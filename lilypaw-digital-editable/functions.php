@@ -5,7 +5,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-define( 'LPD_VERSION', '2.82' );
+define( 'LPD_VERSION', '3.0' );
 
 function lpd_setup() {
 	load_theme_textdomain( 'lilypaw-digital', get_template_directory() . '/languages' );

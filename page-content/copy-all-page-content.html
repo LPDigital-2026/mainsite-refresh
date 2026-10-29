@@ -34,7 +34,7 @@
   <div class="how">
     <strong>How to use it</strong>
     <ol>
-      <li>Upload the latest theme zip first (Appearance &rarr; Themes &rarr; Add New &rarr; Upload, then Replace), because the styles for these pages live in the theme.</li>
+      <li>Upload the latest theme zip first, v3.0 or later for the refreshed design (Appearance &rarr; Themes &rarr; Add New &rarr; Upload, then Replace), because the styles for these pages live in the theme.</li>
       <li>In WP Admin open the page, switch to the <strong>Code Editor</strong> (top-right menu &rarr; Code editor).</li>
       <li>Select all, delete, paste, then press <strong>Update</strong>.</li>
     </ol>
@@ -44,15 +44,19 @@
   <summary>
     <span class="ttl">Home</span>
     <span class="tag" style="background:#16a34a">Up to date</span>
-    <span class="upd">Updated 4 Oct 2026</span>
+    <span class="upd">Updated 29 Oct 2026</span>
   </summary>
   <div class="body">
     <p class="where"><strong>Goes in:</strong> Pages → Home (your front page)</p>
-    <p class="note">Multi-service redesign: new hero, What We Do cards, web design section, colocation section. The contact form uses your real form shortcode.</p>
+    <p class="note">v3 refresh: same sections as before, plus small eyebrow labels above the hero and each section heading (needs theme v3.0). Optional: the old Home content still looks right on the new theme, it just has no labels.</p>
     <textarea id="ta-home" readonly><!-- wp:group {"className":"lpd-hero","align":"full"} -->
 <div class="wp-block-group alignfull lpd-hero">
 <!-- wp:group {"className":"lpd-inner"} -->
 <div class="wp-block-group lpd-inner">
+
+<!-- wp:paragraph {"className":"lpd-hero-eyebrow"} -->
+<p class="lpd-hero-eyebrow">North East England &amp;amp; Newcastle data centre</p>
+<!-- /wp:paragraph -->
 
 <!-- wp:heading {"level":1,"className":"lpd-hero-heading"} -->
 <h1 class="wp-block-heading lpd-hero-heading"><span class="lpd-accent">Web Design</span>, Hosting &amp;amp; Colocation</h1>
@@ -85,6 +89,7 @@
 
 <!-- wp:group {"className":"lpd-section-heading"} -->
 <div class="wp-block-group lpd-section-heading">
+<!-- wp:paragraph {"className":"lpd-eyebrow"} --><p class="lpd-eyebrow">Services</p><!-- /wp:paragraph -->
 <!-- wp:heading --><h2 class="wp-block-heading">What We Do</h2><!-- /wp:heading -->
 <!-- wp:paragraph --><p>Two services today, with more on the way.</p><!-- /wp:paragraph -->
 </div>
@@ -146,6 +151,7 @@
 
 <!-- wp:group {"className":"lpd-section-heading"} -->
 <div class="wp-block-group lpd-section-heading">
+<!-- wp:paragraph {"className":"lpd-eyebrow"} --><p class="lpd-eyebrow">Web design</p><!-- /wp:paragraph -->
 <!-- wp:heading --><h2 class="wp-block-heading">Web Design &amp;amp; Hosting</h2><!-- /wp:heading -->
 <!-- wp:paragraph --><p>Everything your website needs, handled by one team.</p><!-- /wp:paragraph -->
 </div>
@@ -213,6 +219,7 @@
 
 <!-- wp:group {"className":"lpd-section-heading"} -->
 <div class="wp-block-group lpd-section-heading">
+<!-- wp:paragraph {"className":"lpd-eyebrow"} --><p class="lpd-eyebrow">The process</p><!-- /wp:paragraph -->
 <!-- wp:heading --><h2 class="wp-block-heading">How It Works</h2><!-- /wp:heading -->
 <!-- wp:paragraph --><p>From first message to a live website, with no jargon and no hassle.</p><!-- /wp:paragraph -->
 </div>
@@ -323,6 +330,7 @@
 
 <!-- wp:group {"className":"lpd-section-heading"} -->
 <div class="wp-block-group lpd-section-heading">
+<!-- wp:paragraph {"className":"lpd-eyebrow"} --><p class="lpd-eyebrow">Pricing</p><!-- /wp:paragraph -->
 <!-- wp:heading --><h2 class="wp-block-heading">Web Design Pricing</h2><!-- /wp:heading -->
 <!-- wp:paragraph --><p>Transparent pricing, always.</p><!-- /wp:paragraph -->
 </div>
@@ -648,6 +656,7 @@
 
 <!-- wp:group {"className":"lpd-section-heading"} -->
 <div class="wp-block-group lpd-section-heading">
+<!-- wp:paragraph {"className":"lpd-eyebrow"} --><p class="lpd-eyebrow">FAQ</p><!-- /wp:paragraph -->
 <!-- wp:heading --><h2 class="wp-block-heading">Web Design Questions</h2><!-- /wp:heading -->
 </div>
 <!-- /wp:group -->
@@ -751,6 +760,7 @@
 
 <!-- wp:group {"className":"lpd-section-heading"} -->
 <div class="wp-block-group lpd-section-heading">
+<!-- wp:paragraph {"className":"lpd-eyebrow"} --><p class="lpd-eyebrow">Why us</p><!-- /wp:paragraph -->
 <!-- wp:heading --><h2 class="wp-block-heading">How We're Different</h2><!-- /wp:heading -->
 <!-- wp:paragraph --><p>A few things that set us apart, explained simply.</p><!-- /wp:paragraph -->
 </div>
@@ -819,6 +829,7 @@
 
 <!-- wp:group {"className":"lpd-section-heading"} -->
 <div class="wp-block-group lpd-section-heading">
+<!-- wp:paragraph {"className":"lpd-eyebrow"} --><p class="lpd-eyebrow">Reviews</p><!-- /wp:paragraph -->
 <!-- wp:heading --><h2 class="wp-block-heading">Client Testimonials</h2><!-- /wp:heading -->
 <!-- wp:paragraph -->
 <p>Don't take our word for it. Here's what our clients say.</p>
@@ -855,6 +866,7 @@
 
 <!-- wp:group {"className":"lpd-section-heading"} -->
 <div class="wp-block-group lpd-section-heading">
+<!-- wp:paragraph {"className":"lpd-eyebrow"} --><p class="lpd-eyebrow">Who we are</p><!-- /wp:paragraph -->
 <!-- wp:heading --><h2 class="wp-block-heading">About Us</h2><!-- /wp:heading -->
 </div>
 <!-- /wp:group -->
@@ -886,6 +898,7 @@
 
 <!-- wp:group {"className":"lpd-section-heading"} -->
 <div class="wp-block-group lpd-section-heading">
+<!-- wp:paragraph {"className":"lpd-eyebrow"} --><p class="lpd-eyebrow">Say hello</p><!-- /wp:paragraph -->
 <!-- wp:heading --><h2 class="wp-block-heading">Contact Us</h2><!-- /wp:heading -->
 <!-- wp:paragraph --><p>Get in touch and we'll get back to you.</p><!-- /wp:paragraph -->
 </div>
