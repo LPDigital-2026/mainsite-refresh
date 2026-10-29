@@ -16,9 +16,9 @@ if ( post_password_required() ) {
 			<?php
 			$comment_count = get_comments_number();
 			if ( '1' === $comment_count ) {
-				esc_html_e( '1 Comment', 'lilypaw-digital' );
+				esc_html_e( '1 Comment', 'lilypawdigital' );
 			} else {
-				echo esc_html( $comment_count ) . ' ' . esc_html__( 'Comments', 'lilypaw-digital' );
+				echo esc_html( $comment_count ) . ' ' . esc_html__( 'Comments', 'lilypawdigital' );
 			}
 			?>
 		</h2>
@@ -38,7 +38,7 @@ if ( post_password_required() ) {
 	<?php endif; ?>
 
 	<?php if ( ! comments_open() && get_comments_number() && post_type_supports( get_post_type(), 'comments' ) ) : ?>
-		<p class="no-comments"><?php esc_html_e( 'Comments are closed.', 'lilypaw-digital' ); ?></p>
+		<p class="no-comments"><?php esc_html_e( 'Comments are closed.', 'lilypawdigital' ); ?></p>
 	<?php endif; ?>
 
 	<?php comment_form(); ?>

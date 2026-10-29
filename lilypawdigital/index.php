@@ -36,7 +36,7 @@ get_header();
 
 							<p style="margin-top:14px;">
 								<a href="<?php the_permalink(); ?>" class="btn btn-secondary">
-									<?php esc_html_e( 'Read more', 'lilypaw-digital' ); ?>
+									<?php esc_html_e( 'Read more', 'lilypawdigital' ); ?>
 								</a>
 							</p>
 						</article>
@@ -49,8 +49,8 @@ get_header();
 				<?php else : ?>
 
 					<div class="card">
-						<h2><?php esc_html_e( 'Nothing found', 'lilypaw-digital' ); ?></h2>
-						<p><?php esc_html_e( 'It looks like there is no content here yet.', 'lilypaw-digital' ); ?></p>
+						<h2><?php esc_html_e( 'Nothing found', 'lilypawdigital' ); ?></h2>
+						<p><?php esc_html_e( 'It looks like there is no content here yet.', 'lilypawdigital' ); ?></p>
 					</div>
 
 				<?php endif; ?>

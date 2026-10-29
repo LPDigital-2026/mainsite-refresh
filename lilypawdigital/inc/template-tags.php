@@ -21,7 +21,7 @@ if ( ! function_exists( 'lpd_entry_footer' ) ) :
 	function lpd_entry_footer() {
 		if ( ! is_single() && ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
 			echo '<span class="comments-link">';
-			comments_popup_link( __( 'Leave a comment', 'lilypaw-digital' ), __( '1 Comment', 'lilypaw-digital' ), __( '% Comments', 'lilypaw-digital' ) );
+			comments_popup_link( __( 'Leave a comment', 'lilypawdigital' ), __( '1 Comment', 'lilypawdigital' ), __( '% Comments', 'lilypawdigital' ) );
 			echo '</span>';
 		}
 	}

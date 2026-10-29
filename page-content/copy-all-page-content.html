@@ -30,11 +30,12 @@
 <body>
   <h1>Lily Paw Digital &mdash; All Page Content</h1>
   <p>Every page's block content in one place. Open a page below and press its Copy button.</p>
+  <p><strong>Easier way:</strong> with the lilypawdigital theme active, go to <strong>Appearance &rarr; Page Setup</strong> in WP Admin. It creates any missing page with this exact content, sets the homepage and builds the menu, and can replace a page with one click (the old version is kept as a revision). This file is only needed if you want to paste by hand.</p>
 
   <div class="how">
     <strong>How to use it</strong>
     <ol>
-      <li>Upload the latest theme zip first, v3.1 or later for the refreshed design (Appearance &rarr; Themes &rarr; Add New &rarr; Upload, then Replace), because the styles for these pages live in the theme.</li>
+      <li>Upload the lilypawdigital theme zip first (Appearance &rarr; Themes &rarr; Add New &rarr; Upload) and activate it, because the styles for these pages live in the theme.</li>
       <li>In WP Admin open the page, switch to the <strong>Code Editor</strong> (top-right menu &rarr; Code editor).</li>
       <li>Select all, delete, paste, then press <strong>Update</strong>.</li>
     </ol>
@@ -709,7 +710,7 @@
 <!-- wp:column -->
 <div class="wp-block-column">
 <!-- wp:image {"className":"lpd-colo-teaser-photo"} -->
-<figure class="wp-block-image lpd-colo-teaser-photo"><img src="/wp-content/themes/lilypaw-digital-editable/assets/images/colocation/colocation-1.jpg" alt="Server racks and structured cabling at Reliance House, Newcastle"/></figure>
+<figure class="wp-block-image lpd-colo-teaser-photo"><img src="/wp-content/themes/lilypawdigital/assets/images/colocation/colocation-1.jpg" alt="Server racks and structured cabling at Reliance House, Newcastle"/></figure>
 <!-- /wp:image -->
 </div>
 <!-- /wp:column -->
@@ -829,7 +830,7 @@
 <!-- wp:group {"className":"lpd-testimonial"} -->
 <div class="wp-block-group lpd-testimonial">
 <!-- wp:image {"width":120,"height":22,"sizeSlug":"full","linkDestination":"none","className":"lpd-testimonial-stars"} -->
-<figure class="wp-block-image size-full is-resized lpd-testimonial-stars"><img src="/wp-content/themes/lilypaw-digital-editable/assets/images/stars-5.svg" alt="5 out of 5 stars" width="120" height="22"/></figure>
+<figure class="wp-block-image size-full is-resized lpd-testimonial-stars"><img src="/wp-content/themes/lilypawdigital/assets/images/stars-5.svg" alt="5 out of 5 stars" width="120" height="22"/></figure>
 <!-- /wp:image -->
 <!-- wp:paragraph {"className":"lpd-testimonial-quote"} -->
 <p class="lpd-testimonial-quote">"Professional service from the start and the finished website for the cricket club exceeded expectations. Good communication throughout and very proactive in suggesting things. Would highly recommend and would not hesitate in using again."</p>
@@ -891,8 +892,6 @@
 </div>
 <!-- /wp:group -->
 
-<!-- If you're using WPForms (like your live site), replace the number below
-     with your form's ID - find it under WPForms -> All Forms in WP Admin. -->
 <!-- wp:shortcode -->
 [lpd_form id="lpd_form_9d620c8f7c"]
 <!-- /wp:shortcode -->
@@ -922,13 +921,13 @@
 <!-- wp:gallery {"className":"lpd-colo-gallery"} -->
 <figure class="wp-block-gallery lpd-colo-gallery">
 <!-- wp:image -->
-<figure class="wp-block-image"><img src="/wp-content/themes/lilypaw-digital-editable/assets/images/colocation/colocation-1.jpg" alt="Server racks and structured cabling at Reliance House"/></figure>
+<figure class="wp-block-image"><img src="/wp-content/themes/lilypawdigital/assets/images/colocation/colocation-1.jpg" alt="Server racks and structured cabling at Reliance House"/></figure>
 <!-- /wp:image -->
 <!-- wp:image -->
-<figure class="wp-block-image"><img src="/wp-content/themes/lilypaw-digital-editable/assets/images/colocation/colocation-2.jpg" alt="Overhead cable management above the server racks"/></figure>
+<figure class="wp-block-image"><img src="/wp-content/themes/lilypawdigital/assets/images/colocation/colocation-2.jpg" alt="Overhead cable management above the server racks"/></figure>
 <!-- /wp:image -->
 <!-- wp:image -->
-<figure class="wp-block-image"><img src="/wp-content/themes/lilypaw-digital-editable/assets/images/colocation/colocation-3.jpg" alt="Inergen fire suppression system protecting the server room"/></figure>
+<figure class="wp-block-image"><img src="/wp-content/themes/lilypawdigital/assets/images/colocation/colocation-3.jpg" alt="Inergen fire suppression system protecting the server room"/></figure>
 <!-- /wp:image -->
 </figure>
 <!-- /wp:gallery -->
@@ -1450,7 +1449,7 @@
   </summary>
   <div class="body">
     <p class="where"><strong>Goes in:</strong> Pages → Get Started (/get-started/)</p>
-    <p class="note warnbox">OLD version with a form placeholder in it. If this page now uses your price calculator, do NOT paste this over it, or you will lose the calculator.</p>
+    <p class="note warnbox">Uses your contact form shortcode. If this page now uses your price calculator, do NOT paste this over it, or you will lose the calculator.</p>
     <textarea id="ta-getstarted" readonly><!-- wp:paragraph -->
 <p>Ready to get your website up and running? Fill in a few details below and we will be in touch to get things moving. No pressure, no jargon.</p>
 <!-- /wp:paragraph -->
@@ -1499,11 +1498,9 @@
 </div>
 <!-- /wp:columns -->
 
-<!-- If you're using WPForms, replace the number below with your form's
-     ID - find it under WPForms -> All Forms in WP Admin. -->
 <!-- wp:heading {"level":2} --><h2 class="wp-block-heading">Get Started</h2><!-- /wp:heading -->
 <!-- wp:shortcode -->
-[wpforms id="REPLACE-WITH-YOUR-FORM-ID"]
+[lpd_form id="lpd_form_9d620c8f7c"]
 <!-- /wp:shortcode -->
 </textarea>
     <button class="copy" data-target="ta-getstarted">Copy Get Started to Clipboard</button>

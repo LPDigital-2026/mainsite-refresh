@@ -34,7 +34,7 @@ $is_colocation = is_page( 'colocation' );
 
 					wp_link_pages(
 						array(
-							'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'lilypaw-digital' ),
+							'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'lilypawdigital' ),
 							'after'  => '</div>',
 						)
 					);

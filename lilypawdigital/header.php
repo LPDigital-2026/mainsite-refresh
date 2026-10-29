@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 
-<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'lilypaw-digital' ); ?></a>
+<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'lilypawdigital' ); ?></a>
 
 <header id="masthead" class="site-header">
 	<div class="container header-inner">
@@ -50,7 +50,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 			);
 			?>
 			<a href="https://billing.lilypawdigital.com/login" class="lpd-client-login btn btn-secondary" target="_blank" rel="noopener">
-				<?php esc_html_e( 'Client Login', 'lilypaw-digital' ); ?>
+				<?php esc_html_e( 'Client Login', 'lilypawdigital' ); ?>
 			</a>
 		</nav>
 
@@ -59,7 +59,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 				<span></span><span></span><span></span>
 			</span>
 			<span class="menu-toggle-paw" aria-hidden="true"></span>
-			<span class="screen-reader-text"><?php esc_html_e( 'Menu', 'lilypaw-digital' ); ?></span>
+			<span class="screen-reader-text"><?php esc_html_e( 'Menu', 'lilypawdigital' ); ?></span>
 		</button>
 	</div>
 </header>

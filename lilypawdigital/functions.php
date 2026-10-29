@@ -5,10 +5,10 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-define( 'LPD_VERSION', '3.1' );
+define( 'LPD_VERSION', '3.2' );
 
 function lpd_setup() {
-	load_theme_textdomain( 'lilypaw-digital', get_template_directory() . '/languages' );
+	load_theme_textdomain( 'lilypawdigital', get_template_directory() . '/languages' );
 
 	add_theme_support( 'title-tag' );
 	add_theme_support( 'post-thumbnails' );
@@ -32,18 +32,18 @@ function lpd_setup() {
 
 	register_nav_menus(
 		array(
-			'primary' => __( 'Primary Menu', 'lilypaw-digital' ),
-			'footer'  => __( 'Footer Menu', 'lilypaw-digital' ),
+			'primary' => __( 'Primary Menu', 'lilypawdigital' ),
+			'footer'  => __( 'Footer Menu', 'lilypawdigital' ),
 		)
 	);
 }
 add_action( 'after_setup_theme', 'lpd_setup' );
 
 function lpd_scripts() {
-	wp_enqueue_style( 'lilypaw-digital-style', get_stylesheet_uri(), array(), LPD_VERSION );
-	wp_enqueue_script( 'lilypaw-digital-nav', get_template_directory_uri() . '/js/navigation.js', array(), LPD_VERSION, true );
-	wp_enqueue_script( 'lilypaw-digital-interactions', get_template_directory_uri() . '/js/interactions.js', array(), LPD_VERSION, true );
-	wp_localize_script( 'lilypaw-digital-interactions', 'lpdTheme', array(
+	wp_enqueue_style( 'lilypawdigital-style', get_stylesheet_uri(), array(), LPD_VERSION );
+	wp_enqueue_script( 'lilypawdigital-nav', get_template_directory_uri() . '/js/navigation.js', array(), LPD_VERSION, true );
+	wp_enqueue_script( 'lilypawdigital-interactions', get_template_directory_uri() . '/js/interactions.js', array(), LPD_VERSION, true );
+	wp_localize_script( 'lilypawdigital-interactions', 'lpdTheme', array(
 		'url' => get_template_directory_uri(),
 	) );
 
@@ -71,7 +71,7 @@ add_action( 'wp_head', 'lpd_preload_fonts', 1 );
 function lpd_widgets_init() {
 	register_sidebar(
 		array(
-			'name'          => __( 'Sidebar', 'lilypaw-digital' ),
+			'name'          => __( 'Sidebar', 'lilypawdigital' ),
 			'id'            => 'sidebar-1',
 			'before_widget' => '<div id="%1$s" class="widget %2$s">',
 			'after_widget'  => '</div>',
@@ -84,7 +84,7 @@ function lpd_widgets_init() {
 	foreach ( $footer_cols as $col ) {
 		register_sidebar(
 			array(
-				'name'          => sprintf( __( 'Footer %s', 'lilypaw-digital' ), $col ),
+				'name'          => sprintf( __( 'Footer %s', 'lilypawdigital' ), $col ),
 				'id'            => $col,
 				'before_widget' => '<div id="%1$s" class="%2$s">',
 				'after_widget'  => '</div>',
@@ -119,3 +119,4 @@ add_filter( 'excerpt_more', 'lpd_excerpt_more' );
 
 require get_template_directory() . '/inc/template-tags.php';
 require get_template_directory() . '/inc/customizer-defaults.php';
+require get_template_directory() . '/inc/page-setup.php';

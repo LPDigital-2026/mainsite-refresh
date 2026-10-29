@@ -13,7 +13,7 @@ get_header();
 			<h1 class="entry-title">
 				<?php
 				/* translators: %s: search query. */
-				printf( esc_html__( 'Search Results for: %s', 'lilypaw-digital' ), '<span>' . get_search_query() . '</span>' );
+				printf( esc_html__( 'Search Results for: %s', 'lilypawdigital' ), '<span>' . get_search_query() . '</span>' );
 				?>
 			</h1>
 		</div>
@@ -36,7 +36,7 @@ get_header();
 
 		<?php else : ?>
 			<div class="card">
-				<p><?php esc_html_e( 'Nothing found for that search.', 'lilypaw-digital' ); ?></p>
+				<p><?php esc_html_e( 'Nothing found for that search.', 'lilypawdigital' ); ?></p>
 				<?php get_search_form(); ?>
 			</div>
 		<?php endif; ?>

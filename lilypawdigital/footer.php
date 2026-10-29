@@ -19,37 +19,37 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 					width="175"
 					height="64"
 				>
-				<p><?php esc_html_e( 'Web design, hosting and colocation from the North East of England. Clear pricing, real people, and no jargon.', 'lilypaw-digital' ); ?></p>
+				<p><?php esc_html_e( 'Web design, hosting and colocation from the North East of England. Clear pricing, real people, and no jargon.', 'lilypawdigital' ); ?></p>
 				<p class="lpd-footer-phone"><a href="tel:+443331127191">0333 112 7191</a></p>
 			</div>
 
 			<div>
-				<h4><?php esc_html_e( 'Explore', 'lilypaw-digital' ); ?></h4>
+				<h4><?php esc_html_e( 'Explore', 'lilypawdigital' ); ?></h4>
 				<ul>
-					<li><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php esc_html_e( 'Home', 'lilypaw-digital' ); ?></a></li>
-					<li><a href="<?php echo esc_url( home_url( '/about-us/' ) ); ?>"><?php esc_html_e( 'About Us', 'lilypaw-digital' ); ?></a></li>
-					<li><a href="<?php echo esc_url( home_url( '/get-started/' ) ); ?>"><?php esc_html_e( 'Get Started', 'lilypaw-digital' ); ?></a></li>
-					<li><a href="<?php echo esc_url( home_url( '/#pricing' ) ); ?>"><?php esc_html_e( 'Pricing', 'lilypaw-digital' ); ?></a></li>
-					<li><a href="<?php echo esc_url( home_url( '/contact-us/' ) ); ?>"><?php esc_html_e( 'Contact Us', 'lilypaw-digital' ); ?></a></li>
+					<li><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php esc_html_e( 'Home', 'lilypawdigital' ); ?></a></li>
+					<li><a href="<?php echo esc_url( home_url( '/about-us/' ) ); ?>"><?php esc_html_e( 'About Us', 'lilypawdigital' ); ?></a></li>
+					<li><a href="<?php echo esc_url( home_url( '/get-started/' ) ); ?>"><?php esc_html_e( 'Get Started', 'lilypawdigital' ); ?></a></li>
+					<li><a href="<?php echo esc_url( home_url( '/#pricing' ) ); ?>"><?php esc_html_e( 'Pricing', 'lilypawdigital' ); ?></a></li>
+					<li><a href="<?php echo esc_url( home_url( '/contact-us/' ) ); ?>"><?php esc_html_e( 'Contact Us', 'lilypawdigital' ); ?></a></li>
 				</ul>
 			</div>
 
 			<div>
-				<h4><?php esc_html_e( 'Company', 'lilypaw-digital' ); ?></h4>
+				<h4><?php esc_html_e( 'Company', 'lilypawdigital' ); ?></h4>
 				<ul>
-					<li><a href="https://status.lilypaw.digital" target="_blank" rel="noopener"><?php esc_html_e( 'Status', 'lilypaw-digital' ); ?></a></li>
-					<li><a href="https://billing.lilypawdigital.com/login" target="_blank" rel="noopener"><?php esc_html_e( 'Client Login', 'lilypaw-digital' ); ?></a></li>
-					<li><a href="https://uk.trustpilot.com/review/lilypawdigital.xyz" target="_blank" rel="noopener"><?php esc_html_e( 'Reviews', 'lilypaw-digital' ); ?></a></li>
-					<li><a href="https://links.lilypawdigital.xyz" target="_blank" rel="noopener"><?php esc_html_e( 'Links', 'lilypaw-digital' ); ?></a></li>
+					<li><a href="https://status.lilypaw.digital" target="_blank" rel="noopener"><?php esc_html_e( 'Status', 'lilypawdigital' ); ?></a></li>
+					<li><a href="https://billing.lilypawdigital.com/login" target="_blank" rel="noopener"><?php esc_html_e( 'Client Login', 'lilypawdigital' ); ?></a></li>
+					<li><a href="https://uk.trustpilot.com/review/lilypawdigital.xyz" target="_blank" rel="noopener"><?php esc_html_e( 'Reviews', 'lilypawdigital' ); ?></a></li>
+					<li><a href="https://links.lilypawdigital.xyz" target="_blank" rel="noopener"><?php esc_html_e( 'Links', 'lilypawdigital' ); ?></a></li>
 				</ul>
 			</div>
 
 			<div>
-				<h4><?php esc_html_e( 'Legal', 'lilypaw-digital' ); ?></h4>
+				<h4><?php esc_html_e( 'Legal', 'lilypawdigital' ); ?></h4>
 				<ul>
-					<li><a href="https://legal.lilypaw.digital/privacy-policy" target="_blank" rel="noopener"><?php esc_html_e( 'Privacy Policy', 'lilypaw-digital' ); ?></a></li>
-					<li><a href="https://legal.lilypaw.digital/terms-of-service" target="_blank" rel="noopener"><?php esc_html_e( 'Terms of Service', 'lilypaw-digital' ); ?></a></li>
-					<li><a href="https://legal.lilypaw.digital/cookie-policy" target="_blank" rel="noopener"><?php esc_html_e( 'Cookie Policy', 'lilypaw-digital' ); ?></a></li>
+					<li><a href="https://legal.lilypaw.digital/privacy-policy" target="_blank" rel="noopener"><?php esc_html_e( 'Privacy Policy', 'lilypawdigital' ); ?></a></li>
+					<li><a href="https://legal.lilypaw.digital/terms-of-service" target="_blank" rel="noopener"><?php esc_html_e( 'Terms of Service', 'lilypawdigital' ); ?></a></li>
+					<li><a href="https://legal.lilypaw.digital/cookie-policy" target="_blank" rel="noopener"><?php esc_html_e( 'Cookie Policy', 'lilypawdigital' ); ?></a></li>
 				</ul>
 			</div>
 
@@ -67,7 +67,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 
 		<div class="lpd-status-badge">
-			<iframe src="https://status.lilypaw.digital/badge?theme=dark" title="<?php esc_attr_e( 'Lily Paw Digital service status', 'lilypaw-digital' ); ?>" width="183" height="30" frameborder="0" scrolling="no" loading="lazy" style="color-scheme: normal"></iframe>
+			<iframe src="https://status.lilypaw.digital/badge?theme=dark" title="<?php esc_attr_e( 'Lily Paw Digital service status', 'lilypawdigital' ); ?>" width="183" height="30" frameborder="0" scrolling="no" loading="lazy" style="color-scheme: normal"></iframe>
 		</div>
 
 		<div class="lpd-footer-cats">
@@ -225,7 +225,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 				<?php
 				/* translators: %s: site link */
 				printf(
-					esc_html__( 'Website Design By %s', 'lilypaw-digital' ),
+					esc_html__( 'Website Design By %s', 'lilypawdigital' ),
 					'<a href="' . esc_url( home_url( '/' ) ) . '">' . esc_html( get_bloginfo( 'name' ) ) . '</a>'
 				);
 				?>
