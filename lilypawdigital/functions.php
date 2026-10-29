@@ -5,7 +5,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-define( 'LPD_VERSION', '3.3' );
+define( 'LPD_VERSION', '3.4' );
 
 function lpd_setup() {
 	load_theme_textdomain( 'lilypawdigital', get_template_directory() . '/languages' );
@@ -55,10 +55,10 @@ add_action( 'wp_enqueue_scripts', 'lpd_scripts' );
 
 /**
  * Preload the two faces every page paints above the fold (hero/page
- * title in Sora 800, body in Inter 400) so headings don't swap late.
+ * title in Sora 700, body in Inter 400) so headings don't swap late.
  */
 function lpd_preload_fonts() {
-	$fonts = array( 'sora-latin-800-normal.woff2', 'inter-latin-400-normal.woff2' );
+	$fonts = array( 'sora-latin-700-normal.woff2', 'inter-latin-400-normal.woff2' );
 	foreach ( $fonts as $font ) {
 		printf(
 			'<link rel="preload" href="%s" as="font" type="font/woff2" crossorigin>' . "\n",
