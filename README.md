@@ -19,6 +19,8 @@ WordPress theme for lilypawdigital.xyz, plus the page content it ships with.
    - builds a main menu if the header has none.
 3. **Appearance → Page Setup** shows each page's status. From there you can create a missing page, or replace a page with the theme's version. Replacing keeps the old content as a revision, which you can restore from the page editor.
 
+The inner pages (Colocation, Our Work, About Us, Contact Us, Get Started) use a full-width layout of edge-to-edge bands, like the homepage. A page only switches to it once its content is the theme's version, so press **Replace with theme version** on each page you want in the new layout. Pages you haven't replaced keep the older centred layout.
+
 Existing pages are never overwritten automatically. That matters for **Get Started** if it now holds a price calculator: don't press Replace on it unless you mean to.
 
 ## Note on the rename

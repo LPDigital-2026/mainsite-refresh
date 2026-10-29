@@ -1,17 +1,41 @@
 <?php
 /**
- * Page template - single clean column, no sidebar. Most pages on this
- * site (About Us, Get Started, Contact Us) don't need a blog-style
- * sidebar competing for space next to a form or a short story.
+ * Page template.
  *
- * The Colocation page gets a wider layout (it's a pricing/spec page,
- * not a narrow reading column).
+ * Pages built from full-width bands (the content the theme ships in
+ * inc/pages/, recognisable by the lpd-band class) render edge to edge
+ * like the homepage, under a left-aligned page hero. Any other page
+ * keeps the single clean reading column; Colocation's older content
+ * gets a wider one.
  */
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 get_header();
 
+$is_full       = false !== strpos( (string) get_post_field( 'post_content', get_queried_object_id() ), 'lpd-band' );
 $is_colocation = is_page( 'colocation' );
+
+if ( $is_full ) :
+	?>
+	<main id="primary" class="site-main lpd-page-full">
+		<div class="page-hero">
+			<div class="container">
+				<h1 class="entry-title"><?php the_title(); ?></h1>
+			</div>
+		</div>
+		<?php
+		while ( have_posts() ) :
+			the_post();
+			?>
+			<article id="post-<?php the_ID(); ?>" <?php post_class( 'entry-content lpd-bands' ); ?>>
+				<?php the_content(); ?>
+			</article>
+		<?php endwhile; ?>
+	</main>
+	<?php
+	get_footer();
+	return;
+endif;
 ?>
 
 <main id="primary" class="site-main">

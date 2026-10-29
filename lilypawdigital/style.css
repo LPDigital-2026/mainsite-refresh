@@ -4,7 +4,7 @@ Theme URI: https://lilypawdigital.xyz
 Author: Lily Paw Digital
 Author URI: https://lilypawdigital.xyz
 Description: Theme for Lily Paw Digital - North East web design and hosting. Built around the brand's navy/paw-gradient identity.
-Version: 3.2
+Version: 3.3
 Requires at least: 6.0
 Tested up to: 6.6
 Requires PHP: 7.4
@@ -1199,7 +1199,7 @@ button[type="submit"]:active, input[type="submit"]:active { transform: scale(0.9
    ========================================================================== */
 .site-content { padding: 56px 0; min-height: 40vh; }
 .entry-title { font-size: 2rem; margin: 0 0 20px; }
-.entry-content p { color: var(--muted); }
+.entry-content:not(.lpd-bands) p { color: var(--muted); }
 .page-hero {
   position: relative;
   padding: 104px 0 84px;
@@ -2068,3 +2068,173 @@ div.wpforms-container-full .wpforms-container {
   .lpd-colo-teaser-photo::before { inset: 14px -14px -14px 14px; }
   .lpd-colo-teaser-photo img { max-height: 280px; }
 }
+
+/* ==========================================================================
+   Full-width pages
+   Pages built from .lpd-band sections (see inc/pages/) render edge to
+   edge like the homepage: a left-aligned hero, then alternating bands
+   whose layouts use the width (split text + aside, card grids) instead
+   of one narrow centred column.
+   ========================================================================== */
+.lpd-page-full .page-hero { text-align: left; padding: 96px 0 72px; }
+.lpd-page-full .page-hero .container { max-width: 1180px; }
+.lpd-page-full .page-hero .entry-title::after { margin-left: 0; }
+
+.lpd-band { position: relative; }
+.lpd-band.lpd-band-alt { background: var(--mist); }
+.lpd-band > .lpd-inner { padding-top: 88px; padding-bottom: 88px; }
+/* Two plain bands in a row read as one section: drop the doubled gap */
+.lpd-band:not(.lpd-band-alt):not(.lpd-process) + .lpd-band:not(.lpd-band-alt):not(.lpd-process):not(.lpd-cta-section) > .lpd-inner { padding-top: 0; }
+.lpd-band.lpd-cta-section > .lpd-inner { padding-top: 24px; }
+
+/* Left-aligned section heading for page bands */
+.lpd-section-heading.lpd-left { text-align: left; margin-left: 0; margin-bottom: 40px; }
+
+/* Intro lead */
+.lpd-bands p.lpd-lead,
+.lpd-bands .lpd-prose > p.lpd-lead {
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 2.2vw, 1.65rem);
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  line-height: 1.45;
+  color: var(--text);
+  max-width: 30ch;
+  margin: 0 0 24px;
+}
+
+/* Running text inside bands */
+.lpd-bands .lpd-prose > p { color: var(--muted); font-size: 1.05rem; line-height: 1.75; margin: 0 0 18px; max-width: 62ch; }
+.lpd-bands .lpd-prose > p:last-child { margin-bottom: 0; }
+.lpd-bands .lpd-prose > h2 { font-size: clamp(1.7rem, 3vw, 2.3rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; margin: 0 0 18px; }
+.lpd-bands .lpd-prose > h3 { font-size: 1.4rem; letter-spacing: -0.02em; margin: 0 0 12px; }
+.lpd-bands .lpd-prose > .wp-block-buttons { margin-top: 28px; }
+.lpd-bands .lpd-prose a:not(.wp-block-button__link) { color: var(--pink-deep); font-weight: 600; text-decoration: underline; text-decoration-color: rgba(196, 47, 120, 0.3); text-underline-offset: 3px; }
+
+/* Split: text column + aside, the main way pages use the width */
+.lpd-bands .wp-block-columns.lpd-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: 72px;
+  align-items: center;
+  margin: 0;
+}
+.lpd-bands .wp-block-columns.lpd-split.lpd-split-top { align-items: start; }
+.lpd-bands .wp-block-columns.lpd-split.lpd-split-even { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+.lpd-bands .wp-block-columns.lpd-split.lpd-split-narrow { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); }
+
+/* Card grids */
+.lpd-bands .wp-block-columns.lpd-grid-2,
+.lpd-bands .wp-block-columns.lpd-grid-3 { display: grid; gap: 22px; margin: 0; }
+.lpd-bands .wp-block-columns.lpd-grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.lpd-bands .wp-block-columns.lpd-grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.lpd-bands .wp-block-columns:is(.lpd-split, .lpd-grid-2, .lpd-grid-3) > .wp-block-column { width: auto; flex-basis: auto; margin: 0; min-width: 0; }
+.lpd-bands .wp-block-columns:is(.lpd-grid-2, .lpd-grid-3) .lpd-card { height: 100%; }
+
+/* Photo beside text */
+.lpd-bands .lpd-photo { margin: 0; }
+.lpd-bands .lpd-photo img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+.lpd-bands .lpd-photo.lpd-photo-wide img { aspect-ratio: 4 / 3; }
+
+/* Check list (project features) */
+.lpd-bands ul.lpd-checklist {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2px 24px;
+}
+.lpd-bands ul.lpd-checklist li { position: relative; padding: 8px 0 8px 30px; color: var(--text); font-size: 0.98rem; }
+.lpd-bands ul.lpd-checklist li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 11px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--gradient-soft);
+}
+.lpd-bands ul.lpd-checklist li::after {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 16px;
+  width: 10px;
+  height: 10px;
+  background: var(--gradient);
+  -webkit-mask: url('assets/icons/check.svg') center / contain no-repeat;
+  mask: url('assets/icons/check.svg') center / contain no-repeat;
+}
+
+/* Pointer card: the soft gradient "next step" card */
+.lpd-bands .lpd-pointer { background: var(--gradient-soft); border-color: #f6d6e5; padding: 36px; }
+.lpd-bands .lpd-pointer h3, .lpd-bands .lpd-card.lpd-pad h3 { font-size: 1.35rem; letter-spacing: -0.02em; margin: 0 0 10px; }
+.lpd-bands .lpd-card.lpd-pad { padding: 36px; }
+.lpd-bands .lpd-card .wp-block-buttons { margin-top: 22px; }
+
+/* Form card (Contact / Get Started) */
+.lpd-bands .lpd-form-card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 40px;
+  box-shadow: var(--shadow-soft);
+}
+.lpd-bands .lpd-form-card > h2 { font-size: 1.6rem; letter-spacing: -0.025em; margin: 0 0 6px; }
+.lpd-bands .lpd-form-card > p { color: var(--muted); margin: 0 0 24px; }
+.lpd-bands .lpd-form-card > p:empty { display: none; }
+.lpd-bands .lpd-alt-contact { margin: 28px 0 0; max-width: 520px; }
+
+/* Testimonial beside a project */
+.lpd-bands .lpd-testimonial { max-width: none; margin: 0; }
+.lpd-bands .lpd-testimonial p:is(.lpd-testimonial-quote, .lpd-testimonial-name) { color: var(--navy); }
+.lpd-bands .lpd-cta-banner p { color: #fff; }
+/* A lead-only intro band sits closer to the band after it */
+.lpd-band:has(> .lpd-inner > p.lpd-lead:only-child) > .lpd-inner { padding-bottom: 48px; }
+
+/* Colocation plans: three across */
+.lpd-bands .lpd-pricing .wp-block-columns.lpd-colocation-pricing,
+.lpd-bands.lpd-pricing .wp-block-columns.lpd-colocation-pricing,
+.lpd-pricing .wp-block-columns.lpd-colocation-pricing { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.lpd-pricing .lpd-colocation-pricing .lpd-pricing-desc { min-height: 3.1em; }
+.lpd-bands .lpd-pricing-note { margin: 28px 0 0; color: var(--muted); }
+.lpd-bands .lpd-pricing-note a { color: var(--pink-deep); font-weight: 600; }
+
+/* Get Started: three steps instead of four */
+.lpd-process .wp-block-columns.lpd-steps-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+/* FAQ beside its heading */
+.lpd-bands .lpd-split .lpd-faq-list { max-width: none; margin: 0; }
+
+@media (max-width: 960px) {
+  .lpd-bands .wp-block-columns.lpd-split,
+  .lpd-bands .wp-block-columns.lpd-split.lpd-split-even,
+  .lpd-bands .wp-block-columns.lpd-split.lpd-split-narrow { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+  .lpd-bands .wp-block-columns.lpd-grid-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .lpd-pricing .wp-block-columns.lpd-colocation-pricing { grid-template-columns: minmax(0, 1fr); max-width: 520px; }
+  .lpd-bands .lpd-photo img { aspect-ratio: 4 / 3; max-height: 420px; }
+  .lpd-process .wp-block-columns.lpd-steps-3 { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 640px) {
+  .lpd-page-full .page-hero { padding: 64px 0 48px; }
+  .lpd-band > .lpd-inner { padding-top: 56px; padding-bottom: 56px; }
+  .lpd-bands .wp-block-columns.lpd-grid-2,
+  .lpd-bands .wp-block-columns.lpd-grid-3 { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+  .lpd-bands ul.lpd-checklist { grid-template-columns: minmax(0, 1fr); }
+  .lpd-bands .lpd-form-card { padding: 26px 20px; }
+  .lpd-bands .lpd-pointer, .lpd-bands .lpd-card.lpd-pad { padding: 26px; }
+}
+
+/* Colocation gallery beside the intro: one large photo over two */
+.lpd-bands .lpd-split .lpd-colo-gallery.wp-block-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 0; }
+.lpd-bands .lpd-split .lpd-colo-gallery .wp-block-image:first-child { grid-column: 1 / -1; }
+.lpd-bands .lpd-split .lpd-colo-gallery .wp-block-image img { height: 190px; }
+.lpd-bands .lpd-split .lpd-colo-gallery .wp-block-image:first-child img { height: 300px; }
