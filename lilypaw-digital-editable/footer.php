@@ -67,12 +67,12 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 
 		<div class="lpd-status-badge">
-			<iframe src="https://status.lilypaw.digital/badge?theme=dark" width="183" height="30" frameborder="0" scrolling="no" style="color-scheme: normal"></iframe>
+			<iframe src="https://status.lilypaw.digital/badge?theme=dark" title="<?php esc_attr_e( 'Lily Paw Digital service status', 'lilypaw-digital' ); ?>" width="183" height="30" frameborder="0" scrolling="no" loading="lazy" style="color-scheme: normal"></iframe>
 		</div>
 
 		<div class="lpd-footer-cats">
 			<div class="lpd-footer-cat-wrap">
-			<svg class="lpd-footer-cat lpd-footer-cat-dark" viewBox="25 70 110 140" xmlns="http://www.w3.org/2000/svg">
+			<svg class="lpd-footer-cat lpd-footer-cat-dark" aria-hidden="true" focusable="false" viewBox="25 70 110 140" xmlns="http://www.w3.org/2000/svg">
 			  <defs>
 			    <clipPath id="leye-d"><ellipse cx="86" cy="109" rx="7" ry="5.5"/></clipPath>
 			    <clipPath id="reye-d"><ellipse cx="106" cy="109" rx="7" ry="5.5"/></clipPath>
@@ -147,7 +147,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 			</svg>
 			</div>
 			<div class="lpd-footer-cat-wrap">
-			<svg class="lpd-footer-cat lpd-footer-cat-light" viewBox="388 70 110 140" xmlns="http://www.w3.org/2000/svg">
+			<svg class="lpd-footer-cat lpd-footer-cat-light" aria-hidden="true" focusable="false" viewBox="388 70 110 140" xmlns="http://www.w3.org/2000/svg">
 			  <defs>
 			    <clipPath id="leye-l"><ellipse cx="414" cy="109" rx="7" ry="8"/></clipPath>
 			    <clipPath id="reye-l"><ellipse cx="434" cy="109" rx="7" ry="8"/></clipPath>

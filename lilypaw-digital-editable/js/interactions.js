@@ -76,14 +76,25 @@
 	 * fixed guess, so the reveal is smooth regardless of answer length.
 	 * ------------------------------------------------------------- */
 	document.querySelectorAll( '.lpd-faq-item' ).forEach( function ( item, index ) {
-		var question = item.querySelector( 'h3' );
+		var heading = item.querySelector( 'h3' );
 		var answer = item.querySelector( 'p' );
-		if ( ! question || ! answer ) return;
+		if ( ! heading || ! answer ) return;
 
-		question.setAttribute( 'role', 'button' );
-		question.setAttribute( 'tabindex', '0' );
+		// A real button inside the heading keeps the question in the
+		// heading outline for screen readers (role="button" on the h3
+		// itself would replace its heading role).
+		var question = document.createElement( 'button' );
+		question.type = 'button';
+		question.className = 'lpd-faq-trigger';
+		while ( heading.firstChild ) question.appendChild( heading.firstChild );
+		heading.appendChild( question );
+
+		question.id = 'lpd-faq-q-' + index;
+		answer.id = answer.id || 'lpd-faq-a-' + index;
+		answer.setAttribute( 'role', 'region' );
+		answer.setAttribute( 'aria-labelledby', question.id );
+		question.setAttribute( 'aria-controls', answer.id );
 		question.setAttribute( 'aria-expanded', 'false' );
-		if ( ! question.id ) question.id = 'lpd-faq-q-' + index;
 
 		var toggle = function () {
 			var isOpen = item.classList.contains( 'is-open' );
@@ -117,12 +128,6 @@
 		} );
 
 		question.addEventListener( 'click', toggle );
-		question.addEventListener( 'keydown', function ( e ) {
-			if ( e.key === 'Enter' || e.key === ' ' ) {
-				e.preventDefault();
-				toggle();
-			}
-		} );
 	} );
 
 	// Move a leading "+" to trailing instead (e.g. "+15" -> "15+").
@@ -149,19 +154,16 @@
 	/* ---------------------------------------------------------------
 	 * Scroll reveal: fade + rise, once, staggered within a row
 	 * ------------------------------------------------------------- */
+	// Only rows of cards reveal: headings, prose and FAQ rows stay put, so
+	// the motion marks "here is a set to compare" instead of decorating
+	// every block on the page the same way.
 	var revealSelectors = [
-		'.lpd-card',
+		'.lpd-features .lpd-card',
 		'.lpd-pricing-card',
-		'.lpd-testimonial',
-		'.post-card',
-		'.lpd-cta-banner',
-		'.lpd-section-heading',
 		'.lpd-step',
 		'.lpd-why-item',
 		'.lpd-service-card',
-		'.lpd-colo-teaser .wp-block-column',
-		'.lpd-faq-item',
-		'.lpd-page-content .entry-content > *'
+		'.post-card'
 	];
 
 	var revealTargets = document.querySelectorAll( revealSelectors.join( ',' ) );
@@ -178,24 +180,26 @@
 		var rowState = new Map();
 		var toAnimate = [];
 
-		revealTargets.forEach( function ( el ) {
+		// Read every position first, then write: interleaving
+		// getBoundingClientRect() with classList.add() forces a reflow per card.
+		var tops = Array.prototype.map.call( revealTargets, function ( el ) {
+			return el.getBoundingClientRect().top;
+		} );
+		var scrollY = window.pageYOffset;
+
+		revealTargets.forEach( function ( el, i ) {
 			// Anything already on screen (or scrolled past) when this script
 			// runs is left alone. Hiding it now would make content the visitor
 			// is already looking at dim and flicker while the page loads.
-			if ( el.getBoundingClientRect().top < viewportH - 40 ) return;
+			if ( tops[ i ] < viewportH - 40 ) return;
 
-			el.classList.add( 'lpd-reveal' );
 			toAnimate.push( el );
 
-			if ( el.closest( '.lpd-page-content' ) ) {
-				el.style.transitionDelay = '0ms';
-				return;
-			}
 			// Only items that sit side by side in the same visual row are
 			// staggered. On a phone the columns stack, so every card is its
 			// own row and gets no delay.
 			var parent = el.closest( '.wp-block-columns' ) || el.parentElement;
-			var top = el.getBoundingClientRect().top + window.pageYOffset;
+			var top = tops[ i ] + scrollY;
 			var state = rowState.get( parent );
 			if ( ! state ) {
 				state = { top: top, count: 0 };
@@ -206,7 +210,11 @@
 				state.top = top;
 				state.count = 0;
 			}
-			el.style.transitionDelay = ( Math.min( state.count, 3 ) * 90 ) + 'ms';
+			el.style.transitionDelay = ( Math.min( state.count, 3 ) * 60 ) + 'ms';
+		} );
+
+		toAnimate.forEach( function ( el ) {
+			el.classList.add( 'lpd-reveal' );
 		} );
 
 		var observer = new IntersectionObserver( function ( entries, obs ) {
@@ -221,7 +229,7 @@
 				window.setTimeout( function () {
 					el.classList.remove( 'lpd-reveal', 'is-visible' );
 					el.style.transitionDelay = '';
-				}, 1100 );
+				}, 800 );
 			} );
 		}, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' } );
 

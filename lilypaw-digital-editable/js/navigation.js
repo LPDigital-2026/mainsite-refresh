@@ -4,7 +4,7 @@
 
 	if ( ! toggle || ! nav ) return;
 
-	var CLOSE_ANIMATION_MS = 450; // must be at least the CSS lpd-menu-out duration (0.42s)
+	var CLOSE_ANIMATION_MS = 320; // must be at least the CSS lpd-menu-out duration (0.3s)
 	var closeTimer = null;
 
 	function openMenu() {

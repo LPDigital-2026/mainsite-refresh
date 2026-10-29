@@ -5,7 +5,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-define( 'LPD_VERSION', '3.0' );
+define( 'LPD_VERSION', '3.1' );
 
 function lpd_setup() {
 	load_theme_textdomain( 'lilypaw-digital', get_template_directory() . '/languages' );
@@ -52,6 +52,21 @@ function lpd_scripts() {
 	}
 }
 add_action( 'wp_enqueue_scripts', 'lpd_scripts' );
+
+/**
+ * Preload the two faces every page paints above the fold (hero/page
+ * title in Sora 800, body in Inter 400) so headings don't swap late.
+ */
+function lpd_preload_fonts() {
+	$fonts = array( 'sora-latin-800-normal.woff2', 'inter-latin-400-normal.woff2' );
+	foreach ( $fonts as $font ) {
+		printf(
+			'<link rel="preload" href="%s" as="font" type="font/woff2" crossorigin>' . "\n",
+			esc_url( get_template_directory_uri() . '/assets/fonts/' . $font )
+		);
+	}
+}
+add_action( 'wp_head', 'lpd_preload_fonts', 1 );
 
 function lpd_widgets_init() {
 	register_sidebar(
