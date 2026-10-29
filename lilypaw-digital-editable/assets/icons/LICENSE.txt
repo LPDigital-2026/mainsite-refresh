@@ -1,0 +1,22 @@
+Icons in this folder are from Font Awesome Free 7.3.1
+https://fontawesome.com
+
+License: CC BY 4.0 (icons) - https://creativecommons.org/licenses/by/4.0/
+Font Awesome Free License: https://fontawesome.com/license/free
+
+Icons used, self-hosted as local SVG files (no CDN/runtime dependency
+on Font Awesome's servers):
+- responsive-design.svg  (originally "display")
+- fast-hosting.svg       (originally "bolt")
+- we-build-it.svg        (originally "screwdriver-wrench")
+- ongoing-support.svg    (originally "headset")
+- check.svg              (originally "check")
+- paw.svg                (originally "paw")
+- fair-pricing.svg      (originally "sterling-sign")
+- we-care.svg           (originally "heart")
+- secured.svg           (originally "lock")
+- ddos-protected.svg    (originally "shield-halved")
+- usecase-web.svg       (originally "globe")
+- usecase-cloud.svg     (originally "cloud")
+- usecase-backup.svg    (originally "database")
+- usecase-games.svg     (originally "gamepad")

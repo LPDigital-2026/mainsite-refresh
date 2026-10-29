@@ -1,0 +1,12 @@
+Fonts in this folder are self-hosted, sourced via the @fontsource
+npm packages (which redistribute the official Google Fonts files):
+https://fontsource.org
+
+- Sora (weights 500, 600, 700, 800) - SIL Open Font License 1.1
+  Copyright 2019 The Sora Project Authors
+- Inter (weights 400, 500, 600, 700) - SIL Open Font License 1.1
+  Copyright 2016 The Inter Project Authors
+- IBM Plex Mono (weights 500, 600) - SIL Open Font License 1.1
+  Copyright IBM Corp.
+
+Full license text: https://scripts.sil.org/OFL
