@@ -2,9 +2,7 @@ Fonts in this folder are self-hosted, sourced via the @fontsource
 npm packages (which redistribute the official Google Fonts files):
 https://fontsource.org
 
-- Sora (weights 500, 600, 700) - SIL Open Font License 1.1
+- Sora (variable, weights 100-800) - SIL Open Font License 1.1
   Copyright 2019 The Sora Project Authors
-- Hanken Grotesk (variable, weights 100-900) - SIL Open Font License 1.1
-  Copyright 2021 The Hanken Grotesk Project Authors
 
 Full license text: https://scripts.sil.org/OFL

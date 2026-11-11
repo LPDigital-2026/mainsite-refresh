@@ -89,8 +89,16 @@
 	var header = document.querySelector( '.site-header' );
 	if ( header ) {
 		var ticking = false;
+		var heroVideo = document.querySelector( '.lpd-hero-video' );
 		var updateHeader = function () {
 			header.classList.toggle( 'is-scrolled', window.scrollY > 24 );
+			// The hero stays pinned under the page (see "Hero curtain" in
+			// style.css), so stop decoding its film once it is covered.
+			if ( heroVideo ) {
+				var covered = window.scrollY > window.innerHeight * 1.05;
+				if ( covered && ! heroVideo.paused ) heroVideo.pause();
+				if ( ! covered && heroVideo.paused ) heroVideo.play().catch( function () {} );
+			}
 			ticking = false;
 		};
 		window.addEventListener( 'scroll', function () {

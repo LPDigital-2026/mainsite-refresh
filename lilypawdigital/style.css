@@ -4,7 +4,7 @@ Theme URI: https://lilypawdigital.xyz
 Author: Lily Paw Digital
 Author URI: https://lilypawdigital.xyz
 Description: Theme for Lily Paw Digital - North East web design, hosting and colocation. Navy and paper, set large, with the paw pink used sparingly.
-Version: 4.0
+Version: 4.1
 Requires at least: 6.0
 Tested up to: 6.6
 Requires PHP: 7.4
@@ -17,29 +17,8 @@ Text Domain: lilypawdigital
    request to Google's servers, so no visitor IP is sent there. */
 @font-face {
   font-family: 'Sora';
-  src: url('assets/fonts/sora-latin-500-normal.woff2') format('woff2');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Sora';
-  src: url('assets/fonts/sora-latin-600-normal.woff2') format('woff2');
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Sora';
-  src: url('assets/fonts/sora-latin-700-normal.woff2') format('woff2');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Hanken Grotesk';
-  src: url('assets/fonts/hanken-grotesk-latin-wght-normal.woff2') format('woff2-variations');
-  font-weight: 100 900;
+  src: url('assets/fonts/sora-latin-wght-normal.woff2') format('woff2-variations');
+  font-weight: 100 800;
   font-style: normal;
   font-display: swap;
 }
@@ -80,8 +59,10 @@ Text Domain: lilypawdigital
   --head: 76px;
   --section: clamp(72px, 10vw, 144px);
 
+  /* One family, the brand's: Sora for everything. Display sizes are set
+     tight and semi-bold, running text light-regular with more air. */
   --font-display: 'Sora', system-ui, sans-serif;
-  --font-body: 'Hanken Grotesk', system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-body: 'Sora', system-ui, -apple-system, "Segoe UI", sans-serif;
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
   --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
@@ -144,8 +125,10 @@ body {
   background: var(--bg);
   color: var(--fg);
   font-family: var(--font-body);
-  font-size: 1.0625rem;
-  line-height: 1.6;
+  font-size: 1rem;
+  font-weight: 350;
+  line-height: 1.7;
+  letter-spacing: -0.008em;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   /* clip, not hidden: hidden here would make body a scroll container,
@@ -1384,3 +1367,130 @@ label { display: block; font-size: 0.95rem; font-weight: 600; margin-bottom: 6px
 
 /* Quote beside a project: smaller than the full-width homepage quote */
 .lpd-bands .lpd-split p.lpd-testimonial-quote { font-size: clamp(1.25rem, 2vw, 1.65rem); line-height: 1.3; }
+
+/* ==========================================================================
+   The colocation scene
+   Without scroll-timeline support, on small screens, or with reduced
+   motion, this is an ordinary two-column section: three photographs
+   beside the copy. Where it can, the stage pins to the screen for three
+   screens of scrolling: the photographs wipe from one to the next and
+   the matching fact comes forward.
+   ========================================================================== */
+.lpd-scene { position: relative; background: var(--night); color: var(--cream); }
+.lpd-scene-stage {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(32px, 6vw, 96px);
+  align-items: center;
+  width: 100%;
+  max-width: calc(var(--wrap) + var(--gutter) * 2);
+  margin: 0 auto;
+  padding: var(--section) var(--gutter);
+}
+.lpd-scene-photos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.lpd-scene-photo { margin: 0; overflow: hidden; border-radius: var(--radius); }
+.lpd-scene-photo:first-child { grid-column: 1 / -1; }
+.lpd-scene-photo img { width: 100%; height: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+.lpd-scene-photo:first-child img { aspect-ratio: 16 / 10; }
+
+.lpd-scene-copy h2 { font-size: clamp(2.1rem, 4.4vw, 3.6rem); letter-spacing: -0.04em; line-height: 1.02; margin: 0 0 18px; }
+.lpd-scene-copy p.lpd-scene-intro { color: var(--fg-dim); font-size: 1.08rem; line-height: 1.6; max-width: 44ch; margin: 0 0 28px; }
+.lpd-scene-caps { position: relative; }
+.lpd-scene-cap { padding: 18px 0; border-top: 1px solid var(--rule); }
+.lpd-scene-cap h3 { font-size: clamp(1.2rem, 1.8vw, 1.45rem); letter-spacing: -0.03em; margin: 0 0 6px; }
+.lpd-scene-cap p { margin: 0; color: rgba(246, 239, 230, 0.86); max-width: 46ch; }
+.lpd-scene-copy p.lpd-colo-price {
+  margin: 0 0 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--rule);
+  font-size: clamp(1.3rem, 2vw, 1.6rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+@media (max-width: 900px) {
+  .lpd-scene-stage { grid-template-columns: minmax(0, 1fr); }
+}
+
+@supports (animation-timeline: view()) {
+  @media (min-width: 901px) and (min-height: 660px) and (prefers-reduced-motion: no-preference) {
+    .lpd-scene { height: 320vh; view-timeline-name: --lpd-scene; }
+    .lpd-scene-stage {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      height: 100svh;
+      padding-top: calc(var(--head) + 24px);
+      padding-bottom: 32px;
+    }
+    /* photographs stacked in one tall frame */
+    .lpd-scene-photos { display: block; position: relative; height: 100%; max-height: 760px; border-radius: var(--radius); overflow: hidden; }
+    .lpd-scene-photo { position: absolute; inset: 0; border-radius: 0; }
+    .lpd-scene-photo img,
+    .lpd-scene-photo:first-child img { aspect-ratio: auto; }
+    .lpd-scene-photo:nth-child(2) { animation-name: lpd-scene-wipe-2; }
+    .lpd-scene-photo:nth-child(3) { animation-name: lpd-scene-wipe-3; }
+    .lpd-scene-photo:nth-child(2) img { animation-name: lpd-scene-zoom-2; }
+    .lpd-scene-photo:nth-child(3) img { animation-name: lpd-scene-zoom-3; }
+
+    .lpd-scene-cap:nth-child(1) { animation-name: lpd-scene-cap-1; }
+    .lpd-scene-cap:nth-child(2) { animation-name: lpd-scene-cap-2; }
+    .lpd-scene-cap:nth-child(3) { animation-name: lpd-scene-cap-3; }
+    /* progress down the left edge of the facts */
+    .lpd-scene-caps { padding-left: 22px; }
+    .lpd-scene-caps::before,
+    .lpd-scene-caps::after { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--rule); }
+    .lpd-scene-caps::after { background: var(--pink); transform-origin: top center; animation-name: lpd-progress; }
+
+    /* longhands only: an `animation` shorthand on the rules above would
+       reset the timeline back to time-based */
+    .lpd-scene-photo, .lpd-scene-photo img, .lpd-scene-cap, .lpd-scene-caps::after {
+      animation-timing-function: linear;
+      animation-fill-mode: both;
+      animation-timeline: --lpd-scene;
+      animation-range: contain 0% contain 100%;
+    }
+  }
+}
+/* the wipes happen in short bands of the scroll, so each photograph
+   holds still for most of its screen */
+@keyframes lpd-scene-wipe-2 { 0%, 26% { clip-path: inset(100% 0 0 0); } 40%, 100% { clip-path: inset(0 0 0 0); } }
+@keyframes lpd-scene-wipe-3 { 0%, 60% { clip-path: inset(100% 0 0 0); } 74%, 100% { clip-path: inset(0 0 0 0); } }
+@keyframes lpd-scene-zoom-2 { 0%, 26% { transform: scale(1.14); } 46%, 100% { transform: scale(1); } }
+@keyframes lpd-scene-zoom-3 { 0%, 60% { transform: scale(1.14); } 80%, 100% { transform: scale(1); } }
+@keyframes lpd-scene-cap-1 { 0%, 28% { opacity: 1; } 38%, 100% { opacity: 0.6; } }
+@keyframes lpd-scene-cap-2 { 0%, 28% { opacity: 0.6; } 38%, 62% { opacity: 1; } 72%, 100% { opacity: 0.6; } }
+@keyframes lpd-scene-cap-3 { 0%, 62% { opacity: 0.6; } 72%, 100% { opacity: 1; } }
+
+/* ==========================================================================
+   Hero curtain
+   On roomy screens the hero holds its place and dims while the page
+   slides up over it, instead of scrolling away.
+   ========================================================================== */
+.lpd-front-page > .wp-block-group:not(.lpd-hero) { position: relative; z-index: 1; }
+.lpd-front-page > :is(.lpd-services, .lpd-features, .lpd-why-different, .lpd-section-alt, .lpd-section-dark):not(.lpd-pricing) { background-color: var(--bg); }
+@supports (animation-timeline: view()) {
+  @media (min-width: 901px) and (min-height: 700px) and (prefers-reduced-motion: no-preference) {
+    .lpd-front-page > .lpd-hero { position: sticky; top: 0; }
+    .lpd-front-page > .lpd-hero + .wp-block-group { border-radius: 28px 28px 0 0; }
+    .lpd-front-page > .lpd-hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      background: var(--night-deep);
+      pointer-events: none;
+      opacity: 0;
+      animation: lpd-hero-dim linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 100vh;
+    }
+    .lpd-front-page > .lpd-hero > .lpd-inner,
+    .lpd-front-page > .lpd-hero > .lpd-rail {
+      animation: lpd-hero-sink linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 100vh;
+    }
+  }
+}
+@keyframes lpd-hero-dim { to { opacity: 0.7; } }
+@keyframes lpd-hero-sink { to { transform: scale(0.96); } }

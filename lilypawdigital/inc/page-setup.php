@@ -3,12 +3,20 @@
  * Page setup: builds the site's pages from the content shipped in
  * inc/pages/, so a fresh install needs no copy-pasting.
  *
- * On activation the theme creates any standard page that doesn't exist
- * yet, makes Home the front page (only if no static front page is set)
- * and builds the primary menu (only if none is assigned). It never
- * overwrites a page that already exists: that is an explicit, per-page
- * "Replace" on Appearance -> Page Setup, and WordPress keeps the old
- * content as a revision so it can be restored.
+ * This runs by itself: on activation, and again whenever the theme's
+ * version changes (uploading a new zip over the old one never fires
+ * WordPress's activation hook). Each run
+ *   - creates any standard page that doesn't exist yet,
+ *   - brings a page up to date if nobody has edited it by hand,
+ *   - makes Home the front page (only if no static front page is set),
+ *   - builds the primary menu (only if none is assigned).
+ *
+ * "Not edited by hand" is decided by fingerprint: the page's content
+ * matches what this theme last wrote to it, or any version of the
+ * content the theme has ever shipped. A page that has been edited
+ * (a price calculator added to Get Started, say) is left alone and
+ * listed on Appearance -> Page Setup, where "Replace" overwrites it on
+ * request. WordPress keeps the old content as a revision either way.
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit;
@@ -71,6 +79,61 @@ function lpd_setup_find_page( $slug ) {
 }
 
 /**
+ * Fingerprint of page content, ignoring the things that differ between
+ * sites and saves without being an edit: where the theme lives, the rel
+ * attribute WordPress may add to links, and whitespace.
+ */
+function lpd_setup_fingerprint( $content ) {
+	$content = str_replace( '{{theme_uri}}', '{{T}}', (string) $content );
+	$content = preg_replace( '#(?:https?://[^\s"\'<>]+?)?/wp-content/themes/[A-Za-z0-9_-]+#', '{{T}}', $content );
+	$content = preg_replace( '#\s+rel="[^"]*"#', '', $content );
+	$content = trim( preg_replace( '#\s+#', ' ', $content ) );
+	return md5( $content );
+}
+
+/**
+ * Where a page stands against the theme's content:
+ *   missing  - no such page
+ *   current  - already the theme's version
+ *   outdated - an older theme version nobody has edited: safe to update
+ *   edited   - changed by hand: only replaced on request
+ */
+function lpd_setup_page_state( $slug ) {
+	$page = lpd_setup_find_page( $slug );
+	if ( ! $page ) {
+		return 'missing';
+	}
+
+	$have = lpd_setup_fingerprint( $page->post_content );
+	if ( lpd_setup_fingerprint( lpd_setup_page_content( $slug ) ) === $have ) {
+		return 'current';
+	}
+	if ( get_post_meta( $page->ID, '_lpd_fingerprint', true ) === $have ) {
+		return 'outdated';
+	}
+
+	static $known = null;
+	if ( null === $known ) {
+		$known = (array) require get_template_directory() . '/inc/pages/known-fingerprints.php';
+	}
+	return ( isset( $known[ $slug ] ) && in_array( $have, $known[ $slug ], true ) ) ? 'outdated' : 'edited';
+}
+
+/**
+ * Remember what the theme wrote, fingerprinted from what WordPress
+ * actually stored (save filters can alter content on the way in).
+ */
+function lpd_setup_remember( $page_id ) {
+	if ( is_wp_error( $page_id ) || ! $page_id ) {
+		return;
+	}
+	$saved = get_post( $page_id );
+	if ( $saved ) {
+		update_post_meta( $page_id, '_lpd_fingerprint', lpd_setup_fingerprint( $saved->post_content ) );
+	}
+}
+
+/**
  * Create one page if it doesn't exist yet. Returns the page ID, or a
  * WP_Error. An existing page is returned untouched.
  */
@@ -80,8 +143,8 @@ function lpd_setup_create_page( $slug ) {
 		return (int) $existing->ID;
 	}
 
-	$pages = lpd_setup_pages();
-	return wp_insert_post(
+	$pages  = lpd_setup_pages();
+	$result = wp_insert_post(
 		wp_slash(
 			array(
 				'post_type'    => 'page',
@@ -93,6 +156,8 @@ function lpd_setup_create_page( $slug ) {
 		),
 		true
 	);
+	lpd_setup_remember( $result );
+	return $result;
 }
 
 /**
@@ -105,7 +170,7 @@ function lpd_setup_replace_page( $slug ) {
 		return lpd_setup_create_page( $slug );
 	}
 
-	return wp_update_post(
+	$result = wp_update_post(
 		wp_slash(
 			array(
 				'ID'           => $page->ID,
@@ -114,6 +179,8 @@ function lpd_setup_replace_page( $slug ) {
 		),
 		true
 	);
+	lpd_setup_remember( $result );
+	return $result;
 }
 
 /**
@@ -131,6 +198,32 @@ function lpd_setup_create_missing() {
 		}
 	}
 	return $created;
+}
+
+/**
+ * Bring every page in line with the theme without touching hand edits.
+ * Returns the slugs created, updated and left alone (edited).
+ */
+function lpd_setup_sync_pages() {
+	$summary = array( 'created' => array(), 'updated' => array(), 'kept' => array() );
+	foreach ( array_keys( lpd_setup_pages() ) as $slug ) {
+		$state = lpd_setup_page_state( $slug );
+		if ( 'missing' === $state ) {
+			if ( ! is_wp_error( lpd_setup_create_page( $slug ) ) ) {
+				$summary['created'][] = $slug;
+			}
+		} elseif ( 'outdated' === $state ) {
+			if ( ! is_wp_error( lpd_setup_replace_page( $slug ) ) ) {
+				$summary['updated'][] = $slug;
+			}
+		} elseif ( 'edited' === $state ) {
+			$summary['kept'][] = $slug;
+		} else {
+			// Already current: adopt it so later versions update it too.
+			lpd_setup_remember( lpd_setup_find_page( $slug )->ID );
+		}
+	}
+	return $summary;
 }
 
 function lpd_setup_set_front_page() {
@@ -196,16 +289,15 @@ function lpd_setup_has_primary_menu() {
 }
 
 /**
- * First activation: only fill gaps, never change what's already there.
- * Runs after WordPress has carried menu locations over from the previous
- * theme (core does that at priority 10).
+ * The automatic run. Fills gaps and updates untouched pages; never
+ * changes a hand-edited page, an existing front page or an existing menu.
  */
-function lpd_setup_on_activate() {
+function lpd_setup_run() {
 	if ( ! current_user_can( 'edit_theme_options' ) || ! current_user_can( 'publish_pages' ) ) {
 		return;
 	}
 
-	$summary = array( 'created' => lpd_setup_create_missing() );
+	$summary = lpd_setup_sync_pages();
 
 	if ( 'page' !== get_option( 'show_on_front' ) || ! get_option( 'page_on_front' ) ) {
 		$summary['front_page'] = lpd_setup_set_front_page();
@@ -215,9 +307,23 @@ function lpd_setup_on_activate() {
 		$summary['menu'] = ! is_wp_error( lpd_setup_build_menu() );
 	}
 
+	update_option( 'lpd_setup_version', LPD_VERSION );
 	set_transient( 'lpd_setup_summary', $summary, HOUR_IN_SECONDS );
 }
-add_action( 'after_switch_theme', 'lpd_setup_on_activate', 20 );
+// On activation, after WordPress has carried menu locations over from
+// the previous theme (core does that at priority 10).
+add_action( 'after_switch_theme', 'lpd_setup_run', 20 );
+
+/**
+ * A new zip uploaded over the old theme doesn't fire the activation
+ * hook, so also run once whenever the installed version changes.
+ */
+function lpd_setup_maybe_run() {
+	if ( get_option( 'lpd_setup_version' ) !== LPD_VERSION ) {
+		lpd_setup_run();
+	}
+}
+add_action( 'admin_init', 'lpd_setup_maybe_run' );
 
 function lpd_setup_activation_notice() {
 	$summary = get_transient( 'lpd_setup_summary' );
@@ -226,10 +332,15 @@ function lpd_setup_activation_notice() {
 	}
 	delete_transient( 'lpd_setup_summary' );
 
+	$pages = lpd_setup_pages();
 	$parts = array();
 	if ( ! empty( $summary['created'] ) ) {
 		/* translators: %d: number of pages */
 		$parts[] = sprintf( _n( 'created %d page', 'created %d pages', count( $summary['created'] ), 'lilypawdigital' ), count( $summary['created'] ) );
+	}
+	if ( ! empty( $summary['updated'] ) ) {
+		/* translators: %d: number of pages */
+		$parts[] = sprintf( _n( 'updated %d page', 'updated %d pages', count( $summary['updated'] ), 'lilypawdigital' ), count( $summary['updated'] ) );
 	}
 	if ( ! empty( $summary['front_page'] ) ) {
 		$parts[] = __( 'set Home as the front page', 'lilypawdigital' );
@@ -239,9 +350,18 @@ function lpd_setup_activation_notice() {
 	}
 
 	$message = $parts
-		/* translators: %s: list of what the theme did, e.g. "created 6 pages, built the main menu" */
-		? sprintf( __( 'Lily Paw Digital theme: %s. Existing pages were left as they were.', 'lilypawdigital' ), implode( ', ', $parts ) )
-		: __( 'Lily Paw Digital theme: all pages already exist, so nothing was changed.', 'lilypawdigital' );
+		/* translators: %s: list of what the theme did, e.g. "created 2 pages, updated 4 pages" */
+		? sprintf( __( 'Lily Paw Digital theme: %s.', 'lilypawdigital' ), implode( ', ', $parts ) )
+		: __( 'Lily Paw Digital theme: your pages are already up to date.', 'lilypawdigital' );
+
+	if ( ! empty( $summary['kept'] ) ) {
+		$titles = array();
+		foreach ( $summary['kept'] as $slug ) {
+			$titles[] = $pages[ $slug ]['title'];
+		}
+		/* translators: %s: comma-separated page titles */
+		$message .= ' ' . sprintf( __( 'Left alone because you have edited them: %s.', 'lilypawdigital' ), implode( ', ', $titles ) );
+	}
 
 	printf(
 		'<div class="notice notice-success is-dismissible"><p>%s <a href="%s">%s</a></p></div>',
@@ -343,7 +463,7 @@ function lpd_setup_render_admin_page() {
 	<div class="wrap">
 		<h1><?php esc_html_e( 'Page Setup', 'lilypawdigital' ); ?></h1>
 		<p style="max-width:640px;">
-			<?php esc_html_e( 'Creates the site\'s pages with the theme\'s ready-made content. Creating only adds pages that don\'t exist yet. Replacing overwrites a page with the theme version; WordPress keeps the old content as a revision, so it can be restored from the page editor.', 'lilypawdigital' ); ?>
+			<?php esc_html_e( 'The theme sets these pages up by itself: it creates any that are missing and updates any you haven\'t edited whenever the theme changes. Pages you have edited are left alone. Replacing overwrites a page with the theme version on request; WordPress keeps the old content as a revision, so it can be restored from the page editor.', 'lilypawdigital' ); ?>
 		</p>
 
 		<?php if ( isset( $messages[ $done ] ) ) : ?>
@@ -361,14 +481,17 @@ function lpd_setup_render_admin_page() {
 			<tbody>
 			<?php foreach ( $pages as $slug => $page_def ) : ?>
 				<?php
-				$page = lpd_setup_find_page( $slug );
-				if ( ! $page ) {
+				$page   = lpd_setup_find_page( $slug );
+				$state  = lpd_setup_page_state( $slug );
+				$labels = array(
+					'missing'  => __( 'Not created yet', 'lilypawdigital' ),
+					'current'  => __( 'Up to date', 'lilypawdigital' ),
+					'outdated' => __( 'Older theme version (updates automatically)', 'lilypawdigital' ),
+					'edited'   => __( 'Edited by you (left alone)', 'lilypawdigital' ),
+				);
+				$status = $labels[ $state ];
+				if ( 'missing' === $state ) {
 					$missing++;
-					$status = __( 'Not created yet', 'lilypawdigital' );
-				} elseif ( trim( $page->post_content ) === trim( lpd_setup_page_content( $slug ) ) ) {
-					$status = __( 'Matches the theme version', 'lilypawdigital' );
-				} else {
-					$status = __( 'Edited (differs from the theme version)', 'lilypawdigital' );
 				}
 				if ( $page && 'publish' !== $page->post_status ) {
 					/* translators: %s: post status, e.g. draft */
