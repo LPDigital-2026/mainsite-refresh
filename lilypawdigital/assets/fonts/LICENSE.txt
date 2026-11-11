@@ -4,8 +4,7 @@ https://fontsource.org
 
 - Sora (weights 500, 600, 700) - SIL Open Font License 1.1
   Copyright 2019 The Sora Project Authors
-- Inter (weights 400, 500, 600, 700) - SIL Open Font License 1.1
-  Copyright 2016 The Inter Project Authors
-  Copyright IBM Corp.
+- Hanken Grotesk (variable, weights 100-900) - SIL Open Font License 1.1
+  Copyright 2021 The Hanken Grotesk Project Authors
 
 Full license text: https://scripts.sil.org/OFL

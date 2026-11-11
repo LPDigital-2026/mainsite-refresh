@@ -1,27 +1,22 @@
 ( function () {
 	'use strict';
 
-	var prefersReducedMotion = window.matchMedia( '(prefers-reduced-motion: reduce)' ).matches;
+	var reduceMotion = window.matchMedia( '(prefers-reduced-motion: reduce)' ).matches;
+	var finePointer = window.matchMedia( '(hover: hover) and (pointer: fine)' ).matches;
 
 	/* ---------------------------------------------------------------
-	 * Hero background video - injected via JS so it doesn't require
-	 * touching the pasted page content. Skipped entirely (falls back
-	 * to the static poster image) for reduced-motion or data-saver
-	 * users, since an autoplaying video is exactly the kind of motion
-	 * those settings exist to avoid.
+	 * Hero background video - injected here so it never needs to be in
+	 * the page content. Skipped (the poster image stays) for reduced
+	 * motion, data saver and small screens.
 	 * ------------------------------------------------------------- */
-	(function () {
+	( function () {
 		var hero = document.querySelector( '.lpd-hero' );
-		if ( ! hero ) return;
-
 		var themeUrl = ( typeof lpdTheme !== 'undefined' && lpdTheme.url ) ? lpdTheme.url : '';
-		if ( ! themeUrl ) return; // localized data missing - skip rather than guess wrong URLs
-
-		var posterUrl = themeUrl + '/assets/images/hero-poster.jpg';
+		if ( ! hero || ! themeUrl ) return;
 
 		var saveData = navigator.connection && navigator.connection.saveData;
 		var isMobile = window.matchMedia( '(max-width: 780px)' ).matches;
-		if ( prefersReducedMotion || saveData || isMobile ) return;
+		if ( reduceMotion || saveData || isMobile ) return;
 
 		var video = document.createElement( 'video' );
 		video.className = 'lpd-hero-video';
@@ -31,34 +26,71 @@
 		video.muted = true;
 		video.loop = true;
 		video.playsInline = true;
-		video.setAttribute( 'poster', posterUrl );
+		video.setAttribute( 'poster', themeUrl + '/assets/images/hero-poster.jpg' );
 
-		var webm = document.createElement( 'source' );
-		webm.src = themeUrl + '/assets/video/hero-bg.webm';
-		webm.type = 'video/webm';
-
-		var mp4 = document.createElement( 'source' );
-		mp4.src = themeUrl + '/assets/video/hero-bg.mp4';
-		mp4.type = 'video/mp4';
-
-		video.appendChild( webm );
-		video.appendChild( mp4 );
+		[ [ 'webm', 'video/webm' ], [ 'mp4', 'video/mp4' ] ].forEach( function ( type ) {
+			var source = document.createElement( 'source' );
+			source.src = themeUrl + '/assets/video/hero-bg.' + type[0];
+			source.type = type[1];
+			video.appendChild( source );
+		} );
 		hero.insertBefore( video, hero.firstChild );
-	})();
+	} )();
 
 	/* ---------------------------------------------------------------
-	 * Header: subtle shadow once scrolled past the top
+	 * Headline entrance: wrap each word so it can rise out of its own
+	 * line box (CSS does the motion). Inline elements inside the heading
+	 * are kept; only text nodes are split.
+	 * ------------------------------------------------------------- */
+	document.querySelectorAll( '.lpd-hero-heading, .page-hero .entry-title' ).forEach( function ( heading ) {
+		if ( reduceMotion ) {
+			heading.classList.add( 'is-split' );
+			return;
+		}
+		var label = heading.textContent.replace( /\s+/g, ' ' ).trim();
+		var index = 0;
+
+		var split = function ( node ) {
+			Array.prototype.slice.call( node.childNodes ).forEach( function ( child ) {
+				if ( child.nodeType === 1 ) {
+					split( child );
+					return;
+				}
+				if ( child.nodeType !== 3 || ! child.textContent.trim() ) return;
+
+				var frag = document.createDocumentFragment();
+				child.textContent.split( /(\s+)/ ).forEach( function ( part ) {
+					if ( ! part ) return;
+					if ( /^\s+$/.test( part ) ) {
+						frag.appendChild( document.createTextNode( ' ' ) );
+						return;
+					}
+					var outer = document.createElement( 'span' );
+					outer.className = 'lpd-w';
+					var inner = document.createElement( 'span' );
+					inner.style.setProperty( '--i', index++ );
+					inner.textContent = part;
+					outer.appendChild( inner );
+					frag.appendChild( outer );
+				} );
+				node.replaceChild( frag, child );
+			} );
+		};
+
+		split( heading );
+		// Screen readers get the sentence once, not a word at a time.
+		heading.setAttribute( 'aria-label', label );
+		heading.classList.add( 'is-split' );
+	} );
+
+	/* ---------------------------------------------------------------
+	 * Header: solid once the page has scrolled
 	 * ------------------------------------------------------------- */
 	var header = document.querySelector( '.site-header' );
-
 	if ( header ) {
 		var ticking = false;
 		var updateHeader = function () {
-			if ( window.scrollY > 8 ) {
-				header.classList.add( 'is-scrolled' );
-			} else {
-				header.classList.remove( 'is-scrolled' );
-			}
+			header.classList.toggle( 'is-scrolled', window.scrollY > 24 );
 			ticking = false;
 		};
 		window.addEventListener( 'scroll', function () {
@@ -71,18 +103,15 @@
 	}
 
 	/* ---------------------------------------------------------------
-	 * FAQ accordion: click a question to expand/collapse its answer.
-	 * Animates to the answer's real measured height rather than a
-	 * fixed guess, so the reveal is smooth regardless of answer length.
+	 * FAQ accordion. A real button inside the heading keeps the question
+	 * in the heading outline for screen readers. Animates to the answer's
+	 * measured height so the reveal is smooth whatever its length.
 	 * ------------------------------------------------------------- */
 	document.querySelectorAll( '.lpd-faq-item' ).forEach( function ( item, index ) {
 		var heading = item.querySelector( 'h3' );
 		var answer = item.querySelector( 'p' );
 		if ( ! heading || ! answer ) return;
 
-		// A real button inside the heading keeps the question in the
-		// heading outline for screen readers (role="button" on the h3
-		// itself would replace its heading role).
 		var question = document.createElement( 'button' );
 		question.type = 'button';
 		question.className = 'lpd-faq-trigger';
@@ -96,209 +125,139 @@
 		question.setAttribute( 'aria-controls', answer.id );
 		question.setAttribute( 'aria-expanded', 'false' );
 
-		var toggle = function () {
+		question.addEventListener( 'click', function () {
 			var isOpen = item.classList.contains( 'is-open' );
-
+			answer.style.maxHeight = answer.scrollHeight + 'px';
 			if ( isOpen ) {
-				// Closing: set an explicit starting height first so the
-				// transition has a real value to animate from, then
-				// collapse to 0 on the next frame.
-				answer.style.maxHeight = answer.scrollHeight + 'px';
+				// Closing: start from the real height, collapse next frame.
 				window.requestAnimationFrame( function () {
 					window.requestAnimationFrame( function () {
 						answer.style.maxHeight = '0px';
 					} );
 				} );
-				item.classList.remove( 'is-open' );
-			} else {
-				answer.style.maxHeight = answer.scrollHeight + 'px';
-				item.classList.add( 'is-open' );
 			}
-
+			item.classList.toggle( 'is-open', ! isOpen );
 			question.setAttribute( 'aria-expanded', isOpen ? 'false' : 'true' );
-		};
+		} );
 
-		// Once the open transition finishes, switch to 'none' so the
-		// answer can reflow naturally (e.g. on window resize) without
-		// being pinned to a stale pixel height.
+		// Once open, let the answer reflow naturally (e.g. on resize).
 		answer.addEventListener( 'transitionend', function ( e ) {
 			if ( e.propertyName === 'max-height' && item.classList.contains( 'is-open' ) ) {
 				answer.style.maxHeight = 'none';
 			}
 		} );
-
-		question.addEventListener( 'click', toggle );
 	} );
 
-	// Move a leading "+" to trailing instead (e.g. "+15" -> "15+").
-	// This is a static text fix, not animation, so it runs regardless
-	// of the reduced-motion preference checked just below.
-	document.querySelectorAll( '.lpd-stat-number' ).forEach( function ( el ) {
-		var raw = el.textContent.trim();
-		if ( raw.charAt( 0 ) === '+' ) {
-			el.textContent = raw.slice( 1 ) + '+';
-		}
-	} );
-
-	if ( prefersReducedMotion ) {
-		// SMIL animations (animateTransform/animate inside the footer cat SVGs)
-		// aren't controllable via CSS, so pause them here explicitly.
-		document.querySelectorAll( '.lpd-footer-cat' ).forEach( function ( svg ) {
-			if ( typeof svg.pauseAnimations === 'function' ) {
-				svg.pauseAnimations();
-			}
-		} );
-		return; // Skip reveal/counter motion entirely - respect the user's setting.
-	}
-
 	/* ---------------------------------------------------------------
-	 * Scroll reveal: fade + rise, once, staggered within a row
-	 * ------------------------------------------------------------- */
-	// Only rows of cards reveal: headings, prose and FAQ rows stay put, so
-	// the motion marks "here is a set to compare" instead of decorating
-	// every block on the page the same way.
-	var revealSelectors = [
-		'.lpd-features .lpd-card',
-		'.lpd-pricing-card',
-		'.lpd-step',
-		'.lpd-why-item',
-		'.lpd-service-card',
-		'.post-card'
-	];
-
-	var revealTargets = document.querySelectorAll( revealSelectors.join( ',' ) );
-
-	if ( 'IntersectionObserver' in window && revealTargets.length ) {
-		// Stagger siblings that share a parent row (columns/grid) instead of
-		// every element on the page firing on its own timer. Content inside
-		// .lpd-page-content is a tall single-column page, not a row - each
-		// paragraph/heading scrolls into view at its own natural time as
-		// the user scrolls, so it gets no artificial delay at all (a fixed
-		// per-sibling delay would otherwise keep growing the further down
-		// the page you go, making later content feel laggy to reveal).
-		var viewportH = window.innerHeight || document.documentElement.clientHeight;
-		var rowState = new Map();
-		var toAnimate = [];
-
-		// Read every position first, then write: interleaving
-		// getBoundingClientRect() with classList.add() forces a reflow per card.
-		var tops = Array.prototype.map.call( revealTargets, function ( el ) {
-			return el.getBoundingClientRect().top;
-		} );
-		var scrollY = window.pageYOffset;
-
-		revealTargets.forEach( function ( el, i ) {
-			// Anything already on screen (or scrolled past) when this script
-			// runs is left alone. Hiding it now would make content the visitor
-			// is already looking at dim and flicker while the page loads.
-			if ( tops[ i ] < viewportH - 40 ) return;
-
-			toAnimate.push( el );
-
-			// Only items that sit side by side in the same visual row are
-			// staggered. On a phone the columns stack, so every card is its
-			// own row and gets no delay.
-			var parent = el.closest( '.wp-block-columns' ) || el.parentElement;
-			var top = tops[ i ] + scrollY;
-			var state = rowState.get( parent );
-			if ( ! state ) {
-				state = { top: top, count: 0 };
-				rowState.set( parent, state );
-			} else if ( Math.abs( top - state.top ) < 12 ) {
-				state.count++;
-			} else {
-				state.top = top;
-				state.count = 0;
-			}
-			el.style.transitionDelay = ( Math.min( state.count, 3 ) * 60 ) + 'ms';
-		} );
-
-		toAnimate.forEach( function ( el ) {
-			el.classList.add( 'lpd-reveal' );
-		} );
-
-		var observer = new IntersectionObserver( function ( entries, obs ) {
-			entries.forEach( function ( entry ) {
-				if ( ! entry.isIntersecting ) return;
-				var el = entry.target;
-				el.classList.add( 'is-visible' );
-				obs.unobserve( el );
-				// Once the fade-in has finished, give the element back to its
-				// normal styles so hover effects keep their own timing instead
-				// of inheriting the reveal's slower, staggered one.
-				window.setTimeout( function () {
-					el.classList.remove( 'lpd-reveal', 'is-visible' );
-					el.style.transitionDelay = '';
-				}, 800 );
-			} );
-		}, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' } );
-
-		toAnimate.forEach( function ( el ) {
-			observer.observe( el );
-		} );
-	}
-
-	/* ---------------------------------------------------------------
-	 * Stat counter: only where it means something (your uptime/scale
-	 * numbers) - counts up once when scrolled into view.
+	 * Stats: show a leading "+" as trailing ("+15" -> "15+"), and count
+	 * up once when the figure scrolls into view.
 	 * ------------------------------------------------------------- */
 	var statNodes = document.querySelectorAll( '.lpd-stat-number' );
+	statNodes.forEach( function ( el ) {
+		var raw = el.textContent.trim();
+		if ( raw.charAt( 0 ) === '+' ) el.textContent = raw.slice( 1 ) + '+';
+	} );
 
-	if ( 'IntersectionObserver' in window && statNodes.length ) {
-		var easeOutCubic = function ( t ) {
-			return 1 - Math.pow( 1 - t, 3 );
-		};
-
-		var animateStat = function ( el ) {
-			var raw = ( el.getAttribute( 'data-final' ) || el.textContent ).trim();
+	if ( ! reduceMotion && 'IntersectionObserver' in window && statNodes.length ) {
+		var countUp = function ( el ) {
+			var raw = el.getAttribute( 'data-final' );
 			var match = raw.match( /^([^\d]*)([\d.]+)(.*)$/ );
 			if ( ! match ) return;
-
-			var prefix = match[1];
 			var target = parseFloat( match[2] );
-			var suffix = match[3];
 			var decimals = ( match[2].split( '.' )[1] || '' ).length;
-			var duration = 1700;
 			var start = null;
-
-			var step = function ( timestamp ) {
-				if ( ! start ) start = timestamp;
-				var progress = Math.min( ( timestamp - start ) / duration, 1 );
-				var eased = easeOutCubic( progress );
-				var current = ( target * eased ).toFixed( decimals );
-				el.textContent = prefix + current + suffix;
-				if ( progress < 1 ) {
-					window.requestAnimationFrame( step );
-				} else {
-					el.textContent = raw; // land exactly on the original text
-				}
+			var step = function ( now ) {
+				if ( ! start ) start = now;
+				var t = Math.min( ( now - start ) / 1400, 1 );
+				var eased = 1 - Math.pow( 1 - t, 4 );
+				el.textContent = t < 1 ? match[1] + ( target * eased ).toFixed( decimals ) + match[3] : raw;
+				if ( t < 1 ) window.requestAnimationFrame( step );
 			};
-
 			window.requestAnimationFrame( step );
 		};
-
 		var statObserver = new IntersectionObserver( function ( entries, obs ) {
 			entries.forEach( function ( entry ) {
-				if ( entry.isIntersecting ) {
-					animateStat( entry.target );
-					obs.unobserve( entry.target );
-				}
+				if ( ! entry.isIntersecting ) return;
+				countUp( entry.target );
+				obs.unobserve( entry.target );
 			} );
-		}, { threshold: 0.5 } );
+		}, { threshold: 0.6 } );
 
-		var statViewportH = window.innerHeight || document.documentElement.clientHeight;
-		statNodes.forEach( function ( el ) {
-			// Already on screen when the page loads: just leave the number as is.
-			if ( el.getBoundingClientRect().top < statViewportH ) return;
-			// Otherwise show zero now, while it is off screen, so it counts up
-			// from zero as it arrives instead of flashing the real number first.
+		var viewportH = window.innerHeight;
+		var tops = Array.prototype.map.call( statNodes, function ( el ) { return el.getBoundingClientRect().top; } );
+		statNodes.forEach( function ( el, i ) {
+			if ( tops[ i ] < viewportH ) return; // already on screen: leave it be
 			var raw = el.textContent.trim();
 			var m = raw.match( /^([^\d]*)([\d.]+)(.*)$/ );
 			if ( ! m ) return;
-			var decimals = ( m[2].split( '.' )[1] || '' ).length;
 			el.setAttribute( 'data-final', raw );
-			el.textContent = m[1] + ( 0 ).toFixed( decimals ) + m[3];
+			el.textContent = m[1] + ( 0 ).toFixed( ( m[2].split( '.' )[1] || '' ).length ) + m[3];
 			statObserver.observe( el );
 		} );
 	}
+
+	/* ---------------------------------------------------------------
+	 * Photographs unveil once as they arrive. Anything already on screen
+	 * at load is left alone, so nothing the visitor is looking at blinks.
+	 * ------------------------------------------------------------- */
+	if ( ! reduceMotion && 'IntersectionObserver' in window ) {
+		var frames = document.querySelectorAll( '.lpd-colo-teaser-photo, .lpd-bands .lpd-photo, .lpd-colo-gallery .wp-block-image' );
+		var frameTops = Array.prototype.map.call( frames, function ( el ) { return el.getBoundingClientRect().top; } );
+		var imgObserver = new IntersectionObserver( function ( entries, obs ) {
+			entries.forEach( function ( entry ) {
+				if ( ! entry.isIntersecting ) return;
+				entry.target.classList.add( 'is-in' );
+				obs.unobserve( entry.target );
+			} );
+		}, { threshold: 0.2, rootMargin: '0px 0px -8% 0px' } );
+
+		frames.forEach( function ( el, i ) {
+			if ( frameTops[ i ] < window.innerHeight * 0.9 ) return;
+			el.classList.add( 'lpd-img-reveal' );
+			imgObserver.observe( el );
+		} );
+	}
+
+	/* ---------------------------------------------------------------
+	 * The footer cats watch the pointer. Each pupil shifts a little
+	 * toward it, in SVG units, so it works at any rendered size.
+	 * ------------------------------------------------------------- */
+	( function () {
+		var cats = document.querySelectorAll( '.lpd-footer-cat' );
+
+		if ( reduceMotion ) {
+			// SMIL (tail, head tilt, blink) can't be stopped from CSS.
+			cats.forEach( function ( svg ) {
+				if ( typeof svg.pauseAnimations === 'function' ) svg.pauseAnimations();
+			} );
+			return;
+		}
+		if ( ! finePointer || ! cats.length ) return;
+
+		var pointer = null;
+		var queued = false;
+		var look = function () {
+			queued = false;
+			cats.forEach( function ( svg ) {
+				var box = svg.getBoundingClientRect();
+				if ( box.bottom < -200 || box.top > window.innerHeight + 200 ) return;
+				var dx = pointer.x - ( box.left + box.width / 2 );
+				var dy = pointer.y - ( box.top + box.height * 0.3 );
+				var dist = Math.sqrt( dx * dx + dy * dy ) || 1;
+				var reach = Math.min( dist / 160, 1 ) * 2.4;
+				var x = ( dx / dist ) * reach;
+				var y = ( dy / dist ) * reach * 0.8;
+				svg.querySelectorAll( '.lpd-cat-eye' ).forEach( function ( eye ) {
+					eye.style.transform = 'translate(' + x.toFixed( 2 ) + 'px,' + y.toFixed( 2 ) + 'px)';
+				} );
+			} );
+		};
+		window.addEventListener( 'pointermove', function ( e ) {
+			pointer = { x: e.clientX, y: e.clientY };
+			if ( ! queued ) {
+				queued = true;
+				window.requestAnimationFrame( look );
+			}
+		}, { passive: true } );
+	} )();
 } )();

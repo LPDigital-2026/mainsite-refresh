@@ -5,7 +5,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-define( 'LPD_VERSION', '3.4' );
+define( 'LPD_VERSION', '4.0' );
 
 function lpd_setup() {
 	load_theme_textdomain( 'lilypawdigital', get_template_directory() . '/languages' );
@@ -54,11 +54,11 @@ function lpd_scripts() {
 add_action( 'wp_enqueue_scripts', 'lpd_scripts' );
 
 /**
- * Preload the two faces every page paints above the fold (hero/page
- * title in Sora 700, body in Inter 400) so headings don't swap late.
+ * Preload the two faces every page paints above the fold (headline in
+ * Sora 600, body in Hanken Grotesk) so text doesn't swap late.
  */
 function lpd_preload_fonts() {
-	$fonts = array( 'sora-latin-700-normal.woff2', 'inter-latin-400-normal.woff2' );
+	$fonts = array( 'sora-latin-600-normal.woff2', 'hanken-grotesk-latin-wght-normal.woff2' );
 	foreach ( $fonts as $font ) {
 		printf(
 			'<link rel="preload" href="%s" as="font" type="font/woff2" crossorigin>' . "\n",
@@ -67,6 +67,15 @@ function lpd_preload_fonts() {
 	}
 }
 add_action( 'wp_head', 'lpd_preload_fonts', 1 );
+
+/**
+ * Mark the document as scripted before first paint, so the headline can
+ * wait for its entrance animation without flashing in unstyled first.
+ */
+function lpd_js_class() {
+	echo "<script>document.documentElement.classList.add('lpd-js');</script>\n";
+}
+add_action( 'wp_head', 'lpd_js_class', 0 );
 
 function lpd_widgets_init() {
 	register_sidebar(

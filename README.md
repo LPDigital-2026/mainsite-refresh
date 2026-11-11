@@ -10,6 +10,19 @@ WordPress theme for lilypawdigital.xyz, plus the page content it ships with.
 | `page-content/copy-all-page-content.html` | The same content as copy buttons, for pasting by hand. |
 | `docs/impeccable-audit.md` | Design and accessibility audit, before and after v3.1. |
 
+## Design (v4)
+
+- **Surfaces:** the logo's aubergine navy is the page colour; pricing, FAQ, About and Contact sit on warm paper.
+- **Colour:** solid paw pink for buttons and for one loud offer panel. No gradients.
+- **Type:** Sora for large headlines, Hanken Grotesk for body. Both are self-hosted in `lilypawdigital/assets/fonts/`.
+- **Motion:**
+  - the hero headline rises in word by word, once, on load;
+  - "How It Works" tracks scroll: the heading stays pinned while a pink line and the step numbers follow progress;
+  - photographs unveil once as they scroll into view;
+  - pages cross-fade into each other;
+  - the footer cats' eyes follow the pointer.
+- **Reduced motion:** all of it is switched off for visitors who ask for reduced motion.
+
 ## Install
 
 1. In WP Admin: **Appearance → Themes → Add New → Upload Theme**, choose `lilypawdigital.zip`, then **Activate**.

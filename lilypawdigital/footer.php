@@ -109,8 +109,8 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 			          <!-- Left eye -->
 			          <ellipse cx="86" cy="109" rx="7" ry="5.5" fill="#1a1a1a"/>
-			          <ellipse cx="86" cy="109" rx="3.8" ry="3.8" fill="#060606"/>
-			          <circle  cx="88" cy="106.5" r="1.8" fill="white" opacity="0.9"/>
+			          <ellipse class="lpd-cat-eye" cx="86" cy="109" rx="3.8" ry="3.8" fill="#060606"/>
+			          <circle class="lpd-cat-eye" cx="88" cy="106.5" r="1.8" fill="white" opacity="0.9"/>
 			          <!-- Eyelid slides down from top using clipPath -->
 			          <rect x="79" y="103.5" width="14" height="0" fill="#444" clip-path="url(#leye-d)">
 			            <animate attributeName="height" values="0;0;0;0;0;0;11;0;0;0;0;0;0;11;0" dur="8s" repeatCount="indefinite"/>
@@ -118,8 +118,8 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 			          <!-- Right eye -->
 			          <ellipse cx="106" cy="109" rx="7" ry="5.5" fill="#1a1a1a"/>
-			          <ellipse cx="106" cy="109" rx="3.8" ry="3.8" fill="#060606"/>
-			          <circle  cx="108" cy="106.5" r="1.8" fill="white" opacity="0.9"/>
+			          <ellipse class="lpd-cat-eye" cx="106" cy="109" rx="3.8" ry="3.8" fill="#060606"/>
+			          <circle class="lpd-cat-eye" cx="108" cy="106.5" r="1.8" fill="white" opacity="0.9"/>
 			          <rect x="99" y="103.5" width="14" height="0" fill="#444" clip-path="url(#reye-d)">
 			            <animate attributeName="height" values="0;0;0;0;0;0;11;0;0;0;0;0;0;11;0" dur="8s" repeatCount="indefinite"/>
 			          </rect>
@@ -182,16 +182,16 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 			          <!-- Left eye -->
 			          <ellipse cx="414" cy="109" rx="7" ry="8" fill="#1a1a1a"/>
-			          <ellipse cx="414" cy="109" rx="3.2" ry="6" fill="#060606"/>
-			          <circle  cx="416" cy="105.5" r="2" fill="white" opacity="0.9"/>
+			          <ellipse class="lpd-cat-eye" cx="414" cy="109" rx="3.2" ry="6" fill="#060606"/>
+			          <circle class="lpd-cat-eye" cx="416" cy="105.5" r="2" fill="white" opacity="0.9"/>
 			          <rect x="407" y="101" width="14" height="0" fill="#aaa" clip-path="url(#leye-l)">
 			            <animate attributeName="height" values="0;0;0;16;0;0;0;0;0;0;0;16;0;0" dur="11s" repeatCount="indefinite"/>
 			          </rect>
 
 			          <!-- Right eye -->
 			          <ellipse cx="434" cy="109" rx="7" ry="8" fill="#1a1a1a"/>
-			          <ellipse cx="434" cy="109" rx="3.2" ry="6" fill="#060606"/>
-			          <circle  cx="436" cy="105.5" r="2" fill="white" opacity="0.9"/>
+			          <ellipse class="lpd-cat-eye" cx="434" cy="109" rx="3.2" ry="6" fill="#060606"/>
+			          <circle class="lpd-cat-eye" cx="436" cy="105.5" r="2" fill="white" opacity="0.9"/>
 			          <rect x="427" y="101" width="14" height="0" fill="#aaa" clip-path="url(#reye-l)">
 			            <animate attributeName="height" values="0;0;0;16;0;0;0;0;0;0;0;16;0;0" dur="11s" repeatCount="indefinite"/>
 			          </rect>
