@@ -121,18 +121,58 @@
 	 *   leave   - 0 at the top of the page, 1 when the hero has gone
 	 * ------------------------------------------------------------- */
 	var scenes = [];
+	var add = function ( selector, mode ) {
+		document.querySelectorAll( selector ).forEach( function ( el ) {
+			scenes.push( { el: el, mode: mode, last: -1 } );
+		} );
+	};
+	// The colocation scene still pins and changes photograph for visitors
+	// who ask for reduced motion; it cross-fades instead of wiping.
+	add( '.lpd-scene', 'pin' );
 	if ( ! reduceMotion ) {
-		var add = function ( selector, mode ) {
-			document.querySelectorAll( selector ).forEach( function ( el ) {
-				scenes.push( { el: el, mode: mode, last: -1 } );
-			} );
-		};
-		add( '.lpd-scene', 'pin' );
 		add( '.lpd-statement-text', 'through' );
 		add( '.lpd-process .wp-block-columns', 'through' );
 		add( '.lpd-hero', 'leave' );
-		if ( scenes.length ) document.documentElement.classList.add( 'lpd-scrub' );
 	}
+	if ( scenes.length ) document.documentElement.classList.add( 'lpd-scrub' );
+
+	var ramp = function ( p, from, to ) {
+		var t = Math.min( Math.max( ( p - from ) / ( to - from ), 0 ), 1 );
+		return t * t * ( 3 - 2 * t );
+	};
+	// Photograph 2 arrives around a third of the way, photograph 3 around
+	// two thirds; each fact is at full strength while its photograph shows.
+	var paintScene = function ( el, p ) {
+		var short = window.innerHeight <= 560; // stage is not pinned: leave it alone
+		var stacked = window.innerWidth <= 900;
+		var off = stacked ? 0 : 0.62;
+		var marks = [ 0.26, 0.6 ];
+		el.querySelectorAll( '.lpd-scene-photo' ).forEach( function ( photo, i ) {
+			var img = photo.querySelector( 'img' );
+			if ( i === 0 || short ) {
+				photo.style.clipPath = photo.style.webkitClipPath = photo.style.opacity = '';
+				if ( img ) img.style.transform = '';
+				return;
+			}
+			var m = marks[ i - 1 ];
+			if ( m === undefined ) return;
+			var t = ramp( p, m, m + 0.14 );
+			if ( reduceMotion ) {
+				photo.style.opacity = t.toFixed( 3 );
+				return;
+			}
+			var clip = 'inset(' + ( ( 1 - t ) * 100 ).toFixed( 2 ) + '% 0 0 0)';
+			photo.style.webkitClipPath = clip;
+			photo.style.clipPath = clip;
+			if ( img ) img.style.transform = 'scale(' + ( 1.14 - 0.14 * ramp( p, m, m + 0.2 ) ).toFixed( 4 ) + ')';
+		} );
+		el.querySelectorAll( '.lpd-scene-cap' ).forEach( function ( cap, i ) {
+			if ( short ) { cap.style.opacity = ''; return; }
+			var up = i === 0 ? 1 : ramp( p, marks[ i - 1 ] + 0.06, marks[ i - 1 ] + 0.12 );
+			var down = marks[ i ] === undefined ? 0 : ramp( p, marks[ i ], marks[ i ] + 0.06 );
+			cap.style.opacity = ( off + ( 1 - off ) * Math.max( up - down, 0 ) ).toFixed( 3 );
+		} );
+	};
 
 	var measure = function () {
 		var vh = window.innerHeight;
@@ -147,9 +187,11 @@
 				p = ( vh * 0.88 - box.top ) / ( box.height + vh * 0.4 );
 			}
 			p = Math.round( Math.min( Math.max( p, 0 ), 1 ) * 1000 ) / 1000;
-			if ( p !== scene.last ) {
-				scene.last = p;
+			var key = p + '/' + window.innerWidth + '/' + vh;
+			if ( key !== scene.last ) {
+				scene.last = key;
 				scene.el.style.setProperty( '--p', p );
+				if ( scene.mode === 'pin' ) paintScene( scene.el, p );
 			}
 		} );
 	};

@@ -4,7 +4,7 @@ Theme URI: https://lilypawdigital.xyz
 Author: Lily Paw Digital
 Author URI: https://lilypawdigital.xyz
 Description: Theme for Lily Paw Digital - North East web design, hosting and colocation. Navy and paper, set large, with the paw pink used sparingly.
-Version: 4.2
+Version: 4.3
 Requires at least: 6.0
 Tested up to: 6.6
 Requires PHP: 7.4
@@ -829,22 +829,11 @@ button[type="submit"], input[type="submit"] { background: var(--pink); border-co
 .lpd-scrub .lpd-scene-caps::before,
 .lpd-scrub .lpd-scene-caps::after { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; border-radius: 3px; background: var(--rule); }
 .lpd-scrub .lpd-scene-caps::after { background: var(--paw); transform-origin: top center; transform: scaleY(var(--p, 0)); }
-/* 1s paused animations, moved to the frame the scroll position asks for */
-.lpd-scrub .lpd-scene-photo:nth-child(2) { animation: lpd-wipe-2 1s linear calc(var(--p, 0) * -1s) both paused; }
-.lpd-scrub .lpd-scene-photo:nth-child(3) { animation: lpd-wipe-3 1s linear calc(var(--p, 0) * -1s) both paused; }
-.lpd-scrub .lpd-scene-photo:nth-child(2) img { animation: lpd-zoom-2 1s linear calc(var(--p, 0) * -1s) both paused; }
-.lpd-scrub .lpd-scene-photo:nth-child(3) img { animation: lpd-zoom-3 1s linear calc(var(--p, 0) * -1s) both paused; }
-.lpd-scrub .lpd-scene-cap:nth-child(1) { animation: lpd-cap-1 1s linear calc(var(--p, 0) * -1s) both paused; }
-.lpd-scrub .lpd-scene-cap:nth-child(2) { animation: lpd-cap-2 1s linear calc(var(--p, 0) * -1s) both paused; }
-.lpd-scrub .lpd-scene-cap:nth-child(3) { animation: lpd-cap-3 1s linear calc(var(--p, 0) * -1s) both paused; }
-@keyframes lpd-wipe-2 { 0%, 26% { clip-path: inset(100% 0 0 0); } 40%, 100% { clip-path: inset(0 0 0 0); } }
-@keyframes lpd-wipe-3 { 0%, 60% { clip-path: inset(100% 0 0 0); } 74%, 100% { clip-path: inset(0 0 0 0); } }
-@keyframes lpd-zoom-2 { 0%, 26% { transform: scale(1.14); } 46%, 100% { transform: scale(1); } }
-@keyframes lpd-zoom-3 { 0%, 60% { transform: scale(1.14); } 80%, 100% { transform: scale(1); } }
-/* one fact hands over to the next: out first, then in */
-@keyframes lpd-cap-1 { 0%, 26% { opacity: 1; } 32%, 100% { opacity: var(--cap-off, 0.62); } }
-@keyframes lpd-cap-2 { 0%, 32% { opacity: var(--cap-off, 0.62); } 38%, 62% { opacity: 1; } 68%, 100% { opacity: var(--cap-off, 0.62); } }
-@keyframes lpd-cap-3 { 0%, 68% { opacity: var(--cap-off, 0.62); } 74%, 100% { opacity: 1; } }
+/* the photographs and facts are moved by interactions.js, which writes
+   their styles directly from the scroll position */
+.lpd-scrub .lpd-scene-photo, .lpd-scrub .lpd-scene-photo img { will-change: clip-path, transform, opacity; }
+.lpd-scrub .lpd-scene-cap { opacity: var(--cap-off, 0.62); }
+.lpd-scrub .lpd-scene-cap:first-child { opacity: 1; }
 
 /* pinned on a phone: photograph on top, one fact at a time beneath */
 @media (max-width: 900px) {
@@ -853,6 +842,7 @@ button[type="submit"], input[type="submit"] { background: var(--pink); border-co
   .lpd-scrub .lpd-scene-copy h2 { font-size: 1.7rem; margin-bottom: 14px; }
   .lpd-scrub .lpd-scene-copy p.lpd-scene-intro { display: none; }
   .lpd-scrub .lpd-scene-caps { display: grid; --cap-off: 0; }
+  .lpd-scrub .lpd-scene-cap:first-child { opacity: 1; }
   .lpd-scrub .lpd-scene-cap { grid-area: 1 / 1; border: 0; padding: 0 0 4px; }
   .lpd-scrub .lpd-scene-cap p { font-size: 0.95rem; }
   .lpd-scrub .lpd-scene-copy p.lpd-colo-price { margin: 14px 0 14px; padding-top: 14px; font-size: 1.1rem; }
@@ -863,9 +853,10 @@ button[type="submit"], input[type="submit"] { background: var(--pink); border-co
   .lpd-scrub .lpd-scene { height: auto; }
   .lpd-scrub .lpd-scene-stage { position: static; height: auto; padding: var(--section) var(--gutter); }
   .lpd-scrub .lpd-scene-photos { display: grid; height: auto; }
-  .lpd-scrub .lpd-scene-photo { position: static; animation: none !important; }
-  .lpd-scrub .lpd-scene-photo img { animation: none !important; aspect-ratio: 4 / 3; }
-  .lpd-scrub .lpd-scene-cap { animation: none !important; }
+  .lpd-scrub .lpd-scene-photo { position: static; clip-path: none !important; opacity: 1 !important; }
+  .lpd-scrub .lpd-scene-photo img { transform: none !important; aspect-ratio: 4 / 3; }
+  .lpd-scrub .lpd-scene-cap { opacity: 1 !important; }
+  .lpd-scrub .lpd-scene-caps { display: block; }
 }
 
 /* Colocation band from older page content (single photograph) */

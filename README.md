@@ -10,7 +10,7 @@ WordPress theme for lilypawdigital.xyz, plus the page content it ships with.
 | `page-content/copy-all-page-content.html` | The same content as copy buttons, for pasting by hand. |
 | `docs/impeccable-audit.md` | Design and accessibility audit, before and after v3.1. |
 
-## Design (v4.2)
+## Design (v4.3)
 
 - **Spacing:** one scale, set as variables at the top of `style.css`. Every section is separated by the same distance, every heading sits the same distance above its content, and every grid and panel uses the same gap and padding.
 - **Surfaces:** the brand purple is the page colour; pricing, FAQ, About and Contact sit on a pale lilac.
@@ -23,7 +23,7 @@ WordPress theme for lilypawdigital.xyz, plus the page content it ships with.
   - the "How It Works" track fills and the step numbers come up to strength;
   - the colocation section pins to the screen while its photographs wipe from one to the next and the matching fact comes forward;
   - photographs on inner pages unveil once; pages cross-fade; the footer cats' eyes follow the pointer.
-- **Reduced motion:** all of it is switched off for visitors who ask for reduced motion, and the page reads as ordinary sections.
+- **Reduced motion:** everything is switched off for visitors who ask for reduced motion, except the colocation section, which still pins and cross-fades between its photographs.
 
 ## Install
 
