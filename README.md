@@ -10,20 +10,20 @@ WordPress theme for lilypawdigital.xyz, plus the page content it ships with.
 | `page-content/copy-all-page-content.html` | The same content as copy buttons, for pasting by hand. |
 | `docs/impeccable-audit.md` | Design and accessibility audit, before and after v3.1. |
 
-## Design (v4)
+## Design (v4.2)
 
-- **Surfaces:** the logo's aubergine navy is the page colour; pricing, FAQ, About and Contact sit on warm paper.
-- **Colour:** solid paw pink for buttons and for one loud offer panel. No gradients.
+- **Spacing:** one scale, set as variables at the top of `style.css`. Every section is separated by the same distance, every heading sits the same distance above its content, and every grid and panel uses the same gap and padding.
+- **Surfaces:** the brand purple is the page colour; pricing, FAQ, About and Contact sit on a pale lilac.
+- **Colour:** paw pink for buttons; the logo's pink-to-orange gradient for icons, progress lines and the one offer panel.
 - **Type:** Sora throughout, the brand typeface, from one self-hosted variable font file in `lilypawdigital/assets/fonts/`.
-- **Motion:**
+- **Pictures:** the service panels and testimonial show the real Ryton CC site and the real data hall.
+- **Motion** (driven by scroll position in `js/interactions.js`, so it works in Safari, Firefox, Chrome and on phones):
   - the hero headline rises in word by word, once, on load;
-  - the hero holds and dims while the page slides up over it;
+  - the founding statement lights up word by word as it travels up the screen;
+  - the "How It Works" track fills and the step numbers come up to strength;
   - the colocation section pins to the screen while its photographs wipe from one to the next and the matching fact comes forward;
-  - "How It Works" tracks scroll: the heading stays pinned while a pink line and the step numbers follow progress;
-  - photographs unveil once as they scroll into view;
-  - pages cross-fade into each other;
-  - the footer cats' eyes follow the pointer.
-- **Reduced motion:** all of it is switched off for visitors who ask for reduced motion.
+  - photographs on inner pages unveil once; pages cross-fade; the footer cats' eyes follow the pointer.
+- **Reduced motion:** all of it is switched off for visitors who ask for reduced motion, and the page reads as ordinary sections.
 
 ## Install
 

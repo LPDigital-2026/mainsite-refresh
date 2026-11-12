@@ -15,6 +15,7 @@ return array(
 		'53982104bb36f17bd1a6234ce168bb57',
 		'24afee7f840c4eb7d2f686f55e827dee',
 		'91847078942470988a10b6cb89ebf7d7',
+		'eea57e16830eac78e0eacc815c657339',
 	),
 	'colocation' => array(
 		'214f43395fcae101b8b8c79000f0074a',
@@ -28,6 +29,7 @@ return array(
 		'e4dddc39e5008b892fd425ea9b34e6ad',
 		'37b9a71c95cdd7f994f512cf6c66bc7d',
 		'73308e3ae2253db852755cf03e40211a',
+		'6dbc8166415d6e9fcc96f1b0be0af905',
 	),
 	'contact-us' => array(
 		'427a7c710f909b51e23dc91e7b0be5ac',

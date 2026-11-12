@@ -4,7 +4,7 @@ Theme URI: https://lilypawdigital.xyz
 Author: Lily Paw Digital
 Author URI: https://lilypawdigital.xyz
 Description: Theme for Lily Paw Digital - North East web design, hosting and colocation. Navy and paper, set large, with the paw pink used sparingly.
-Version: 4.1
+Version: 4.2
 Requires at least: 6.0
 Tested up to: 6.6
 Requires PHP: 7.4
@@ -25,44 +25,51 @@ Text Domain: lilypawdigital
 
 /* ==========================================================================
    Tokens
-   Two surfaces: "night" (the logo's aubergine navy, the default) and
-   "paper" (warm off-white). Components only read the contextual
-   variables (--bg, --fg, --rule ...), so a section switches surface by
-   re-declaring them once - see "Surfaces" below.
+   Two surfaces: "night" (the brand navy, the default) and "light" (a
+   lilac-white). Components only read the contextual variables (--bg,
+   --fg, --rule ...), so a section switches surface by re-declaring them
+   once - see "Surfaces".
+
+   Spacing is one scale. Sections are separated by --section; inside a
+   section, the heading sits --head above its content; grids use --gap;
+   panels pad by --pad. Nothing sets its own one-off distances.
    ========================================================================== */
 :root {
-  --night: #170b2b;
-  --night-deep: #10071f;
-  --navy: #241242;
-  --paper: #f6f0e7;
-  --white: #fffdf9;
-  --ink: #1b0e30;
-  --cream: #f6efe6;
+  --night: #1d0e38;
+  --night-deep: #140928;
+  --navy: #2a1650;
+  --light: #f5f1fb;
+  --white: #ffffff;
+  --ink: #1d0e38;
+  --cream: #fbf7f2;
   --pink: #f0529c;
   --pink-hi: #ff76b4;
   --pink-ink: #b3276b;
+  --orange: #fb7a3c;
+  /* the paw gradient from the logo: used as a surface, never on text */
+  --paw: linear-gradient(115deg, var(--pink) 0%, #f6677a 50%, var(--orange) 100%);
 
   --bg: var(--night);
   --panel: var(--navy);
   --fg: var(--cream);
-  --fg-dim: #bbb0c9;
-  --rule: rgba(246, 239, 230, 0.16);
-  --rule-strong: rgba(246, 239, 230, 0.38);
+  --fg-dim: rgba(251, 247, 242, 0.74);
+  --rule: rgba(251, 247, 242, 0.16);
+  --rule-strong: rgba(251, 247, 242, 0.4);
   --accent-text: #ff8fc2;
-  --field-bg: rgba(246, 239, 230, 0.05);
-  --field-border: rgba(246, 239, 230, 0.32);
+  --field-bg: rgba(251, 247, 242, 0.06);
+  --field-border: rgba(251, 247, 242, 0.34);
 
-  --radius: 14px;
+  --section: clamp(72px, 9vw, 136px);
+  --head: clamp(32px, 4.4vw, 60px);
+  --gap: clamp(12px, 1.4vw, 20px);
+  --pad: clamp(22px, 2.6vw, 36px);
+  --gutter: clamp(20px, 4.4vw, 64px);
+  --wrap: 1240px;
+  --bar: 72px;
+  --radius: 18px;
   --radius-sm: 10px;
-  --gutter: clamp(20px, 4vw, 56px);
-  --wrap: 1280px;
-  --head: 76px;
-  --section: clamp(72px, 10vw, 144px);
 
-  /* One family, the brand's: Sora for everything. Display sizes are set
-     tight and semi-bold, running text light-regular with more air. */
-  --font-display: 'Sora', system-ui, sans-serif;
-  --font-body: 'Sora', system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font: 'Sora', system-ui, -apple-system, "Segoe UI", sans-serif;
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
   --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
@@ -77,28 +84,29 @@ Text Domain: lilypawdigital
 .lpd-about,
 .lpd-contact,
 .lpd-band-alt,
-.lpd-service-web,
 .lpd-form-card {
-  --bg: var(--paper);
+  --bg: var(--light);
   --panel: var(--white);
   --fg: var(--ink);
-  --fg-dim: #5a4f6e;
-  --rule: rgba(27, 14, 48, 0.15);
-  --rule-strong: rgba(27, 14, 48, 0.42);
+  --fg-dim: #564a6c;
+  --rule: rgba(29, 14, 56, 0.14);
+  --rule-strong: rgba(29, 14, 56, 0.42);
   --accent-text: var(--pink-ink);
   --field-bg: #fff;
-  --field-border: rgba(27, 14, 48, 0.3);
+  --field-border: rgba(29, 14, 56, 0.3);
   background: var(--bg);
   color: var(--fg);
 }
-/* Night again inside paper (featured plan) */
+.lpd-process,
+.lpd-section-alt:has(.lpd-stat) { --bg: var(--navy); --panel: #351d63; background: var(--bg); }
+/* night again inside light (featured plan) */
 .lpd-pricing-card.lpd-featured {
   --bg: var(--night);
   --panel: var(--navy);
   --fg: var(--cream);
-  --fg-dim: #bbb0c9;
-  --rule: rgba(246, 239, 230, 0.16);
-  --rule-strong: rgba(246, 239, 230, 0.38);
+  --fg-dim: rgba(251, 247, 242, 0.74);
+  --rule: rgba(251, 247, 242, 0.16);
+  --rule-strong: rgba(251, 247, 242, 0.4);
   --accent-text: #ff8fc2;
 }
 
@@ -110,12 +118,12 @@ Text Domain: lilypawdigital
 html {
   overflow-x: hidden;
   scroll-behavior: smooth;
-  scroll-padding-top: calc(var(--head) + 16px);
+  scroll-padding-top: calc(var(--bar) + 16px);
   -webkit-tap-highlight-color: transparent; /* own press states replace the grey flash */
   -webkit-text-size-adjust: 100%;
   accent-color: var(--pink);
   caret-color: var(--pink);
-  scrollbar-color: #4a3a66 var(--night-deep);
+  scrollbar-color: #56427a var(--night-deep);
   background: var(--night);
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
@@ -124,15 +132,15 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--fg);
-  font-family: var(--font-body);
-  font-size: 1rem;
-  font-weight: 350;
-  line-height: 1.7;
-  letter-spacing: -0.008em;
+  font-family: var(--font);
+  font-size: 1.0625rem;
+  font-weight: 400;
+  line-height: 1.65;
+  letter-spacing: -0.011em;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   /* clip, not hidden: hidden here would make body a scroll container,
-     which breaks position: sticky and scroll-driven animations */
+     which breaks position: sticky */
   overflow-x: clip;
 }
 ::selection { background: var(--pink); color: var(--night); }
@@ -142,16 +150,23 @@ a, button, [role="button"], .wp-block-button__link, input[type="submit"] { touch
 img, video { max-width: 100%; height: auto; display: block; }
 
 h1, h2, h3, h4, .entry-title, .site-title {
-  font-family: var(--font-display);
+  font-family: var(--font);
   font-weight: 600;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.035em;
   line-height: 1.05;
   margin: 0;
   text-wrap: balance;
 }
 p { margin: 0 0 1em; text-wrap: pretty; }
+p:last-child { margin-bottom: 0; }
 
 :focus-visible { outline: 2px solid var(--pink-hi); outline-offset: 3px; border-radius: 4px; }
+
+/* WordPress gives these blocks margins of their own; our layouts set
+   every gap themselves */
+.lpd-front-page :is(.wp-block-columns, .wp-block-image, .wp-block-buttons, .wp-block-gallery),
+.lpd-bands :is(.wp-block-columns, .wp-block-image, .wp-block-buttons, .wp-block-gallery) { margin-top: 0; margin-bottom: 0; }
+:is(.lpd-front-page, .lpd-bands) .wp-block-columns > .wp-block-column { width: auto; flex-basis: auto; margin: 0; min-width: 0; }
 
 .container, .lpd-inner, .section-inner {
   width: 100%;
@@ -162,7 +177,14 @@ p { margin: 0 0 1em; text-wrap: pretty; }
 }
 .lpd-inner, .section-inner { padding-top: var(--section); padding-bottom: var(--section); }
 
-/* Prose links */
+/* Section rhythm: neighbours on the same surface share one gap, so the
+   distance between any two sections is always --section */
+:is(.lpd-statement, .lpd-services, .lpd-features, .lpd-why-different, .lpd-proof, .lpd-section-alt:not(:has(.lpd-stat)))
+  + :is(.lpd-statement, .lpd-services, .lpd-features, .lpd-why-different, .lpd-proof, .lpd-section-alt:not(:has(.lpd-stat))) > .lpd-inner,
+:is(.lpd-process, .lpd-section-alt:has(.lpd-stat)) + :is(.lpd-process, .lpd-section-alt:has(.lpd-stat)) > .lpd-inner,
+:is(.lpd-pricing, .lpd-cta-section, .lpd-faq, .lpd-about, .lpd-contact) + :is(.lpd-pricing, .lpd-cta-section, .lpd-faq, .lpd-about, .lpd-contact) > .lpd-inner { padding-top: 0; }
+
+/* Text links */
 .lpd-prose a:not(.wp-block-button__link),
 .lpd-faq-item p a,
 .lpd-pricing-note a,
@@ -170,19 +192,12 @@ p { margin: 0 0 1em; text-wrap: pretty; }
 .lpd-alt-contact a,
 .lpd-testimonial-link a,
 .lpd-testimonial-source a,
+.lpd-service-more .lpd-service-link a,
 .entry-content:not(.lpd-bands) a:not(.wp-block-button__link) {
   color: var(--accent-text);
   text-decoration: underline;
   text-decoration-thickness: 1px;
-  text-underline-offset: 0.2em;
-}
-@media (hover: hover) and (pointer: fine) {
-  .lpd-prose a:not(.wp-block-button__link):hover,
-  .lpd-faq-item p a:hover,
-  .lpd-pricing-note a:hover,
-  .lpd-alt-contact a:hover,
-  .lpd-testimonial-link a:hover,
-  .lpd-testimonial-source a:hover { text-decoration-thickness: 2px; }
+  text-underline-offset: 0.22em;
 }
 
 /* ==========================================================================
@@ -192,25 +207,20 @@ p { margin: 0 0 1em; text-wrap: pretty; }
   position: fixed;
   inset: 0 0 auto 0;
   z-index: 50;
-  height: var(--head);
+  height: var(--bar);
   color: var(--cream);
-  transition: background-color 0.3s ease, border-color 0.3s ease;
   border-bottom: 1px solid transparent;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 .admin-bar .site-header { top: 32px; }
 @media (max-width: 782px) { .admin-bar .site-header { top: 46px; } }
-.site-header.is-scrolled {
-  background: rgba(23, 11, 43, 0.86);
-  border-bottom-color: rgba(246, 239, 230, 0.1);
-}
+.site-header.is-scrolled { background: rgba(29, 14, 56, 0.9); border-bottom-color: rgba(251, 247, 242, 0.1); }
 @media (min-width: 901px) {
   /* blur only on desktop: on mobile it would make the header the
      containing block for the fixed full-screen menu and clip it */
-  .site-header.is-scrolled {
-    -webkit-backdrop-filter: saturate(160%) blur(16px);
-    backdrop-filter: saturate(160%) blur(16px);
-  }
+  .site-header.is-scrolled { -webkit-backdrop-filter: saturate(160%) blur(16px); backdrop-filter: saturate(160%) blur(16px); }
 }
+@media (max-width: 900px) { .site-header.is-scrolled { background: var(--night); } }
 @media (prefers-reduced-transparency: reduce) {
   .site-header.is-scrolled { -webkit-backdrop-filter: none; backdrop-filter: none; background: var(--night); }
 }
@@ -218,8 +228,8 @@ p { margin: 0 0 1em; text-wrap: pretty; }
 .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; height: 100%; }
 .site-branding { position: relative; z-index: 45; display: flex; align-items: center; }
 .site-branding p { margin: 0; }
-.lpd-brand a { display: flex; align-items: center; }
-.lpd-logo-img { height: 44px; width: auto; display: block; }
+.lpd-brand a, .custom-logo-link { display: flex; align-items: center; }
+.lpd-logo-img, .custom-logo { height: 42px; width: auto; display: block; }
 .site-description { display: none; }
 
 .main-navigation { display: flex; align-items: center; gap: 28px; }
@@ -228,12 +238,11 @@ p { margin: 0 0 1em; text-wrap: pretty; }
   position: relative;
   display: block;
   padding: 8px 0;
-  color: rgba(246, 239, 230, 0.82);
+  color: rgba(251, 247, 242, 0.82);
   font-weight: 500;
-  font-size: 0.97rem;
+  font-size: 0.94rem;
   transition: color 0.15s ease;
 }
-/* underline that draws from the left */
 .main-navigation li a::after {
   content: '';
   position: absolute;
@@ -264,7 +273,7 @@ p { margin: 0 0 1em; text-wrap: pretty; }
   width: 44px;
   height: 44px;
   background: transparent;
-  border: 1px solid rgba(246, 239, 230, 0.34);
+  border: 1px solid rgba(251, 247, 242, 0.34);
   border-radius: var(--radius-sm);
   padding: 0;
   cursor: pointer;
@@ -272,23 +281,8 @@ p { margin: 0 0 1em; text-wrap: pretty; }
   transition: transform 0.16s var(--ease-out);
 }
 .menu-toggle:active { transform: scale(0.94); }
-.menu-toggle-bars {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 18px;
-  height: 13px;
-  transform: translate(-50%, -50%);
-  transition: opacity 0.15s ease;
-}
-.menu-toggle-bars span {
-  position: absolute;
-  left: 0;
-  width: 18px;
-  height: 2px;
-  border-radius: 2px;
-  background: var(--cream);
-}
+.menu-toggle-bars { position: absolute; top: 50%; left: 50%; width: 18px; height: 13px; transform: translate(-50%, -50%); transition: opacity 0.15s ease; }
+.menu-toggle-bars span { position: absolute; left: 0; width: 18px; height: 2px; border-radius: 2px; background: var(--cream); }
 .menu-toggle-bars span:nth-child(1) { top: 0; }
 .menu-toggle-bars span:nth-child(2) { top: 5.5px; }
 .menu-toggle-bars span:nth-child(3) { top: 11px; }
@@ -298,7 +292,7 @@ p { margin: 0 0 1em; text-wrap: pretty; }
   left: 50%;
   width: 20px;
   height: 20px;
-  background: var(--pink);
+  background: var(--paw);
   -webkit-mask: url('assets/icons/paw.svg') center / contain no-repeat;
   mask: url('assets/icons/paw.svg') center / contain no-repeat;
   opacity: 0;
@@ -309,7 +303,7 @@ p { margin: 0 0 1em; text-wrap: pretty; }
 .menu-toggle[aria-expanded="true"] .menu-toggle-paw { opacity: 1; transform: translate(-50%, -50%) scale(1) rotate(0deg); }
 
 /* ==========================================================================
-   Buttons - pink carries the action; the outline is the quiet option
+   Buttons
    ========================================================================== */
 .btn, .wp-block-button__link, button[type="submit"], input[type="submit"] {
   -webkit-user-select: none;
@@ -317,33 +311,25 @@ p { margin: 0 0 1em; text-wrap: pretty; }
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 48px;
-  padding: 12px 24px;
+  min-height: 50px;
+  padding: 13px 24px;
   border: 1.5px solid transparent;
-  border-radius: var(--radius-sm);
-  font-family: var(--font-body);
+  border-radius: 999px;
+  font-family: var(--font);
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 0.97rem;
+  letter-spacing: -0.015em;
   line-height: 1.2;
   text-decoration: none;
   cursor: pointer;
   transition: transform 0.16s var(--ease-out), background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
 }
 .btn:active, .wp-block-button__link:active, button[type="submit"]:active, input[type="submit"]:active { transform: scale(0.97); }
-
 .btn-primary,
 .wp-block-button.lpd-btn-primary .wp-block-button__link,
-button[type="submit"], input[type="submit"] {
-  background: var(--pink);
-  border-color: var(--pink);
-  color: var(--night);
-}
+button[type="submit"], input[type="submit"] { background: var(--pink); border-color: var(--pink); color: var(--night); }
 .btn-secondary,
-.wp-block-button.lpd-btn-secondary .wp-block-button__link {
-  background: transparent;
-  border-color: var(--rule-strong);
-  color: var(--fg);
-}
+.wp-block-button.lpd-btn-secondary .wp-block-button__link { background: transparent; border-color: var(--rule-strong); color: var(--fg); }
 @media (hover: hover) and (pointer: fine) {
   .btn-primary:hover,
   .wp-block-button.lpd-btn-primary .wp-block-button__link:hover,
@@ -351,167 +337,105 @@ button[type="submit"], input[type="submit"] {
   .btn-secondary:hover,
   .wp-block-button.lpd-btn-secondary .wp-block-button__link:hover { background: var(--fg); border-color: var(--fg); color: var(--bg); }
 }
-.wp-block-buttons { display: flex; flex-wrap: wrap; gap: 12px; }
-
-.main-navigation .lpd-client-login { min-height: 40px; padding: 8px 16px; font-size: 0.92rem; white-space: nowrap; border-color: rgba(246, 239, 230, 0.38); color: var(--cream); }
+.wp-block-buttons { display: flex; flex-wrap: wrap; gap: 10px; }
+.main-navigation .lpd-client-login { min-height: 40px; padding: 8px 18px; font-size: 0.9rem; white-space: nowrap; border-color: rgba(251, 247, 242, 0.4); color: var(--cream); }
 
 /* ==========================================================================
-   Hero - the data hall on film, headline bottom-left, pitch bottom-right
+   Hero
    ========================================================================== */
 .lpd-hero {
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  min-height: min(100vh, 940px);
-  min-height: min(100svh, 940px);
+  min-height: min(100vh, 920px);
+  min-height: min(100svh, 920px);
   background: var(--night) url('assets/images/hero-poster.jpg') center / cover no-repeat;
   overflow: hidden;
   isolation: isolate;
   color: var(--cream);
 }
-.lpd-hero-video {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: -2;
-}
+.lpd-hero-video { position: absolute; inset: -6% 0 0 0; width: 100%; height: 112%; object-fit: cover; z-index: -2; }
 .lpd-hero::before {
-  /* readable type over the film: heavy at the bottom where the text sits */
   content: '';
   position: absolute;
   inset: 0;
   z-index: -1;
-  background:
-    linear-gradient(to top, var(--night) 0%, rgba(23, 11, 43, 0.86) 22%, rgba(23, 11, 43, 0.5) 55%, rgba(23, 11, 43, 0.62) 100%);
+  background: linear-gradient(to top, var(--night) 0%, rgba(29, 14, 56, 0.88) 24%, rgba(29, 14, 56, 0.52) 58%, rgba(29, 14, 56, 0.64) 100%);
 }
 .lpd-hero > .lpd-inner {
   display: grid;
-  grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
   grid-template-areas: "title text" "title actions" "title note";
-  column-gap: clamp(32px, 6vw, 96px);
+  column-gap: clamp(32px, 5vw, 80px);
   align-items: end;
-  padding-top: calc(var(--head) + 64px);
-  padding-bottom: clamp(36px, 5vw, 64px);
+  padding-top: calc(var(--bar) + 56px);
+  padding-bottom: clamp(32px, 4vw, 56px);
 }
 .lpd-hero-heading {
   grid-area: title;
   align-self: end;
-  font-size: clamp(2.7rem, 6.6vw, 6rem);
+  font-size: clamp(2.6rem, 6.3vw, 5.75rem);
   font-weight: 600;
   line-height: 0.98;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.045em;
   margin: 0;
 }
 .lpd-accent { color: inherit; }
-.lpd-hero-text { grid-area: text; font-size: clamp(1.05rem, 1.35vw, 1.22rem); line-height: 1.55; color: rgba(246, 239, 230, 0.9); margin: 0 0 24px; max-width: 44ch; }
+.lpd-hero-text { grid-area: text; font-size: clamp(1.02rem, 1.25vw, 1.15rem); line-height: 1.6; color: rgba(251, 247, 242, 0.9); margin: 0 0 24px; max-width: 42ch; }
 .lpd-hero-actions { grid-area: actions; margin: 0; }
-.lpd-hero-note { grid-area: note; margin: 18px 0 0; font-size: 0.95rem; color: rgba(246, 239, 230, 0.78); }
-.lpd-hero .wp-block-button.lpd-btn-secondary .wp-block-button__link { border-color: rgba(246, 239, 230, 0.5); color: var(--cream); }
+.lpd-hero-note { grid-area: note; margin: 16px 0 0; font-size: 0.92rem; color: rgba(251, 247, 242, 0.78); }
+.lpd-hero .wp-block-button.lpd-btn-secondary .wp-block-button__link { border-color: rgba(251, 247, 242, 0.5); color: var(--cream); }
 
-/* Fact rail under the hero copy */
 .lpd-hero .wp-block-columns.lpd-rail {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 0;
+  gap: 0 clamp(16px, 2.4vw, 32px);
   width: 100%;
   max-width: calc(var(--wrap) + var(--gutter) * 2);
   margin: 0 auto;
-  padding: 0 var(--gutter) clamp(28px, 4vw, 48px);
+  padding: 0 var(--gutter) clamp(28px, 3.6vw, 48px);
 }
-.lpd-rail > .wp-block-column { position: relative; width: auto; flex-basis: auto; margin: 0; padding: 22px 28px 0 0; }
-.lpd-rail > .wp-block-column::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: rgba(246, 239, 230, 0.3);
-  transform-origin: left center;
-}
-.lpd-rail p { margin: 0; font-size: 0.95rem; line-height: 1.45; color: rgba(246, 239, 230, 0.74); }
-.lpd-rail p.lpd-rail-title { font-family: var(--font-display); font-size: 1.05rem; font-weight: 600; letter-spacing: -0.02em; color: var(--cream); margin-bottom: 6px; }
+.lpd-rail > .wp-block-column { position: relative; padding-top: 18px; }
+.lpd-rail > .wp-block-column::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: rgba(251, 247, 242, 0.32); transform-origin: left center; }
+.lpd-rail p { margin: 0; font-size: 0.9rem; line-height: 1.5; color: rgba(251, 247, 242, 0.76); }
+.lpd-rail p.lpd-rail-title { font-size: 1rem; font-weight: 600; letter-spacing: -0.025em; color: var(--cream); margin-bottom: 4px; }
 
 @media (max-width: 900px) {
-  .lpd-hero > .lpd-inner { grid-template-columns: minmax(0, 1fr); grid-template-areas: "title" "text" "actions" "note"; row-gap: 0; }
-  .lpd-hero-heading { margin-bottom: 22px; }
-  .lpd-hero .wp-block-columns.lpd-rail { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 22px; }
-}
-@media (max-width: 480px) {
-  .lpd-hero .wp-block-columns.lpd-rail { grid-template-columns: minmax(0, 1fr); row-gap: 16px; }
-  .lpd-rail > .wp-block-column { padding-top: 14px; }
+  .lpd-hero > .lpd-inner { grid-template-columns: minmax(0, 1fr); grid-template-areas: "title" "text" "actions" "note"; }
+  .lpd-hero-heading { margin-bottom: 20px; }
+  .lpd-hero .wp-block-columns.lpd-rail { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 20px; }
 }
 
 /* ==========================================================================
-   Section headings - large, left, with the one-line intro beside
+   Statement - one sentence, set large. With scripting, the words light
+   up as the sentence travels up the screen (--p is set by interactions.js)
+   ========================================================================== */
+.lpd-statement-text {
+  max-width: 24ch;
+  margin: 0;
+  font-size: clamp(1.7rem, 4.2vw, 3.6rem);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 1.12;
+  text-wrap: balance;
+}
+.lpd-statement .lpd-inner { display: flex; }
+.lpd-statement-text { max-width: 21em; }
+.lpd-statement-text .lpd-sw { opacity: clamp(0.3, calc((var(--p, 1) * var(--n, 1) - var(--i, 0)) * 0.9 + 0.3), 1); }
+
+/* ==========================================================================
+   Section headings
    ========================================================================== */
 .lpd-section-alt, .lpd-section-dark { background: transparent; }
-
-.lpd-section-heading {
-  display: grid;
-  grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
-  gap: 16px clamp(32px, 6vw, 96px);
-  align-items: end;
-  margin: 0 0 clamp(36px, 5vw, 64px);
-  text-align: left;
-}
-.lpd-section-heading h2 {
-  font-size: clamp(2.1rem, 4.6vw, 3.75rem);
-  line-height: 1.02;
-  letter-spacing: -0.04em;
-  margin: 0;
-}
-.lpd-section-heading p { color: var(--fg-dim); font-size: 1.1rem; line-height: 1.5; margin: 0 0 0.35em; max-width: 40ch; }
-.lpd-section-heading:not(:has(p)) { grid-template-columns: minmax(0, 1fr); }
-
-/* Sections that pin their heading in a left column while the content
-   scrolls past on the right */
-.lpd-features > .lpd-inner,
-.lpd-why-different > .lpd-inner,
-.lpd-process > .lpd-inner,
-.lpd-front-page .lpd-faq > .lpd-inner,
-.lpd-about > .lpd-inner,
-.lpd-contact > .lpd-inner {
-  display: grid;
-  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
-  column-gap: clamp(32px, 6vw, 96px);
-  align-items: start;
-}
-:is(.lpd-features, .lpd-why-different, .lpd-process, .lpd-front-page .lpd-faq, .lpd-about, .lpd-contact) > .lpd-inner > .lpd-section-heading {
-  display: block;
-  position: sticky;
-  top: calc(var(--head) + 40px);
-  margin: 0;
-}
-:is(.lpd-features, .lpd-why-different, .lpd-process, .lpd-front-page .lpd-faq, .lpd-about, .lpd-contact) > .lpd-inner > .lpd-section-heading h2 { margin-bottom: 18px; }
-:is(.lpd-features, .lpd-why-different, .lpd-process, .lpd-front-page .lpd-faq, .lpd-about, .lpd-contact) > .lpd-inner > :not(.lpd-section-heading) { grid-column: 2; min-width: 0; }
-
-@media (max-width: 900px) {
-  .lpd-section-heading { grid-template-columns: minmax(0, 1fr); }
-  .lpd-features > .lpd-inner,
-  .lpd-why-different > .lpd-inner,
-  .lpd-process > .lpd-inner,
-  .lpd-front-page .lpd-faq > .lpd-inner,
-  .lpd-about > .lpd-inner,
-  .lpd-contact > .lpd-inner { grid-template-columns: minmax(0, 1fr); }
-  :is(.lpd-features, .lpd-why-different, .lpd-process, .lpd-front-page .lpd-faq, .lpd-about, .lpd-contact) > .lpd-inner > .lpd-section-heading { position: static; margin-bottom: 32px; }
-  :is(.lpd-features, .lpd-why-different, .lpd-process, .lpd-front-page .lpd-faq, .lpd-about, .lpd-contact) > .lpd-inner > :not(.lpd-section-heading) { grid-column: 1; }
-}
+.lpd-section-heading { margin: 0 0 var(--head); text-align: left; }
+.lpd-section-heading h2 { font-size: clamp(2rem, 4.4vw, 3.5rem); letter-spacing: -0.045em; line-height: 1.02; margin: 0; max-width: 16em; }
+.lpd-section-heading p { color: var(--fg-dim); font-size: clamp(1.02rem, 1.3vw, 1.15rem); line-height: 1.55; margin: 16px 0 0; max-width: 44ch; }
 
 /* ==========================================================================
-   Services - two large panels (one paper, one photograph), then a quiet
-   line for what's next
+   Services - two large media panels, then a line for what's next
    ========================================================================== */
-.lpd-services > .lpd-inner { padding-bottom: clamp(48px, 6vw, 88px); }
-.lpd-services .wp-block-columns {
-  display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-  gap: 16px;
-}
-.lpd-services .wp-block-columns > .wp-block-column { width: auto; flex-basis: auto; margin: 0; min-width: 0; }
+.lpd-services .wp-block-columns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--gap); }
 .lpd-services .wp-block-columns > .wp-block-column:nth-child(3) { grid-column: 1 / -1; }
 
 .lpd-service-card {
@@ -519,228 +443,184 @@ button[type="submit"], input[type="submit"] {
   display: flex;
   flex-direction: column;
   height: 100%;
-  min-height: clamp(400px, 40vw, 540px);
-  padding: clamp(24px, 3vw, 40px);
+  padding: 0 var(--pad) var(--pad);
+  background: var(--panel);
   border-radius: var(--radius);
   overflow: hidden;
-  isolation: isolate;
 }
-/* name at the top, the detail and price anchored to the bottom */
-.lpd-service-card h3 { font-size: clamp(2rem, 3.8vw, 3.25rem); letter-spacing: -0.045em; line-height: 0.98; margin: 0 0 auto; padding-bottom: 48px; }
-.lpd-service-card p { color: var(--fg-dim); font-size: 1.05rem; line-height: 1.55; margin: 0 0 18px; max-width: 44ch; }
-.lpd-service-card .lpd-service-meta {
-  margin: 0 0 22px;
-  padding-top: 16px;
-  border-top: 1px solid var(--rule);
-  font-family: var(--font-display);
-  font-size: 1.15rem;
-  font-weight: 600;
-  letter-spacing: -0.025em;
-  color: var(--fg);
+/* the picture: real work on the left, the real data hall on the right */
+.lpd-service-card::before {
+  content: '';
+  display: block;
+  aspect-ratio: 16 / 10;
+  margin: 0 calc(var(--pad) * -1) var(--pad);
+  background: var(--night-deep) center top / cover no-repeat;
+  transition: transform 0.9s var(--ease-out);
 }
+.lpd-service-web::before { background-image: url('assets/images/work/ryton-cc-desktop.jpg'); }
+.lpd-service-colo::before { background-image: url('assets/images/colocation/colocation-1.jpg'); background-position: center; }
+@media (hover: hover) and (pointer: fine) {
+  .lpd-service-card:hover::before { transform: scale(1.03); }
+}
+.lpd-service-card h3 { position: relative; font-size: clamp(1.6rem, 2.8vw, 2.4rem); letter-spacing: -0.045em; line-height: 1; margin: 0 0 12px; }
+.lpd-service-card p { color: var(--fg-dim); margin: 0 0 20px; max-width: 46ch; }
+.lpd-service-card .lpd-service-meta { margin: auto 0 20px; padding-top: 16px; border-top: 1px solid var(--rule); font-weight: 600; letter-spacing: -0.025em; color: var(--fg); }
 .lpd-service-card .lpd-service-link { margin: 0; }
 .lpd-service-card .lpd-service-link a {
   display: inline-flex;
   align-items: center;
-  min-height: 48px;
-  padding: 12px 22px;
+  min-height: 50px;
+  padding: 13px 24px;
   border: 1.5px solid var(--rule-strong);
-  border-radius: var(--radius-sm);
+  border-radius: 999px;
   font-weight: 600;
+  font-size: 0.97rem;
   color: var(--fg);
   transition: transform 0.16s var(--ease-out), background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
 }
 .lpd-service-card .lpd-service-link a:active { transform: scale(0.97); }
 @media (hover: hover) and (pointer: fine) {
-  .lpd-service-card .lpd-service-link a:hover { background: var(--fg); border-color: var(--fg); color: var(--bg); }
+  .lpd-service-card:not(.lpd-service-more) .lpd-service-link a:hover { background: var(--fg); border-color: var(--fg); color: var(--bg); }
 }
 
-/* Colocation: the real data hall behind the copy */
-.lpd-service-colo { color: var(--cream); --fg: var(--cream); --fg-dim: rgba(246, 239, 230, 0.86); --rule-strong: rgba(246, 239, 230, 0.55); --bg: var(--night); }
-.lpd-service-colo::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: -2;
-  background: url('assets/images/colocation/colocation-2.jpg') center / cover no-repeat;
-  transition: transform 0.9s var(--ease-out);
-}
-.lpd-service-colo::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background: linear-gradient(to top, rgba(23, 11, 43, 0.94) 0%, rgba(23, 11, 43, 0.72) 45%, rgba(23, 11, 43, 0.5) 100%);
-}
-@media (hover: hover) and (pointer: fine) {
-  .lpd-service-colo:hover::before { transform: scale(1.03); }
-}
-
-/* More on the way: a line, not a panel */
 .lpd-service-more {
   display: grid;
-  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr) auto;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr) auto;
   align-items: center;
-  gap: 12px 32px;
-  min-height: 0;
-  padding: 26px 0 0;
-  margin-top: 12px;
-  border-top: 1px solid var(--rule);
-  border-radius: 0;
-  overflow: visible;
+  gap: 8px clamp(20px, 3vw, 40px);
+  padding: var(--pad);
+  background: transparent;
+  border: 1px solid var(--rule);
 }
-.lpd-service-more h3 { font-size: 1.35rem; letter-spacing: -0.03em; margin: 0; padding: 0; }
-.lpd-service-more p { margin: 0; font-size: 1rem; }
-.lpd-service-more .lpd-service-link a { min-height: 0; padding: 0; border: 0; border-radius: 0; color: var(--accent-text); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
-@media (hover: hover) and (pointer: fine) {
-  .lpd-service-more .lpd-service-link a:hover { background: none; color: var(--accent-text); text-decoration-thickness: 2px; }
-}
-@media (max-width: 900px) {
+.lpd-service-more::before { display: none; }
+.lpd-service-more h3 { font-size: 1.3rem; letter-spacing: -0.035em; margin: 0; }
+.lpd-service-more p { margin: 0; }
+.lpd-service-more .lpd-service-link a { min-height: 0; padding: 0; border: 0; border-radius: 0; }
+@media (max-width: 760px) {
   .lpd-services .wp-block-columns { grid-template-columns: minmax(0, 1fr); }
-  .lpd-service-card { min-height: 360px; }
-  .lpd-service-more { grid-template-columns: minmax(0, 1fr); min-height: 0; }
+  .lpd-service-more { grid-template-columns: minmax(0, 1fr); }
 }
 
 /* ==========================================================================
-   Spec rows - features, "how we're different", facility and use cases
-   are set like a spec sheet: title left, plain explanation right
+   Tiles - features, "how we're different", facility, use cases
+   Each has its own drawn icon, set large in the paw gradient.
    ========================================================================== */
 .lpd-card {
   position: relative;
-  border-top: 1px solid var(--rule);
-  padding: 22px 0 0;
+  height: 100%;
+  padding: var(--pad);
+  background: var(--panel);
+  border-radius: var(--radius);
 }
-.lpd-card h3 { font-size: 1.25rem; letter-spacing: -0.025em; line-height: 1.15; margin: 0 0 8px; }
-.lpd-card p { color: var(--fg-dim); font-size: 1.02rem; line-height: 1.55; margin: 0; }
+.lpd-card h3 { font-size: 1.2rem; letter-spacing: -0.035em; line-height: 1.15; margin: 0 0 8px; }
+.lpd-card p { color: var(--fg-dim); font-size: 0.98rem; line-height: 1.6; margin: 0; }
 
-:is(.lpd-features, .lpd-why-different) .wp-block-columns { display: block; margin: 0; }
-:is(.lpd-features, .lpd-why-different) .wp-block-columns > .wp-block-column { width: auto; margin: 0; }
-:is(.lpd-features, .lpd-why-different) .lpd-card {
-  display: grid;
-  grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr);
-  gap: 8px 32px;
-  padding: 26px 0 30px;
+.lpd-features .wp-block-columns { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--gap); }
+.lpd-why-different .wp-block-columns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--gap); }
+.lpd-why-different .lpd-card { padding: calc(var(--pad) * 1.15); }
+.lpd-why-different .lpd-card h3 { font-size: clamp(1.25rem, 1.9vw, 1.55rem); }
+.lpd-why-different .lpd-card p { font-size: 1.02rem; max-width: 52ch; }
+
+.lpd-features .lpd-card::before,
+.lpd-why-item::before {
+  content: '';
+  display: block;
+  width: 34px;
+  height: 34px;
+  margin: 0 0 clamp(28px, 4vw, 56px);
+  background: var(--paw);
+  -webkit-mask: var(--icon) left center / contain no-repeat;
+  mask: var(--icon) left center / contain no-repeat;
 }
-:is(.lpd-features, .lpd-why-different) .wp-block-column:last-child .lpd-card { border-bottom: 1px solid var(--rule); }
-:is(.lpd-features, .lpd-why-different) .lpd-card h3 { margin: 0; }
-.lpd-features > .lpd-inner { padding-top: clamp(48px, 6vw, 88px); }
-@media (max-width: 600px) {
-  :is(.lpd-features, .lpd-why-different) .lpd-card { grid-template-columns: minmax(0, 1fr); }
+.lpd-features .wp-block-column:nth-child(1) .lpd-card { --icon: url('assets/icons/responsive-design.svg'); }
+.lpd-features .wp-block-column:nth-child(2) .lpd-card { --icon: url('assets/icons/fast-hosting.svg'); }
+.lpd-features .wp-block-column:nth-child(3) .lpd-card { --icon: url('assets/icons/we-build-it.svg'); }
+.lpd-features .wp-block-column:nth-child(4) .lpd-card { --icon: url('assets/icons/ongoing-support.svg'); }
+.lpd-why-pricing { --icon: url('assets/icons/fair-pricing.svg'); }
+.lpd-why-care { --icon: url('assets/icons/we-care.svg'); }
+.lpd-why-secure { --icon: url('assets/icons/secured.svg'); }
+.lpd-why-ddos { --icon: url('assets/icons/ddos-protected.svg'); }
+.lpd-why-location { --icon: url('assets/icons/location.svg'); }
+.lpd-why-security { --icon: url('assets/icons/security.svg'); }
+.lpd-why-access { --icon: url('assets/icons/access.svg'); }
+.lpd-why-onsite { --icon: url('assets/icons/capacity.svg'); }
+.lpd-why-power { --icon: url('assets/icons/power.svg'); }
+.lpd-why-connectivity { --icon: url('assets/icons/connectivity.svg'); }
+.lpd-why-web { --icon: url('assets/icons/usecase-web.svg'); }
+.lpd-why-cloud { --icon: url('assets/icons/usecase-cloud.svg'); }
+.lpd-why-backup { --icon: url('assets/icons/usecase-backup.svg'); }
+.lpd-why-games { --icon: url('assets/icons/usecase-games.svg'); }
+@media (max-width: 1000px) { .lpd-features .wp-block-columns { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) {
+  .lpd-features .wp-block-columns, .lpd-why-different .wp-block-columns { grid-template-columns: minmax(0, 1fr); }
 }
 
 /* ==========================================================================
-   How It Works - a real sequence, so it is numbered. The steps run down
-   the right while the heading stays put; a pink line tracks progress and
-   each numeral lights as its step reaches the middle of the screen
-   (scroll-driven where the browser supports it, simply "on" elsewhere).
+   How It Works - four steps across, on a track that fills as the row
+   travels up the screen (--p from interactions.js; full when unscripted)
    ========================================================================== */
-.lpd-process,
-.lpd-section-alt:has(.lpd-stat) { --bg: var(--navy); --panel: #2c1750; --fg-dim: rgba(246, 239, 230, 0.74); background: var(--bg); }
 .lpd-process .wp-block-columns {
   position: relative;
-  display: block;
-  margin: 0;
-  padding-left: clamp(20px, 3vw, 40px);
-}
-.lpd-process .wp-block-columns::before,
-.lpd-process .wp-block-columns::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: 2px;
-  background: var(--rule);
-}
-.lpd-process .wp-block-columns::after { background: var(--pink); transform-origin: top center; }
-.lpd-process .wp-block-columns > .wp-block-column { width: auto; margin: 0; }
-.lpd-step {
-  display: grid;
-  grid-template-columns: clamp(4.2rem, 8vw, 7rem) minmax(0, 1fr);
-  column-gap: clamp(16px, 2.5vw, 32px);
-  padding: clamp(24px, 3.5vw, 44px) 0;
-  border-top: 1px solid var(--rule);
-}
-.lpd-process .wp-block-column:first-child .lpd-step { border-top: 0; padding-top: 0; }
-.lpd-process .wp-block-column:last-child .lpd-step { padding-bottom: 0; }
-.lpd-step > * { grid-column: 2; }
-.lpd-step p.lpd-step-number,
-.lpd-step-number {
-  grid-column: 1;
-  grid-row: 1 / span 4;
-  margin: 0;
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: clamp(2.6rem, 5.4vw, 4.75rem);
-  letter-spacing: -0.05em;
-  line-height: 0.9;
-  font-variant-numeric: tabular-nums;
-  color: var(--pink);
-}
-.lpd-step h3 { font-size: clamp(1.35rem, 2.2vw, 1.75rem); letter-spacing: -0.03em; margin: 0 0 10px; }
-.lpd-step p { color: var(--fg-dim); font-size: 1.05rem; line-height: 1.55; margin: 0; max-width: 48ch; }
-.lpd-step-disclaimer { font-size: 0.88rem !important; margin-top: 12px !important; }
-
-@supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) {
-    .lpd-process .wp-block-columns { view-timeline-name: --lpd-steps; }
-    .lpd-process .wp-block-columns::after {
-      animation: lpd-progress linear both;
-      animation-timeline: --lpd-steps;
-      animation-range: cover 28% cover 72%;
-    }
-    .lpd-step .lpd-step-number {
-      animation: lpd-step-on linear both;
-      animation-timeline: view();
-      animation-range: entry 30% cover 45%;
-    }
-  }
-}
-@keyframes lpd-progress { from { transform: scaleY(0); } to { transform: scaleY(1); } }
-/* unlit numerals stay legible (4:1 on the navy), they just aren't pink yet */
-@keyframes lpd-step-on { from { color: rgba(246, 239, 230, 0.5); } to { color: var(--pink); } }
-
-/* Stats: a quiet row of figures closing the section */
-.lpd-section-alt:has(.lpd-stat) > .lpd-inner { padding-top: 0; }
-.lpd-section-alt .wp-block-columns:has(.lpd-stat) {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0;
-  margin: 0;
-  border-top: 1px solid var(--rule);
-}
-.lpd-section-alt .wp-block-columns:has(.lpd-stat) > .wp-block-column { width: auto; flex-basis: auto; margin: 0; padding: 28px 24px 0 0; }
-.lpd-stat, .lpd-stat > div { text-align: left; }
-.lpd-stat-number {
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: clamp(2.2rem, 4.6vw, 3.75rem);
-  font-variant-numeric: tabular-nums;
-  letter-spacing: -0.04em;
-  line-height: 1;
-  margin: 0 0 8px;
-}
-.lpd-stat-label { margin: 0; color: var(--fg-dim); font-size: 1rem; }
-
-/* ==========================================================================
-   Pricing - on paper, where plans are easiest to compare
-   ========================================================================== */
-.lpd-pricing .wp-block-columns {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 12px;
-  align-items: stretch;
-  margin: 0;
+  gap: clamp(20px, 2.6vw, 40px);
+  padding-top: clamp(28px, 3.4vw, 44px);
 }
-.lpd-pricing .wp-block-columns + .wp-block-columns { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 12px; }
-.lpd-pricing .wp-block-columns.lpd-colocation-pricing { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-.lpd-pricing .wp-block-columns > .wp-block-column { width: auto; flex-basis: auto; margin: 0; min-width: 0; }
-@media (max-width: 1100px) {
-  .lpd-pricing .wp-block-columns { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.lpd-process .wp-block-columns.lpd-steps-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.lpd-process .wp-block-columns::before,
+.lpd-process .wp-block-columns::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; border-radius: 3px; background: var(--rule); }
+.lpd-process .wp-block-columns::after { background: var(--paw); transform-origin: left center; transform: scaleX(var(--p, 1)); }
+.lpd-step p.lpd-step-number,
+.lpd-step-number {
+  margin: 0 0 clamp(20px, 3vw, 40px);
+  font-size: clamp(2.8rem, 5.6vw, 4.75rem);
+  font-weight: 600;
+  letter-spacing: -0.06em;
+  line-height: 0.9;
+  font-variant-numeric: tabular-nums;
+  color: var(--fg);
+  /* each numeral comes up to full strength as the track reaches it */
+  opacity: clamp(0.4, calc((var(--p, 1) * var(--steps, 4) - var(--k, 0)) * 2 + 0.4), 1);
 }
+.lpd-process .lpd-steps-3 { --steps: 3; }
+.lpd-process .wp-block-column:nth-child(2) { --k: 1; }
+.lpd-process .wp-block-column:nth-child(3) { --k: 2; }
+.lpd-process .wp-block-column:nth-child(4) { --k: 3; }
+.lpd-step h3 { font-size: clamp(1.2rem, 1.8vw, 1.45rem); letter-spacing: -0.035em; margin: 0 0 10px; }
+.lpd-step p { color: var(--fg-dim); font-size: 0.98rem; line-height: 1.6; margin: 0; }
+.lpd-step p.lpd-step-disclaimer { font-size: 0.86rem; margin-top: 12px; }
 @media (max-width: 900px) {
-  .lpd-pricing .wp-block-columns.lpd-colocation-pricing { grid-template-columns: minmax(0, 1fr); }
+  .lpd-process .wp-block-columns,
+  .lpd-process .wp-block-columns.lpd-steps-3 { grid-template-columns: minmax(0, 1fr); gap: 0; padding: 0 0 0 clamp(20px, 5vw, 32px); }
+  .lpd-process .wp-block-columns::before,
+  .lpd-process .wp-block-columns::after { top: 0; bottom: 0; right: auto; width: 3px; height: auto; }
+  .lpd-process .wp-block-columns::after { transform-origin: center top; transform: scaleY(var(--p, 1)); }
+  .lpd-step { display: grid; grid-template-columns: 4.4rem minmax(0, 1fr); column-gap: 16px; padding: 22px 0; border-top: 1px solid var(--rule); }
+  .lpd-process .wp-block-column:first-child .lpd-step { border-top: 0; padding-top: 0; }
+  .lpd-process .wp-block-column:last-child .lpd-step { padding-bottom: 0; }
+  .lpd-step > * { grid-column: 2; }
+  .lpd-step p.lpd-step-number { grid-column: 1; grid-row: 1 / span 4; margin: 0; font-size: 2.6rem; }
 }
+
+/* Stats: three figures, set as large as the type allows */
+.lpd-section-alt .wp-block-columns:has(.lpd-stat) { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gap); }
+.lpd-section-alt .wp-block-column.lpd-stat { padding: var(--pad); background: var(--panel); border-radius: var(--radius); text-align: left; }
+.lpd-stat-number { font-size: clamp(2.6rem, 7vw, 6rem); font-weight: 600; font-variant-numeric: tabular-nums; letter-spacing: -0.06em; line-height: 0.95; margin: 0 0 clamp(20px, 4vw, 56px); }
+.lpd-stat-label { margin: 0; color: var(--fg-dim); font-size: 1rem; }
+@media (max-width: 640px) {
+  .lpd-section-alt .wp-block-columns:has(.lpd-stat) { grid-template-columns: minmax(0, 1fr); }
+  .lpd-section-alt .wp-block-column.lpd-stat { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; }
+  .lpd-stat-number { margin: 0; font-size: 2.6rem; }
+}
+
+/* ==========================================================================
+   Pricing
+   ========================================================================== */
+.lpd-pricing .wp-block-columns { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--gap); align-items: stretch; }
+.lpd-pricing .wp-block-columns + .wp-block-columns { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: var(--gap); }
+.lpd-pricing .wp-block-columns.lpd-colocation-pricing { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 1100px) { .lpd-pricing .wp-block-columns { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 900px) { .lpd-pricing .wp-block-columns.lpd-colocation-pricing { grid-template-columns: minmax(0, 1fr); } }
 @media (max-width: 640px) {
   .lpd-pricing .wp-block-columns,
   .lpd-pricing .wp-block-columns + .wp-block-columns { grid-template-columns: minmax(0, 1fr); }
@@ -751,47 +631,48 @@ button[type="submit"], input[type="submit"] {
   display: flex;
   flex-direction: column;
   height: 100%;
-  padding: 28px 24px 24px;
+  padding: var(--pad) clamp(20px, 2vw, 28px);
   background: var(--panel);
   color: var(--fg);
-  border: 1px solid var(--rule);
   border-radius: var(--radius);
 }
-.lpd-pricing-card.lpd-featured { background: var(--bg); border-color: var(--bg); }
+.lpd-pricing-card.lpd-featured { background: var(--bg); }
 .lpd-pricing-card p { margin: 0; }
-.lpd-pricing-card .wp-block-buttons { margin-top: auto; padding-top: 26px; }
+.lpd-pricing-card .wp-block-buttons { margin-top: auto; padding-top: 28px; }
 .lpd-pricing-card .wp-block-button, .lpd-pricing-card .wp-block-button__link { width: 100%; }
 
 .lpd-pricing-card p.lpd-pricing-badge {
-  position: absolute;
-  top: 30px;
-  right: 24px;
-  font-size: 0.88rem;
+  align-self: flex-start;
+  order: -1;
+  margin: 0 0 14px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: var(--paw);
+  color: var(--night);
+  font-size: 0.8rem;
   font-weight: 600;
-  color: var(--accent-text);
+  line-height: 1.3;
 }
-.lpd-pricing-card p.lpd-pricing-name { font-family: var(--font-display); font-size: 1.2rem; font-weight: 600; letter-spacing: -0.025em; line-height: 1.3; margin-bottom: 4px; }
-.lpd-pricing-card p.lpd-pricing-domain { color: var(--fg-dim); font-size: 0.88rem; line-height: 1.4; margin-bottom: 22px; }
-.lpd-pricing-card p.lpd-pricing-price { font-family: var(--font-display); font-size: clamp(2.3rem, 3.2vw, 2.9rem); font-weight: 600; font-variant-numeric: lining-nums tabular-nums; letter-spacing: -0.045em; line-height: 1.05; }
-.lpd-pricing-card p.lpd-pricing-subprice { color: var(--fg-dim); font-size: 0.95rem; margin: 4px 0 18px; }
-.lpd-pricing-card p.lpd-pricing-desc { color: var(--fg-dim); font-size: 0.97rem; line-height: 1.5; margin-bottom: 18px; padding-bottom: 18px; border-bottom: 1px solid var(--rule); }
-.lpd-pricing-card p.lpd-pricing-feature { position: relative; padding: 6px 0 6px 26px; font-size: 0.97rem; line-height: 1.4; }
+.lpd-pricing-card p.lpd-pricing-name { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.035em; line-height: 1.25; margin-bottom: 4px; }
+.lpd-pricing-card p.lpd-pricing-domain { color: var(--fg-dim); font-size: 0.86rem; line-height: 1.45; margin-bottom: 24px; }
+.lpd-pricing-card p.lpd-pricing-price { font-size: clamp(2.4rem, 3.4vw, 3.1rem); font-weight: 600; font-variant-numeric: lining-nums tabular-nums; letter-spacing: -0.055em; line-height: 1; }
+.lpd-pricing-card p.lpd-pricing-subprice { color: var(--fg-dim); font-size: 0.92rem; margin: 8px 0 20px; }
+.lpd-pricing-card p.lpd-pricing-desc { color: var(--fg-dim); font-size: 0.95rem; line-height: 1.55; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid var(--rule); }
+.lpd-pricing-card p.lpd-pricing-feature { position: relative; padding: 6px 0 6px 26px; font-size: 0.95rem; line-height: 1.45; }
 .lpd-pricing-card p.lpd-pricing-feature::before {
   content: '';
   position: absolute;
   left: 2px;
-  top: 0.72em;
+  top: 0.78em;
   width: 13px;
   height: 13px;
   background: var(--accent-text);
   -webkit-mask: url('assets/icons/check.svg') center / contain no-repeat;
   mask: url('assets/icons/check.svg') center / contain no-repeat;
 }
-/* Colocation cards have no description line: rule under the price instead */
-.lpd-colocation-pricing .lpd-pricing-card p.lpd-pricing-desc { border: 0; padding: 0; margin-bottom: 20px; min-height: 3em; }
-.lpd-colocation-pricing .lpd-pricing-card p.lpd-pricing-subprice { padding-bottom: 18px; border-bottom: 1px solid var(--rule); }
+.lpd-colocation-pricing .lpd-pricing-card p.lpd-pricing-desc { border: 0; padding: 0; margin-bottom: 24px; min-height: 3.1em; }
+.lpd-colocation-pricing .lpd-pricing-card p.lpd-pricing-subprice { padding-bottom: 20px; border-bottom: 1px solid var(--rule); }
 
-/* E-commerce + Custom share the second row: features flow in two columns */
 @media (min-width: 641px) {
   .lpd-pricing .wp-block-columns + .wp-block-columns .lpd-pricing-card:has(.lpd-pricing-feature) {
     display: grid;
@@ -801,46 +682,51 @@ button[type="submit"], input[type="submit"] {
   }
   .lpd-pricing .wp-block-columns + .wp-block-columns .lpd-pricing-card:has(.lpd-pricing-feature) > :not(.lpd-pricing-feature) { grid-column: 1 / -1; }
 }
-/* Custom (no feature list): no box, just the offer */
-.lpd-pricing-card:not(:has(.lpd-pricing-feature)) { background: transparent; border-style: dashed; border-color: var(--rule-strong); }
-.lpd-pricing-card:not(:has(.lpd-pricing-feature)) p.lpd-pricing-price { font-size: clamp(1.9rem, 3vw, 2.6rem); margin-bottom: 12px; }
-.lpd-pricing-card:not(:has(.lpd-pricing-feature)) p.lpd-pricing-desc { border: 0; padding: 0; max-width: 40ch; font-size: 1.02rem; }
+.lpd-pricing-card:not(:has(.lpd-pricing-feature)) { background: transparent; border: 1.5px dashed var(--rule-strong); }
+.lpd-pricing-card:not(:has(.lpd-pricing-feature)) p.lpd-pricing-price { font-size: clamp(1.9rem, 3vw, 2.6rem); line-height: 1.05; margin-bottom: 14px; }
+.lpd-pricing-card:not(:has(.lpd-pricing-feature)) p.lpd-pricing-desc { border: 0; padding: 0; max-width: 40ch; font-size: 1rem; }
 .lpd-pricing-card:not(:has(.lpd-pricing-feature)) .wp-block-button,
 .lpd-pricing-card:not(:has(.lpd-pricing-feature)) .wp-block-button__link { width: auto; }
 .lpd-pricing-note { margin: 28px 0 0; color: var(--fg-dim); }
-.lpd-pricing > .lpd-inner { padding-bottom: clamp(40px, 5vw, 72px); }
 
 /* ==========================================================================
-   The offer panel - the one loud surface: solid paw pink, ink type
+   The offer - the one surface in the full paw gradient
    ========================================================================== */
-.lpd-cta-section > .lpd-inner { padding-top: 0; padding-bottom: clamp(48px, 6vw, 88px); }
 .lpd-cta-banner {
   --fg: var(--night);
   display: grid;
-  grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
   grid-template-areas: "title text" "title action";
-  gap: 20px clamp(32px, 6vw, 96px);
+  gap: 20px clamp(32px, 5vw, 80px);
   align-items: end;
-  padding: clamp(28px, 4.5vw, 64px);
-  background: var(--pink);
+  padding: clamp(28px, 5vw, 72px);
+  background: var(--paw);
   color: var(--night);
-  border-radius: var(--radius);
+  border-radius: calc(var(--radius) + 6px);
 }
-.lpd-cta-banner h2 { grid-area: title; font-size: clamp(2.2rem, 5vw, 4.25rem); letter-spacing: -0.045em; line-height: 0.98; margin: 0; }
-.lpd-cta-banner p { grid-area: text; margin: 0; font-size: 1.08rem; line-height: 1.5; color: var(--night); }
+.lpd-cta-banner h2 { grid-area: title; font-size: clamp(2.2rem, 5.4vw, 4.5rem); letter-spacing: -0.05em; line-height: 0.96; margin: 0; }
+.lpd-cta-banner p { grid-area: text; margin: 0; font-size: 1.04rem; line-height: 1.55; font-weight: 500; color: var(--night); }
 .lpd-cta-banner .wp-block-buttons { grid-area: action; }
 .lpd-cta-banner .wp-block-button.lpd-btn-primary .wp-block-button__link { background: var(--night); border-color: var(--night); color: var(--cream); }
 @media (hover: hover) and (pointer: fine) {
   .lpd-cta-banner .wp-block-button.lpd-btn-primary .wp-block-button__link:hover { background: var(--navy); border-color: var(--navy); color: var(--cream); }
 }
-@media (max-width: 900px) {
-  .lpd-cta-banner { grid-template-columns: minmax(0, 1fr); grid-template-areas: "title" "text" "action"; }
-}
+@media (max-width: 900px) { .lpd-cta-banner { grid-template-columns: minmax(0, 1fr); grid-template-areas: "title" "text" "action"; } }
 
 /* ==========================================================================
    FAQ - click to expand, JS-driven accordion (interactions.js)
    ========================================================================== */
-.lpd-front-page .lpd-faq > .lpd-inner { padding-top: clamp(48px, 6vw, 88px); }
+.lpd-front-page .lpd-faq > .lpd-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  column-gap: clamp(32px, 5vw, 80px);
+  align-items: start;
+}
+.lpd-front-page .lpd-faq > .lpd-inner > .lpd-section-heading { position: sticky; top: calc(var(--bar) + 32px); margin: 0; }
+@media (max-width: 900px) {
+  .lpd-front-page .lpd-faq > .lpd-inner { grid-template-columns: minmax(0, 1fr); }
+  .lpd-front-page .lpd-faq > .lpd-inner > .lpd-section-heading { position: static; margin-bottom: var(--head); }
+}
 .lpd-faq-list { border-top: 1px solid var(--rule-strong); }
 .lpd-faq-item { border-bottom: 1px solid var(--rule); }
 .lpd-faq-item h3 {
@@ -849,15 +735,14 @@ button[type="submit"], input[type="submit"] {
   align-items: center;
   min-height: 44px;
   margin: 0;
-  padding: 24px 52px 24px 0;
-  font-size: clamp(1.1rem, 1.6vw, 1.3rem);
-  letter-spacing: -0.025em;
-  line-height: 1.25;
+  padding: 22px 52px 22px 0;
+  font-size: clamp(1.08rem, 1.5vw, 1.25rem);
+  letter-spacing: -0.03em;
+  line-height: 1.3;
   cursor: pointer;
   user-select: none;
   transition: color 0.15s ease;
 }
-/* plus that turns to a minus: two bars, one rotates away */
 .lpd-faq-item h3::before,
 .lpd-faq-item h3::after {
   content: '';
@@ -880,91 +765,162 @@ button[type="submit"], input[type="submit"] {
 @media (hover: hover) and (pointer: fine) { .lpd-faq-item h3:hover { color: var(--accent-text); } }
 .lpd-faq-item p {
   color: var(--fg-dim);
-  font-size: 1.05rem;
-  line-height: 1.6;
-  max-width: 62ch;
+  line-height: 1.65;
+  max-width: 60ch;
   margin: 0;
   max-height: 0;
   opacity: 0;
   overflow: hidden;
   transition: max-height 0.4s var(--ease-out), opacity 0.25s ease, margin 0.3s var(--ease-out);
 }
-.lpd-faq-item.is-open p { opacity: 1; margin: -6px 0 26px; }
+.lpd-faq-item.is-open p { opacity: 1; margin: -6px 0 24px; }
 
 /* ==========================================================================
-   Colocation band - photograph left, the facts as a ruled list
+   The colocation scene
+   Unscripted (or with reduced motion) this is an ordinary section: the
+   photographs beside the copy. With scripting the stage pins to the
+   screen for three screens of scrolling - on phones too - while the
+   photographs wipe from one to the next and the matching fact comes
+   forward. interactions.js writes the scroll progress to --p (0 to 1);
+   the keyframes below are paused and scrubbed by it, which works in
+   every browser.
    ========================================================================== */
-.lpd-colo-teaser .wp-block-columns {
+.lpd-scene { position: relative; background: var(--night); color: var(--cream); }
+.lpd-scene-stage {
   display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-  gap: clamp(32px, 6vw, 96px);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(28px, 5vw, 80px);
   align-items: center;
-  margin: 0;
+  width: 100%;
+  max-width: calc(var(--wrap) + var(--gutter) * 2);
+  margin: 0 auto;
+  padding: var(--section) var(--gutter);
 }
-.lpd-colo-teaser .wp-block-columns > .wp-block-column { width: auto; flex-basis: auto; margin: 0; min-width: 0; }
+.lpd-scene-photos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--gap); }
+.lpd-scene-photo { margin: 0; overflow: hidden; border-radius: var(--radius); }
+.lpd-scene-photo:first-child { grid-column: 1 / -1; }
+.lpd-scene-photo img { width: 100%; height: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+.lpd-scene-photo:first-child img { aspect-ratio: 16 / 10; }
+
+.lpd-scene-copy h2 { font-size: clamp(2rem, 4.4vw, 3.5rem); letter-spacing: -0.045em; line-height: 1.02; margin: 0 0 16px; }
+.lpd-scene-copy p.lpd-scene-intro { color: var(--fg-dim); max-width: 44ch; margin: 0 0 28px; }
+.lpd-scene-caps { position: relative; }
+.lpd-scene-cap { padding: 18px 0; border-top: 1px solid var(--rule); }
+.lpd-scene-cap h3 { font-size: clamp(1.15rem, 1.7vw, 1.4rem); letter-spacing: -0.035em; margin: 0 0 6px; }
+.lpd-scene-cap p { margin: 0; color: rgba(251, 247, 242, 0.86); max-width: 46ch; }
+.lpd-scene-copy p.lpd-colo-price { margin: 0 0 22px; padding-top: 20px; border-top: 1px solid var(--rule); font-size: clamp(1.2rem, 1.9vw, 1.5rem); font-weight: 600; letter-spacing: -0.035em; }
+@media (max-width: 900px) { .lpd-scene-stage { grid-template-columns: minmax(0, 1fr); } }
+
+/* pinned mode */
+.lpd-scrub .lpd-scene { height: 320vh; }
+.lpd-scrub .lpd-scene-stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  padding-top: calc(var(--bar) + 20px);
+  padding-bottom: 28px;
+}
+.lpd-scrub .lpd-scene-photos { display: block; position: relative; height: 100%; max-height: 760px; border-radius: var(--radius); overflow: hidden; }
+.lpd-scrub .lpd-scene-photo { position: absolute; inset: 0; border-radius: 0; }
+.lpd-scrub .lpd-scene-photo img,
+.lpd-scrub .lpd-scene-photo:first-child img { aspect-ratio: auto; }
+.lpd-scrub .lpd-scene-caps { padding-left: 22px; }
+.lpd-scrub .lpd-scene-caps::before,
+.lpd-scrub .lpd-scene-caps::after { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; border-radius: 3px; background: var(--rule); }
+.lpd-scrub .lpd-scene-caps::after { background: var(--paw); transform-origin: top center; transform: scaleY(var(--p, 0)); }
+/* 1s paused animations, moved to the frame the scroll position asks for */
+.lpd-scrub .lpd-scene-photo:nth-child(2) { animation: lpd-wipe-2 1s linear calc(var(--p, 0) * -1s) both paused; }
+.lpd-scrub .lpd-scene-photo:nth-child(3) { animation: lpd-wipe-3 1s linear calc(var(--p, 0) * -1s) both paused; }
+.lpd-scrub .lpd-scene-photo:nth-child(2) img { animation: lpd-zoom-2 1s linear calc(var(--p, 0) * -1s) both paused; }
+.lpd-scrub .lpd-scene-photo:nth-child(3) img { animation: lpd-zoom-3 1s linear calc(var(--p, 0) * -1s) both paused; }
+.lpd-scrub .lpd-scene-cap:nth-child(1) { animation: lpd-cap-1 1s linear calc(var(--p, 0) * -1s) both paused; }
+.lpd-scrub .lpd-scene-cap:nth-child(2) { animation: lpd-cap-2 1s linear calc(var(--p, 0) * -1s) both paused; }
+.lpd-scrub .lpd-scene-cap:nth-child(3) { animation: lpd-cap-3 1s linear calc(var(--p, 0) * -1s) both paused; }
+@keyframes lpd-wipe-2 { 0%, 26% { clip-path: inset(100% 0 0 0); } 40%, 100% { clip-path: inset(0 0 0 0); } }
+@keyframes lpd-wipe-3 { 0%, 60% { clip-path: inset(100% 0 0 0); } 74%, 100% { clip-path: inset(0 0 0 0); } }
+@keyframes lpd-zoom-2 { 0%, 26% { transform: scale(1.14); } 46%, 100% { transform: scale(1); } }
+@keyframes lpd-zoom-3 { 0%, 60% { transform: scale(1.14); } 80%, 100% { transform: scale(1); } }
+/* one fact hands over to the next: out first, then in */
+@keyframes lpd-cap-1 { 0%, 26% { opacity: 1; } 32%, 100% { opacity: var(--cap-off, 0.62); } }
+@keyframes lpd-cap-2 { 0%, 32% { opacity: var(--cap-off, 0.62); } 38%, 62% { opacity: 1; } 68%, 100% { opacity: var(--cap-off, 0.62); } }
+@keyframes lpd-cap-3 { 0%, 68% { opacity: var(--cap-off, 0.62); } 74%, 100% { opacity: 1; } }
+
+/* pinned on a phone: photograph on top, one fact at a time beneath */
+@media (max-width: 900px) {
+  .lpd-scrub .lpd-scene-stage { grid-template-rows: minmax(0, 1fr) auto; gap: 20px; align-items: stretch; padding-top: calc(var(--bar) + 12px); padding-bottom: 20px; }
+  .lpd-scrub .lpd-scene-photos { max-height: none; }
+  .lpd-scrub .lpd-scene-copy h2 { font-size: 1.7rem; margin-bottom: 14px; }
+  .lpd-scrub .lpd-scene-copy p.lpd-scene-intro { display: none; }
+  .lpd-scrub .lpd-scene-caps { display: grid; --cap-off: 0; }
+  .lpd-scrub .lpd-scene-cap { grid-area: 1 / 1; border: 0; padding: 0 0 4px; }
+  .lpd-scrub .lpd-scene-cap p { font-size: 0.95rem; }
+  .lpd-scrub .lpd-scene-copy p.lpd-colo-price { margin: 14px 0 14px; padding-top: 14px; font-size: 1.1rem; }
+  .lpd-scrub .lpd-scene-copy .wp-block-button__link { min-height: 46px; padding: 11px 18px; font-size: 0.92rem; }
+}
+/* too short to fit the stage: fall back to the ordinary section */
+@media (max-height: 560px) {
+  .lpd-scrub .lpd-scene { height: auto; }
+  .lpd-scrub .lpd-scene-stage { position: static; height: auto; padding: var(--section) var(--gutter); }
+  .lpd-scrub .lpd-scene-photos { display: grid; height: auto; }
+  .lpd-scrub .lpd-scene-photo { position: static; animation: none !important; }
+  .lpd-scrub .lpd-scene-photo img { animation: none !important; aspect-ratio: 4 / 3; }
+  .lpd-scrub .lpd-scene-cap { animation: none !important; }
+}
+
+/* Colocation band from older page content (single photograph) */
+.lpd-colo-teaser .wp-block-columns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(28px, 5vw, 80px); align-items: center; }
 .lpd-colo-teaser-photo { margin: 0; overflow: hidden; border-radius: var(--radius); }
 .lpd-colo-teaser-photo img { width: 100%; aspect-ratio: 4 / 3.4; object-fit: cover; }
-.lpd-colo-teaser h2 { font-size: clamp(2.1rem, 4.6vw, 3.75rem); letter-spacing: -0.04em; line-height: 1.02; margin: 0 0 18px; }
-.lpd-colo-teaser .wp-block-column > p { color: var(--fg-dim); font-size: 1.1rem; line-height: 1.55; margin: 0 0 26px; max-width: 46ch; }
-.lpd-colo-teaser .wp-block-column > p.lpd-colo-point {
-  margin: 0;
-  max-width: none;
-  padding: 14px 0;
-  border-top: 1px solid var(--rule);
-  color: var(--fg);
-  font-size: 1.05rem;
-}
-.lpd-colo-teaser .wp-block-column > p.lpd-colo-price {
-  margin: 0 0 26px;
-  max-width: none;
-  padding-top: 20px;
-  border-top: 1px solid var(--rule);
-  font-family: var(--font-display);
-  font-size: clamp(1.4rem, 2.2vw, 1.75rem);
-  font-weight: 600;
-  letter-spacing: -0.03em;
-  color: var(--fg);
-}
-@media (max-width: 900px) {
-  .lpd-colo-teaser .wp-block-columns { grid-template-columns: minmax(0, 1fr); }
-}
+.lpd-colo-teaser h2 { font-size: clamp(2rem, 4.4vw, 3.5rem); letter-spacing: -0.045em; line-height: 1.02; margin: 0 0 16px; }
+.lpd-colo-teaser .wp-block-column > p { color: var(--fg-dim); margin: 0 0 24px; max-width: 46ch; }
+.lpd-colo-teaser .wp-block-column > p.lpd-colo-point { margin: 0; max-width: none; padding: 14px 0; border-top: 1px solid var(--rule); color: var(--fg); }
+.lpd-colo-teaser .wp-block-column > p.lpd-colo-price { margin: 0 0 22px; max-width: none; padding-top: 20px; border-top: 1px solid var(--rule); font-size: clamp(1.2rem, 1.9vw, 1.5rem); font-weight: 600; letter-spacing: -0.035em; color: var(--fg); }
+@media (max-width: 900px) { .lpd-colo-teaser .wp-block-columns { grid-template-columns: minmax(0, 1fr); } }
 
 /* ==========================================================================
-   Testimonial - the client's words, set large
+   Proof - the client's words beside the site we built them
    ========================================================================== */
-.lpd-testimonial { max-width: 1040px; margin: 0; text-align: left; }
-.lpd-testimonial-stars.wp-block-image { margin: 0 0 28px; }
+.lpd-proof-grid.wp-block-columns { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 6fr); gap: clamp(28px, 5vw, 80px); align-items: center; }
+.lpd-testimonial { margin: 0; text-align: left; }
+.lpd-testimonial-stars.wp-block-image { margin: 0 0 24px; }
 .lpd-testimonial-stars img { display: block !important; height: 22px !important; width: auto !important; max-width: 130px !important; }
-p.lpd-testimonial-quote {
-  font-family: var(--font-display);
-  font-weight: 500;
-  font-size: clamp(1.5rem, 3.2vw, 2.6rem);
-  letter-spacing: -0.035em;
-  line-height: 1.22;
-  color: var(--fg);
-  margin: 0 0 32px;
-  text-wrap: pretty;
-}
+p.lpd-testimonial-quote { font-size: clamp(1.3rem, 2.3vw, 1.95rem); font-weight: 500; letter-spacing: -0.04em; line-height: 1.25; color: var(--fg); margin: 0 0 28px; }
 p.lpd-testimonial-name { margin: 0; font-weight: 600; color: var(--fg); }
 p.lpd-testimonial-link { margin: 2px 0 0; color: var(--fg-dim); }
-p.lpd-testimonial-source { margin: 40px 0 0; font-size: 0.95rem; color: var(--fg-dim); }
+p.lpd-testimonial-source { margin: 28px 0 0; font-size: 0.92rem; color: var(--fg-dim); }
+/* older content: the quote on its own */
+.lpd-section-alt > .lpd-inner > .lpd-testimonial { max-width: 960px; }
+
+.lpd-shots { position: relative; padding: 0 0 9% 0; }
+.lpd-shot { margin: 0; overflow: hidden; background: var(--night-deep); box-shadow: 0 30px 60px -30px rgba(8, 3, 18, 0.9); }
+.lpd-shot img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+.lpd-shot-desktop { width: 92%; aspect-ratio: 16 / 10; border-radius: var(--radius-sm); border: 1px solid rgba(251, 247, 242, 0.14); }
+.lpd-shot-phone { position: absolute; right: 0; bottom: 0; width: 24%; aspect-ratio: 9 / 18.6; border-radius: 16px; border: 4px solid var(--night-deep); outline: 1px solid rgba(251, 247, 242, 0.2); }
+@media (max-width: 900px) { .lpd-proof-grid.wp-block-columns { grid-template-columns: minmax(0, 1fr); } }
 
 /* ==========================================================================
-   About + Contact (homepage) - paper, heading left, substance right
+   About + Contact (homepage)
    ========================================================================== */
-.lpd-about > .lpd-inner { padding-bottom: clamp(40px, 5vw, 72px); }
-.lpd-about .lpd-card, .lpd-about .card { border: 0; padding: 0; max-width: 62ch; }
-.lpd-about .lpd-card p { color: var(--fg-dim); font-size: 1.08rem; line-height: 1.65; margin: 0 0 18px; }
-.lpd-about .lpd-card p:first-of-type { color: var(--fg); font-family: var(--font-display); font-size: clamp(1.3rem, 2.1vw, 1.7rem); font-weight: 500; letter-spacing: -0.03em; line-height: 1.3; margin-bottom: 24px; }
+.lpd-about > .lpd-inner,
+.lpd-contact > .lpd-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  column-gap: clamp(32px, 5vw, 80px);
+  align-items: start;
+}
+:is(.lpd-about, .lpd-contact) > .lpd-inner > .lpd-section-heading { margin: 0; }
+:is(.lpd-about, .lpd-contact) > .lpd-inner > :not(.lpd-section-heading) { grid-column: 2; min-width: 0; }
+.lpd-about .lpd-card, .lpd-about .card { padding: 0; background: none; border-radius: 0; }
+.lpd-about .lpd-card p { color: var(--fg-dim); font-size: 1.06rem; line-height: 1.7; margin: 0 0 18px; max-width: 58ch; }
+.lpd-about .lpd-card p:first-of-type { color: var(--fg); font-size: clamp(1.2rem, 1.9vw, 1.5rem); font-weight: 500; letter-spacing: -0.035em; line-height: 1.35; }
 .lpd-about .wp-block-buttons { margin-top: 28px; }
-
-.lpd-contact > .lpd-inner { padding-top: clamp(40px, 5vw, 72px); }
 .lpd-contact > .lpd-inner > :not(.lpd-section-heading):empty { display: none; }
-.lpd-contact > .lpd-inner > :not(.lpd-section-heading):not(:empty) {
-  padding: clamp(22px, 3vw, 40px);
-  background: var(--panel);
-  border: 1px solid var(--rule);
-  border-radius: var(--radius);
+.lpd-contact > .lpd-inner > :not(.lpd-section-heading):not(:empty) { padding: var(--pad); background: var(--panel); border-radius: var(--radius); }
+@media (max-width: 900px) {
+  .lpd-about > .lpd-inner, .lpd-contact > .lpd-inner { grid-template-columns: minmax(0, 1fr); }
+  :is(.lpd-about, .lpd-contact) > .lpd-inner > .lpd-section-heading { margin-bottom: var(--head); }
+  :is(.lpd-about, .lpd-contact) > .lpd-inner > :not(.lpd-section-heading) { grid-column: 1; }
 }
 
 /* ==========================================================================
@@ -972,21 +928,21 @@ p.lpd-testimonial-source { margin: 40px 0 0; font-size: 0.95rem; color: var(--fg
    ========================================================================== */
 input[type="text"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="number"], select, textarea {
   width: 100%;
-  padding: 13px 14px;
+  padding: 14px 16px;
   border-radius: var(--radius-sm);
   border: 1px solid var(--field-border);
   background: var(--field-bg);
   color: var(--fg);
-  font-family: var(--font-body);
+  font-family: var(--font);
   font-size: 16px; /* iOS zooms the page on anything smaller */
   margin-bottom: 16px;
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 input:focus, select:focus, textarea:focus { outline: none; border-color: var(--pink); box-shadow: 0 0 0 3px rgba(240, 82, 156, 0.28); }
-label { display: block; font-size: 0.95rem; font-weight: 600; margin-bottom: 6px; color: var(--fg); }
+label { display: block; font-size: 0.92rem; font-weight: 600; margin-bottom: 6px; color: var(--fg); }
 
 .wpforms-container .wpforms-field { padding: 0 0 16px; }
-.wpforms-container .wpforms-field-label { font-family: var(--font-body); font-size: 0.95rem; font-weight: 600; color: var(--fg); margin-bottom: 6px; }
+.wpforms-container .wpforms-field-label { font-family: var(--font); font-size: 0.92rem; font-weight: 600; color: var(--fg); margin-bottom: 6px; }
 .wpforms-container .wpforms-field-required { color: var(--accent-text); }
 .wpforms-container input[type=text],
 .wpforms-container input[type=email],
@@ -996,12 +952,12 @@ label { display: block; font-size: 0.95rem; font-weight: 600; margin-bottom: 6px
 .wpforms-container select,
 .wpforms-container textarea {
   width: 100% !important;
-  padding: 13px 14px !important;
+  padding: 14px 16px !important;
   border-radius: var(--radius-sm) !important;
   border: 1px solid var(--field-border) !important;
   background: var(--field-bg) !important;
   color: var(--fg) !important;
-  font-family: var(--font-body) !important;
+  font-family: var(--font) !important;
   font-size: 16px !important;
   box-shadow: none !important;
 }
@@ -1009,133 +965,76 @@ label { display: block; font-size: 0.95rem; font-weight: 600; margin-bottom: 6px
 .wpforms-container select:focus,
 .wpforms-container textarea:focus { border-color: var(--pink) !important; box-shadow: 0 0 0 3px rgba(240, 82, 156, 0.28) !important; outline: none !important; }
 .wpforms-container button.wpforms-submit {
-  min-height: 48px;
-  padding: 12px 24px !important;
-  border-radius: var(--radius-sm) !important;
+  min-height: 50px;
+  padding: 13px 24px !important;
+  border-radius: 999px !important;
   background: var(--pink) !important;
   color: var(--night) !important;
-  font-family: var(--font-body) !important;
+  font-family: var(--font) !important;
   font-weight: 600 !important;
-  font-size: 1rem !important;
+  font-size: 0.97rem !important;
   border: 0 !important;
   cursor: pointer;
 }
 .wpforms-container .wpforms-field-checkbox label,
-.wpforms-container .wpforms-field-gdpr-checkbox label { color: var(--fg-dim); font-size: 0.92rem; }
-.wpforms-container .wpforms-error, .wpforms-container .wpforms-field-description { font-size: 0.88rem; }
+.wpforms-container .wpforms-field-gdpr-checkbox label { color: var(--fg-dim); font-size: 0.9rem; }
+.wpforms-container .wpforms-error, .wpforms-container .wpforms-field-description { font-size: 0.86rem; }
 
 /* ==========================================================================
-   Inner pages - page hero
+   Inner pages - page hero and bands (content shipped in inc/pages/)
    ========================================================================== */
-.page-hero {
-  position: relative;
-  padding: calc(var(--head) + clamp(56px, 9vw, 128px)) 0 clamp(28px, 4vw, 48px);
-  background: var(--night);
-  color: var(--cream);
-}
-.page-hero .container { border-bottom: 1px solid rgba(246, 239, 230, 0.18); padding-bottom: clamp(28px, 4vw, 48px); }
-.page-hero .entry-title {
-  font-size: clamp(2.7rem, 7vw, 6rem);
-  font-weight: 600;
-  letter-spacing: -0.045em;
-  line-height: 0.98;
-  margin: 0;
-}
+.page-hero { position: relative; padding: calc(var(--bar) + clamp(48px, 8vw, 112px)) 0 0; background: var(--night); color: var(--cream); }
+.page-hero .container { border-bottom: 1px solid rgba(251, 247, 242, 0.18); padding-bottom: clamp(24px, 3.4vw, 44px); }
+.page-hero .entry-title { font-size: clamp(2.6rem, 7vw, 5.75rem); letter-spacing: -0.05em; line-height: 0.98; margin: 0; }
 .entry-title { font-size: 2rem; margin: 0 0 20px; }
-.entry-meta { color: var(--fg-dim); font-size: 0.95rem; }
+.entry-meta { color: var(--fg-dim); font-size: 0.92rem; }
 
-/* ==========================================================================
-   Inner pages - bands (content shipped in inc/pages/)
-   ========================================================================== */
 .lpd-band { position: relative; background: var(--bg); color: var(--fg); }
-.lpd-band > .lpd-inner { padding-top: clamp(56px, 8vw, 112px); padding-bottom: clamp(56px, 8vw, 112px); }
-/* two night bands in a row read as one section: drop the doubled gap */
-.lpd-band:not(.lpd-band-alt):not(.lpd-process):not(.lpd-pricing) + .lpd-band:not(.lpd-band-alt):not(.lpd-process):not(.lpd-pricing):not(.lpd-cta-section) > .lpd-inner { padding-top: 0; }
-.lpd-band.lpd-cta-section { background: var(--night); --bg: var(--night); }
-.lpd-band.lpd-cta-section > .lpd-inner { padding-top: clamp(56px, 8vw, 112px); }
-.lpd-band-alt + .lpd-band.lpd-cta-section, .lpd-pricing + .lpd-band.lpd-cta-section { background: var(--paper); }
-.lpd-band-alt + .lpd-band.lpd-cta-section > .lpd-inner, .lpd-pricing + .lpd-band.lpd-cta-section > .lpd-inner { padding-top: 0; }
+.lpd-band.lpd-cta-section { --bg: var(--night); background: var(--night); }
+.lpd-band-alt + .lpd-band.lpd-cta-section, .lpd-band.lpd-pricing + .lpd-band.lpd-cta-section { --bg: var(--light); background: var(--light); }
+/* same rhythm rule as the homepage, for bands */
+.lpd-band:not(.lpd-band-alt):not(.lpd-process):not(.lpd-pricing) + .lpd-band:not(.lpd-band-alt):not(.lpd-process):not(.lpd-pricing):not(.lpd-cta-section) > .lpd-inner,
+:is(.lpd-band-alt, .lpd-band.lpd-pricing) + :is(.lpd-band-alt, .lpd-band.lpd-pricing) > .lpd-inner,
+:is(.lpd-band-alt, .lpd-band.lpd-pricing) + .lpd-band.lpd-cta-section > .lpd-inner { padding-top: 0; }
 .lpd-bands > .lpd-band:first-child > .lpd-inner { padding-top: clamp(40px, 5vw, 72px); }
 
-.lpd-section-heading.lpd-left { text-align: left; }
-
 .lpd-bands p.lpd-lead,
-.lpd-bands .lpd-prose > p.lpd-lead {
-  font-family: var(--font-display);
-  font-size: clamp(1.4rem, 2.6vw, 2.1rem);
-  font-weight: 500;
-  letter-spacing: -0.035em;
-  line-height: 1.22;
-  color: var(--fg);
-  max-width: 26ch;
-  margin: 0 0 28px;
-}
-.lpd-bands .lpd-inner > p.lpd-lead { max-width: 32ch; margin-bottom: 0; }
-.lpd-band:has(> .lpd-inner > p.lpd-lead:only-child) > .lpd-inner { padding-bottom: clamp(32px, 4vw, 56px); }
-
-.lpd-bands .lpd-prose > p { color: var(--fg-dim); font-size: 1.08rem; line-height: 1.65; margin: 0 0 18px; max-width: 58ch; }
+.lpd-bands .lpd-prose > p.lpd-lead { font-size: clamp(1.35rem, 2.5vw, 2rem); font-weight: 500; letter-spacing: -0.04em; line-height: 1.22; color: var(--fg); max-width: 24em; margin: 0 0 28px; }
+.lpd-bands .lpd-inner > p.lpd-lead { margin-bottom: 0; }
+.lpd-bands .lpd-prose > p { color: var(--fg-dim); font-size: 1.06rem; line-height: 1.7; margin: 0 0 18px; max-width: 56ch; }
 .lpd-bands .lpd-prose > p:last-child { margin-bottom: 0; }
-.lpd-bands .lpd-prose > h2 { font-size: clamp(1.9rem, 3.6vw, 3rem); letter-spacing: -0.04em; line-height: 1.02; margin: 0 0 20px; }
+.lpd-bands .lpd-prose > h2 { font-size: clamp(1.8rem, 3.4vw, 2.75rem); letter-spacing: -0.045em; line-height: 1.04; margin: 0 0 18px; }
 .lpd-bands .lpd-prose > p.lpd-lead + h2 { margin-top: clamp(28px, 4vw, 48px); }
-.lpd-bands .lpd-prose > h3 { font-size: 1.4rem; margin: 0 0 12px; }
+.lpd-bands .lpd-prose > h3 { font-size: 1.35rem; margin: 0 0 12px; }
 .lpd-bands .lpd-prose > .wp-block-buttons { margin-top: 28px; }
 
-.lpd-bands .wp-block-columns.lpd-split {
-  display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-  gap: clamp(32px, 6vw, 96px);
-  align-items: center;
-  margin: 0;
-}
+.lpd-bands .wp-block-columns.lpd-split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 80px); align-items: center; }
 .lpd-bands .wp-block-columns.lpd-split.lpd-split-top { align-items: start; }
-.lpd-bands .wp-block-columns.lpd-split.lpd-split-even { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
-.lpd-bands .wp-block-columns.lpd-split.lpd-split-narrow { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); }
-
+.lpd-bands .wp-block-columns.lpd-split.lpd-split-narrow { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); }
 .lpd-bands .wp-block-columns.lpd-grid-2,
-.lpd-bands .wp-block-columns.lpd-grid-3 { display: grid; gap: 8px clamp(24px, 4vw, 56px); margin: 0; }
-.lpd-bands .wp-block-columns.lpd-grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.lpd-bands .wp-block-columns.lpd-grid-3 { display: grid; gap: var(--gap); }
+.lpd-bands .wp-block-columns.lpd-grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .lpd-bands .wp-block-columns.lpd-grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-.lpd-bands .wp-block-columns:is(.lpd-split, .lpd-grid-2, .lpd-grid-3) > .wp-block-column { width: auto; flex-basis: auto; margin: 0; min-width: 0; }
-.lpd-bands .lpd-grid-3 .lpd-card { height: 100%; padding-bottom: 28px; }
+.lpd-bands .lpd-why-item::before { margin-bottom: clamp(20px, 2.6vw, 36px); width: 30px; height: 30px; }
 
 .lpd-bands .lpd-photo { margin: 0; overflow: hidden; border-radius: var(--radius); }
 .lpd-bands .lpd-photo img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
-
-.lpd-bands ul.lpd-checklist {
-  list-style: none;
-  padding: 0;
-  margin: 12px 0 0;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0 32px;
-}
-.lpd-bands ul.lpd-checklist li { padding: 12px 0; border-top: 1px solid var(--rule); color: var(--fg); font-size: 1.02rem; }
-
-.lpd-bands .lpd-card.lpd-pad,
-.lpd-bands .lpd-pointer {
-  height: 100%;
-  padding: clamp(24px, 3vw, 40px);
-  background: var(--panel);
-  border: 1px solid var(--rule);
-  border-radius: var(--radius);
-}
-.lpd-bands .lpd-pointer { background: transparent; border-style: dashed; border-color: var(--rule-strong); }
-.lpd-bands .lpd-card.lpd-pad h3, .lpd-bands .lpd-pointer h3 { font-size: clamp(1.4rem, 2.2vw, 1.75rem); letter-spacing: -0.03em; margin: 0 0 12px; }
+.lpd-bands ul.lpd-checklist { list-style: none; padding: 0; margin: 12px 0 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 32px; }
+.lpd-bands ul.lpd-checklist li { padding: 12px 0; border-top: 1px solid var(--rule); color: var(--fg); font-size: 1rem; }
+.lpd-bands .lpd-card.lpd-pad h3, .lpd-bands .lpd-pointer h3 { font-size: clamp(1.35rem, 2.1vw, 1.7rem); margin: 0 0 12px; }
+.lpd-bands .lpd-pointer { background: transparent; border: 1.5px dashed var(--rule-strong); }
 .lpd-bands .lpd-card .wp-block-buttons { margin-top: 24px; }
-
-.lpd-form-card { padding: clamp(22px, 3vw, 40px); border-radius: var(--radius); }
-.lpd-form-card > h2 { font-size: clamp(1.5rem, 2.4vw, 1.9rem); letter-spacing: -0.03em; margin: 0 0 22px; }
+.lpd-form-card { padding: var(--pad); border-radius: var(--radius); }
+.lpd-form-card > h2 { font-size: clamp(1.45rem, 2.3vw, 1.85rem); margin: 0 0 22px; }
 .lpd-form-card > p:empty { display: none; }
-
 .lpd-alt-contact { margin: 28px 0 0; padding-top: 20px; border-top: 1px solid var(--rule); max-width: 46ch; }
 .lpd-alt-contact p { margin: 0; color: var(--fg-dim); }
 .lpd-alt-contact a { font-weight: 600; white-space: nowrap; }
-
-.lpd-process .wp-block-columns.lpd-steps-3 { display: block; }
 .lpd-bands .lpd-split .lpd-faq-list { margin: 0; }
+.lpd-bands .lpd-shots { margin-bottom: clamp(28px, 4vw, 48px); }
+.lpd-bands .lpd-split p.lpd-testimonial-quote { font-size: clamp(1.2rem, 1.9vw, 1.55rem); line-height: 1.3; }
 
-/* Colocation gallery: one large photograph over two */
-.lpd-colo-gallery.wp-block-gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 0; }
+.lpd-colo-gallery.wp-block-gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--gap); }
 .lpd-colo-gallery .wp-block-image { margin: 0; overflow: hidden; border-radius: var(--radius); width: auto !important; }
 .lpd-colo-gallery .wp-block-image:first-child { grid-column: 1 / -1; }
 .lpd-colo-gallery .wp-block-image img { width: 100%; height: 200px; object-fit: cover; }
@@ -1143,7 +1042,6 @@ label { display: block; font-size: 0.95rem; font-weight: 600; margin-bottom: 6px
 
 @media (max-width: 900px) {
   .lpd-bands .wp-block-columns.lpd-split,
-  .lpd-bands .wp-block-columns.lpd-split.lpd-split-even,
   .lpd-bands .wp-block-columns.lpd-split.lpd-split-narrow { grid-template-columns: minmax(0, 1fr); }
   .lpd-bands .wp-block-columns.lpd-grid-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .lpd-bands .lpd-photo img { aspect-ratio: 4 / 3; }
@@ -1155,24 +1053,24 @@ label { display: block; font-size: 0.95rem; font-weight: 600; margin-bottom: 6px
 }
 
 /* ==========================================================================
-   Pages whose content has not been replaced with the theme's version,
-   posts, search, archives: a single reading column on night
+   Pages whose content has not been brought up to date, posts, search:
+   a single reading column on night
    ========================================================================== */
 .site-main { min-height: 50vh; }
-.lpd-page-content { max-width: 700px; margin: 0 auto; padding: clamp(40px, 6vw, 80px) 0 clamp(64px, 8vw, 112px); }
+.lpd-page-content { max-width: 700px; margin: 0 auto; padding: clamp(40px, 6vw, 80px) 0 var(--section); }
 .lpd-page-content-wide { max-width: var(--wrap); }
 .entry-content:not(.lpd-bands) p { color: var(--fg-dim); margin: 0 0 18px; }
 .entry-content:not(.lpd-bands) h2 { font-size: clamp(1.7rem, 3vw, 2.4rem); margin: 48px 0 18px; }
 .entry-content:not(.lpd-bands) h3 { font-size: 1.3rem; margin: 28px 0 10px; }
 .entry-content:not(.lpd-bands) ul, .entry-content:not(.lpd-bands) ol { color: var(--fg-dim); padding-left: 22px; margin: 0 0 18px; }
 .entry-content:not(.lpd-bands) img { border-radius: var(--radius); margin: 8px 0 24px; }
-.entry-content:not(.lpd-bands) > p:first-of-type { color: var(--fg); font-family: var(--font-display); font-size: clamp(1.3rem, 2.2vw, 1.7rem); font-weight: 500; letter-spacing: -0.03em; line-height: 1.3; margin-bottom: 32px; }
-.lpd-page-content .entry-content .wp-block-columns { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 8px 32px; margin-bottom: 40px; }
+.entry-content:not(.lpd-bands) > p:first-of-type { color: var(--fg); font-size: clamp(1.25rem, 2.1vw, 1.6rem); font-weight: 500; letter-spacing: -0.035em; line-height: 1.3; margin-bottom: 32px; }
+.lpd-page-content .entry-content .wp-block-columns { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--gap); margin: 0 0 40px; }
 .lpd-page-content .entry-content .wp-block-columns > .wp-block-column { width: auto; flex-basis: auto; margin: 0; }
-.lpd-page-content .entry-content .wp-block-columns.lpd-colocation-pricing { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; }
-.lpd-page-content .lpd-pricing-card { --panel: var(--navy); }
+.lpd-page-content .entry-content .wp-block-columns.lpd-colocation-pricing { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+.lpd-page-content .lpd-card h3, .lpd-page-content .lpd-pricing-card p { margin-top: 0; }
 .lpd-page-content .lpd-portfolio-item,
-.lpd-page-content .lpd-portfolio-pointer { padding: 28px; margin: 0 0 16px; background: var(--navy); border: 0; border-radius: var(--radius); }
+.lpd-page-content .lpd-portfolio-pointer { margin: 0 0 var(--gap); }
 .lpd-page-content .lpd-faq { margin: 40px 0; }
 .lpd-colo-explainer { max-width: 60ch; }
 .lpd-portfolio-cta { margin-top: 28px !important; }
@@ -1182,71 +1080,68 @@ label { display: block; font-size: 0.95rem; font-weight: 600; margin-bottom: 6px
 
 .content-layout { padding-top: clamp(40px, 6vw, 80px) !important; }
 @media (max-width: 800px) { .content-layout { grid-template-columns: minmax(0, 1fr) !important; } }
-.card, .widget { padding: 28px; background: var(--navy); border-radius: var(--radius); }
-.widget { margin-bottom: 16px; }
+.card, .widget { padding: var(--pad); background: var(--navy); border-radius: var(--radius); }
+.widget { margin-bottom: var(--gap); }
 .widget-title { margin: 0 0 14px; font-size: 1.1rem; }
 .card .entry-title a { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
 .pagination { margin: 28px 0; }
 .comment-list { list-style: none; margin: 0; padding: 0; }
 .comment-body { padding: 20px; margin-bottom: 12px; background: var(--navy); border-radius: var(--radius); }
-.comment-meta { font-size: 0.92rem; color: var(--fg-dim); margin-bottom: 8px; }
+.comment-meta { font-size: 0.9rem; color: var(--fg-dim); margin-bottom: 8px; }
 .post-card { background: var(--navy); border-radius: var(--radius); overflow: hidden; }
 .post-card-body { padding: 22px; }
-.post-card-meta { font-size: 0.92rem; color: var(--fg-dim); margin-bottom: 8px; }
-.grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.post-card-meta { font-size: 0.9rem; color: var(--fg-dim); margin-bottom: 8px; }
+.grid { display: grid; gap: var(--gap); grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
 
 /* ==========================================================================
    Footer
    ========================================================================== */
-.site-footer { background: var(--night-deep); color: var(--cream); padding: clamp(56px, 8vw, 96px) 0 28px; --fg: var(--cream); --fg-dim: #bbb0c9; }
-.footer-grid { display: grid; gap: 40px clamp(24px, 4vw, 64px); grid-template-columns: 1.6fr 1fr 1fr 1fr; margin-bottom: clamp(40px, 6vw, 72px); }
-.footer-grid h4 { font-family: var(--font-body); font-size: 1rem; font-weight: 600; letter-spacing: 0; color: var(--cream); margin: 4px 0 16px; }
+.site-footer { background: var(--night-deep); color: var(--cream); padding: clamp(56px, 7vw, 96px) 0 28px; --fg: var(--cream); --fg-dim: rgba(251, 247, 242, 0.7); }
+.footer-grid { display: grid; gap: 40px clamp(24px, 4vw, 64px); grid-template-columns: 1.6fr 1fr 1fr 1fr; margin-bottom: 40px; }
+.footer-grid h4 { font-size: 0.95rem; font-weight: 600; letter-spacing: -0.02em; color: var(--cream); margin: 4px 0 16px; }
 .footer-grid ul { list-style: none; margin: 0; padding: 0; }
 .footer-grid li { margin-bottom: 10px; }
-.footer-grid li a { color: #bbb0c9; transition: color 0.15s ease; }
-.footer-brand .lpd-logo-img { height: 48px; margin-bottom: 20px; }
-.footer-brand p { color: #bbb0c9; line-height: 1.6; max-width: 34ch; margin: 0; }
-.lpd-footer-phone { margin: 20px 0 0 !important; }
-.lpd-footer-phone a { font-family: var(--font-display); font-size: clamp(1.4rem, 2.4vw, 1.9rem); font-weight: 600; letter-spacing: -0.03em; color: var(--cream); }
+.footer-grid li a { color: var(--fg-dim); font-size: 0.95rem; transition: color 0.15s ease; }
+.footer-brand .lpd-logo-img { height: 46px; margin-bottom: 18px; }
+.footer-brand p { color: var(--fg-dim); font-size: 0.95rem; line-height: 1.6; max-width: 34ch; margin: 0; }
+.lpd-footer-phone { margin: 18px 0 0 !important; }
+.lpd-footer-phone a { font-size: clamp(1.4rem, 2.4vw, 1.9rem); font-weight: 600; letter-spacing: -0.04em; color: var(--cream); }
 @media (hover: hover) and (pointer: fine) {
   .footer-grid li a:hover { color: var(--cream); }
   .lpd-footer-phone a:hover { color: var(--pink-hi); }
   .footer-bottom a:hover { color: var(--cream); }
 }
-.lpd-status-badge { margin-bottom: 20px; }
-.lpd-footer-cats { display: flex; align-items: flex-end; gap: 18px; margin: 0 0 -1px; }
+/* cats on the left of the closing rule, status on the right */
+.site-footer > .container { display: grid; grid-template-columns: 1fr auto; align-items: end; }
+.footer-grid, .footer-bottom { grid-column: 1 / -1; }
+.lpd-footer-cats { grid-column: 1; grid-row: 2; display: flex; align-items: flex-end; gap: 16px; margin: 0 0 -1px; }
+.lpd-status-badge { grid-column: 2; grid-row: 2; margin: 0 0 14px; }
 .lpd-footer-cat-wrap { display: flex; }
-.lpd-footer-cat { width: 68px; height: auto; overflow: visible; }
-/* the pupils follow the pointer (interactions.js) */
-.lpd-cat-eye { transition: transform 0.18s var(--ease-out); }
-.footer-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; padding-top: 22px; border-top: 1px solid rgba(246, 239, 230, 0.16); color: #bbb0c9; font-size: 0.95rem; }
+.lpd-footer-cat { width: 64px; height: auto; overflow: visible; }
+.lpd-cat-eye { transition: transform 0.18s var(--ease-out); } /* pupils follow the pointer */
+.footer-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; padding-top: 20px; border-top: 1px solid rgba(251, 247, 242, 0.16); color: var(--fg-dim); font-size: 0.9rem; }
 .footer-bottom p { margin: 0; }
 .footer-bottom a { color: var(--cream); }
 @media (max-width: 900px) {
   .footer-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .footer-brand { grid-column: 1 / -1; }
 }
-@media (max-width: 560px) {
-  .footer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
+@media (max-width: 560px) { .footer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 
 /* ==========================================================================
    Motion
-   One orchestrated entrance (the hero), image reveals as photographs
-   arrive, and the scroll-driven steps above. Nothing else fades in.
+   One entrance (the hero), then everything else answers the scroll:
+   the statement, the steps, the colocation scene. Photographs unveil
+   once as they arrive.
    ========================================================================== */
-@keyframes lpd-settle { from { transform: scale(1.08); } to { transform: scale(1); } }
 @keyframes lpd-word { from { transform: translateY(105%); } to { transform: translateY(0); } }
 @keyframes lpd-rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes lpd-draw { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 @keyframes lpd-unhide { to { visibility: visible; } }
 
 @media (prefers-reduced-motion: no-preference) {
-  .lpd-hero-video { animation: lpd-settle 2.4s var(--ease-out) both; }
-
-  /* Headline: each word rises out of its own line box. The heading is
-     hidden only while the script that splits it is on its way, with a
-     timed fallback so it can never stay hidden. */
+  /* Headline: each word rises out of its own line box. Hidden only while
+     the script that splits it is on its way, with a timed fallback. */
   .lpd-js :is(.lpd-hero-heading, .page-hero .entry-title):not(.is-split) { visibility: hidden; animation: lpd-unhide 0s 1.2s forwards; }
   .lpd-w { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.14em; margin-bottom: -0.14em; }
   .lpd-w > span { display: inline-block; animation: lpd-word 0.9s var(--ease-out) both; animation-delay: calc(80ms + var(--i, 0) * 55ms); }
@@ -1260,9 +1155,11 @@ label { display: block; font-size: 0.95rem; font-weight: 600; margin-bottom: 6px
   .lpd-rail > .wp-block-column:nth-child(3) { --i: 2; }
   .lpd-rail > .wp-block-column:nth-child(4) { --i: 3; }
 
-  /* Photographs unveil top-down once, as they scroll into view */
-  /* (the clip is on the image, not the observed frame: a fully clipped
-     frame never counts as intersecting) */
+  /* the hero film drifts a little slower than the page */
+  .lpd-scrub .lpd-hero-video { transform: translateY(calc(var(--p, 0) * 9%)); }
+
+  /* Photographs unveil top-down once (the clip is on the image, not the
+     observed frame: a fully clipped frame never counts as intersecting) */
   .lpd-img-reveal img { clip-path: inset(0 0 100% 0); transform: scale(1.12); }
   .lpd-img-reveal.is-in img { clip-path: inset(0 0 0 0); transform: scale(1); transition: clip-path 1.1s var(--ease-in-out), transform 1.6s var(--ease-out); }
 
@@ -1279,10 +1176,6 @@ label { display: block; font-size: 0.95rem; font-weight: 600; margin-bottom: 6px
   .lpd-colo-teaser-photo img { transition: transform 0.9s var(--ease-out); }
   .lpd-colo-gallery .wp-block-image:hover img,
   .lpd-colo-teaser-photo:hover img { transform: scale(1.03); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation-duration: 0.01ms !important; animation-delay: 0s !important; transition-duration: 0.01ms !important; }
 }
 
 /* ==========================================================================
@@ -1307,16 +1200,15 @@ label { display: block; font-size: 0.95rem; font-weight: 600; margin-bottom: 6px
     inset: 0;
     z-index: 40;
     background: var(--night);
-    padding: calc(var(--head) + 24px) var(--gutter) max(32px, env(safe-area-inset-bottom));
+    padding: calc(var(--bar) + 24px) var(--gutter) max(32px, env(safe-area-inset-bottom));
     overflow-y: auto;
   }
   .main-navigation.is-open { animation: lpd-menu-in 0.45s var(--ease-drawer) both; }
   .main-navigation.is-closing { animation: lpd-menu-out 0.3s var(--ease-drawer) both; }
-
   .main-navigation.is-open ul,
   .main-navigation.is-closing ul { flex-direction: column; align-items: stretch; gap: 0; width: 100%; }
   .main-navigation.is-open li,
-  .main-navigation.is-closing li { border-top: 1px solid rgba(246, 239, 230, 0.16); }
+  .main-navigation.is-closing li { border-top: 1px solid rgba(251, 247, 242, 0.16); }
   .main-navigation.is-open li { animation: lpd-rise 0.5s var(--ease-out) both; animation-delay: calc(120ms + var(--i, 0) * 45ms); }
   .main-navigation li:nth-child(2) { --i: 1; }
   .main-navigation li:nth-child(3) { --i: 2; }
@@ -1325,28 +1217,20 @@ label { display: block; font-size: 0.95rem; font-weight: 600; margin-bottom: 6px
   .main-navigation li:nth-child(6) { --i: 5; }
   .main-navigation li:nth-child(7) { --i: 6; }
   .main-navigation.is-open li a,
-  .main-navigation.is-closing li a {
-    padding: 16px 0;
-    font-family: var(--font-display);
-    font-size: clamp(1.7rem, 7vw, 2.4rem);
-    font-weight: 600;
-    letter-spacing: -0.035em;
-    line-height: 1.1;
-    color: var(--cream);
-  }
+  .main-navigation.is-closing li a { padding: 15px 0; font-size: clamp(1.6rem, 6.6vw, 2.2rem); font-weight: 600; letter-spacing: -0.045em; line-height: 1.1; color: var(--cream); }
   .main-navigation li a::after { display: none; }
   .main-navigation.is-open .current-menu-item > a { color: var(--pink-hi); }
-  .main-navigation .lpd-client-login { margin-top: 28px; min-height: 52px; width: 100%; font-size: 1.05rem; background: var(--pink); border-color: var(--pink); color: var(--night); }
+  .main-navigation .lpd-client-login { margin-top: 28px; min-height: 52px; width: 100%; font-size: 1rem; background: var(--pink); border-color: var(--pink); color: var(--night); }
   .main-navigation.is-open .lpd-client-login { animation: lpd-rise 0.5s var(--ease-out) 0.4s both; }
-
   body.lpd-menu-open { overflow: hidden; }
 
   @keyframes lpd-menu-in { from { clip-path: inset(0 0 100% 0); } to { clip-path: inset(0 0 0 0); } }
   @keyframes lpd-menu-out { from { clip-path: inset(0 0 0 0); } to { clip-path: inset(0 0 100% 0); } }
 }
+@media (max-width: 400px) { .lpd-logo-img, .custom-logo { height: 36px; } }
 
-@media (max-width: 400px) {
-  .lpd-logo-img { height: 38px; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-delay: 0s !important; transition-duration: 0.01ms !important; }
 }
 
 .screen-reader-text { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(1px, 1px, 1px, 1px); }
@@ -1364,133 +1248,3 @@ label { display: block; font-size: 0.95rem; font-weight: 600; margin-bottom: 6px
   border-radius: var(--radius-sm);
   font-weight: 600;
 }
-
-/* Quote beside a project: smaller than the full-width homepage quote */
-.lpd-bands .lpd-split p.lpd-testimonial-quote { font-size: clamp(1.25rem, 2vw, 1.65rem); line-height: 1.3; }
-
-/* ==========================================================================
-   The colocation scene
-   Without scroll-timeline support, on small screens, or with reduced
-   motion, this is an ordinary two-column section: three photographs
-   beside the copy. Where it can, the stage pins to the screen for three
-   screens of scrolling: the photographs wipe from one to the next and
-   the matching fact comes forward.
-   ========================================================================== */
-.lpd-scene { position: relative; background: var(--night); color: var(--cream); }
-.lpd-scene-stage {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: clamp(32px, 6vw, 96px);
-  align-items: center;
-  width: 100%;
-  max-width: calc(var(--wrap) + var(--gutter) * 2);
-  margin: 0 auto;
-  padding: var(--section) var(--gutter);
-}
-.lpd-scene-photos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
-.lpd-scene-photo { margin: 0; overflow: hidden; border-radius: var(--radius); }
-.lpd-scene-photo:first-child { grid-column: 1 / -1; }
-.lpd-scene-photo img { width: 100%; height: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
-.lpd-scene-photo:first-child img { aspect-ratio: 16 / 10; }
-
-.lpd-scene-copy h2 { font-size: clamp(2.1rem, 4.4vw, 3.6rem); letter-spacing: -0.04em; line-height: 1.02; margin: 0 0 18px; }
-.lpd-scene-copy p.lpd-scene-intro { color: var(--fg-dim); font-size: 1.08rem; line-height: 1.6; max-width: 44ch; margin: 0 0 28px; }
-.lpd-scene-caps { position: relative; }
-.lpd-scene-cap { padding: 18px 0; border-top: 1px solid var(--rule); }
-.lpd-scene-cap h3 { font-size: clamp(1.2rem, 1.8vw, 1.45rem); letter-spacing: -0.03em; margin: 0 0 6px; }
-.lpd-scene-cap p { margin: 0; color: rgba(246, 239, 230, 0.86); max-width: 46ch; }
-.lpd-scene-copy p.lpd-colo-price {
-  margin: 0 0 24px;
-  padding-top: 20px;
-  border-top: 1px solid var(--rule);
-  font-size: clamp(1.3rem, 2vw, 1.6rem);
-  font-weight: 600;
-  letter-spacing: -0.03em;
-}
-@media (max-width: 900px) {
-  .lpd-scene-stage { grid-template-columns: minmax(0, 1fr); }
-}
-
-@supports (animation-timeline: view()) {
-  @media (min-width: 901px) and (min-height: 660px) and (prefers-reduced-motion: no-preference) {
-    .lpd-scene { height: 320vh; view-timeline-name: --lpd-scene; }
-    .lpd-scene-stage {
-      position: sticky;
-      top: 0;
-      height: 100vh;
-      height: 100svh;
-      padding-top: calc(var(--head) + 24px);
-      padding-bottom: 32px;
-    }
-    /* photographs stacked in one tall frame */
-    .lpd-scene-photos { display: block; position: relative; height: 100%; max-height: 760px; border-radius: var(--radius); overflow: hidden; }
-    .lpd-scene-photo { position: absolute; inset: 0; border-radius: 0; }
-    .lpd-scene-photo img,
-    .lpd-scene-photo:first-child img { aspect-ratio: auto; }
-    .lpd-scene-photo:nth-child(2) { animation-name: lpd-scene-wipe-2; }
-    .lpd-scene-photo:nth-child(3) { animation-name: lpd-scene-wipe-3; }
-    .lpd-scene-photo:nth-child(2) img { animation-name: lpd-scene-zoom-2; }
-    .lpd-scene-photo:nth-child(3) img { animation-name: lpd-scene-zoom-3; }
-
-    .lpd-scene-cap:nth-child(1) { animation-name: lpd-scene-cap-1; }
-    .lpd-scene-cap:nth-child(2) { animation-name: lpd-scene-cap-2; }
-    .lpd-scene-cap:nth-child(3) { animation-name: lpd-scene-cap-3; }
-    /* progress down the left edge of the facts */
-    .lpd-scene-caps { padding-left: 22px; }
-    .lpd-scene-caps::before,
-    .lpd-scene-caps::after { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--rule); }
-    .lpd-scene-caps::after { background: var(--pink); transform-origin: top center; animation-name: lpd-progress; }
-
-    /* longhands only: an `animation` shorthand on the rules above would
-       reset the timeline back to time-based */
-    .lpd-scene-photo, .lpd-scene-photo img, .lpd-scene-cap, .lpd-scene-caps::after {
-      animation-timing-function: linear;
-      animation-fill-mode: both;
-      animation-timeline: --lpd-scene;
-      animation-range: contain 0% contain 100%;
-    }
-  }
-}
-/* the wipes happen in short bands of the scroll, so each photograph
-   holds still for most of its screen */
-@keyframes lpd-scene-wipe-2 { 0%, 26% { clip-path: inset(100% 0 0 0); } 40%, 100% { clip-path: inset(0 0 0 0); } }
-@keyframes lpd-scene-wipe-3 { 0%, 60% { clip-path: inset(100% 0 0 0); } 74%, 100% { clip-path: inset(0 0 0 0); } }
-@keyframes lpd-scene-zoom-2 { 0%, 26% { transform: scale(1.14); } 46%, 100% { transform: scale(1); } }
-@keyframes lpd-scene-zoom-3 { 0%, 60% { transform: scale(1.14); } 80%, 100% { transform: scale(1); } }
-@keyframes lpd-scene-cap-1 { 0%, 28% { opacity: 1; } 38%, 100% { opacity: 0.6; } }
-@keyframes lpd-scene-cap-2 { 0%, 28% { opacity: 0.6; } 38%, 62% { opacity: 1; } 72%, 100% { opacity: 0.6; } }
-@keyframes lpd-scene-cap-3 { 0%, 62% { opacity: 0.6; } 72%, 100% { opacity: 1; } }
-
-/* ==========================================================================
-   Hero curtain
-   On roomy screens the hero holds its place and dims while the page
-   slides up over it, instead of scrolling away.
-   ========================================================================== */
-.lpd-front-page > .wp-block-group:not(.lpd-hero) { position: relative; z-index: 1; }
-.lpd-front-page > :is(.lpd-services, .lpd-features, .lpd-why-different, .lpd-section-alt, .lpd-section-dark):not(.lpd-pricing) { background-color: var(--bg); }
-@supports (animation-timeline: view()) {
-  @media (min-width: 901px) and (min-height: 700px) and (prefers-reduced-motion: no-preference) {
-    .lpd-front-page > .lpd-hero { position: sticky; top: 0; }
-    .lpd-front-page > .lpd-hero + .wp-block-group { border-radius: 28px 28px 0 0; }
-    .lpd-front-page > .lpd-hero::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      z-index: 2;
-      background: var(--night-deep);
-      pointer-events: none;
-      opacity: 0;
-      animation: lpd-hero-dim linear both;
-      animation-timeline: scroll(root);
-      animation-range: 0 100vh;
-    }
-    .lpd-front-page > .lpd-hero > .lpd-inner,
-    .lpd-front-page > .lpd-hero > .lpd-rail {
-      animation: lpd-hero-sink linear both;
-      animation-timeline: scroll(root);
-      animation-range: 0 100vh;
-    }
-  }
-}
-@keyframes lpd-hero-dim { to { opacity: 0.7; } }
-@keyframes lpd-hero-sink { to { transform: scale(0.96); } }

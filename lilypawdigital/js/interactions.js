@@ -87,28 +87,94 @@
 	 * Header: solid once the page has scrolled
 	 * ------------------------------------------------------------- */
 	var header = document.querySelector( '.site-header' );
-	if ( header ) {
-		var ticking = false;
-		var heroVideo = document.querySelector( '.lpd-hero-video' );
-		var updateHeader = function () {
-			header.classList.toggle( 'is-scrolled', window.scrollY > 24 );
-			// The hero stays pinned under the page (see "Hero curtain" in
-			// style.css), so stop decoding its film once it is covered.
-			if ( heroVideo ) {
-				var covered = window.scrollY > window.innerHeight * 1.05;
-				if ( covered && ! heroVideo.paused ) heroVideo.pause();
-				if ( ! covered && heroVideo.paused ) heroVideo.play().catch( function () {} );
-			}
-			ticking = false;
-		};
-		window.addEventListener( 'scroll', function () {
-			if ( ! ticking ) {
-				window.requestAnimationFrame( updateHeader );
-				ticking = true;
-			}
-		}, { passive: true } );
-		updateHeader();
+	var heroVideo = document.querySelector( '.lpd-hero-video' );
+
+	/* ---------------------------------------------------------------
+	 * The statement: wrap each word so it can light up in turn.
+	 * ------------------------------------------------------------- */
+	var statements = document.querySelectorAll( '.lpd-statement-text' );
+	if ( ! reduceMotion ) {
+		statements.forEach( function ( el ) {
+			var words = el.textContent.replace( /\s+/g, ' ' ).trim().split( ' ' );
+			el.textContent = '';
+			words.forEach( function ( word, i ) {
+				var span = document.createElement( 'span' );
+				span.className = 'lpd-sw';
+				span.style.setProperty( '--i', i );
+				span.textContent = word;
+				el.appendChild( span );
+				if ( i < words.length - 1 ) el.appendChild( document.createTextNode( ' ' ) );
+			} );
+			el.style.setProperty( '--n', words.length );
+		} );
 	}
+
+	/* ---------------------------------------------------------------
+	 * Scroll scenes. One loop measures how far each scene has travelled
+	 * and writes it to --p (0 to 1) on the element; the stylesheet does
+	 * the rest (see ".lpd-scrub" rules). Plain scroll position, so it
+	 * behaves the same in Safari, Firefox, Chrome and on phones.
+	 *   pin     - the tall colocation scene: 0 when its stage pins,
+	 *             1 when it lets go
+	 *   through - 0 as the element enters low on screen, 1 once it has
+	 *             risen to the upper part
+	 *   leave   - 0 at the top of the page, 1 when the hero has gone
+	 * ------------------------------------------------------------- */
+	var scenes = [];
+	if ( ! reduceMotion ) {
+		var add = function ( selector, mode ) {
+			document.querySelectorAll( selector ).forEach( function ( el ) {
+				scenes.push( { el: el, mode: mode, last: -1 } );
+			} );
+		};
+		add( '.lpd-scene', 'pin' );
+		add( '.lpd-statement-text', 'through' );
+		add( '.lpd-process .wp-block-columns', 'through' );
+		add( '.lpd-hero', 'leave' );
+		if ( scenes.length ) document.documentElement.classList.add( 'lpd-scrub' );
+	}
+
+	var measure = function () {
+		var vh = window.innerHeight;
+		scenes.forEach( function ( scene ) {
+			var box = scene.el.getBoundingClientRect();
+			var p;
+			if ( scene.mode === 'pin' ) {
+				p = -box.top / Math.max( box.height - vh, 1 );
+			} else if ( scene.mode === 'leave' ) {
+				p = -box.top / Math.max( box.height, 1 );
+			} else {
+				p = ( vh * 0.88 - box.top ) / ( box.height + vh * 0.4 );
+			}
+			p = Math.round( Math.min( Math.max( p, 0 ), 1 ) * 1000 ) / 1000;
+			if ( p !== scene.last ) {
+				scene.last = p;
+				scene.el.style.setProperty( '--p', p );
+			}
+		} );
+	};
+
+	var ticking = false;
+	var onFrame = function () {
+		ticking = false;
+		if ( header ) header.classList.toggle( 'is-scrolled', window.scrollY > 24 );
+		// No point decoding the hero film once it is off screen.
+		if ( heroVideo ) {
+			var gone = window.scrollY > window.innerHeight;
+			if ( gone && ! heroVideo.paused ) heroVideo.pause();
+			if ( ! gone && heroVideo.paused ) heroVideo.play().catch( function () {} );
+		}
+		measure();
+	};
+	var queue = function () {
+		if ( ticking ) return;
+		ticking = true;
+		window.requestAnimationFrame( onFrame );
+	};
+	window.addEventListener( 'scroll', queue, { passive: true } );
+	window.addEventListener( 'resize', queue, { passive: true } );
+	window.addEventListener( 'load', queue );
+	onFrame();
 
 	/* ---------------------------------------------------------------
 	 * FAQ accordion. A real button inside the heading keeps the question
