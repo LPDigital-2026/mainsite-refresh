@@ -4,7 +4,7 @@ Theme URI: https://lilypawdigital.xyz
 Author: Lily Paw Digital
 Author URI: https://lilypawdigital.xyz
 Description: Theme for Lily Paw Digital - North East web design, hosting and colocation. Navy and paper, set large, with the paw pink used sparingly.
-Version: 4.5
+Version: 4.6
 Requires at least: 6.0
 Tested up to: 6.6
 Requires PHP: 7.4
@@ -889,8 +889,8 @@ p.lpd-testimonial-source { margin: 28px 0 0; font-size: 0.92rem; color: var(--fg
 .lpd-shots { position: relative; padding: 0 0 9% 0; }
 .lpd-shot { margin: 0; overflow: hidden; background: var(--night-deep); box-shadow: 0 30px 60px -30px rgba(8, 3, 18, 0.9); }
 .lpd-shot img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
-.lpd-shot-desktop { width: 92%; aspect-ratio: 16 / 10; border-radius: var(--radius-sm); border: 1px solid rgba(251, 247, 242, 0.14); }
-.lpd-shot-phone { position: absolute; right: 0; bottom: 0; width: 24%; aspect-ratio: 9 / 18.6; border-radius: 16px; border: 4px solid var(--night-deep); outline: 1px solid rgba(251, 247, 242, 0.2); }
+.lpd-shot-desktop { width: 92%; aspect-ratio: 36 / 25; border-radius: var(--radius-sm); border: 1px solid rgba(251, 247, 242, 0.14); }
+.lpd-shot-phone { position: absolute; right: 0; bottom: 0; width: 24%; aspect-ratio: 390 / 844; border-radius: 16px; border: 4px solid var(--night-deep); outline: 1px solid rgba(251, 247, 242, 0.2); }
 @media (max-width: 900px) { .lpd-proof-grid.wp-block-columns { grid-template-columns: minmax(0, 1fr); } }
 
 /* ==========================================================================
