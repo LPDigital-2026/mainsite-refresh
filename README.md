@@ -10,13 +10,13 @@ WordPress theme for lilypawdigital.xyz, plus the page content it ships with.
 | `page-content/copy-all-page-content.html` | The same content as copy buttons, for pasting by hand. |
 | `docs/impeccable-audit.md` | Design and accessibility audit, before and after v3.1. |
 
-## Design (v4.4)
+## Design (v4.5)
 
 - **Spacing:** one scale, set as variables at the top of `style.css`. Every section is separated by the same distance, every heading sits the same distance above its content, and every grid and panel uses the same gap and padding.
 - **Surfaces:** the brand purple is the page colour; pricing, FAQ, About and Contact sit on a pale lilac.
 - **Colour:** paw pink for buttons; the logo's pink-to-orange gradient for icons, progress lines and the one offer panel.
 - **Type:** Sora throughout, the brand typeface, from one self-hosted variable font file in `lilypawdigital/assets/fonts/`.
-- **Pictures:** the service panels and testimonial show the real Ryton CC site and the real data hall.
+- **Pictures:** the service panels and testimonial show real client sites (Ryton Singers, Ryton CC) and the real data hall.
 - **Motion** (driven by scroll position in `js/interactions.js`, so it works in Safari, Firefox, Chrome and on phones):
   - the hero headline rises in word by word, once, on load;
   - the founding statement lights up word by word as it travels up the screen;
