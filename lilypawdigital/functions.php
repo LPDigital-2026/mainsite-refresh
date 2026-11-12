@@ -5,7 +5,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-define( 'LPD_VERSION', '4.3' );
+define( 'LPD_VERSION', '4.4' );
 
 function lpd_setup() {
 	load_theme_textdomain( 'lilypawdigital', get_template_directory() . '/languages' );
@@ -125,6 +125,30 @@ function lpd_excerpt_more( $more ) {
 	return '&hellip;';
 }
 add_filter( 'excerpt_more', 'lpd_excerpt_more' );
+
+
+/**
+ * WordPress wraps the contents of every Group block in an extra
+ * <div class="wp-block-group__inner-container"> on themes without a
+ * theme.json. This theme's layouts are written against the markup as it
+ * is saved in the editor (grids, flex columns and the pinned colocation
+ * scene all rely on direct children), so that wrapper is switched off.
+ */
+remove_filter( 'render_block_core/group', 'wp_restore_group_inner_container', 10 );
+remove_filter( 'render_block', 'wp_restore_group_inner_container', 10 );
+
+/**
+ * Belt and braces: if a plugin or a cached page still carries the
+ * wrapper, take it back out before the page is sent.
+ */
+function lpd_strip_group_inner_container( $block_content, $block ) {
+	if ( empty( $block['blockName'] ) || 'core/group' !== $block['blockName'] || false === strpos( $block_content, 'wp-block-group__inner-container' ) ) {
+		return $block_content;
+	}
+	$unwrapped = preg_replace( '/^(\s*<(?:div|section|main|article|aside|header|footer)\b[^>]*>)\s*<div class="wp-block-group__inner-container[^"]*">(.*)<\/div>(\s*<\/(?:div|section|main|article|aside|header|footer)>\s*)$/s', '$1$2$3', $block_content );
+	return null === $unwrapped ? $block_content : $unwrapped;
+}
+add_filter( 'render_block', 'lpd_strip_group_inner_container', 20, 2 );
 
 require get_template_directory() . '/inc/template-tags.php';
 require get_template_directory() . '/inc/customizer-defaults.php';

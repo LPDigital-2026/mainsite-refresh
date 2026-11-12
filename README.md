@@ -10,7 +10,7 @@ WordPress theme for lilypawdigital.xyz, plus the page content it ships with.
 | `page-content/copy-all-page-content.html` | The same content as copy buttons, for pasting by hand. |
 | `docs/impeccable-audit.md` | Design and accessibility audit, before and after v3.1. |
 
-## Design (v4.3)
+## Design (v4.4)
 
 - **Spacing:** one scale, set as variables at the top of `style.css`. Every section is separated by the same distance, every heading sits the same distance above its content, and every grid and panel uses the same gap and padding.
 - **Surfaces:** the brand purple is the page colour; pricing, FAQ, About and Contact sit on a pale lilac.
@@ -24,6 +24,10 @@ WordPress theme for lilypawdigital.xyz, plus the page content it ships with.
   - the colocation section pins to the screen while its photographs wipe from one to the next and the matching fact comes forward;
   - photographs on inner pages unveil once; pages cross-fade; the footer cats' eyes follow the pointer.
 - **Reduced motion:** everything is switched off for visitors who ask for reduced motion, except the colocation section, which still pins and cross-fades between its photographs.
+
+## A note on WordPress's group wrapper
+
+On themes without a `theme.json`, WordPress wraps the contents of every Group block in an extra `<div class="wp-block-group__inner-container">`. The layouts here are written against the markup as saved in the editor, so `functions.php` switches that wrapper off (and strips it if anything adds it back). If layouts ever collapse into a single column or the colocation section stops pinning, check that wrapper has not returned.
 
 ## Install
 

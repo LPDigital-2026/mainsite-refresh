@@ -4,7 +4,7 @@ Theme URI: https://lilypawdigital.xyz
 Author: Lily Paw Digital
 Author URI: https://lilypawdigital.xyz
 Description: Theme for Lily Paw Digital - North East web design, hosting and colocation. Navy and paper, set large, with the paw pink used sparingly.
-Version: 4.3
+Version: 4.4
 Requires at least: 6.0
 Tested up to: 6.6
 Requires PHP: 7.4
@@ -161,6 +161,9 @@ p { margin: 0 0 1em; text-wrap: pretty; }
 p:last-child { margin-bottom: 0; }
 
 :focus-visible { outline: 2px solid var(--pink-hi); outline-offset: 3px; border-radius: 4px; }
+
+/* last line of defence against WordPress's group wrapper (see functions.php) */
+.wp-block-group__inner-container { display: contents; }
 
 /* WordPress gives these blocks margins of their own; our layouts set
    every gap themselves */
