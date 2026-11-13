@@ -5,7 +5,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-define( 'LPD_VERSION', '4.6' );
+define( 'LPD_VERSION', '4.7' );
 
 function lpd_setup() {
 	load_theme_textdomain( 'lilypawdigital', get_template_directory() . '/languages' );
@@ -148,7 +148,9 @@ function lpd_strip_group_inner_container( $block_content, $block ) {
 	$unwrapped = preg_replace( '/^(\s*<(?:div|section|main|article|aside|header|footer)\b[^>]*>)\s*<div class="wp-block-group__inner-container[^"]*">(.*)<\/div>(\s*<\/(?:div|section|main|article|aside|header|footer)>\s*)$/s', '$1$2$3', $block_content );
 	return null === $unwrapped ? $block_content : $unwrapped;
 }
-add_filter( 'render_block', 'lpd_strip_group_inner_container', 20, 2 );
+// The block-specific filter runs after the general one, so this is the
+// last word on a Group block's markup.
+add_filter( 'render_block_core/group', 'lpd_strip_group_inner_container', 99, 2 );
 
 require get_template_directory() . '/inc/template-tags.php';
 require get_template_directory() . '/inc/customizer-defaults.php';

@@ -4,7 +4,7 @@ Theme URI: https://lilypawdigital.xyz
 Author: Lily Paw Digital
 Author URI: https://lilypawdigital.xyz
 Description: Theme for Lily Paw Digital - North East web design, hosting and colocation. Navy and paper, set large, with the paw pink used sparingly.
-Version: 4.6
+Version: 4.7
 Requires at least: 6.0
 Tested up to: 6.6
 Requires PHP: 7.4
@@ -164,6 +164,15 @@ p:last-child { margin-bottom: 0; }
 
 /* last line of defence against WordPress's group wrapper (see functions.php) */
 .wp-block-group__inner-container { display: contents; }
+
+/* Caching plugins (WP Rocket, AccelerateWP) mark sections further down
+   the page to be skipped until they are near the screen. A skipped
+   section has no height, so the page changes length as you scroll and
+   the pinned colocation scene loses its place. These pages are light
+   enough to render in full. */
+.lpd-front-page [data-wpr-lazyrender],
+.lpd-bands [data-wpr-lazyrender],
+.site-main [data-wpr-lazyrender] { content-visibility: visible; contain: none; }
 
 /* WordPress gives these blocks margins of their own; our layouts set
    every gap themselves */
@@ -424,6 +433,7 @@ button[type="submit"], input[type="submit"] { background: var(--pink); border-co
   text-wrap: balance;
 }
 .lpd-statement .lpd-inner { display: flex; }
+.lpd-hero + .lpd-statement > .lpd-inner { padding-top: calc(var(--section) - clamp(28px, 3.6vw, 48px)); }
 .lpd-statement-text { max-width: 21em; }
 .lpd-statement-text .lpd-sw { opacity: clamp(0.3, calc((var(--p, 1) * var(--n, 1) - var(--i, 0)) * 0.9 + 0.3), 1); }
 
@@ -989,7 +999,8 @@ label { display: block; font-size: 0.92rem; font-weight: 600; margin-bottom: 6px
 /* same rhythm rule as the homepage, for bands */
 .lpd-band:not(.lpd-band-alt):not(.lpd-process):not(.lpd-pricing) + .lpd-band:not(.lpd-band-alt):not(.lpd-process):not(.lpd-pricing):not(.lpd-cta-section) > .lpd-inner,
 :is(.lpd-band-alt, .lpd-band.lpd-pricing) + :is(.lpd-band-alt, .lpd-band.lpd-pricing) > .lpd-inner,
-:is(.lpd-band-alt, .lpd-band.lpd-pricing) + .lpd-band.lpd-cta-section > .lpd-inner { padding-top: 0; }
+:is(.lpd-band-alt, .lpd-band.lpd-pricing) + .lpd-band.lpd-cta-section > .lpd-inner,
+.lpd-band:not(.lpd-band-alt):not(.lpd-process):not(.lpd-pricing) + .lpd-band.lpd-cta-section > .lpd-inner { padding-top: 0; }
 .lpd-bands > .lpd-band:first-child > .lpd-inner { padding-top: clamp(40px, 5vw, 72px); }
 
 .lpd-bands p.lpd-lead,
