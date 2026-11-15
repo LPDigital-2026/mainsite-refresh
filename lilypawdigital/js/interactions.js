@@ -196,6 +196,24 @@
 		} );
 	};
 
+	// A step track that is already on screen when the page opens (Get
+	// Started) would sit half-filled, and on a short page could never be
+	// scrolled to the end. Fill it on a timer instead, once.
+	scenes = scenes.filter( function ( scene ) {
+		if ( scene.mode !== 'through' || ! scene.el.matches( '.lpd-process .wp-block-columns' ) ) return true;
+		if ( window.scrollY > 8 || scene.el.getBoundingClientRect().top > window.innerHeight * 0.8 ) return true;
+		var began = null;
+		var fill = function ( now ) {
+			if ( began === null ) began = now + 500;
+			var t = Math.min( Math.max( ( now - began ) / 1800, 0 ), 1 );
+			scene.el.style.setProperty( '--p', ( 1 - Math.pow( 1 - t, 3 ) ).toFixed( 3 ) );
+			if ( t < 1 ) window.requestAnimationFrame( fill );
+		};
+		scene.el.style.setProperty( '--p', 0 );
+		window.requestAnimationFrame( fill );
+		return false;
+	} );
+
 	var ticking = false;
 	var onFrame = function () {
 		ticking = false;

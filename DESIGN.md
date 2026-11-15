@@ -323,6 +323,10 @@ What exists:
    sentence travels up the screen.
 4. **How It Works**: the gradient track fills left to right (top to bottom
    on phones) and each numeral comes up to strength as the track reaches it.
+   When the steps are already on screen as the page opens (Get Started),
+   the track fills on a timer instead, once, so it never sits half-lit.
+   Inner page titles sit on the same track, drawn once on load (hidden on
+   a page that opens straight onto the steps).
 5. **Colocation scene**: the section is 320vh tall and its stage pins to
    the screen. Photo 2 wipes up over photo 1 around a third of the way,
    photo 3 around two thirds, each settling from a slight zoom; the matching
@@ -565,7 +569,8 @@ site's two screenshots on the right). Put it first to make it the main
 review. The arrows and counter appear by themselves.
 
 **A new portfolio project.** Capture desktop and phone screenshots per §9
-into `assets/images/work/`. On Our Work, copy the Ryton CC band: `.lpd-split`
+into `assets/images/work/`. On Our Work, copy a project band (add
+`lpd-split-flip` to every other one so the picture alternates sides): `.lpd-split`
 with prose and checklist on the left, `.lpd-shots` and (if there is one) the
 testimonial on the right. Only attach a testimonial that is about that site.
 
@@ -597,5 +602,7 @@ Unresolved when this guide was written:
 - The contact form (`[lpd_form id="lpd_form_9d620c8f7c"]`), the photo of
   Lily on About, and the status badge iframe come from outside the theme
   and have only been seen as stand-ins.
-- Ryton Singers is shown on the Web Design panel but is not yet a project
-  on Our Work; that needs a few lines from the owner about what was built.
+- The Ryton Singers project on Our Work lists features read off the
+  site's own navigation (group pages, taster booking, performances,
+  gallery, members area, fundraising, FAQs). The owner has not yet
+  confirmed that wording.
