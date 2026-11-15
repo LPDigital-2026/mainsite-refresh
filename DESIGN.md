@@ -264,6 +264,7 @@ edited by hand keep the old markup forever.
 | Colocation scene | `.lpd-scene`, `.lpd-scene-stage`, `.lpd-scene-photos`, `.lpd-scene-photo`, `.lpd-scene-copy`, `.lpd-scene-intro`, `.lpd-scene-caps`, `.lpd-scene-cap`, `.lpd-colo-price` | See §10. |
 | Testimonial + work | `.lpd-proof`, `.lpd-reviews`, `.lpd-proof-grid`, `.lpd-testimonial*`, `.lpd-shots`, `.lpd-shot-desktop`, `.lpd-shot-phone` | Each `.lpd-proof-grid` inside `.lpd-reviews` is one review: quote beside the site it is about. With two or more, JS shows one at a time and adds previous/next arrows, a counter and swipe (`.is-carousel`, `.lpd-reviews-nav`, `.lpd-reviews-btn`). The first one in the content is the main review. All share one grid cell so the section height never changes. |
 | Inner-page band | `.lpd-band`, `.lpd-band-alt`, `.lpd-split` (`-top`, `-narrow`), `.lpd-grid-2`, `.lpd-grid-3`, `.lpd-lead`, `.lpd-prose`, `.lpd-checklist`, `.lpd-form-card`, `.lpd-pointer`, `.lpd-photo`, `.lpd-alt-contact`, `.lpd-colo-gallery` | A page whose content contains `lpd-band` renders full width (`page.php`); otherwise it falls back to a single reading column. |
+| Specification | `.lpd-figures` > `.lpd-figure` (`-number`, `-label`); `.lpd-spec` > `.lpd-spec-row` (h3 + list) | Colocation page. Four headline figures, then labelled rows of ticked facts. Figures do not count up. |
 | Legacy | `.lpd-colo-teaser`, `.lpd-page-content` | Styled so old content still looks right. Don't use in new content. |
 | Footer | `.site-footer`, `.lpd-footer-cats`, `.lpd-cat-eye` | Cats stay. |
 
@@ -389,6 +390,11 @@ Rules:
 - British English. "We will", not "we'll", in the body copy the owner wrote.
 - **Don't rewrite the owner's copy** to suit a layout. Restructure, split or
   move it; if it must change, ask.
+- Colocation facility facts come from the building operator's own page,
+  <https://wildcard.net.uk/colocation-newcastle/> (the owner pointed to it).
+  Use facts about the building, in our own words. Do not name the operator,
+  and do not carry over its commercial terms: its network SLA, customer
+  count, AS number, memberships, other sites, phone number or hours.
 - Facts in use (don't alter without the owner): founded 2026; four years'
   web design experience; websites from £99 then £5.75/month; colocation from
   £65.99/month; 30-day free trial on a demo URL; phone 0333 112 7191;

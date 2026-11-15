@@ -24,6 +24,7 @@ return array(
 		'214f43395fcae101b8b8c79000f0074a',
 		'6d87e771ea6880dcf88203c535091c9a',
 		'344eaa3dc74c0e7e8614339008eb13ba',
+		'0308f53f8d74c4637d769fef19287f82',
 	),
 	'about-us' => array(
 		'81429345e1a3fe48bb8f7ac3404837a2',

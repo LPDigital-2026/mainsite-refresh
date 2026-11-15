@@ -4,7 +4,7 @@ Theme URI: https://lilypawdigital.xyz
 Author: Lily Paw Digital
 Author URI: https://lilypawdigital.xyz
 Description: Theme for Lily Paw Digital - North East web design, hosting and colocation. Navy and paper, set large, with the paw pink used sparingly.
-Version: 4.9
+Version: 4.10
 Requires at least: 6.0
 Tested up to: 6.6
 Requires PHP: 7.4
@@ -1068,6 +1068,23 @@ body:has(.lpd-bands > .lpd-process:first-child) .page-hero .container::after { d
 .lpd-bands .wp-block-columns.lpd-grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .lpd-bands .wp-block-columns.lpd-grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .lpd-bands .lpd-why-item::before { margin-bottom: clamp(20px, 2.6vw, 36px); width: 30px; height: 30px; }
+
+/* Specification: headline figures, then the detail as labelled rows */
+.lpd-bands .wp-block-columns.lpd-figures { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--gap); }
+.lpd-figure { height: 100%; padding: var(--pad); background: var(--panel); border-radius: var(--radius); }
+.lpd-figure p.lpd-figure-number { margin: 0 0 clamp(20px, 3vw, 44px); font-size: clamp(2.4rem, 4.6vw, 4rem); font-weight: 600; letter-spacing: -0.06em; line-height: 0.95; font-variant-numeric: tabular-nums; color: var(--fg); }
+.lpd-figure p.lpd-figure-label { margin: 0; color: var(--fg-dim); font-size: 1rem; }
+.lpd-spec { margin-top: var(--head); border-bottom: 1px solid var(--rule); }
+.lpd-spec-row { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); column-gap: clamp(28px, 5vw, 80px); padding: var(--pad) 0; border-top: 1px solid var(--rule); }
+.lpd-spec-row h3 { font-size: clamp(1.25rem, 1.9vw, 1.55rem); letter-spacing: -0.035em; margin: 0; }
+.lpd-spec-row ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 32px; }
+.lpd-spec-row li { position: relative; padding-left: 26px; color: var(--fg); font-size: 1rem; line-height: 1.5; }
+.lpd-spec-row li::before { content: ''; position: absolute; left: 2px; top: 0.42em; width: 13px; height: 13px; background: var(--accent-text); -webkit-mask: url('assets/icons/check.svg') center / contain no-repeat; mask: url('assets/icons/check.svg') center / contain no-repeat; }
+@media (max-width: 900px) {
+  .lpd-bands .wp-block-columns.lpd-figures { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .lpd-spec-row { grid-template-columns: minmax(0, 1fr); row-gap: 14px; }
+}
+@media (max-width: 640px) { .lpd-spec-row ul { grid-template-columns: minmax(0, 1fr); } }
 
 .lpd-bands .lpd-photo { margin: 0; overflow: hidden; border-radius: var(--radius); }
 .lpd-bands .lpd-photo img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
