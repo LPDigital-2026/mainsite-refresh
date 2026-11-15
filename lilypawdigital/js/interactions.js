@@ -265,6 +265,77 @@
 	} );
 
 	/* ---------------------------------------------------------------
+	 * Reviews: when there is more than one, show one at a time with
+	 * previous / next arrows (and a swipe on touch screens). The arrows
+	 * are added here, so the page content stays plain blocks.
+	 * ------------------------------------------------------------- */
+	document.querySelectorAll( '.lpd-reviews' ).forEach( function ( wrap, wrapIndex ) {
+		var slides = Array.prototype.filter.call( wrap.children, function ( el ) {
+			return el.classList.contains( 'lpd-proof-grid' );
+		} );
+		if ( slides.length < 2 ) return;
+
+		var current = 0;
+		var nav = document.createElement( 'div' );
+		nav.className = 'lpd-reviews-nav';
+		var count = document.createElement( 'p' );
+		count.className = 'lpd-reviews-count';
+		count.setAttribute( 'aria-live', 'polite' );
+
+		var show = function ( next, dir ) {
+			current = ( next + slides.length ) % slides.length;
+			wrap.style.setProperty( '--dir', dir );
+			slides.forEach( function ( slide, i ) {
+				var on = i === current;
+				slide.classList.toggle( 'is-active', on );
+				slide.setAttribute( 'aria-hidden', on ? 'false' : 'true' );
+				if ( 'inert' in slide ) slide.inert = ! on;
+			} );
+			count.textContent = 'Review ' + ( current + 1 ) + ' of ' + slides.length;
+		};
+
+		var arrow = function ( label, dir, path ) {
+			var btn = document.createElement( 'button' );
+			btn.type = 'button';
+			btn.className = 'lpd-reviews-btn';
+			btn.setAttribute( 'aria-label', label );
+			btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="' + path + '"/></svg>';
+			btn.addEventListener( 'click', function () { show( current + dir, dir ); } );
+			nav.appendChild( btn );
+		};
+		arrow( 'Previous review', -1, 'M19 12H5M11 6l-6 6 6 6' );
+		arrow( 'Next review', 1, 'M5 12h14M13 6l6 6-6 6' );
+		nav.appendChild( count );
+
+		slides.forEach( function ( slide, i ) {
+			slide.setAttribute( 'role', 'group' );
+			slide.setAttribute( 'aria-roledescription', 'review' );
+			slide.setAttribute( 'aria-label', ( i + 1 ) + ' of ' + slides.length );
+		} );
+		wrap.setAttribute( 'role', 'region' );
+		wrap.setAttribute( 'aria-roledescription', 'carousel' );
+		wrap.setAttribute( 'aria-label', 'Client reviews' );
+		wrap.classList.add( 'is-carousel' );
+		wrap.parentNode.insertBefore( nav, wrap.nextSibling );
+		show( 0, 1 );
+
+		// Swipe sideways to change review; vertical scrolling is untouched.
+		var startX = null, startY = null;
+		wrap.addEventListener( 'touchstart', function ( e ) {
+			startX = e.touches[0].clientX;
+			startY = e.touches[0].clientY;
+		}, { passive: true } );
+		wrap.addEventListener( 'touchend', function ( e ) {
+			if ( startX === null ) return;
+			var dx = e.changedTouches[0].clientX - startX;
+			var dy = e.changedTouches[0].clientY - startY;
+			startX = null;
+			if ( Math.abs( dx ) < 48 || Math.abs( dx ) < Math.abs( dy ) * 1.5 ) return;
+			show( current + ( dx < 0 ? 1 : -1 ), dx < 0 ? 1 : -1 );
+		}, { passive: true } );
+	} );
+
+	/* ---------------------------------------------------------------
 	 * Stats: show a leading "+" as trailing ("+15" -> "15+"), and count
 	 * up once when the figure scrolls into view.
 	 * ------------------------------------------------------------- */

@@ -262,7 +262,7 @@ edited by hand keep the old markup forever.
 | Offer | `.lpd-cta-section` > `.lpd-cta-banner` | The one gradient panel. |
 | FAQ | `.lpd-faq`, `.lpd-faq-list`, `.lpd-faq-item` (h3 + p) | JS turns each h3 into a real button and animates to measured height. |
 | Colocation scene | `.lpd-scene`, `.lpd-scene-stage`, `.lpd-scene-photos`, `.lpd-scene-photo`, `.lpd-scene-copy`, `.lpd-scene-intro`, `.lpd-scene-caps`, `.lpd-scene-cap`, `.lpd-colo-price` | See §10. |
-| Testimonial + work | `.lpd-proof`, `.lpd-proof-grid`, `.lpd-testimonial*`, `.lpd-shots`, `.lpd-shot-desktop`, `.lpd-shot-phone` | Quote beside the site it is about. |
+| Testimonial + work | `.lpd-proof`, `.lpd-reviews`, `.lpd-proof-grid`, `.lpd-testimonial*`, `.lpd-shots`, `.lpd-shot-desktop`, `.lpd-shot-phone` | Each `.lpd-proof-grid` inside `.lpd-reviews` is one review: quote beside the site it is about. With two or more, JS shows one at a time and adds previous/next arrows, a counter and swipe (`.is-carousel`, `.lpd-reviews-nav`, `.lpd-reviews-btn`). The first one in the content is the main review. All share one grid cell so the section height never changes. |
 | Inner-page band | `.lpd-band`, `.lpd-band-alt`, `.lpd-split` (`-top`, `-narrow`), `.lpd-grid-2`, `.lpd-grid-3`, `.lpd-lead`, `.lpd-prose`, `.lpd-checklist`, `.lpd-form-card`, `.lpd-pointer`, `.lpd-photo`, `.lpd-alt-contact`, `.lpd-colo-gallery` | A page whose content contains `lpd-band` renders full width (`page.php`); otherwise it falls back to a single reading column. |
 | Legacy | `.lpd-colo-teaser`, `.lpd-page-content` | Styled so old content still looks right. Don't use in new content. |
 | Footer | `.site-footer`, `.lpd-footer-cats`, `.lpd-cat-eye` | Cats stay. |
@@ -287,7 +287,7 @@ Component rules:
 | File | What |
 |---|---|
 | `assets/images/colocation/colocation-1/2/3.jpg` | The actual data hall, cable trays, fire suppression |
-| `assets/images/work/ryton-singers-desktop.jpg` | rytonsingers.org.uk — Web Design service panel |
+| `assets/images/work/ryton-singers-desktop.jpg`, `ryton-singers-phone.jpg` | rytonsingers.org.uk — Web Design service panel, and beside Joanna T's review (the main one) |
 | `assets/images/work/ryton-cc-desktop.jpg`, `ryton-cc-phone.jpg` | rytoncc.org.uk — beside Amanda's testimonial and on Our Work |
 | `assets/images/hero-poster.jpg`, `assets/video/hero-bg.{webm,mp4}` | Hero film (skipped on phones, data saver, reduced motion) |
 
@@ -300,9 +300,13 @@ Rules for client-site screenshots:
   with a taller window (Ryton CC needed 1440×1000).
 - Desktop at 1440 wide; phone at 390×844. Save as JPEG, quality ~82.
 - The frame's `aspect-ratio` in CSS must equal the image's, so nothing is
-  cropped (`.lpd-shot-desktop` is 36/25, `.lpd-shot-phone` is 390/844).
-- **Keep a testimonial beside the site it is about.** Amanda's review is of
-  the cricket club site; don't pair it with another client's screenshot.
+  cropped (`.lpd-shot-desktop` takes its image's own height, so give the `<img>`
+  `width` and `height` attributes; `.lpd-shot-phone` is 390/844).
+- **Keep a testimonial beside the site it is about.** Joanna T's review is
+  of Ryton Singers, Amanda's is of the cricket club; never cross them.
+- Reviews are quoted word for word. The one agreed exception: Joanna T's
+  review said "Lou Paw Digital" and the owner chose to correct it to
+  "Lily Paw Digital".
 
 ## 10. Motion
 
@@ -554,6 +558,11 @@ Each of these cost at least one round of "it still doesn't work".
 (light), each with `.lpd-inner`. Start with a `.lpd-lead` paragraph. Add the
 slug to `lpd_setup_pages()` in `inc/page-setup.php`, the `SLUGS` map in
 `tools/update-page-fingerprints.py`, and the maps in `tools/preview`.
+
+**A new review on the home page.** Copy a whole `.lpd-proof-grid` columns
+block inside `.lpd-reviews` (quote, name, site link on the left; that
+site's two screenshots on the right). Put it first to make it the main
+review. The arrows and counter appear by themselves.
 
 **A new portfolio project.** Capture desktop and phone screenshots per §9
 into `assets/images/work/`. On Our Work, copy the Ryton CC band: `.lpd-split`

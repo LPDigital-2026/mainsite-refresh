@@ -4,7 +4,7 @@ Theme URI: https://lilypawdigital.xyz
 Author: Lily Paw Digital
 Author URI: https://lilypawdigital.xyz
 Description: Theme for Lily Paw Digital - North East web design, hosting and colocation. Navy and paper, set large, with the paw pink used sparingly.
-Version: 4.7
+Version: 4.8
 Requires at least: 6.0
 Tested up to: 6.6
 Requires PHP: 7.4
@@ -899,9 +899,46 @@ p.lpd-testimonial-source { margin: 28px 0 0; font-size: 0.92rem; color: var(--fg
 .lpd-shots { position: relative; padding: 0 0 9% 0; }
 .lpd-shot { margin: 0; overflow: hidden; background: var(--night-deep); box-shadow: 0 30px 60px -30px rgba(8, 3, 18, 0.9); }
 .lpd-shot img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
-.lpd-shot-desktop { width: 92%; aspect-ratio: 36 / 25; border-radius: var(--radius-sm); border: 1px solid rgba(251, 247, 242, 0.14); }
+.lpd-shot-desktop img { height: auto; }
+.lpd-shot-desktop { width: 92%; border-radius: var(--radius-sm); border: 1px solid rgba(251, 247, 242, 0.14); }
 .lpd-shot-phone { position: absolute; right: 0; bottom: 0; width: 24%; aspect-ratio: 390 / 844; border-radius: 16px; border: 4px solid var(--night-deep); outline: 1px solid rgba(251, 247, 242, 0.2); }
 @media (max-width: 900px) { .lpd-proof-grid.wp-block-columns { grid-template-columns: minmax(0, 1fr); } }
+
+/* More than one review: unscripted they simply follow one another. With
+   scripting (interactions.js adds .is-carousel and the arrows) they share
+   one cell, so the section keeps the height of the tallest and nothing
+   below it moves when the review changes. */
+.lpd-reviews { display: grid; row-gap: var(--section); }
+.lpd-reviews p.lpd-testimonial-quote { font-size: clamp(1.15rem, 1.75vw, 1.5rem); line-height: 1.35; letter-spacing: -0.03em; }
+.lpd-reviews.is-carousel { row-gap: 0; touch-action: pan-y; }
+.lpd-reviews.is-carousel > .lpd-proof-grid { grid-area: 1 / 1; align-self: center; opacity: 0; visibility: hidden; transition: opacity 0.35s ease, visibility 0s 0.35s; }
+.lpd-reviews.is-carousel > .lpd-proof-grid.is-active { opacity: 1; visibility: visible; transition: opacity 0.45s ease 0.1s, visibility 0s; }
+@media (prefers-reduced-motion: no-preference) {
+  .lpd-reviews.is-carousel > .lpd-proof-grid .lpd-shots { transform: translateX(calc(var(--dir, 1) * 28px)); transition: transform 0.35s ease; }
+  .lpd-reviews.is-carousel > .lpd-proof-grid.is-active .lpd-shots { transform: none; transition: transform 0.7s var(--ease-out) 0.1s; }
+}
+.lpd-reviews-nav { display: flex; align-items: center; gap: 10px; margin-top: var(--pad); }
+.lpd-reviews-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  padding: 0;
+  border: 1.5px solid var(--rule-strong);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--fg);
+  cursor: pointer;
+  transition: transform 0.16s var(--ease-out), background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+.lpd-reviews-btn svg { width: 18px; height: 18px; }
+.lpd-reviews-btn:active { transform: scale(0.94); }
+@media (hover: hover) and (pointer: fine) {
+  .lpd-reviews-btn:hover { background: var(--fg); border-color: var(--fg); color: var(--bg); }
+}
+.lpd-reviews-count { margin: 0 0 0 8px; font-size: 0.92rem; font-variant-numeric: tabular-nums; color: var(--fg-dim); }
+.lpd-reviews-nav + p.lpd-testimonial-source { margin-top: var(--pad); }
 
 /* ==========================================================================
    About + Contact (homepage)
