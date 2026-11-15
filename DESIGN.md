@@ -304,6 +304,8 @@ Rules for client-site screenshots:
   `width` and `height` attributes; `.lpd-shot-phone` is 390/844).
 - **Keep a testimonial beside the site it is about.** Joanna T's review is
   of Ryton Singers, Amanda's is of the cricket club; never cross them.
+- The Ryton Singers project description on Our Work was read off the site's
+  navigation and then confirmed by the owner.
 - Reviews are quoted word for word. The one agreed exception: Joanna T's
   review said "Lou Paw Digital" and the owner chose to correct it to
   "Lily Paw Digital".
@@ -602,7 +604,3 @@ Unresolved when this guide was written:
 - The contact form (`[lpd_form id="lpd_form_9d620c8f7c"]`), the photo of
   Lily on About, and the status badge iframe come from outside the theme
   and have only been seen as stand-ins.
-- The Ryton Singers project on Our Work lists features read off the
-  site's own navigation (group pages, taster booking, performances,
-  gallery, members area, fundraising, FAQs). The owner has not yet
-  confirmed that wording.
