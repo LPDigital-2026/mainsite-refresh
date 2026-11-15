@@ -16,10 +16,12 @@ return array(
 		'24afee7f840c4eb7d2f686f55e827dee',
 		'91847078942470988a10b6cb89ebf7d7',
 		'eea57e16830eac78e0eacc815c657339',
+		'e2f5b87dd2e88f2af08ac54fefc58da7',
 	),
 	'colocation' => array(
 		'214f43395fcae101b8b8c79000f0074a',
 		'6d87e771ea6880dcf88203c535091c9a',
+		'344eaa3dc74c0e7e8614339008eb13ba',
 	),
 	'about-us' => array(
 		'81429345e1a3fe48bb8f7ac3404837a2',

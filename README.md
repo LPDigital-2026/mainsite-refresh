@@ -8,6 +8,8 @@ WordPress theme for lilypawdigital.xyz, plus the page content it ships with.
 | `lilypawdigital/inc/pages/` | Block content for Home, Colocation, Our Work, About Us, Contact Us and Get Started. |
 | `lilypawdigital/inc/page-setup.php` | Creates those pages, sets the homepage and builds the menu. |
 | `page-content/copy-all-page-content.html` | The same content as copy buttons, for pasting by hand. |
+| `DESIGN.md` | The design guide: colours, type, spacing, motion, what has been rejected, and how to check a change. Read this first. |
+| `tools/` | Local preview, checks and tests (`bash tools/check.sh`). |
 | `docs/impeccable-audit.md` | Design and accessibility audit, before and after v3.1. |
 
 ## Design (v4.7)
