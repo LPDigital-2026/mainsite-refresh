@@ -5,7 +5,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-define( 'LPD_VERSION', '4.10' );
+define( 'LPD_VERSION', '4.11' );
 
 function lpd_setup() {
 	load_theme_textdomain( 'lilypawdigital', get_template_directory() . '/languages' );
@@ -126,6 +126,46 @@ function lpd_excerpt_more( $more ) {
 }
 add_filter( 'excerpt_more', 'lpd_excerpt_more' );
 
+
+/**
+ * Link previews. When the address is shared (WhatsApp, Facebook, iMessage,
+ * LinkedIn) these give it a title, a sentence and a picture. Skipped when
+ * an SEO plugin is active, since those print their own.
+ */
+function lpd_share_meta() {
+	if ( defined( 'WPSEO_VERSION' ) || defined( 'RANK_MATH_VERSION' ) || defined( 'AIOSEO_VERSION' ) || defined( 'SEOPRESS_VERSION' ) || defined( 'THE_SEO_FRAMEWORK_VERSION' ) || defined( 'SLIM_SEO_VER' ) ) {
+		return;
+	}
+
+	$description = __( 'Web design, hosting and colocation from the North East of England. Clear pricing, real people, and no jargon.', 'lilypawdigital' );
+	$title       = wp_get_document_title();
+	$url         = home_url( '/' );
+	$image       = get_template_directory_uri() . '/assets/images/share.jpg';
+
+	if ( is_singular() ) {
+		$url = get_permalink();
+		if ( has_excerpt() ) {
+			$description = wp_strip_all_tags( get_the_excerpt(), true );
+		}
+		if ( has_post_thumbnail() ) {
+			$thumbnail = wp_get_attachment_image_src( get_post_thumbnail_id(), 'large' );
+			if ( $thumbnail ) {
+				$image = $thumbnail[0];
+			}
+		}
+	}
+
+	echo "\n";
+	printf( '<meta name="description" content="%s">' . "\n", esc_attr( $description ) );
+	printf( '<meta property="og:type" content="%s">' . "\n", is_front_page() ? 'website' : 'article' );
+	printf( '<meta property="og:site_name" content="%s">' . "\n", esc_attr( get_bloginfo( 'name' ) ) );
+	printf( '<meta property="og:title" content="%s">' . "\n", esc_attr( $title ) );
+	printf( '<meta property="og:description" content="%s">' . "\n", esc_attr( $description ) );
+	printf( '<meta property="og:url" content="%s">' . "\n", esc_url( $url ) );
+	printf( '<meta property="og:image" content="%s">' . "\n", esc_url( $image ) );
+	echo '<meta name="twitter:card" content="summary_large_image">' . "\n";
+}
+add_action( 'wp_head', 'lpd_share_meta', 5 );
 
 /**
  * WordPress wraps the contents of every Group block in an extra

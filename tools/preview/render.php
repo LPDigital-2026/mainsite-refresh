@@ -9,7 +9,7 @@ $html = file_get_contents($CONTENT);
 preg_match_all('#<textarea id="ta-([a-z]+)"[^>]*>(.*?)</textarea>#s', $html, $m, PREG_SET_ORDER);
 $PAGES = [];
 foreach ($m as $x) $PAGES[$x[1]] = html_entity_decode($x[2], ENT_QUOTES | ENT_HTML5, 'UTF-8');
-$TITLES = ['home'=>'Home','colocation'=>'Colocation','about'=>'About Us','work'=>'Our Work','contact'=>'Contact Us','getstarted'=>'Get Started'];
+$TITLES = ['home'=>'Home','colocation'=>'Colocation','about'=>'About Us','work'=>'Our Work','contact'=>'Contact Us','getstarted'=>'Get Started','404'=>'Page Not Found'];
 
 function __($s){return $s;} function esc_html__($s){return htmlspecialchars($s);} function esc_html_e($s){echo htmlspecialchars($s);}
 function esc_attr_e($s){echo htmlspecialchars($s);} function esc_attr__($s){return htmlspecialchars($s);}
@@ -64,4 +64,4 @@ function the_content(){
 }
 $GLOBALS['THEME']=$THEME; $GLOBALS['THEME_URL']=$THEME_URL; $GLOBALS['PAGES']=$PAGES; $GLOBALS['TITLES']=$TITLES;
 require $THEME.'/inc/template-tags.php'; require $THEME.'/inc/customizer-defaults.php';
-include $THEME . ($PAGE==='home' ? '/front-page.php' : '/page.php');
+include $THEME . ($PAGE==='home' ? '/front-page.php' : ($PAGE==='404' ? '/404.php' : '/page.php'));

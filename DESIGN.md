@@ -98,6 +98,7 @@ write a hex value anywhere else in the stylesheet.
 | `--night` | `#1d0e38` | Page colour, dark sections, text on pink |
 | `--night-deep` | `#140928` | Footer, image placeholders |
 | `--navy` | `#2a1650` | Panels on night; the Process and Stats sections |
+| `--navy-hi` | `#351d63` | Panels on navy; hover on a night panel that is a link |
 | `--light` | `#f5f1fb` | Light sections (lilac white) |
 | `--white` | `#ffffff` | Panels on light |
 | `--ink` | `#1d0e38` | Text on light |
@@ -265,6 +266,7 @@ edited by hand keep the old markup forever.
 | Testimonial + work | `.lpd-proof`, `.lpd-reviews`, `.lpd-proof-grid`, `.lpd-testimonial*`, `.lpd-shots`, `.lpd-shot-desktop`, `.lpd-shot-phone` | Each `.lpd-proof-grid` inside `.lpd-reviews` is one review: quote beside the site it is about. With two or more, JS shows one at a time and adds previous/next arrows, a counter and swipe (`.is-carousel`, `.lpd-reviews-nav`, `.lpd-reviews-btn`). The first one in the content is the main review. All share one grid cell so the section height never changes. |
 | Inner-page band | `.lpd-band`, `.lpd-band-alt`, `.lpd-split` (`-top`, `-narrow`), `.lpd-grid-2`, `.lpd-grid-3`, `.lpd-lead`, `.lpd-prose`, `.lpd-checklist`, `.lpd-form-card`, `.lpd-pointer`, `.lpd-photo`, `.lpd-alt-contact`, `.lpd-colo-gallery` | A page whose content contains `lpd-band` renders full width (`page.php`); otherwise it falls back to a single reading column. |
 | Specification | `.lpd-figures` > `.lpd-figure` (`-number`, `-label`); `.lpd-spec` > `.lpd-spec-row` (h3 + list) | Colocation page. Four headline figures, then labelled rows of ticked facts. Figures do not count up. |
+| Page not found | `404.php`, `.lpd-404-links` | Same title header as any page, the owner's sentence as a lead, then four link panels. |
 | Legacy | `.lpd-colo-teaser`, `.lpd-page-content` | Styled so old content still looks right. Don't use in new content. |
 | Footer | `.site-footer`, `.lpd-footer-cats`, `.lpd-cat-eye` | Cats stay. |
 
@@ -290,6 +292,7 @@ Component rules:
 | `assets/images/colocation/colocation-1/2/3.jpg` | The actual data hall, cable trays, fire suppression |
 | `assets/images/work/ryton-singers-desktop.jpg`, `ryton-singers-phone.jpg` | rytonsingers.org.uk — Web Design service panel, and beside Joanna T's review (the main one) |
 | `assets/images/work/ryton-cc-desktop.jpg`, `ryton-cc-phone.jpg` | rytoncc.org.uk — beside Amanda's testimonial and on Our Work |
+| `assets/images/share.jpg` | 1200×630 link-preview image (logo, headline, tagline). `lpd_share_meta()` in `functions.php` prints it with a title and description unless an SEO plugin is active. Regenerate it if the headline or logo changes. |
 | `assets/images/hero-poster.jpg`, `assets/video/hero-bg.{webm,mp4}` | Hero film (skipped on phones, data saver, reduced motion) |
 
 Rules for client-site screenshots:

@@ -21,7 +21,7 @@ for key, slug in names.items():
     content = open(f'{sys.argv[1]}/inc/pages/{slug}.html').read().replace('{{theme_uri}}', '/wp-content/themes/lilypawdigital')
     print(f'<textarea id="ta-{key}">' + html.escape(content, quote=False) + '</textarea>')
 PY
-for page in home colocation about work contact getstarted; do
+for page in home colocation about work contact getstarted 404; do
   php "$ROOT/tools/preview/render.php" "$OUT/site/theme" "$OUT/content.html" $page theme > "$OUT/site/$page.html"
 done
 echo "built $OUT/site"

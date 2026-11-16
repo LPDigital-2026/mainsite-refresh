@@ -4,7 +4,7 @@ Theme URI: https://lilypawdigital.xyz
 Author: Lily Paw Digital
 Author URI: https://lilypawdigital.xyz
 Description: Theme for Lily Paw Digital - North East web design, hosting and colocation. Navy and paper, set large, with the paw pink used sparingly.
-Version: 4.10
+Version: 4.11
 Requires at least: 6.0
 Tested up to: 6.6
 Requires PHP: 7.4
@@ -38,6 +38,7 @@ Text Domain: lilypawdigital
   --night: #1d0e38;
   --night-deep: #140928;
   --navy: #2a1650;
+  --navy-hi: #351d63;
   --light: #f5f1fb;
   --white: #ffffff;
   --ink: #1d0e38;
@@ -98,7 +99,7 @@ Text Domain: lilypawdigital
   color: var(--fg);
 }
 .lpd-process,
-.lpd-section-alt:has(.lpd-stat) { --bg: var(--navy); --panel: #351d63; background: var(--bg); }
+.lpd-section-alt:has(.lpd-stat) { --bg: var(--navy); --panel: var(--navy-hi); background: var(--bg); }
 /* night again inside light (featured plan) */
 .lpd-pricing-card.lpd-featured {
   --bg: var(--night);
@@ -1120,6 +1121,20 @@ body:has(.lpd-bands > .lpd-process:first-child) .page-hero .container::after { d
   .lpd-bands .wp-block-columns.lpd-grid-3 { grid-template-columns: minmax(0, 1fr); }
   .lpd-bands ul.lpd-checklist { grid-template-columns: minmax(0, 1fr); }
 }
+
+/* Page not found: the same header as any page, then four ways back */
+.lpd-404-links { list-style: none; margin: var(--head) 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--gap); }
+.lpd-404-links a { display: flex; flex-direction: column; height: 100%; padding: var(--pad); background: var(--panel); border-radius: var(--radius); transition: transform 0.16s var(--ease-out), background-color 0.15s ease; }
+.lpd-404-links a:active { transform: scale(0.97); }
+.lpd-404-title { font-size: clamp(1.25rem, 1.9vw, 1.55rem); font-weight: 600; letter-spacing: -0.035em; line-height: 1.15; margin-bottom: clamp(20px, 3vw, 44px); }
+.lpd-404-title::after { content: '\2192'; display: inline-block; margin-left: 10px; color: var(--accent-text); transition: transform 0.25s var(--ease-out); }
+.lpd-404-text { margin-top: auto; color: var(--fg-dim); font-size: 0.98rem; line-height: 1.5; }
+@media (hover: hover) and (pointer: fine) {
+  .lpd-404-links a:hover { background: var(--navy-hi); }
+  .lpd-404-links a:hover .lpd-404-title::after { transform: translateX(5px); }
+}
+@media (max-width: 1000px) { .lpd-404-links { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 520px) { .lpd-404-links { grid-template-columns: minmax(0, 1fr); } }
 
 /* ==========================================================================
    Pages whose content has not been brought up to date, posts, search:
