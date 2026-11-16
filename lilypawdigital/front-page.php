@@ -35,7 +35,7 @@ else :
 								<h2 class="entry-title" style="font-size:1.35rem;">
 									<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
 								</h2>
-								<div class="entry-meta" style="color:var(--lp-text-dim);font-size:0.83rem;margin-bottom:12px;">
+								<div class="entry-meta" style="color:var(--fg-dim);font-size:0.83rem;margin-bottom:12px;">
 									<?php lpd_posted_on(); ?>
 								</div>
 								<div class="entry-summary"><?php the_excerpt(); ?></div>

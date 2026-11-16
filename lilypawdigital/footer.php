@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 			</div>
 
 			<div>
-				<h4><?php esc_html_e( 'Explore', 'lilypawdigital' ); ?></h4>
+				<h2><?php esc_html_e( 'Explore', 'lilypawdigital' ); ?></h2>
 				<ul>
 					<li><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php esc_html_e( 'Home', 'lilypawdigital' ); ?></a></li>
 					<li><a href="<?php echo esc_url( home_url( '/about-us/' ) ); ?>"><?php esc_html_e( 'About Us', 'lilypawdigital' ); ?></a></li>
@@ -35,7 +35,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 			</div>
 
 			<div>
-				<h4><?php esc_html_e( 'Company', 'lilypawdigital' ); ?></h4>
+				<h2><?php esc_html_e( 'Company', 'lilypawdigital' ); ?></h2>
 				<ul>
 					<li><a href="https://status.lilypaw.digital" target="_blank" rel="noopener"><?php esc_html_e( 'Status', 'lilypawdigital' ); ?></a></li>
 					<li><a href="https://billing.lilypawdigital.com/login" target="_blank" rel="noopener"><?php esc_html_e( 'Client Login', 'lilypawdigital' ); ?></a></li>
@@ -45,7 +45,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 			</div>
 
 			<div>
-				<h4><?php esc_html_e( 'Legal', 'lilypawdigital' ); ?></h4>
+				<h2><?php esc_html_e( 'Legal', 'lilypawdigital' ); ?></h2>
 				<ul>
 					<li><a href="https://legal.lilypaw.digital/privacy-policy" target="_blank" rel="noopener"><?php esc_html_e( 'Privacy Policy', 'lilypawdigital' ); ?></a></li>
 					<li><a href="https://legal.lilypaw.digital/terms-of-service" target="_blank" rel="noopener"><?php esc_html_e( 'Terms of Service', 'lilypawdigital' ); ?></a></li>

@@ -13,7 +13,7 @@ get_header();
 		<div class="container">
 			<?php while ( have_posts() ) : the_post(); ?>
 				<h1 class="entry-title"><?php the_title(); ?></h1>
-				<div class="entry-meta" style="color:var(--lp-text-dim);">
+				<div class="entry-meta" style="color:var(--fg-dim);">
 					<?php esc_html_e( 'Written by', 'lilypawdigital' ); ?> <?php the_author(); ?> | <?php lpd_posted_on(); ?>
 				</div>
 			<?php endwhile; ?>
@@ -46,7 +46,7 @@ get_header();
 						?>
 					</article>
 
-					<footer class="entry-footer" style="margin:24px 0;color:var(--lp-text-dim);">
+					<footer class="entry-footer" style="margin:24px 0;color:var(--fg-dim);">
 						<?php lpd_entry_footer(); ?>
 					</footer>
 
