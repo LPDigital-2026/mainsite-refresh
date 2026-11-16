@@ -4,7 +4,7 @@ Theme URI: https://lilypawdigital.xyz
 Author: Lily Paw Digital
 Author URI: https://lilypawdigital.xyz
 Description: Theme for Lily Paw Digital - North East web design, hosting and colocation. Navy and paper, set large, with the paw pink used sparingly.
-Version: 4.11
+Version: 4.12
 Requires at least: 6.0
 Tested up to: 6.6
 Requires PHP: 7.4
@@ -702,6 +702,47 @@ button[type="submit"], input[type="submit"] { background: var(--pink); border-co
 .lpd-pricing-card:not(:has(.lpd-pricing-feature)) .wp-block-button,
 .lpd-pricing-card:not(:has(.lpd-pricing-feature)) .wp-block-button__link { width: auto; }
 .lpd-pricing-note { margin: 28px 0 0; color: var(--fg-dim); }
+
+/* Plan helper (built by interactions.js). Dashed, like the Custom card:
+   it is help, not a product. */
+.lpd-plan-helper {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: 20px clamp(28px, 5vw, 80px);
+  align-items: center;
+  margin-bottom: var(--gap);
+  padding: var(--pad);
+  border: 1.5px dashed var(--rule-strong);
+  border-radius: var(--radius);
+}
+.lpd-plan-helper h3 { font-size: clamp(1.25rem, 1.9vw, 1.55rem); letter-spacing: -0.035em; margin: 0 0 6px; }
+.lpd-plan-helper-intro p { margin: 0; color: var(--fg-dim); }
+.lpd-plan-helper-stage { min-height: 104px; display: flex; flex-direction: column; justify-content: center; }
+p.lpd-plan-helper-q { margin: 0 0 14px; font-size: 1.1rem; font-weight: 500; letter-spacing: -0.02em; color: var(--fg); }
+p.lpd-plan-helper-price { margin: -8px 0 14px; color: var(--fg-dim); }
+.lpd-plan-helper-options { display: flex; flex-wrap: wrap; gap: 10px; }
+.lpd-plan-helper-option {
+  min-height: 46px;
+  padding: 10px 20px;
+  border: 1.5px solid var(--rule-strong);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--fg);
+  font-family: var(--font);
+  font-size: 0.97rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  cursor: pointer;
+  transition: transform 0.16s var(--ease-out), background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+.lpd-plan-helper-option:active { transform: scale(0.97); }
+.lpd-plan-helper-option.is-primary { background: var(--pink); border-color: var(--pink); color: var(--night); }
+@media (hover: hover) and (pointer: fine) {
+  .lpd-plan-helper-option:hover { background: var(--fg); border-color: var(--fg); color: var(--bg); }
+  .lpd-plan-helper-option.is-primary:hover { background: var(--pink-hi); border-color: var(--pink-hi); color: var(--night); }
+}
+.lpd-pricing-card.is-suggested { outline: 3px solid var(--pink); outline-offset: 3px; }
+@media (max-width: 900px) { .lpd-plan-helper { grid-template-columns: minmax(0, 1fr); } .lpd-plan-helper-stage { min-height: 0; } }
 
 /* ==========================================================================
    The offer - the one surface in the full paw gradient

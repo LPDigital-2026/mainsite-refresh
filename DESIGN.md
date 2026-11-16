@@ -260,6 +260,7 @@ edited by hand keep the old markup forever.
 | Steps | `.lpd-process`, `.lpd-step`, `.lpd-step-number`; `.lpd-steps-3` for three | Track fills with scroll; vertical on phones. |
 | Stats | `.lpd-stat`, `.lpd-stat-number`, `.lpd-stat-label` | Count up once. Content writes "+15"; JS shows "15+". |
 | Pricing | `.lpd-pricing-card` (+ `.lpd-featured`), `-badge`, `-name`, `-domain`, `-price`, `-subprice`, `-desc`, `-feature`; `.lpd-colocation-pricing` | Buttons pinned to the bottom so they line up. A card with no features is the dashed "Custom" card. |
+| Plan helper | `.lpd-plan-helper` (built by JS), `.lpd-pricing-card.is-suggested` | Dashed panel above the home page plans: "sell online?" then "how many pages?", then it names a plan and outlines its card. All names, prices and page limits are read from the cards, so plan edits in WordPress flow through. It needs each plan to keep a feature like "Up to 8 pages" and the shop plan to mention "shop" or "checkout". Appears only when at least two cards carry page limits. |
 | Offer | `.lpd-cta-section` > `.lpd-cta-banner` | The one gradient panel. |
 | FAQ | `.lpd-faq`, `.lpd-faq-list`, `.lpd-faq-item` (h3 + p) | JS turns each h3 into a real button and animates to measured height. |
 | Colocation scene | `.lpd-scene`, `.lpd-scene-stage`, `.lpd-scene-photos`, `.lpd-scene-photo`, `.lpd-scene-copy`, `.lpd-scene-intro`, `.lpd-scene-caps`, `.lpd-scene-cap`, `.lpd-colo-price` | See §10. |

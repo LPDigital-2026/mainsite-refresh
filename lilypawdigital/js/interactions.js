@@ -354,6 +354,107 @@
 	} );
 
 	/* ---------------------------------------------------------------
+	 * Plan helper: two plain questions above the web design plans, then
+	 * it points at one. Everything it says is read from the plan cards
+	 * themselves (name, price, page limit, shop features), so editing a
+	 * plan in WordPress keeps the helper right. It only appears when the
+	 * cards carry page limits, so not on the colocation plans.
+	 * ------------------------------------------------------------- */
+	( function () {
+		var section = document.querySelector( '.lpd-front-page .lpd-pricing' );
+		var firstRow = section && section.querySelector( '.wp-block-columns' );
+		if ( ! firstRow ) return;
+
+		var text = function ( card, selector ) {
+			var el = card.querySelector( selector );
+			return el ? el.textContent.replace( /\s+/g, ' ' ).trim() : '';
+		};
+		var sized = [], shop = null, custom = null;
+		section.querySelectorAll( '.lpd-pricing-card' ).forEach( function ( card ) {
+			var features = Array.prototype.map.call( card.querySelectorAll( '.lpd-pricing-feature' ), function ( f ) { return f.textContent; } ).join( ' | ' );
+			var plan = { card: card, name: text( card, '.lpd-pricing-name' ), price: text( card, '.lpd-pricing-price' ), sub: text( card, '.lpd-pricing-subprice' ) };
+			if ( ! features ) { custom = custom || plan; return; }
+			if ( /shop|checkout/i.test( features ) ) { shop = shop || plan; return; }
+			var pages = features.match( /(\d+)\s+pages?\b/i );
+			if ( pages && plan.name ) { plan.pages = parseInt( pages[1], 10 ); sized.push( plan ); }
+		} );
+		if ( sized.length < 2 ) return;
+		sized.sort( function ( a, b ) { return a.pages - b.pages; } );
+
+		var make = function ( tag, className, content ) {
+			var el = document.createElement( tag );
+			if ( className ) el.className = className;
+			if ( content ) el.textContent = content;
+			return el;
+		};
+		var helper = make( 'div', 'lpd-plan-helper' );
+		var intro = make( 'div', 'lpd-plan-helper-intro' );
+		intro.appendChild( make( 'h3', '', 'Not Sure Which Plan?' ) );
+		intro.appendChild( make( 'p', '', 'Two quick questions and we will point you to one.' ) );
+		var stage = make( 'div', 'lpd-plan-helper-stage' );
+		stage.setAttribute( 'aria-live', 'polite' );
+		helper.appendChild( intro );
+		helper.appendChild( stage );
+
+		var clearMark = function () {
+			section.querySelectorAll( '.lpd-pricing-card.is-suggested' ).forEach( function ( c ) { c.classList.remove( 'is-suggested' ); } );
+		};
+		var ask = function ( question, options ) {
+			stage.textContent = '';
+			stage.appendChild( make( 'p', 'lpd-plan-helper-q', question ) );
+			var row = make( 'div', 'lpd-plan-helper-options' );
+			options.forEach( function ( option ) {
+				var btn = make( 'button', 'lpd-plan-helper-option', option.label );
+				btn.type = 'button';
+				btn.addEventListener( 'click', option.go );
+				row.appendChild( btn );
+			} );
+			stage.appendChild( row );
+		};
+		var suggest = function ( plan ) {
+			clearMark();
+			stage.textContent = '';
+			var line = make( 'p', 'lpd-plan-helper-q' );
+			line.appendChild( make( 'strong', '', plan.name || plan.price ) );
+			line.appendChild( document.createTextNode( plan.pages || plan === shop ? ' looks like the right fit.' : ': tell us what you need and we will put something together.' ) );
+			stage.appendChild( line );
+			if ( plan !== custom && plan.price ) {
+				stage.appendChild( make( 'p', 'lpd-plan-helper-price', plan.price + ( plan.sub ? ', ' + plan.sub.charAt( 0 ).toLowerCase() + plan.sub.slice( 1 ) : '' ) ) );
+			}
+			var row = make( 'div', 'lpd-plan-helper-options' );
+			var show = make( 'button', 'lpd-plan-helper-option is-primary', 'Show Me' );
+			show.type = 'button';
+			show.addEventListener( 'click', function () {
+				plan.card.classList.add( 'is-suggested' );
+				plan.card.scrollIntoView( { behavior: reduceMotion ? 'auto' : 'smooth', block: 'center' } );
+			} );
+			var again = make( 'button', 'lpd-plan-helper-option', 'Start Again' );
+			again.type = 'button';
+			again.addEventListener( 'click', function () { clearMark(); start(); } );
+			row.appendChild( show );
+			row.appendChild( again );
+			stage.appendChild( row );
+			plan.card.classList.add( 'is-suggested' );
+		};
+		var askPages = function () {
+			var options = sized.map( function ( plan ) {
+				return { label: plan.pages === 1 ? 'Just one' : 'Up to ' + plan.pages, go: function () { suggest( plan ); } };
+			} );
+			options.push( { label: custom ? 'More, or not sure' : 'More', go: function () { suggest( custom || sized[ sized.length - 1 ] ); } } );
+			ask( 'How many pages do you need?', options );
+		};
+		var start = function () {
+			if ( ! shop ) { askPages(); return; }
+			ask( 'Do you want to sell products online?', [
+				{ label: 'Yes', go: function () { suggest( shop ); } },
+				{ label: 'No', go: askPages }
+			] );
+		};
+		start();
+		firstRow.parentNode.insertBefore( helper, firstRow );
+	} )();
+
+	/* ---------------------------------------------------------------
 	 * Stats: show a leading "+" as trailing ("+15" -> "15+"), and count
 	 * up once when the figure scrolls into view.
 	 * ------------------------------------------------------------- */
