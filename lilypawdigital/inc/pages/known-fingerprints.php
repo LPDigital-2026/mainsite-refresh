@@ -24,6 +24,8 @@ return array(
 		'081142075514a87bce972f896d970a3c',
 		'a71fe256c852444985e959428b294814',
 		'd5bac85257eacd8dd5a2d73b18b8c3af',
+		'c4811aa56ad1ad2c70b4b9478bf52e0a',
+		'3759f1c8cb07fb30ca928a33cf083172',
 	),
 	'colocation' => array(
 		'214f43395fcae101b8b8c79000f0074a',

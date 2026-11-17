@@ -259,7 +259,7 @@ edited by hand keep the old markup forever.
 |---|---|---|
 | Header | `.site-header` | Fixed, transparent over the hero, solid `.is-scrolled` after 24px. Blur only ≥901px (see §14). |
 | Buttons | `.wp-block-button.lpd-btn-primary` / `.lpd-btn-secondary`, `.btn` | Pill, 50px tall, press scales to 0.97. |
-| Hero | `.lpd-hero`, `.lpd-hero-heading`, `.lpd-hero-text`, `.lpd-hero-actions`, `.lpd-hero-note`, `.lpd-rail` | Bottom-aligned. Left: the services line "Web Design • Hosting • Cybersecurity • Communications" (`.lpd-hero-kicker`; JS keeps each item on one line, colours the separators pink and keeps each separator with the item before it), then the headline "Capable. Connected. Considered.", one word to a line, each full stop pink (`.lpd-dot`, added by JS, which also splits it under reduced motion). Right: text and buttons. Four facts on a rail below. Entrance: the services rise in one by one, then the headline words (140ms apart). On screens under 900px the headline is set larger, up to 4.5rem. |
+| Hero | `.lpd-hero`, `.lpd-hero-heading`, `.lpd-hero-text`, `.lpd-hero-actions`, `.lpd-hero-note`, `.lpd-rail` | Bottom-aligned. Left: the services line "Web Design • Hosting • Cybersecurity • Communications" (`.lpd-hero-kicker`; JS keeps each item on one line, colours the separators pink and keeps each separator with the item before it), then the headline "Capable. Connected. Considered.", one word to a line, each full stop pink (`.lpd-dot`, added by JS, which also splits it under reduced motion). Right: text and buttons, with the buttons' bottom edge level with the headline's. Three facts on a rail below (on phones, just their titles as a short list). The price line under the buttons (`.lpd-hero-note`) was removed at the owner's request; its styles remain only for older content. Entrance: the services rise in one by one, then the headline words (140ms apart). On screens under 900px the headline is set larger, up to 4.5rem. |
 | Statement | `.lpd-statement`, `.lpd-statement-text` | One sentence, set large. |
 | Section heading | `.lpd-section-heading` | h2 + optional p. |
 | Service panel | `.lpd-service-card` + `.lpd-service-web` / `.lpd-service-colo` / `.lpd-service-more` | Picture on top (CSS background), title, text, price line, outline link. |
@@ -406,6 +406,9 @@ Rules:
   Use facts about the building, in our own words. Do not name the operator,
   and do not carry over its commercial terms: its network SLA, customer
   count, AS number, memberships, other sites, phone number or hours.
+- The owner removed "Free for 30 days" from the hero facts. The trial is
+  still described in How It Works, the offer panel and the FAQ; don't
+  put it back in the hero.
 - Facts in use (don't alter without the owner): founded 2026; four years'
   web design experience; websites from £99 then £5.75/month; colocation from
   £65.99/month; 30-day free trial on a demo URL; phone 0333 112 7191;

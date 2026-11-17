@@ -4,7 +4,7 @@ Theme URI: https://lilypawdigital.xyz
 Author: Lily Paw Digital
 Author URI: https://lilypawdigital.xyz
 Description: Theme for Lily Paw Digital - North East web design, hosting and colocation. Navy and paper, set large, with the paw pink used sparingly.
-Version: 4.17
+Version: 4.18
 Requires at least: 6.0
 Tested up to: 6.6
 Requires PHP: 7.4
@@ -383,12 +383,15 @@ button[type="submit"], input[type="submit"] { background: var(--pink); border-co
 .lpd-hero > .lpd-inner {
   display: grid;
   grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
-  grid-template-areas: "kicker ." "title text" "title actions" "title note";
+  grid-template-areas: "kicker ." "title text" "title actions";
+  grid-template-rows: auto 1fr auto; /* spare height goes above the text, keeping text and buttons together */
   column-gap: clamp(32px, 5vw, 80px);
   align-items: end;
   padding-top: calc(var(--bar) + 56px);
   padding-bottom: clamp(32px, 4vw, 56px);
 }
+/* older content that still has the price line under the buttons */
+.lpd-hero > .lpd-inner:has(.lpd-hero-note) { grid-template-areas: "kicker ." "title text" "title actions" "title note"; grid-template-rows: auto 1fr auto auto; }
 .lpd-hero-heading {
   grid-area: title;
   align-self: end;
@@ -422,7 +425,7 @@ button[type="submit"], input[type="submit"] { background: var(--pink); border-co
 
 .lpd-hero .wp-block-columns.lpd-rail {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0 clamp(16px, 2.4vw, 32px);
   width: 100%;
   max-width: calc(var(--wrap) + var(--gutter) * 2);
@@ -435,10 +438,16 @@ button[type="submit"], input[type="submit"] { background: var(--pink); border-co
 .lpd-rail p.lpd-rail-title { font-size: 1rem; font-weight: 600; letter-spacing: -0.025em; color: var(--cream); margin-bottom: 4px; }
 
 @media (max-width: 900px) {
-  .lpd-hero > .lpd-inner { grid-template-columns: minmax(0, 1fr); grid-template-areas: "kicker" "title" "text" "actions" "note"; }
+  .lpd-hero > .lpd-inner,
+  .lpd-hero > .lpd-inner:has(.lpd-hero-note) { grid-template-columns: minmax(0, 1fr); grid-template-areas: "kicker" "title" "text" "actions" "note"; grid-template-rows: none; }
   .lpd-hero::before { background: linear-gradient(to top, var(--night) 0%, rgba(29, 14, 56, 0.9) 40%, rgba(29, 14, 56, 0.76) 100%); } /* text covers most of the picture on a phone */
   .lpd-hero-heading { margin-bottom: 20px; font-size: clamp(2.6rem, 13vw, 4.5rem); } /* short words: they can be set larger on small screens */
-  .lpd-hero .wp-block-columns.lpd-rail { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 20px; }
+  /* on a phone the facts become a short list of titles under one rule */
+  .lpd-hero .wp-block-columns.lpd-rail { grid-template-columns: minmax(0, 1fr); row-gap: 0; }
+  .lpd-rail > .wp-block-column { padding: 12px 0; }
+  .lpd-rail > .wp-block-column + .wp-block-column::before { background: rgba(251, 247, 242, 0.14); }
+  .lpd-rail p:not(.lpd-rail-title) { display: none; }
+  .lpd-rail p.lpd-rail-title { margin: 0; }
 }
 
 /* ==========================================================================
