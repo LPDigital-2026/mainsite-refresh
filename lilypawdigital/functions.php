@@ -5,7 +5,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-define( 'LPD_VERSION', '4.22' );
+define( 'LPD_VERSION', '4.23' );
 
 function lpd_setup() {
 	load_theme_textdomain( 'lilypawdigital', get_template_directory() . '/languages' );
@@ -137,7 +137,7 @@ function lpd_share_meta() {
 		return;
 	}
 
-	$description = __( 'Web design, hosting and colocation from the North East of England. Clear pricing, real people, and no jargon.', 'lilypawdigital' );
+	$description = __( 'Websites, hosting, email, security and colocation from the North East of England. Clear pricing, real people, and no jargon.', 'lilypawdigital' );
 	$title       = wp_get_document_title();
 	$url         = home_url( '/' );
 	$image       = get_template_directory_uri() . '/assets/images/share.jpg';

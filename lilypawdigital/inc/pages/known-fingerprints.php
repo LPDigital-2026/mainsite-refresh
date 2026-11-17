@@ -32,6 +32,8 @@ return array(
 		'751b2a47a92cc77e3e790a694d322c87',
 		'0cb78dc11efd02a55fe93ae2812b66cc',
 		'620e4016bb907b478a5bf5b83afc820c',
+		'4e14344c9133fbe48d4a7bf8a347545b',
+		'600dda0561b6d569c874533442a8b212',
 	),
 	'web-design' => array(
 		'fff208ce0e9c40ec9af10c173781afc8',
@@ -64,5 +66,23 @@ return array(
 		'6c4d14c62592924271d62a677532db34',
 		'2747d4627f8f192274418b4ba2816b0f',
 		'5b631e1ea2ede5fd12263418e8063afa',
+	),
+	'website-maintenance' => array(
+		'0b18d4a78c29b2e970c2c88c0bdb0670',
+	),
+	'domains-and-dns' => array(
+		'688471a20ef4c67d171fa62115825e78',
+	),
+	'business-email' => array(
+		'd263057b287ed3b5c63093f21af3c727',
+	),
+	'website-security' => array(
+		'957dc1e51a971a6428b1a417343d7e80',
+	),
+	'microsoft-365' => array(
+		'a52557f4dbe32e1eb2c7a8c7b3a8586d',
+	),
+	'hosted-pbx' => array(
+		'bf8f51b8e795bcc30fa502e11a5fdace',
 	),
 );

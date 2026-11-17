@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 					width="175"
 					height="64"
 				>
-				<p><?php esc_html_e( 'Web design, hosting and colocation from the North East of England. Clear pricing, real people, and no jargon.', 'lilypawdigital' ); ?></p>
+				<p><?php esc_html_e( 'Websites, hosting, email, security and colocation from the North East of England. Clear pricing, real people, and no jargon.', 'lilypawdigital' ); ?></p>
 				<p class="lpd-footer-phone"><a href="tel:+443331127191">0333 112 7191</a></p>
 			</div>
 
@@ -31,6 +31,20 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 					<li><a href="<?php echo esc_url( home_url( '/get-started/' ) ); ?>"><?php esc_html_e( 'Get Started', 'lilypawdigital' ); ?></a></li>
 					<li><a href="<?php echo esc_url( home_url( '/web-design/#pricing' ) ); ?>"><?php esc_html_e( 'Pricing', 'lilypawdigital' ); ?></a></li>
 					<li><a href="<?php echo esc_url( home_url( '/contact-us/' ) ); ?>"><?php esc_html_e( 'Contact Us', 'lilypawdigital' ); ?></a></li>
+				</ul>
+			</div>
+
+			<div>
+				<h2><?php esc_html_e( 'Services', 'lilypawdigital' ); ?></h2>
+				<ul>
+					<li><a href="<?php echo esc_url( home_url( '/web-design/' ) ); ?>"><?php esc_html_e( 'Web Design', 'lilypawdigital' ); ?></a></li>
+					<li><a href="<?php echo esc_url( home_url( '/colocation/' ) ); ?>"><?php esc_html_e( 'Colocation', 'lilypawdigital' ); ?></a></li>
+					<li><a href="<?php echo esc_url( home_url( '/website-maintenance/' ) ); ?>"><?php esc_html_e( 'Website Maintenance', 'lilypawdigital' ); ?></a></li>
+					<li><a href="<?php echo esc_url( home_url( '/domains-and-dns/' ) ); ?>"><?php esc_html_e( 'Domains and DNS', 'lilypawdigital' ); ?></a></li>
+					<li><a href="<?php echo esc_url( home_url( '/business-email/' ) ); ?>"><?php esc_html_e( 'Business Email', 'lilypawdigital' ); ?></a></li>
+					<li><a href="<?php echo esc_url( home_url( '/website-security/' ) ); ?>"><?php esc_html_e( 'Website Security', 'lilypawdigital' ); ?></a></li>
+					<li><a href="<?php echo esc_url( home_url( '/microsoft-365/' ) ); ?>"><?php esc_html_e( 'Microsoft 365', 'lilypawdigital' ); ?></a></li>
+					<li><a href="<?php echo esc_url( home_url( '/hosted-pbx/' ) ); ?>"><?php esc_html_e( 'Hosted PBX', 'lilypawdigital' ); ?></a></li>
 				</ul>
 			</div>
 

@@ -56,6 +56,36 @@ function lpd_setup_pages() {
 			'file'    => 'get-started.html',
 			'warning' => __( 'Replacing this page removes anything added to it since, such as a price calculator.', 'lilypawdigital' ),
 		),
+		'website-maintenance' => array(
+			'title' => __( 'Website Maintenance', 'lilypawdigital' ),
+			'file'  => 'website-maintenance.html',
+			'menu'  => false, // linked from the home page and footer instead
+		),
+		'domains-and-dns' => array(
+			'title' => __( 'Domain and DNS Management', 'lilypawdigital' ),
+			'file'  => 'domains-and-dns.html',
+			'menu'  => false, // linked from the home page and footer instead
+		),
+		'business-email' => array(
+			'title' => __( 'Business Email Setup', 'lilypawdigital' ),
+			'file'  => 'business-email.html',
+			'menu'  => false, // linked from the home page and footer instead
+		),
+		'website-security' => array(
+			'title' => __( 'Website Security Monitoring', 'lilypawdigital' ),
+			'file'  => 'website-security.html',
+			'menu'  => false, // linked from the home page and footer instead
+		),
+		'microsoft-365' => array(
+			'title' => __( 'Microsoft 365', 'lilypawdigital' ),
+			'file'  => 'microsoft-365.html',
+			'menu'  => false, // linked from the home page and footer instead
+		),
+		'hosted-pbx' => array(
+			'title' => __( 'Hosted PBX', 'lilypawdigital' ),
+			'file'  => 'hosted-pbx.html',
+			'menu'  => false, // linked from the home page and footer instead
+		),
 	);
 }
 
@@ -264,6 +294,9 @@ function lpd_setup_build_menu() {
 	}
 
 	foreach ( lpd_setup_pages() as $slug => $page_def ) {
+		if ( isset( $page_def['menu'] ) && false === $page_def['menu'] ) {
+			continue;
+		}
 		$page = lpd_setup_find_page( $slug );
 		if ( ! $page || in_array( (int) $page->ID, $in_menu, true ) ) {
 			continue;

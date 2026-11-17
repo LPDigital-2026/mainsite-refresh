@@ -25,7 +25,7 @@ ok(get_post($colo)->post_content===lpd_setup_page_content('colocation') && get_p
 ok(($db['revisions'][$home][0]??'')===$orig['home'], 'old Home kept as a revision');
 ok(get_post($gs)->post_content===$calc && empty($db['revisions'][$gs]), 'edited Get Started left alone');
 ok(lpd_setup_find_page('our-work') && lpd_setup_find_page('contact-us'), 'missing pages created');
-$n=notice(); ok(strpos($n,'created 3 pages, updated 3 pages')!==false && strpos($n,'Left alone because you have edited them: Get Started')!==false, 'notice: '.$n);
+$n=notice(); ok(strpos($n,'created 9 pages, updated 3 pages')!==false && strpos($n,'Left alone because you have edited them: Get Started')!==false, 'notice: '.$n);
 ok(get_option('lpd_setup_version')===LPD_VERSION, 'version recorded');
 
 echo "== nothing happens again until the version changes\n";

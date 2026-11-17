@@ -6,10 +6,10 @@ define('ABSPATH', '/');
 $GLOBALS['lpd_page'] = $PAGE;
 
 $html = file_get_contents($CONTENT);
-preg_match_all('#<textarea id="ta-([a-z]+)"[^>]*>(.*?)</textarea>#s', $html, $m, PREG_SET_ORDER);
+preg_match_all('#<textarea id="ta-([a-z0-9]+)"[^>]*>(.*?)</textarea>#s', $html, $m, PREG_SET_ORDER);
 $PAGES = [];
 foreach ($m as $x) $PAGES[$x[1]] = html_entity_decode($x[2], ENT_QUOTES | ENT_HTML5, 'UTF-8');
-$TITLES = ['home'=>'Home','webdesign'=>'Web Design','colocation'=>'Colocation','about'=>'About Us','work'=>'Our Work','contact'=>'Contact Us','getstarted'=>'Get Started','404'=>'Page Not Found'];
+$TITLES = ['home'=>'Home','webdesign'=>'Web Design','colocation'=>'Colocation','about'=>'About Us','work'=>'Our Work','contact'=>'Contact Us','getstarted'=>'Get Started','websitemaintenance'=>'Website Maintenance','domainsanddns'=>'Domain and DNS Management','businessemail'=>'Business Email Setup','websitesecurity'=>'Website Security Monitoring','microsoft365'=>'Microsoft 365','hostedpbx'=>'Hosted PBX','404'=>'Page Not Found'];
 
 function __($s){return $s;} function esc_html__($s){return htmlspecialchars($s);} function esc_html_e($s){echo htmlspecialchars($s);}
 function esc_attr_e($s){echo htmlspecialchars($s);} function esc_attr__($s){return htmlspecialchars($s);}

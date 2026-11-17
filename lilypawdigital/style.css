@@ -4,7 +4,7 @@ Theme URI: https://lilypawdigital.xyz
 Author: Lily Paw Digital
 Author URI: https://lilypawdigital.xyz
 Description: Theme for Lily Paw Digital - North East web design, hosting and colocation. Navy and paper, set large, with the paw pink used sparingly.
-Version: 4.22
+Version: 4.23
 Requires at least: 6.0
 Tested up to: 6.6
 Requires PHP: 7.4
@@ -560,6 +560,7 @@ button[type="submit"], input[type="submit"] { background: var(--pink); border-co
 .lpd-service-tile p { color: var(--fg-dim); margin: 0 0 20px; }
 .lpd-service-tile p.lpd-service-sub { margin-bottom: 18px; }
 .lpd-service-tile ul.lpd-service-list { list-style: none; margin: 4px 0 28px; padding: 0; display: grid; gap: 10px; }
+.lpd-service-tile h3 + ul.lpd-service-list { margin-top: 16px; }
 .lpd-service-list li { position: relative; padding-left: 26px; color: var(--fg); font-size: 0.98rem; line-height: 1.45; }
 .lpd-service-list li::before { content: ''; position: absolute; left: 2px; top: 0.36em; width: 13px; height: 13px; background: var(--accent-text); -webkit-mask: url('assets/icons/check.svg') center / contain no-repeat; mask: url('assets/icons/check.svg') center / contain no-repeat; }
 .lpd-service-tile .lpd-service-link { margin: auto 0 0; }
@@ -1294,7 +1295,7 @@ body:has(.lpd-bands > .lpd-process:first-child) .page-hero .container::after { d
    Footer
    ========================================================================== */
 .site-footer { background: var(--night-deep); color: var(--cream); padding: clamp(56px, 7vw, 96px) 0 28px; --fg: var(--cream); --fg-dim: rgba(251, 247, 242, 0.7); }
-.footer-grid { display: grid; gap: 40px clamp(24px, 4vw, 64px); grid-template-columns: 1.6fr 1fr 1fr 1fr; margin-bottom: 40px; }
+.footer-grid { display: grid; gap: 40px clamp(24px, 3.4vw, 56px); grid-template-columns: 1.5fr 1fr 1.3fr 1fr 1fr; margin-bottom: 40px; }
 .footer-grid :is(h2, h4) { font-size: 0.95rem; font-weight: 600; letter-spacing: -0.02em; color: var(--cream); margin: 4px 0 16px; }
 .footer-grid ul { list-style: none; margin: 0; padding: 0; }
 .footer-grid li { margin-bottom: 10px; }
@@ -1320,7 +1321,7 @@ body:has(.lpd-bands > .lpd-process:first-child) .page-hero .container::after { d
 .footer-bottom p { margin: 0; }
 .footer-bottom a { color: var(--cream); }
 @media (max-width: 900px) {
-  .footer-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .footer-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .footer-brand { grid-column: 1 / -1; }
 }
 @media (max-width: 560px) { .footer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }

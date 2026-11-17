@@ -11,7 +11,7 @@ lpd_setup_fingerprint() in lilypawdigital/inc/page-setup.php.
 import collections, glob, hashlib, html, re, subprocess
 
 SLUGS = {'home': 'home', 'webdesign': 'web-design', 'colocation': 'colocation', 'about': 'about-us',
-         'work': 'our-work', 'contact': 'contact-us', 'getstarted': 'get-started'}
+         'work': 'our-work', 'contact': 'contact-us', 'getstarted': 'get-started', 'websitemaintenance': 'website-maintenance', 'domainsanddns': 'domains-and-dns', 'businessemail': 'business-email', 'websitesecurity': 'website-security', 'microsoft365': 'microsoft-365', 'hostedpbx': 'hosted-pbx'}
 
 
 def fingerprint(content):
