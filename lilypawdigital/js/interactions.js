@@ -26,11 +26,11 @@
 		video.muted = true;
 		video.loop = true;
 		video.playsInline = true;
-		video.setAttribute( 'poster', themeUrl + '/assets/images/hero-poster.jpg' );
+		video.setAttribute( 'poster', themeUrl + '/assets/images/hero-tyne.jpg' );
 
-		[ [ 'webm', 'video/webm' ], [ 'mp4', 'video/mp4' ] ].forEach( function ( type ) {
+		[ [ 'mp4', 'video/mp4' ] ].forEach( function ( type ) {
 			var source = document.createElement( 'source' );
-			source.src = themeUrl + '/assets/video/hero-bg.' + type[0];
+			source.src = themeUrl + '/assets/video/hero-tyne.' + type[0];
 			source.type = type[1];
 			video.appendChild( source );
 		} );

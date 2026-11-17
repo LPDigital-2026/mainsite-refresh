@@ -4,7 +4,7 @@ Theme URI: https://lilypawdigital.xyz
 Author: Lily Paw Digital
 Author URI: https://lilypawdigital.xyz
 Description: Theme for Lily Paw Digital - North East web design, hosting and colocation. Navy and paper, set large, with the paw pink used sparingly.
-Version: 4.15
+Version: 4.16
 Requires at least: 6.0
 Tested up to: 6.6
 Requires PHP: 7.4
@@ -363,7 +363,7 @@ button[type="submit"], input[type="submit"] { background: var(--pink); border-co
   justify-content: flex-end;
   min-height: min(100vh, 920px);
   min-height: min(100svh, 920px);
-  background: var(--night) url('assets/images/hero-poster.jpg') center / cover no-repeat;
+  background: var(--night) url('assets/images/hero-tyne.jpg') center / cover no-repeat;
   overflow: hidden;
   isolation: isolate;
   color: var(--cream);
@@ -374,7 +374,11 @@ button[type="submit"], input[type="submit"] { background: var(--pink); border-co
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(to top, var(--night) 0%, rgba(29, 14, 56, 0.88) 24%, rgba(29, 14, 56, 0.52) 58%, rgba(29, 14, 56, 0.64) 100%);
+  /* the Tyne footage is bright daylight: a deeper wash than a night film
+     would need, heaviest where the words sit */
+  background:
+    linear-gradient(to right, rgba(29, 14, 56, 0.42) 0%, rgba(29, 14, 56, 0) 60%),
+    linear-gradient(to top, var(--night) 0%, rgba(29, 14, 56, 0.9) 26%, rgba(29, 14, 56, 0.66) 60%, rgba(29, 14, 56, 0.76) 100%);
 }
 .lpd-hero > .lpd-inner {
   display: grid;
@@ -432,6 +436,7 @@ button[type="submit"], input[type="submit"] { background: var(--pink); border-co
 
 @media (max-width: 900px) {
   .lpd-hero > .lpd-inner { grid-template-columns: minmax(0, 1fr); grid-template-areas: "kicker" "title" "text" "actions" "note"; }
+  .lpd-hero::before { background: linear-gradient(to top, var(--night) 0%, rgba(29, 14, 56, 0.9) 40%, rgba(29, 14, 56, 0.76) 100%); } /* text covers most of the picture on a phone */
   .lpd-hero-heading { margin-bottom: 20px; font-size: clamp(2.6rem, 13vw, 4.5rem); } /* short words: they can be set larger on small screens */
   .lpd-hero .wp-block-columns.lpd-rail { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 20px; }
 }

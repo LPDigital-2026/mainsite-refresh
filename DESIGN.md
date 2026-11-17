@@ -294,7 +294,7 @@ Component rules:
 | `assets/images/work/ryton-singers-desktop.jpg`, `ryton-singers-phone.jpg` | rytonsingers.org.uk — Web Design service panel, and beside Joanna T's review (the main one) |
 | `assets/images/work/ryton-cc-desktop.jpg`, `ryton-cc-phone.jpg` | rytoncc.org.uk — beside Amanda's testimonial and on Our Work |
 | `assets/images/share.jpg` | 1200×630 link-preview image (logo, the three-word headline, services). Source page: `.preview/share/index.html` is not committed; rebuild it from this description if the headline changes. `lpd_share_meta()` in `functions.php` prints it with a title and description unless an SEO plugin is active. Regenerate it if the headline or logo changes. |
-| `assets/images/hero-poster.jpg`, `assets/video/hero-bg.{webm,mp4}` | Hero film (skipped on phones, data saver, reduced motion) |
+| `assets/images/hero-tyne.jpg`, `assets/video/hero-tyne.mp4` | Hero film: an aerial pull-back over the Tyne bridges (Pexels video 31183278, free licence, no credit needed), first 11 seconds played forward then back (22-second loop) so it loops without a jump, 1280×720, 24fps, no sound, H.264 MP4 only (about 1.8 MB; every current browser plays it, and a WebM came out larger). Skipped on phones, data saver and reduced motion; the still is shown instead. Give replacement media a new file name so caches can't serve the old one. |
 
 Rules for client-site screenshots:
 
