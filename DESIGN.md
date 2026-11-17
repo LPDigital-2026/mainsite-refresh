@@ -620,7 +620,7 @@ keep "Something Else?" last, and add a `--icon` rule beside
 **Changing a price or fact.** It appears in several places: pricing cards
 (which also feed the plan helper), the offer panel, How It Works step 4
 and its disclaimer, FAQ answers, the colocation scene and the colocation
-page. Search for the number. Search for the number.
+page. Search for the number.
 
 ## 17. Open questions
 
