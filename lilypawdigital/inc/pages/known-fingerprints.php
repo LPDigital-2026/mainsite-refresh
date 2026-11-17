@@ -29,6 +29,10 @@ return array(
 		'7a51c65eea5ad6e1f0030122e01ecd11',
 		'ef8078aeffaf2553961db1d6e1ac72c1',
 		'ac3cc4d6f7fefd2828c9c5a2c969d58e',
+		'751b2a47a92cc77e3e790a694d322c87',
+	),
+	'web-design' => array(
+		'fff208ce0e9c40ec9af10c173781afc8',
 	),
 	'colocation' => array(
 		'214f43395fcae101b8b8c79000f0074a',
@@ -47,6 +51,7 @@ return array(
 		'73308e3ae2253db852755cf03e40211a',
 		'6dbc8166415d6e9fcc96f1b0be0af905',
 		'2201ba64c79926148e0b23efa77cd0b9',
+		'd487271ef37621e00a3dbd01ff00c930',
 	),
 	'contact-us' => array(
 		'427a7c710f909b51e23dc91e7b0be5ac',
@@ -56,5 +61,6 @@ return array(
 		'0737c22e9181f39b37321cc3a8c6e40b',
 		'6c4d14c62592924271d62a677532db34',
 		'2747d4627f8f192274418b4ba2816b0f',
+		'5b631e1ea2ede5fd12263418e8063afa',
 	),
 );

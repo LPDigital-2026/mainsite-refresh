@@ -9,7 +9,7 @@ $html = file_get_contents($CONTENT);
 preg_match_all('#<textarea id="ta-([a-z]+)"[^>]*>(.*?)</textarea>#s', $html, $m, PREG_SET_ORDER);
 $PAGES = [];
 foreach ($m as $x) $PAGES[$x[1]] = html_entity_decode($x[2], ENT_QUOTES | ENT_HTML5, 'UTF-8');
-$TITLES = ['home'=>'Home','colocation'=>'Colocation','about'=>'About Us','work'=>'Our Work','contact'=>'Contact Us','getstarted'=>'Get Started','404'=>'Page Not Found'];
+$TITLES = ['home'=>'Home','webdesign'=>'Web Design','colocation'=>'Colocation','about'=>'About Us','work'=>'Our Work','contact'=>'Contact Us','getstarted'=>'Get Started','404'=>'Page Not Found'];
 
 function __($s){return $s;} function esc_html__($s){return htmlspecialchars($s);} function esc_html_e($s){echo htmlspecialchars($s);}
 function esc_attr_e($s){echo htmlspecialchars($s);} function esc_attr__($s){return htmlspecialchars($s);}
@@ -35,9 +35,9 @@ function get_post_field($f,$id){ return $GLOBALS['PAGES'][$GLOBALS['lpd_page']];
 function get_header(){ include $GLOBALS['THEME'].'/header.php'; }
 function get_footer(){ include $GLOBALS['THEME'].'/footer.php'; }
 function wp_nav_menu($a){
-  $items=['Home'=>'/','Colocation'=>'/colocation/','Our Work'=>'/our-work/','About Us'=>'/about-us/','Contact Us'=>'/contact-us/','Get Started'=>'/get-started/'];
+  $items=['Home'=>'/','Web Design'=>'/web-design/','Colocation'=>'/colocation/','Our Work'=>'/our-work/','About Us'=>'/about-us/','Contact Us'=>'/contact-us/','Get Started'=>'/get-started/'];
   echo '<ul id="primary-menu" class="menu">';
-  foreach($items as $k=>$v){ $cur = ($GLOBALS['lpd_page']==='home'&&$k==='Home')||($GLOBALS['lpd_page']==='colocation'&&$k==='Colocation'); echo '<li class="menu-item'.($cur?' current-menu-item':'').'"><a href="'.$v.'"'.($cur?' aria-current="page"':'').'>'.$k.'</a></li>'; }
+  foreach($items as $k=>$v){ $cur = ($GLOBALS['lpd_page']==='home'&&$k==='Home')||($GLOBALS['lpd_page']==='colocation'&&$k==='Colocation')||($GLOBALS['lpd_page']==='webdesign'&&$k==='Web Design'); echo '<li class="menu-item'.($cur?' current-menu-item':'').'"><a href="'.$v.'"'.($cur?' aria-current="page"':'').'>'.$k.'</a></li>'; }
   echo '</ul>';
 }
 function wp_head(){

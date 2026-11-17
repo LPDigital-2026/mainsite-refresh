@@ -16,12 +16,12 @@ fi
 rm -rf "$OUT/site" && mkdir -p "$OUT/site" && cp -r "$THEME" "$OUT/site/theme"
 python3 - "$THEME" > "$OUT/content.html" <<'PY'
 import sys, html
-names = {'home': 'home', 'colocation': 'colocation', 'about': 'about-us', 'work': 'our-work', 'contact': 'contact-us', 'getstarted': 'get-started'}
+names = {'home': 'home', 'webdesign': 'web-design', 'colocation': 'colocation', 'about': 'about-us', 'work': 'our-work', 'contact': 'contact-us', 'getstarted': 'get-started'}
 for key, slug in names.items():
     content = open(f'{sys.argv[1]}/inc/pages/{slug}.html').read().replace('{{theme_uri}}', '/wp-content/themes/lilypawdigital')
     print(f'<textarea id="ta-{key}">' + html.escape(content, quote=False) + '</textarea>')
 PY
-for page in home colocation about work contact getstarted 404; do
+for page in home webdesign colocation about work contact getstarted 404; do
   php "$ROOT/tools/preview/render.php" "$OUT/site/theme" "$OUT/content.html" $page theme > "$OUT/site/$page.html"
 done
 echo "built $OUT/site"

@@ -415,7 +415,7 @@
 	 * cards carry page limits, so not on the colocation plans.
 	 * ------------------------------------------------------------- */
 	( function () {
-		var section = document.querySelector( '.lpd-front-page .lpd-pricing' );
+		var section = document.querySelector( '.lpd-pricing' );
 		var firstRow = section && section.querySelector( '.wp-block-columns' );
 		if ( ! firstRow ) return;
 

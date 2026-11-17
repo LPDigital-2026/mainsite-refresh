@@ -29,7 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 					<li><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php esc_html_e( 'Home', 'lilypawdigital' ); ?></a></li>
 					<li><a href="<?php echo esc_url( home_url( '/about-us/' ) ); ?>"><?php esc_html_e( 'About Us', 'lilypawdigital' ); ?></a></li>
 					<li><a href="<?php echo esc_url( home_url( '/get-started/' ) ); ?>"><?php esc_html_e( 'Get Started', 'lilypawdigital' ); ?></a></li>
-					<li><a href="<?php echo esc_url( home_url( '/#pricing' ) ); ?>"><?php esc_html_e( 'Pricing', 'lilypawdigital' ); ?></a></li>
+					<li><a href="<?php echo esc_url( home_url( '/web-design/#pricing' ) ); ?>"><?php esc_html_e( 'Pricing', 'lilypawdigital' ); ?></a></li>
 					<li><a href="<?php echo esc_url( home_url( '/contact-us/' ) ); ?>"><?php esc_html_e( 'Contact Us', 'lilypawdigital' ); ?></a></li>
 				</ul>
 			</div>

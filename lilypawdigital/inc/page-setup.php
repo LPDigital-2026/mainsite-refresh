@@ -31,6 +31,10 @@ function lpd_setup_pages() {
 			'title' => __( 'Home', 'lilypawdigital' ),
 			'file'  => 'home.html',
 		),
+		'web-design'  => array(
+			'title' => __( 'Web Design', 'lilypawdigital' ),
+			'file'  => 'web-design.html',
+		),
 		'colocation'  => array(
 			'title' => __( 'Colocation', 'lilypawdigital' ),
 			'file'  => 'colocation.html',

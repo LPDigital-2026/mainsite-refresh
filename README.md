@@ -5,14 +5,14 @@ WordPress theme for lilypawdigital.xyz, plus the page content it ships with.
 | Path | What it is |
 |------|------------|
 | `lilypawdigital/` | The theme. Zip this folder to upload it. |
-| `lilypawdigital/inc/pages/` | Block content for Home, Colocation, Our Work, About Us, Contact Us and Get Started. |
+| `lilypawdigital/inc/pages/` | Block content for Home, Web Design, Colocation, Our Work, About Us, Contact Us and Get Started. |
 | `lilypawdigital/inc/page-setup.php` | Creates those pages, sets the homepage and builds the menu. |
 | `page-content/copy-all-page-content.html` | The same content as copy buttons, for pasting by hand. |
 | `DESIGN.md` | The design guide: colours, type, spacing, motion, what has been rejected, and how to check a change. Read this first. |
 | `tools/` | Local preview, checks and tests (`bash tools/check.sh`). |
 | `docs/impeccable-audit.md` | Design and accessibility audit, before and after v3.1. |
 
-## Design (v4.20)
+## Design (v4.21)
 
 - **Spacing:** one scale, set as variables at the top of `style.css`. Every section is separated by the same distance, every heading sits the same distance above its content, and every grid and panel uses the same gap and padding.
 - **Surfaces:** the brand purple is the page colour; pricing, FAQ, About and Contact sit on a pale lilac.
@@ -35,7 +35,7 @@ On themes without a `theme.json`, WordPress wraps the contents of every Group bl
 
 1. In WP Admin: **Appearance → Themes → Add New → Upload Theme**, choose `lilypawdigital.zip`, then **Activate** (or **Replace** when updating).
 2. The theme then sets the pages up by itself. It does this on activation and again whenever its version changes:
-   - it creates any of the six pages that don't exist yet;
+   - it creates any of the seven pages that don't exist yet;
    - it updates any page nobody has edited by hand to the current content;
    - it makes Home the front page if no static front page is set;
    - it builds a main menu if the header has none.

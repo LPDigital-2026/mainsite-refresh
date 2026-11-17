@@ -406,11 +406,15 @@ Rules:
 
 - Plain, friendly, concrete. "Clear pricing, real people, no jargon." is
   the brand in five words.
-- The home page leads with the company, not prices (owner's request).
+- The home page is about the company, not one service (owner's request).
   Order: hero, statement, About, What We Do, How We're Different, stats,
-  testimonials, website features, How It Works, colocation scene,
-  pricing, offer, FAQ, contact. No prices before How It Works; the hero
-  and the service panels carry none.
+  testimonials, colocation scene, contact. No web design prices, plans,
+  process or FAQ on it: those live on the Web Design page (/web-design/):
+  intro with the Ryton Singers screenshots, What You Get, How It Works,
+  pricing (with the plan helper), questions, and the free website design
+  offer. Colocation detail lives on the Colocation page. Copy on the home
+  page speaks for all services ("the technology small businesses depend
+  on"), not just websites.
 - Sentences, not slogans. No "unleash", "seamless", "elevate", "next-level".
 - British English. "We will", not "we'll", in the body copy the owner wrote.
 - **Don't rewrite the owner's copy** to suit a layout. Restructure, split or
@@ -458,7 +462,7 @@ lilypawdigital/            the theme (zip this folder to install)
   js/navigation.js         mobile menu
   js/interactions.js       hero film, headline split, scroll scenes, FAQ,
                            stats, image reveal, cats
-  inc/pages/*.html         block content for the six pages
+  inc/pages/*.html         block content for the seven pages
   inc/pages/known-fingerprints.php   generated; see below
   inc/page-setup.php       creates/updates the pages automatically
   assets/                  fonts, icons, images, video
