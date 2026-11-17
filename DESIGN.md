@@ -294,8 +294,9 @@ Component rules:
   different / not a product": the Custom plan, the plan helper, the
   pricing pointer, "Something Else?". No dashed borders anywhere.
 - No hairlines inside cards; separate content with space. Links inside
-  service panels and tiles are accent-coloured text with a chevron
-  ("See web design ›"), not outlined buttons.
+  service panels and tiles ("See web design", "Learn more") are outlined
+  pill buttons that fill on hover (owner's request); they replaced the
+  earlier chevron text links.
 - Icons are the SVGs in `assets/icons/`, drawn as CSS masks filled with the
   paw gradient. 34px on home tiles, 30px on inner pages. Add a new icon by
   adding the SVG and one `--icon` line; don't use an icon font or emoji.

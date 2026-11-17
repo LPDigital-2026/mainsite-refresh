@@ -38,6 +38,7 @@ return array(
 		'dfd43e5a2f6be0b3051fdc73d8c13b4f',
 		'1714a41fba9e31ded9ead30b7459d5ff',
 		'09fa124297dc269b5b0c2c76829e8d52',
+		'fb7b49c5f080a8a959281535391ba5c1',
 	),
 	'web-design' => array(
 		'fff208ce0e9c40ec9af10c173781afc8',
