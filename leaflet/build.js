@@ -49,6 +49,27 @@ async function open(page, trim, side) {
     console.log('wrote', file);
   }
 
+  // Home-printer version: each side as one 300 dpi picture in a PDF. Nothing
+  // left for a printer driver to get wrong (fonts, masks, transparency).
+  const hi = await browser.newPage({ viewport: { width: 794, height: 1123 }, deviceScaleFactor: 300 / 96 });
+  const pngs = [];
+  for (const side of [1, 2]) {
+    await open(hi, true, side);
+    // paint the page behind the sheet in the sheet's own colour, so the
+    // fraction of a pixel past its edge can't show as a grey line
+    await hi.evaluate(() => {
+      const bg = getComputedStyle(document.querySelector('.sheet')).backgroundColor;
+      document.documentElement.style.background = bg;
+      document.body.style.background = bg;
+    });
+    const f = path.join(os.tmpdir(), `leaflet-${process.pid}-hi-${side}.png`);
+    await (await hi.$('.sheet')).screenshot({ path: f });
+    pngs.push(f);
+  }
+  execFileSync('python3', [path.join(dir, 'images-to-pdf.py'), path.join(dir, 'leaflet-home-printer.pdf'), ...pngs]);
+  pngs.forEach((f) => fs.unlinkSync(f));
+  console.log('wrote leaflet-home-printer.pdf');
+
   // PNG previews of each side (trimmed A4)
   const shot = await browser.newPage({ viewport: { width: 794, height: 1123 }, deviceScaleFactor: 2 });
   await open(shot, true);
