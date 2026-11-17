@@ -12,7 +12,7 @@ WordPress theme for lilypawdigital.xyz, plus the page content it ships with.
 | `tools/` | Local preview, checks and tests (`bash tools/check.sh`). |
 | `docs/impeccable-audit.md` | Design and accessibility audit, before and after v3.1. |
 
-## Design (v4.18)
+## Design (v4.19)
 
 - **Spacing:** one scale, set as variables at the top of `style.css`. Every section is separated by the same distance, every heading sits the same distance above its content, and every grid and panel uses the same gap and padding.
 - **Surfaces:** the brand purple is the page colour; pricing, FAQ, About and Contact sit on a pale lilac.

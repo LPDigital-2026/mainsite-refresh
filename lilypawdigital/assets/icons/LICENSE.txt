@@ -20,3 +20,5 @@ on Font Awesome's servers):
 - usecase-cloud.svg     (originally "cloud")
 - usecase-backup.svg    (originally "database")
 - usecase-games.svg     (originally "gamepad")
+
+email.svg is not from Font Awesome: it was drawn for this theme (envelope).

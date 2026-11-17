@@ -4,7 +4,7 @@ Theme URI: https://lilypawdigital.xyz
 Author: Lily Paw Digital
 Author URI: https://lilypawdigital.xyz
 Description: Theme for Lily Paw Digital - North East web design, hosting and colocation. Navy and paper, set large, with the paw pink used sparingly.
-Version: 4.18
+Version: 4.19
 Requires at least: 6.0
 Tested up to: 6.6
 Requires PHP: 7.4
@@ -510,6 +510,7 @@ button[type="submit"], input[type="submit"] { background: var(--pink); border-co
 .lpd-service-card p { color: var(--fg-dim); margin: 0 0 20px; max-width: 46ch; }
 .lpd-service-card .lpd-service-meta { margin: auto 0 20px; padding-top: 16px; border-top: 1px solid var(--rule); font-weight: 600; letter-spacing: -0.025em; color: var(--fg); }
 .lpd-service-card .lpd-service-link { margin: 0; }
+.lpd-service-card:not(:has(.lpd-service-meta)) .lpd-service-link { margin-top: auto; padding-top: 4px; }
 .lpd-service-card .lpd-service-link a {
   display: inline-flex;
   align-items: center;
@@ -540,6 +541,35 @@ button[type="submit"], input[type="submit"] { background: var(--pink); border-co
 .lpd-service-more h3 { font-size: 1.3rem; letter-spacing: -0.035em; margin: 0; }
 .lpd-service-more p { margin: 0; }
 .lpd-service-more .lpd-service-link a { min-height: 0; padding: 0; border: 0; border-radius: 0; }
+/* Further services: a grid of tiles under the two picture panels. It
+   takes any number; three to a row on a wide screen. */
+.lpd-services .wp-block-columns.lpd-service-grid { grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); margin-top: var(--gap); }
+.lpd-services .lpd-service-grid > .wp-block-column:nth-child(3) { grid-column: auto; }
+.lpd-service-tile { display: flex; flex-direction: column; height: 100%; padding: var(--pad); background: var(--panel); border-radius: var(--radius); }
+.lpd-service-tile::before {
+  content: '';
+  display: block;
+  width: 34px;
+  height: 34px;
+  margin: 0 0 clamp(24px, 3vw, 40px);
+  background: var(--paw);
+  -webkit-mask: var(--icon, url('assets/icons/paw.svg')) left center / contain no-repeat;
+  mask: var(--icon, url('assets/icons/paw.svg')) left center / contain no-repeat;
+}
+.lpd-service-maintenance { --icon: url('assets/icons/we-build-it.svg'); }
+.lpd-service-security { --icon: url('assets/icons/security.svg'); }
+.lpd-service-email { --icon: url('assets/icons/email.svg'); }
+.lpd-service-dns { --icon: url('assets/icons/usecase-web.svg'); }
+.lpd-service-tile h3 { font-size: clamp(1.3rem, 2vw, 1.6rem); letter-spacing: -0.04em; line-height: 1.1; margin: 0 0 6px; }
+.lpd-service-tile p { color: var(--fg-dim); margin: 0 0 20px; }
+.lpd-service-tile p.lpd-service-sub { margin-bottom: 18px; }
+.lpd-service-tile ul.lpd-service-list { list-style: none; margin: 0 0 24px; padding: 18px 0 0; border-top: 1px solid var(--rule); display: grid; gap: 9px; }
+.lpd-service-list li { position: relative; padding-left: 26px; color: var(--fg); font-size: 0.98rem; line-height: 1.45; }
+.lpd-service-list li::before { content: ''; position: absolute; left: 2px; top: 0.36em; width: 13px; height: 13px; background: var(--accent-text); -webkit-mask: url('assets/icons/check.svg') center / contain no-repeat; mask: url('assets/icons/check.svg') center / contain no-repeat; }
+.lpd-service-tile .lpd-service-link { margin: auto 0 0; }
+.lpd-service-tile .lpd-service-link a { color: var(--fg); font-weight: 600; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.22em; }
+.lpd-service-tile-more { background: transparent; border: 1.5px dashed var(--rule-strong); }
+.lpd-service-tile-more::before { display: none; }
 @media (max-width: 760px) {
   .lpd-services .wp-block-columns { grid-template-columns: minmax(0, 1fr); }
   .lpd-service-more { grid-template-columns: minmax(0, 1fr); }

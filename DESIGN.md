@@ -263,6 +263,7 @@ edited by hand keep the old markup forever.
 | Statement | `.lpd-statement`, `.lpd-statement-text` | One sentence, set large. |
 | Section heading | `.lpd-section-heading` | h2 + optional p. |
 | Service panel | `.lpd-service-card` + `.lpd-service-web` / `.lpd-service-colo` / `.lpd-service-more` | Picture on top (CSS background), title, text, price line, outline link. |
+| Service tile | `.lpd-service-grid` > `.lpd-service-tile` (+ `.lpd-service-<name>` for its icon), `.lpd-service-sub`, `.lpd-service-list`, `.lpd-service-link`; `.lpd-service-tile-more` for the dashed "Something Else?" tile, always last | Further services under the two picture panels in "What We Do". The grid takes any number, about three to a row. Each tile: gradient icon, title, the owner's one-line summary, ticked list, link to Contact. No prices on any service panel or tile. |
 | Tile | `.lpd-card`; icon via `.lpd-why-*` or position in `.lpd-features` | Gradient icon top-left, generous space, then title and text. |
 | Steps | `.lpd-process`, `.lpd-step`, `.lpd-step-number`; `.lpd-steps-3` for three | Track fills with scroll; vertical on phones. |
 | Stats | `.lpd-stat`, `.lpd-stat-number`, `.lpd-stat-label` | Count up once. Content writes "+15"; JS shows "15+". |
@@ -395,8 +396,11 @@ Rules:
 
 - Plain, friendly, concrete. "Clear pricing, real people, no jargon." is
   the brand in five words.
-- Say what it costs. Prices appear in the hero note, the service panels and
-  the pricing section.
+- The home page leads with the company, not prices (owner's request).
+  Order: hero, statement, About, What We Do, How We're Different, stats,
+  testimonials, website features, How It Works, colocation scene,
+  pricing, offer, FAQ, contact. No prices before How It Works; the hero
+  and the service panels carry none.
 - Sentences, not slogans. No "unleash", "seamless", "elevate", "next-level".
 - British English. "We will", not "we'll", in the body copy the owner wrote.
 - **Don't rewrite the owner's copy** to suit a layout. Restructure, split or
