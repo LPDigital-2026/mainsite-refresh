@@ -30,6 +30,8 @@ return array(
 		'ef8078aeffaf2553961db1d6e1ac72c1',
 		'ac3cc4d6f7fefd2828c9c5a2c969d58e',
 		'751b2a47a92cc77e3e790a694d322c87',
+		'0cb78dc11efd02a55fe93ae2812b66cc',
+		'620e4016bb907b478a5bf5b83afc820c',
 	),
 	'web-design' => array(
 		'fff208ce0e9c40ec9af10c173781afc8',

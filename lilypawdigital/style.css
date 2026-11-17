@@ -4,7 +4,7 @@ Theme URI: https://lilypawdigital.xyz
 Author: Lily Paw Digital
 Author URI: https://lilypawdigital.xyz
 Description: Theme for Lily Paw Digital - North East web design, hosting and colocation. Navy and paper, set large, with the paw pink used sparingly.
-Version: 4.21
+Version: 4.22
 Requires at least: 6.0
 Tested up to: 6.6
 Requires PHP: 7.4
@@ -551,6 +551,8 @@ button[type="submit"], input[type="submit"] { background: var(--pink); border-co
   mask: var(--icon, url('assets/icons/paw.svg')) left center / contain no-repeat;
 }
 .lpd-service-maintenance { --icon: url('assets/icons/we-build-it.svg'); }
+.lpd-service-m365 { --icon: url('assets/icons/usecase-cloud.svg'); }
+.lpd-service-pbx { --icon: url('assets/icons/phone.svg'); }
 .lpd-service-security { --icon: url('assets/icons/security.svg'); }
 .lpd-service-email { --icon: url('assets/icons/email.svg'); }
 .lpd-service-dns { --icon: url('assets/icons/usecase-web.svg'); }
@@ -561,6 +563,22 @@ button[type="submit"], input[type="submit"] { background: var(--pink); border-co
 .lpd-service-list li { position: relative; padding-left: 26px; color: var(--fg); font-size: 0.98rem; line-height: 1.45; }
 .lpd-service-list li::before { content: ''; position: absolute; left: 2px; top: 0.36em; width: 13px; height: 13px; background: var(--accent-text); -webkit-mask: url('assets/icons/check.svg') center / contain no-repeat; mask: url('assets/icons/check.svg') center / contain no-repeat; }
 .lpd-service-tile .lpd-service-link { margin: auto 0 0; }
+/* a service that is on its way: a small label above the title, sitting
+   level with the icon */
+.lpd-service-soon { position: relative; }
+.lpd-service-tile p.lpd-service-badge {
+  position: absolute;
+  top: var(--pad);
+  right: var(--pad);
+  margin: 0;
+  padding: 4px 11px;
+  border-radius: 999px;
+  background: rgba(251, 247, 242, 0.1);
+  color: var(--fg);
+  font-size: 0.8rem;
+  font-weight: 500;
+  line-height: 1.4;
+}
 .lpd-service-tile-more { background: transparent; border: 0; box-shadow: inset 0 0 0 1px var(--rule-strong); }
 .lpd-service-tile-more::before { display: none; }
 @media (max-width: 760px) {
