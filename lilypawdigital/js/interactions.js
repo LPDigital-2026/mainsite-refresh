@@ -74,13 +74,10 @@
 	 * are kept; only text nodes are split.
 	 * ------------------------------------------------------------- */
 	document.querySelectorAll( '.lpd-hero-heading, .page-hero .entry-title' ).forEach( function ( heading ) {
-		if ( reduceMotion ) {
-			// No word animation, but keep the pink full stop.
-			var tail = heading.lastChild;
-			if ( heading.classList.contains( 'lpd-hero-heading' ) && tail && tail.nodeType === 3 && /\.\s*$/.test( tail.textContent ) ) {
-				tail.textContent = tail.textContent.replace( /\.\s*$/, '' );
-				heading.appendChild( dotSpan() );
-			}
+		// The hero headline is split even with reduced motion: the words
+		// then simply appear (the CSS animates them only when motion is
+		// allowed), and splitting is what colours the full stops pink.
+		if ( reduceMotion && ! heading.classList.contains( 'lpd-hero-heading' ) ) {
 			heading.classList.add( 'is-split' );
 			return;
 		}
@@ -116,12 +113,12 @@
 
 		split( heading );
 		if ( heading.classList.contains( 'lpd-hero-heading' ) ) {
-			var words = heading.querySelectorAll( '.lpd-w > span' );
-			var last = words[ words.length - 1 ];
-			if ( last && /\.$/.test( last.textContent ) ) {
-				last.textContent = last.textContent.slice( 0, -1 );
-				last.appendChild( dotSpan() );
-			}
+			heading.querySelectorAll( '.lpd-w > span' ).forEach( function ( word ) {
+				if ( /\.$/.test( word.textContent ) ) {
+					word.textContent = word.textContent.slice( 0, -1 );
+					word.appendChild( dotSpan() );
+				}
+			} );
 		}
 		// Screen readers get the sentence once, not a word at a time.
 		heading.setAttribute( 'aria-label', label );

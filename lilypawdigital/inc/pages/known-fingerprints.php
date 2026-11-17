@@ -20,6 +20,8 @@ return array(
 		'6893bf8af66a8bac22e8db65dc6523cd',
 		'7a2dd24d2803b94b3d34cfc9fc1c0a5e',
 		'b39aa26dc9a700ef99de2c003e6edf72',
+		'223b5baa611ba390cf3dee3248c37a9c',
+		'081142075514a87bce972f896d970a3c',
 	),
 	'colocation' => array(
 		'214f43395fcae101b8b8c79000f0074a',

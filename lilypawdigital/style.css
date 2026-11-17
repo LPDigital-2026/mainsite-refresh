@@ -4,7 +4,7 @@ Theme URI: https://lilypawdigital.xyz
 Author: Lily Paw Digital
 Author URI: https://lilypawdigital.xyz
 Description: Theme for Lily Paw Digital - North East web design, hosting and colocation. Navy and paper, set large, with the paw pink used sparingly.
-Version: 4.14
+Version: 4.15
 Requires at least: 6.0
 Tested up to: 6.6
 Requires PHP: 7.4
@@ -395,6 +395,8 @@ button[type="submit"], input[type="submit"] { background: var(--pink); border-co
   margin: 0;
 }
 .lpd-accent { color: inherit; }
+/* "Capable. Connected. Considered." - one word to a line, full stops in pink */
+.lpd-hero-heading.is-split .lpd-w { display: block; width: fit-content; }
 /* Three words above the headline. Set in the body face at reading size,
    not as a small capitals label, with the full stops in brand pink. */
 .lpd-hero p.lpd-hero-kicker {
@@ -430,7 +432,7 @@ button[type="submit"], input[type="submit"] { background: var(--pink); border-co
 
 @media (max-width: 900px) {
   .lpd-hero > .lpd-inner { grid-template-columns: minmax(0, 1fr); grid-template-areas: "kicker" "title" "text" "actions" "note"; }
-  .lpd-hero-heading { margin-bottom: 20px; }
+  .lpd-hero-heading { margin-bottom: 20px; font-size: clamp(2.6rem, 13vw, 4.5rem); } /* short words: they can be set larger on small screens */
   .lpd-hero .wp-block-columns.lpd-rail { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 20px; }
 }
 
@@ -1287,7 +1289,7 @@ body:has(.lpd-bands > .lpd-process:first-child) .page-hero .container::after { d
 
   .page-hero .container::after { animation: lpd-draw 1.3s var(--ease-in-out) 0.35s both; }
   .lpd-kw { animation: lpd-rise 0.7s var(--ease-out) both; animation-delay: calc(60ms + var(--i, 0) * 110ms); }
-  .lpd-hero .lpd-w > span { animation-delay: calc(300ms + var(--i, 0) * 60ms); }
+  .lpd-hero .lpd-w > span { animation-delay: calc(80ms + var(--i, 0) * 140ms); }
   .lpd-hero-text { animation: lpd-rise 0.8s var(--ease-out) 0.6s both; }
   .lpd-hero-actions { animation: lpd-rise 0.8s var(--ease-out) 0.7s both; }
   .lpd-hero-note { animation: lpd-rise 0.8s var(--ease-out) 0.8s both; }
