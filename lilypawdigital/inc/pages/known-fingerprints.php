@@ -36,6 +36,8 @@ return array(
 		'600dda0561b6d569c874533442a8b212',
 		'9270cbc43a7b29deefb0bbe0f4332dc0',
 		'dfd43e5a2f6be0b3051fdc73d8c13b4f',
+		'1714a41fba9e31ded9ead30b7459d5ff',
+		'09fa124297dc269b5b0c2c76829e8d52',
 	),
 	'web-design' => array(
 		'fff208ce0e9c40ec9af10c173781afc8',
@@ -92,5 +94,6 @@ return array(
 		'bf8f51b8e795bcc30fa502e11a5fdace',
 		'e55b80051832b0124931975f2579f16e',
 		'f580dcb337309cc6e8b056a5b79884b1',
+		'7084ea448b183059bf1871c72e6a4555',
 	),
 );

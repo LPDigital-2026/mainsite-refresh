@@ -447,8 +447,8 @@ Rules:
   confirm them against their distributor. The working is in the comment in
   `tools/make-service-pages.py`; change it there when Microsoft changes
   its prices.
-- Hosted PBX: from £16.99 a month; powerful security and DDoS protection;
-  2 vCores at 4.0GHz, 4GB ECC RAM, 48GB SSD storage, daily backups (owner).
+- Hosted PBX: choice of PBX (FreePBX, FusionPBX and more); from £16.99 a month; powerful security and DDoS protection;
+  2 vCores at 4.0GHz, 4GB ECC RAM, 48GB SSD storage, daily backups; phone numbers available on request (owner).
 - Facts in use (don't alter without the owner): founded 2026; four years'
   web design experience; websites from £99 then £5.75/month; colocation from
   £65.99/month; 30-day free trial on a demo URL; phone 0333 112 7191;

@@ -45,8 +45,8 @@ SERVICES = [
          plans_note='Need a different Microsoft 365 plan, or have licences already? <a href="/contact-us/">Get in touch</a> and we will sort it.'),
     dict(slug='hosted-pbx', cls='lpd-service-pbx', short='Hosted PBX',
          lead='A business phone system hosted in the cloud, so your number goes wherever you do.',
-         body='Talk to us about what your business needs from its phones and we will explain the options in plain English.',
-         items=['Powerful security and DDoS protection', '2 vCores at 4.0GHz', '4GB ECC RAM', '48GB SSD storage', 'Daily backups'],
+         body='Choose from many PBX solutions, like FreePBX, FusionPBX and more. Talk to us about what your business needs from its phones and we will explain the options in plain English.',
+         items=['Your choice of PBX: FreePBX, FusionPBX and more', 'Powerful security and DDoS protection', '2 vCores at 4.0GHz', '4GB ECC RAM', '48GB SSD storage', 'Daily backups', 'Phone numbers available on request'],
          price='From £16.99 a month'),
 ]
 
