@@ -275,14 +275,17 @@ p { text-wrap: pretty; }
 .cta .contact { margin-top: 3mm; display: flex; gap: 7mm; align-items: baseline; flex-wrap: wrap; }
 .cta .phone-no { font-size: 17pt; font-weight: 600; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
 .cta .web { font-size: 12pt; font-weight: 600; letter-spacing: -0.02em; }
-.qr {
+.qr { text-align: center; }
+/* the white square is the code's quiet zone: an even 3mm (about 2.5
+   modules) on every side, so the code sits centred and nothing crowds it */
+.qr-box {
   background: var(--white);
   border-radius: var(--radius-sm);
-  padding: 3.5mm;
-  text-align: center;
+  padding: 3mm;
+  line-height: 0;
 }
-.qr img { width: 28mm; height: 28mm; display: block; }
-.qr span { display: block; font-size: 7.5pt; font-weight: 600; margin-top: 2.5mm; letter-spacing: -0.01em; }
+.qr img { width: 32mm; height: 32mm; display: block; image-rendering: pixelated; }
+.qr span { display: block; font-size: 7.5pt; font-weight: 600; margin-top: 2.5mm; letter-spacing: -0.01em; line-height: 1.2; }
 
 .small {
   margin-top: auto;
@@ -403,7 +406,7 @@ p { text-wrap: pretty; }
         </div>
       </div>
       <div class="qr">
-        <img src="qr-lilypaw-digital.svg" alt="QR code for lilypaw.digital">
+        <div class="qr-box"><img src="qr-lilypaw-digital.svg" alt="QR code for lilypaw.digital"></div>
         <span>Scan to visit our website</span>
       </div>
     </div>
