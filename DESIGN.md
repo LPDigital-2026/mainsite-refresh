@@ -600,6 +600,13 @@ into `assets/images/work/`. On Our Work, copy a project band (add
 with prose and checklist on the left, `.lpd-shots` and (if there is one) the
 testimonial on the right. Only attach a testimonial that is about that site.
 
+**A new service.** From the repository root:
+`python3 .preview/addtile.py lpd-service-<name> <icon>.svg "Title" "One-line summary" "Ask about …" "Item" "Item" …`
+is not committed (it lives in the ignored `.preview` folder); without it,
+copy an existing `.lpd-service-tile` column inside `.lpd-service-grid`,
+keep "Something Else?" last, and add a `--icon` rule beside
+`.lpd-service-maintenance` in `style.css`.
+
 **A new icon tile.** Add the SVG to `assets/icons/`, add
 `.lpd-why-yourname { --icon: url('assets/icons/yourname.svg'); }`, and use
 `lpd-card lpd-why-item lpd-why-yourname` on the group.
@@ -610,9 +617,10 @@ testimonial on the right. Only attach a testimonial that is about that site.
 `.lpd-scrub`. Give it a sensible look when `--p` is absent (the fallback in
 `var(--p, 1)`), because that is what no-JS and reduced-motion visitors get.
 
-**Changing a price or fact.** It appears in several places: hero note,
-service panel meta, pricing cards, the offer panel, How It Works step 4 and
-its disclaimer, FAQ answers, and the colocation page. Search for the number.
+**Changing a price or fact.** It appears in several places: pricing cards
+(which also feed the plan helper), the offer panel, How It Works step 4
+and its disclaimer, FAQ answers, the colocation scene and the colocation
+page. Search for the number. Search for the number.
 
 ## 17. Open questions
 
