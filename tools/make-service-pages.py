@@ -78,7 +78,7 @@ def page(s):
         included = f'<!-- wp:list {{"className":"lpd-service-list"}} -->\n<ul class="wp-block-list lpd-service-list">\n{lis}\n</ul>\n<!-- /wp:list -->'
     else:
         included = p('We are finalising the details of this service. Get in touch and we will talk you through what it can do for your business.', 'lpd-service-sub')
-    tile = group(f'lpd-service-tile {s["cls"]}', h(3, "What's Included") + '\n' + included)
+    tile = group(f'lpd-service-tile {s["cls"]}', h(2, "What's Included") + '\n' + included)
     prose = group('lpd-prose', p(s['lead'], 'lpd-lead') + '\n' + p(s['body']) + '\n<!-- wp:buttons -->\n<div class="wp-block-buttons">\n'
                   + button('lpd-btn-primary', '/contact-us/', 'Talk to Us') + '\n' + button('lpd-btn-secondary', '/#services', 'All Services') + '\n</div>\n<!-- /wp:buttons -->')
     intro = band('lpd-band', '\n' + columns('lpd-split lpd-split-top', [column(prose), column(tile)]) + '\n')
