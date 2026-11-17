@@ -11,11 +11,11 @@
   lilypawdigital/style.css, converted to print sizes.
 -->
 <style>
-@font-face {
-  font-family: 'Sora';
-  src: url('../lilypawdigital/assets/fonts/sora-latin-wght-normal.woff2') format('woff2-variations');
-  font-weight: 100 800;
-}
+/* Static Sora instances (made from the theme's variable font). A variable
+   font gets embedded in the PDF as "Type 3", which many printers garble. */
+@font-face { font-family: 'Sora'; src: url('fonts/sora-400.ttf') format('truetype'); font-weight: 400; }
+@font-face { font-family: 'Sora'; src: url('fonts/sora-500.ttf') format('truetype'); font-weight: 500; }
+@font-face { font-family: 'Sora'; src: url('fonts/sora-600.ttf') format('truetype'); font-weight: 600; }
 
 :root {
   /* colour tokens: copied from lilypawdigital/style.css */
@@ -334,7 +334,7 @@ p { text-wrap: pretty; }
 
     <div class="front-foot">
       <span><b>0333 112 7191</b> &nbsp;·&nbsp; <b>lilypaw.digital</b></span>
-      <span class="over">Everything we do, over the page →</span>
+      <span class="over">Everything we do, over the page</span>
     </div>
   </div>
 </section>
@@ -420,6 +420,10 @@ p { text-wrap: pretty; }
 
 <script>
   if (new URLSearchParams(location.search).get('trim') === '1') document.documentElement.classList.add('trim');
+  // ?side=1 or ?side=2 shows one side only; build.js prints each side on its
+  // own so a fraction of a pixel can't push one page's edge onto the other.
+  const side = new URLSearchParams(location.search).get('side');
+  if (side) document.querySelectorAll('.sheet').forEach((el, i) => { if (String(i + 1) !== side) el.remove(); });
 </script>
 </body>
 </html>

@@ -1,0 +1,8 @@
+Fonts in this folder are self-hosted, sourced via the @fontsource
+npm packages (which redistribute the official Google Fonts files):
+https://fontsource.org
+
+- Sora (variable, weights 100-800) - SIL Open Font License 1.1
+  Copyright 2019 The Sora Project Authors
+
+Full license text: https://scripts.sil.org/OFL

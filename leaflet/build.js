@@ -5,10 +5,12 @@ const path = require('path');
 const dir = __dirname;
 const http = require('http');
 const fs = require('fs');
+const os = require('os');
+const { execFileSync } = require('child_process');
 // Served over http, not file://: Chromium refuses SVG masks (the icons and
 // ticks) loaded from file:// pages.
 const root = path.join(dir, '..');
-const types = { '.html': 'text/html', '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg', '.woff2': 'font/woff2' };
+const types = { '.html': 'text/html', '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg', '.woff2': 'font/woff2', '.ttf': 'font/ttf' };
 const server = http.createServer((req, res) => {
   const file = path.join(root, decodeURIComponent(new URL(req.url, 'http://x').pathname));
   if (!file.startsWith(root) || !fs.existsSync(file)) { res.writeHead(404); return res.end(); }
@@ -17,8 +19,8 @@ const server = http.createServer((req, res) => {
 });
 let url;
 
-async function open(page, trim) {
-  await page.goto(url + (trim ? '?trim=1' : ''));
+async function open(page, trim, side) {
+  await page.goto(url + '?trim=' + (trim ? 1 : 0) + (side ? '&side=' + side : ''));
   await page.waitForLoadState('networkidle');
   await page.evaluate(() => document.fonts.ready);
 }
@@ -33,9 +35,17 @@ async function open(page, trim) {
     ['leaflet-a4.pdf', true, '210mm', '297mm'],
   ];
   for (const [file, trim, width, height] of outputs) {
-    await open(page, trim);
-    await page.pdf({ path: path.join(dir, file), width, height, printBackground: true,
-      margin: { top: 0, right: 0, bottom: 0, left: 0 } });
+    // each side printed on its own, then joined, so the pages line up exactly
+    const parts = [];
+    for (const side of [1, 2]) {
+      await open(page, trim, side);
+      const part = path.join(os.tmpdir(), `leaflet-${process.pid}-${side}.pdf`);
+      await page.pdf({ path: part, width, height, printBackground: true,
+        margin: { top: 0, right: 0, bottom: 0, left: 0 } });
+      parts.push(part);
+    }
+    execFileSync('pdfunite', [...parts, path.join(dir, file)]);
+    parts.forEach((f) => fs.unlinkSync(f));
     console.log('wrote', file);
   }
 
