@@ -4,7 +4,7 @@ Theme URI: https://lilypawdigital.xyz
 Author: Lily Paw Digital
 Author URI: https://lilypawdigital.xyz
 Description: Theme for Lily Paw Digital - North East web design, hosting and colocation. Navy and paper, set large, with the paw pink used sparingly.
-Version: 4.19
+Version: 4.20
 Requires at least: 6.0
 Tested up to: 6.6
 Requires PHP: 7.4
@@ -60,14 +60,14 @@ Text Domain: lilypawdigital
   --field-bg: rgba(251, 247, 242, 0.06);
   --field-border: rgba(251, 247, 242, 0.34);
 
-  --section: clamp(72px, 9vw, 136px);
+  --section: clamp(80px, 10vw, 152px);
   --head: clamp(32px, 4.4vw, 60px);
   --gap: clamp(12px, 1.4vw, 20px);
   --pad: clamp(22px, 2.6vw, 36px);
   --gutter: clamp(20px, 4.4vw, 64px);
   --wrap: 1240px;
-  --bar: 72px;
-  --radius: 18px;
+  --bar: 64px;
+  --radius: 24px;
   --radius-sm: 10px;
 
   --font: 'Sora', system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -227,11 +227,11 @@ p:last-child { margin-bottom: 0; }
 }
 .admin-bar .site-header { top: 32px; }
 @media (max-width: 782px) { .admin-bar .site-header { top: 46px; } }
-.site-header.is-scrolled { background: rgba(29, 14, 56, 0.9); border-bottom-color: rgba(251, 247, 242, 0.1); }
+.site-header.is-scrolled { background: rgba(29, 14, 56, 0.72); }
 @media (min-width: 901px) {
   /* blur only on desktop: on mobile it would make the header the
      containing block for the fixed full-screen menu and clip it */
-  .site-header.is-scrolled { -webkit-backdrop-filter: saturate(160%) blur(16px); backdrop-filter: saturate(160%) blur(16px); }
+  .site-header.is-scrolled { -webkit-backdrop-filter: saturate(180%) blur(20px); backdrop-filter: saturate(180%) blur(20px); }
 }
 @media (max-width: 900px) { .site-header.is-scrolled { background: var(--night); } }
 @media (prefers-reduced-transparency: reduce) {
@@ -251,30 +251,17 @@ p:last-child { margin-bottom: 0; }
   position: relative;
   display: block;
   padding: 8px 0;
-  color: rgba(251, 247, 242, 0.82);
-  font-weight: 500;
-  font-size: 0.94rem;
+  color: rgba(251, 247, 242, 0.76);
+  font-weight: 400;
+  font-size: 0.88rem;
+  letter-spacing: -0.005em;
   transition: color 0.15s ease;
 }
-.main-navigation li a::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 2px;
-  height: 1.5px;
-  background: currentColor;
-  transform: scaleX(0);
-  transform-origin: left center;
-  transition: transform 0.25s var(--ease-out);
-}
+/* the current page is simply brighter: no underline */
 .main-navigation .current-menu-item > a,
-.main-navigation .current_page_item > a { color: var(--cream); }
-.main-navigation .current-menu-item > a::after,
-.main-navigation .current_page_item > a::after { transform: scaleX(1); }
+.main-navigation .current_page_item > a { color: var(--cream); font-weight: 500; }
 @media (hover: hover) and (pointer: fine) {
   .main-navigation li a:hover { color: var(--cream); }
-  .main-navigation li a:hover::after { transform: scaleX(1); }
 }
 
 .menu-toggle {
@@ -351,7 +338,8 @@ button[type="submit"], input[type="submit"] { background: var(--pink); border-co
   .wp-block-button.lpd-btn-secondary .wp-block-button__link:hover { background: var(--fg); border-color: var(--fg); color: var(--bg); }
 }
 .wp-block-buttons { display: flex; flex-wrap: wrap; gap: 10px; }
-.main-navigation .lpd-client-login { min-height: 40px; padding: 8px 18px; font-size: 0.9rem; white-space: nowrap; border-color: rgba(251, 247, 242, 0.4); color: var(--cream); }
+.main-navigation .lpd-client-login { min-height: 36px; padding: 7px 16px; font-size: 0.85rem; font-weight: 500; white-space: nowrap; background: rgba(251, 247, 242, 0.1); border-color: transparent; color: var(--cream); }
+@media (hover: hover) and (pointer: fine) { .main-navigation .lpd-client-login:hover { background: rgba(251, 247, 242, 0.18); border-color: transparent; color: var(--cream); } }
 
 /* ==========================================================================
    Hero
@@ -475,6 +463,12 @@ button[type="submit"], input[type="submit"] { background: var(--pink); border-co
 .lpd-section-heading { margin: 0 0 var(--head); text-align: left; }
 .lpd-section-heading h2 { font-size: clamp(2rem, 4.4vw, 3.5rem); letter-spacing: -0.045em; line-height: 1.02; margin: 0; max-width: 16em; }
 .lpd-section-heading p { color: var(--fg-dim); font-size: clamp(1.02rem, 1.3vw, 1.15rem); line-height: 1.55; margin: 16px 0 0; max-width: 44ch; }
+/* Home page: section headlines centred over full-width content, with a
+   larger subhead. Two-column sections (FAQ, About, Contact) keep theirs
+   left, beside the content. */
+.lpd-front-page > .wp-block-group:not(.lpd-faq, .lpd-about, .lpd-contact) .lpd-section-heading { text-align: center; }
+.lpd-front-page > .wp-block-group:not(.lpd-faq, .lpd-about, .lpd-contact) .lpd-section-heading h2 { margin-inline: auto; font-size: clamp(2.2rem, 5vw, 4rem); }
+.lpd-front-page > .wp-block-group:not(.lpd-faq, .lpd-about, .lpd-contact) .lpd-section-heading p { margin: 18px auto 0; max-width: 40ch; font-size: clamp(1.1rem, 1.6vw, 1.35rem); line-height: 1.45; letter-spacing: -0.015em; }
 
 /* ==========================================================================
    Services - two large media panels, then a line for what's next
@@ -511,36 +505,36 @@ button[type="submit"], input[type="submit"] { background: var(--pink); border-co
 .lpd-service-card .lpd-service-meta { margin: auto 0 20px; padding-top: 16px; border-top: 1px solid var(--rule); font-weight: 600; letter-spacing: -0.025em; color: var(--fg); }
 .lpd-service-card .lpd-service-link { margin: 0; }
 .lpd-service-card:not(:has(.lpd-service-meta)) .lpd-service-link { margin-top: auto; padding-top: 4px; }
-.lpd-service-card .lpd-service-link a {
+.lpd-service-card .lpd-service-link a,
+.lpd-service-tile .lpd-service-link a {
   display: inline-flex;
   align-items: center;
-  min-height: 50px;
-  padding: 13px 24px;
-  border: 1.5px solid var(--rule-strong);
-  border-radius: 999px;
-  font-weight: 600;
-  font-size: 0.97rem;
-  color: var(--fg);
-  transition: transform 0.16s var(--ease-out), background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  gap: 0.3em;
+  color: var(--accent-text);
+  font-size: 1.02rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  text-decoration: none;
 }
-.lpd-service-card .lpd-service-link a:active { transform: scale(0.97); }
+.lpd-service-card .lpd-service-link a::after,
+.lpd-service-tile .lpd-service-link a::after { content: '\203A'; font-size: 1.25em; line-height: 1; transition: transform 0.2s var(--ease-out); }
 @media (hover: hover) and (pointer: fine) {
-  .lpd-service-card:not(.lpd-service-more) .lpd-service-link a:hover { background: var(--fg); border-color: var(--fg); color: var(--bg); }
+  :is(.lpd-service-card, .lpd-service-tile) .lpd-service-link a:hover { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.22em; }
+  :is(.lpd-service-card, .lpd-service-tile) .lpd-service-link a:hover::after { transform: translateX(3px); }
 }
 
 .lpd-service-more {
+  box-shadow: inset 0 0 0 1px var(--rule);
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr) auto;
   align-items: center;
   gap: 8px clamp(20px, 3vw, 40px);
   padding: var(--pad);
   background: transparent;
-  border: 1px solid var(--rule);
 }
 .lpd-service-more::before { display: none; }
 .lpd-service-more h3 { font-size: 1.3rem; letter-spacing: -0.035em; margin: 0; }
 .lpd-service-more p { margin: 0; }
-.lpd-service-more .lpd-service-link a { min-height: 0; padding: 0; border: 0; border-radius: 0; }
 /* Further services: a grid of tiles under the two picture panels. It
    takes any number; three to a row on a wide screen. */
 .lpd-services .wp-block-columns.lpd-service-grid { grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); margin-top: var(--gap); }
@@ -563,12 +557,11 @@ button[type="submit"], input[type="submit"] { background: var(--pink); border-co
 .lpd-service-tile h3 { font-size: clamp(1.3rem, 2vw, 1.6rem); letter-spacing: -0.04em; line-height: 1.1; margin: 0 0 6px; }
 .lpd-service-tile p { color: var(--fg-dim); margin: 0 0 20px; }
 .lpd-service-tile p.lpd-service-sub { margin-bottom: 18px; }
-.lpd-service-tile ul.lpd-service-list { list-style: none; margin: 0 0 24px; padding: 18px 0 0; border-top: 1px solid var(--rule); display: grid; gap: 9px; }
+.lpd-service-tile ul.lpd-service-list { list-style: none; margin: 4px 0 28px; padding: 0; display: grid; gap: 10px; }
 .lpd-service-list li { position: relative; padding-left: 26px; color: var(--fg); font-size: 0.98rem; line-height: 1.45; }
 .lpd-service-list li::before { content: ''; position: absolute; left: 2px; top: 0.36em; width: 13px; height: 13px; background: var(--accent-text); -webkit-mask: url('assets/icons/check.svg') center / contain no-repeat; mask: url('assets/icons/check.svg') center / contain no-repeat; }
 .lpd-service-tile .lpd-service-link { margin: auto 0 0; }
-.lpd-service-tile .lpd-service-link a { color: var(--fg); font-weight: 600; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.22em; }
-.lpd-service-tile-more { background: transparent; border: 1.5px dashed var(--rule-strong); }
+.lpd-service-tile-more { background: transparent; border: 0; box-shadow: inset 0 0 0 1px var(--rule-strong); }
 .lpd-service-tile-more::before { display: none; }
 @media (max-width: 760px) {
   .lpd-services .wp-block-columns { grid-template-columns: minmax(0, 1fr); }
@@ -756,7 +749,7 @@ button[type="submit"], input[type="submit"] { background: var(--pink); border-co
   }
   .lpd-pricing .wp-block-columns + .wp-block-columns .lpd-pricing-card:has(.lpd-pricing-feature) > :not(.lpd-pricing-feature) { grid-column: 1 / -1; }
 }
-.lpd-pricing-card:not(:has(.lpd-pricing-feature)) { background: transparent; border: 1.5px dashed var(--rule-strong); }
+.lpd-pricing-card:not(:has(.lpd-pricing-feature)) { background: transparent; border: 0; box-shadow: inset 0 0 0 1px var(--rule-strong); }
 .lpd-pricing-card:not(:has(.lpd-pricing-feature)) p.lpd-pricing-price { font-size: clamp(1.9rem, 3vw, 2.6rem); line-height: 1.05; margin-bottom: 14px; }
 .lpd-pricing-card:not(:has(.lpd-pricing-feature)) p.lpd-pricing-desc { border: 0; padding: 0; max-width: 40ch; font-size: 1rem; }
 .lpd-pricing-card:not(:has(.lpd-pricing-feature)) .wp-block-button,
@@ -772,7 +765,8 @@ button[type="submit"], input[type="submit"] { background: var(--pink); border-co
   align-items: center;
   margin-bottom: var(--gap);
   padding: var(--pad);
-  border: 1.5px dashed var(--rule-strong);
+  border: 0;
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
   border-radius: var(--radius);
 }
 .lpd-plan-helper h3 { font-size: clamp(1.25rem, 1.9vw, 1.55rem); letter-spacing: -0.035em; margin: 0 0 6px; }
@@ -1193,7 +1187,7 @@ body:has(.lpd-bands > .lpd-process:first-child) .page-hero .container::after { d
 .lpd-bands ul.lpd-checklist { list-style: none; padding: 0; margin: 12px 0 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 32px; }
 .lpd-bands ul.lpd-checklist li { padding: 12px 0; border-top: 1px solid var(--rule); color: var(--fg); font-size: 1rem; }
 .lpd-bands .lpd-card.lpd-pad h3, .lpd-bands .lpd-pointer h3 { font-size: clamp(1.35rem, 2.1vw, 1.7rem); margin: 0 0 12px; }
-.lpd-bands .lpd-pointer { background: transparent; border: 1.5px dashed var(--rule-strong); }
+.lpd-bands .lpd-pointer { background: transparent; border: 0; box-shadow: inset 0 0 0 1px var(--rule-strong); }
 .lpd-bands .lpd-card .wp-block-buttons { margin-top: 24px; }
 .lpd-form-card { padding: var(--pad); border-radius: var(--radius); }
 .lpd-form-card > h2 { font-size: clamp(1.45rem, 2.3vw, 1.85rem); margin: 0 0 22px; }
@@ -1408,7 +1402,6 @@ body:has(.lpd-bands > .lpd-process:first-child) .page-hero .container::after { d
   .main-navigation li:nth-child(7) { --i: 6; }
   .main-navigation.is-open li a,
   .main-navigation.is-closing li a { padding: 15px 0; font-size: clamp(1.6rem, 6.6vw, 2.2rem); font-weight: 600; letter-spacing: -0.045em; line-height: 1.1; color: var(--cream); }
-  .main-navigation li a::after { display: none; }
   .main-navigation.is-open .current-menu-item > a { color: var(--pink-hi); }
   .main-navigation .lpd-client-login { margin-top: 28px; min-height: 52px; width: 100%; font-size: 1rem; background: var(--pink); border-color: var(--pink); color: var(--night); }
   .main-navigation.is-open .lpd-client-login { animation: lpd-rise 0.5s var(--ease-out) 0.4s both; }

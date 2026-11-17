@@ -186,14 +186,14 @@ scale**, and nothing sets a one-off distance.
 
 | Token | Value | Meaning |
 |---|---|---|
-| `--section` | `clamp(72px, 9vw, 136px)` | Padding above and below every section |
+| `--section` | `clamp(80px, 10vw, 152px)` | Padding above and below every section |
 | `--head` | `clamp(32px, 4.4vw, 60px)` | Section heading to its content |
 | `--gap` | `clamp(12px, 1.4vw, 20px)` | Between cards in any grid |
 | `--pad` | `clamp(22px, 2.6vw, 36px)` | Inside any panel or card |
 | `--gutter` | `clamp(20px, 4.4vw, 64px)` | Page side margin |
 | `--wrap` | `1240px` | Maximum content width |
-| `--bar` | `72px` | Header height |
-| `--radius` / `--radius-sm` | `18px` / `10px` | Panels / inputs and small frames |
+| `--bar` | `64px` | Header height |
+| `--radius` / `--radius-sm` | `24px` / `10px` | Panels / inputs and small frames |
 
 How it works:
 
@@ -221,9 +221,9 @@ double.
 
 **How to check:** `node tools/preview/gaps.js site 1440 900` prints the
 measured gap above every section on every page. At 1440px every same-surface
-gap should read **130** and every surface change **259**; at 390px, **72**
-and **144**. Expected exceptions at 1440px: **56** (hero text to its fact
-rail), **117** (inner page title to first band), **232** (into the pinned
+gap should read **144** and every surface change **288**; at 390px, **80**
+and **160**. Expected exceptions at 1440px: **56** (hero text to its fact
+rail), **116** (inner page title to first band), **242** (into the pinned
 colocation stage, which has its own header clearance) and a figure in the
 thousands straight after the colocation scene (its pinned scroll length).
 Any other number is a bug.
@@ -247,7 +247,12 @@ Any other number is a bug.
 - Breakpoints in use: **1100 / 1080** (4-up grids go 2-up, nav tightens),
   **900** (two-column layouts stack, mobile menu, scene switches to phone
   layout), **760 / 640** (grids go single column), **400** (logo shrinks).
-- Left-align by default. Centred text is only used inside buttons.
+- Left-align by default, with one exception: on the home page, headings of
+  full-width sections (What We Do, How We're Different, Testimonials, How
+  It Works, Pricing, website features) are centred, with a larger subhead
+  (up to 1.35rem), in the manner of Apple's product pages. Two-column
+  sections (FAQ, About, Contact) and inner pages keep left-aligned
+  headings.
 
 ## 8. Components
 
@@ -257,7 +262,7 @@ edited by hand keep the old markup forever.
 
 | Component | Class | Notes |
 |---|---|---|
-| Header | `.site-header` | Fixed, transparent over the hero, solid `.is-scrolled` after 24px. Blur only ≥901px (see §14). |
+| Header | `.site-header` | 64px, fixed, transparent over the hero; after 24px of scrolling it becomes a translucent purple material (72% opacity, 20px blur, no dividing line). Blur only ≥901px (see §14). Links are 0.88rem regular weight; the current page is brighter, never underlined. Client Login is a small filled pill. |
 | Buttons | `.wp-block-button.lpd-btn-primary` / `.lpd-btn-secondary`, `.btn` | Pill, 50px tall, press scales to 0.97. |
 | Hero | `.lpd-hero`, `.lpd-hero-heading`, `.lpd-hero-text`, `.lpd-hero-actions`, `.lpd-hero-note`, `.lpd-rail` | Bottom-aligned. Left: the services line "Web Design • Hosting • Cybersecurity • Communications" (`.lpd-hero-kicker`; JS keeps each item on one line, colours the separators pink and keeps each separator with the item before it), then the headline "Capable. Connected. Considered.", one word to a line, each full stop pink (`.lpd-dot`, added by JS, which also splits it under reduced motion). Right: text and buttons, with the buttons' bottom edge level with the headline's. Three facts on a rail below (on phones, just their titles as a short list). The price line under the buttons (`.lpd-hero-note`) was removed at the owner's request; its styles remain only for older content. Entrance: the services rise in one by one, then the headline words (140ms apart). On screens under 900px the headline is set larger, up to 4.5rem. |
 | Statement | `.lpd-statement`, `.lpd-statement-text` | One sentence, set large. |
@@ -284,8 +289,13 @@ Component rules:
 - Panels are a flat fill (`--panel`) with `--radius`. **No borders plus
   shadows plus gradients on one card.** Shadows are used once: under the
   work screenshots.
-- A dashed outline (`1.5px dashed var(--rule-strong)`) means "this one is
-  different / not a product": the Custom plan, the pricing pointer.
+- A thin outline instead of a fill (`box-shadow: inset 0 0 0 1px
+  var(--rule-strong)`, transparent background) means "this one is
+  different / not a product": the Custom plan, the plan helper, the
+  pricing pointer, "Something Else?". No dashed borders anywhere.
+- No hairlines inside cards; separate content with space. Links inside
+  service panels and tiles are accent-coloured text with a chevron
+  ("See web design ›"), not outlined buttons.
 - Icons are the SVGs in `assets/icons/`, drawn as CSS masks filled with the
   paw gradient. 34px on home tiles, 30px on inner pages. Add a new icon by
   adding the SVG and one `--icon` line; don't use an icon font or emoji.
