@@ -35,6 +35,7 @@ return array(
 		'4e14344c9133fbe48d4a7bf8a347545b',
 		'600dda0561b6d569c874533442a8b212',
 		'9270cbc43a7b29deefb0bbe0f4332dc0',
+		'dfd43e5a2f6be0b3051fdc73d8c13b4f',
 	),
 	'web-design' => array(
 		'fff208ce0e9c40ec9af10c173781afc8',
@@ -85,10 +86,11 @@ return array(
 		'7c8c1158e17556c59b7b6b65a0b69608',
 	),
 	'microsoft-365' => array(
-		'faec9ccea7644fb1d01c1ddcb9e9548a',
+		'8e4e80fe73913e63f2324e0018e02c8f',
 	),
 	'hosted-pbx' => array(
 		'bf8f51b8e795bcc30fa502e11a5fdace',
 		'e55b80051832b0124931975f2579f16e',
+		'f580dcb337309cc6e8b056a5b79884b1',
 	),
 );

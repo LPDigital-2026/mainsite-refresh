@@ -26,11 +26,28 @@ SERVICES = [
     dict(slug='microsoft-365', cls='lpd-service-m365', short='Microsoft 365',
          lead='Set-up and support for Microsoft 365, so your email, files and Teams work together.',
          body='Tell us how your business works and we will help you get Microsoft 365 set up to suit it, with a local team to call when you need help.',
-         items=[]),
+         items=['Microsoft 365 licences, billed monthly', 'Set-up on your own domain', 'Support from our local team'],
+         # Selling prices: Microsoft's UK list price (annual commitment, ex VAT,
+         # from 1 July 2026: Basic 5.75, Standard 11.55, Premium 18.10) plus a
+         # 20% markup, plus Stripe's UK card fee (1.5% + 20p per user, the
+         # cautious case), rounded up to .49/.99. Re-check when Microsoft
+         # changes its prices.
+         plans_title='Microsoft 365 Plans',
+         plans_intro='Per user, per month, on an annual commitment.',
+         plans=[
+             dict(name='Business Basic', desc='Email, Teams and storage, with the apps in your browser.', price='£7.49',
+                  features=['Business email on your domain (50 GB mailbox)', 'Teams for chat, calls and meetings', '1 TB of OneDrive storage per user', 'Web and mobile Word, Excel and PowerPoint']),
+             dict(name='Business Standard', desc='Everything in Basic, plus the full desktop apps.', price='£14.49', featured=True,
+                  features=['Everything in Business Basic', 'Desktop Word, Excel, PowerPoint and Outlook', 'Install on up to 5 PCs or Macs per user', 'Webinars and appointment booking']),
+             dict(name='Business Premium', desc='Everything in Standard, plus advanced security.', price='£22.49',
+                  features=['Everything in Business Standard', 'Advanced threat protection', 'Device management with Intune', 'Conditional access for sign-ins']),
+         ],
+         plans_note='Need a different Microsoft 365 plan, or have licences already? <a href="/contact-us/">Get in touch</a> and we will sort it.'),
     dict(slug='hosted-pbx', cls='lpd-service-pbx', short='Hosted PBX',
          lead='A business phone system hosted in the cloud, so your number goes wherever you do.',
          body='Talk to us about what your business needs from its phones and we will explain the options in plain English.',
-         items=[]),
+         items=['Powerful security and DDoS protection', '2 vCores at 4.0GHz', '4GB ECC RAM', '48GB SSD storage', 'Daily backups'],
+         price='From £16.99 a month'),
 ]
 
 WHY = [
@@ -78,6 +95,8 @@ def page(s):
         included = f'<!-- wp:list {{"className":"lpd-service-list"}} -->\n<ul class="wp-block-list lpd-service-list">\n{lis}\n</ul>\n<!-- /wp:list -->'
     else:
         included = p('We are finalising the details of this service. Get in touch and we will talk you through what it can do for your business.', 'lpd-service-sub')
+    if s.get('price'):
+        included += '\n' + p(s['price'], 'lpd-service-price')
     tile = group(f'lpd-service-tile {s["cls"]}', h(2, "What's Included") + '\n' + included)
     prose = group('lpd-prose', p(s['lead'], 'lpd-lead') + '\n' + p(s['body']) + '\n<!-- wp:buttons -->\n<div class="wp-block-buttons">\n'
                   + button('lpd-btn-primary', '/contact-us/', 'Talk to Us') + '\n' + button('lpd-btn-secondary', '/#services', 'All Services') + '\n</div>\n<!-- /wp:buttons -->')
@@ -87,7 +106,23 @@ def page(s):
     cta = band('lpd-band lpd-cta-section', group('lpd-cta-banner', h(2, f'Talk to Us About {s["short"]}') + '\n'
                + p('Tell us what you need and we will get back to you with clear advice and a clear price. No pressure, no jargon.')
                + '\n<!-- wp:buttons -->\n<div class="wp-block-buttons">\n' + button('lpd-btn-primary', '/contact-us/', 'Talk to Us') + '\n</div>\n<!-- /wp:buttons -->'))
-    return '\n\n'.join([intro, why, cta]) + '\n'
+    sections = [intro]
+    if s.get('plans'):
+        cards = []
+        for plan in s['plans']:
+            inner = ''
+            if plan.get('featured'):
+                inner += p('Most Popular', 'lpd-pricing-badge') + '\n'
+            inner += p(plan['name'], 'lpd-pricing-name') + '\n' + p(plan['desc'], 'lpd-pricing-desc') + '\n'
+            inner += p(plan['price'], 'lpd-pricing-price') + '\n' + p('Per user, per month', 'lpd-pricing-subprice') + '\n'
+            inner += '\n'.join(p(f, 'lpd-pricing-feature') for f in plan['features'])
+            inner += '\n<!-- wp:buttons -->\n<div class="wp-block-buttons">\n' + button('lpd-btn-primary' if plan.get('featured') else 'lpd-btn-secondary', '/contact-us/', 'Get Started') + '\n</div>\n<!-- /wp:buttons -->'
+            cls = 'lpd-pricing-card lpd-featured' if plan.get('featured') else 'lpd-pricing-card'
+            cards.append(column(group(cls, inner)))
+        heading = group('lpd-section-heading lpd-left', h(2, s['plans_title']) + '\n' + p(s['plans_intro']))
+        sections.append(band('lpd-band lpd-pricing', '\n' + heading + '\n\n' + columns('lpd-colocation-pricing', cards) + '\n\n' + p(s['plans_note'], 'lpd-pricing-note') + '\n'))
+    sections += [why, cta]
+    return '\n\n'.join(sections) + '\n'
 
 
 if __name__ == '__main__':
