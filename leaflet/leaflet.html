@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>Lily Paw Digital Leaflet</title>
+<!--
+  A4 double-sided door-drop leaflet. Source for leaflet-print.pdf (with 3mm
+  bleed, for a printer) and leaflet-a4.pdf (trimmed A4, for an office
+  printer). Rebuild both with:  node leaflet/build.js
+  Colours, type and the spacing scale follow DESIGN.md and the tokens in
+  lilypawdigital/style.css, converted to print sizes.
+-->
+<style>
+@font-face {
+  font-family: 'Sora';
+  src: url('../lilypawdigital/assets/fonts/sora-latin-wght-normal.woff2') format('woff2-variations');
+  font-weight: 100 800;
+}
+
+:root {
+  /* colour tokens: copied from lilypawdigital/style.css */
+  --night: #1d0e38;
+  --night-deep: #140928;
+  --navy: #2a1650;
+  --light: #f5f1fb;
+  --white: #ffffff;
+  --ink: #1d0e38;
+  --cream: #fbf7f2;
+  --pink: #f0529c;
+  --pink-ink: #b3276b;
+  --orange: #fb7a3c;
+  --accent-text: #ff8fc2;
+  --paw: linear-gradient(115deg, var(--pink) 0%, #f6677a 50%, var(--orange) 100%);
+
+  /* the one spacing scale, in print units */
+  --section: 12mm;   /* page edge to content, and between page blocks */
+  --head: 7mm;       /* heading to its content */
+  --gap: 4mm;        /* between panels */
+  --pad: 6mm;        /* inside a panel */
+  --radius: 5mm;
+  --radius-sm: 2.2mm;
+
+  --bleed: 3mm;
+  --font: 'Sora', sans-serif;
+}
+html.trim { --bleed: 0mm; }
+
+@page { margin: 0; }
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: #888; }
+body {
+  font-family: var(--font);
+  font-size: 10pt;
+  line-height: 1.5;
+  letter-spacing: -0.011em;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+  text-rendering: geometricPrecision;
+}
+
+/* A sheet is the trimmed A4 plus bleed on every side. Content sits inside
+   .safe, which is the trim area less the --section margin. */
+.sheet {
+  width: calc(210mm + 2 * var(--bleed));
+  height: calc(297mm + 2 * var(--bleed));
+  position: relative;
+  overflow: hidden;
+  break-after: page;
+  page-break-after: always;
+}
+.sheet:last-child { break-after: auto; page-break-after: auto; }
+.safe {
+  position: absolute;
+  inset: calc(var(--bleed) + var(--section));
+  display: flex;
+  flex-direction: column;
+}
+
+h1, h2, h3 { font-weight: 600; text-wrap: balance; }
+p { text-wrap: pretty; }
+
+/* gradient icon, drawn as a mask exactly as on the website */
+.icon {
+  width: 7.5mm; height: 7.5mm;
+  background: var(--paw);
+  -webkit-mask: var(--icon) center / contain no-repeat;
+  mask: var(--icon) center / contain no-repeat;
+  flex: none;
+}
+
+/* ===================================================================
+   Front: night surface
+   =================================================================== */
+.front { background: var(--night); color: var(--cream); }
+
+.front-photo {
+  position: absolute;
+  left: 0; right: 0; top: 0;
+  height: calc(var(--bleed) + 176mm);
+  background: url('../lilypawdigital/assets/images/hero-tyne.jpg') center 40% / cover;
+}
+.front-photo::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(29,14,56,0.55) 0%, rgba(29,14,56,0.25) 35%, rgba(29,14,56,0.82) 78%, var(--night) 100%);
+}
+.front .safe { z-index: 1; }
+
+.logo { width: 58mm; display: block; }
+
+.hero { margin-top: auto; }
+.hero-hidden-spacer { flex: 1; }
+.kicker {
+  font-size: 12.5pt;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+  margin-bottom: 5mm;
+}
+.kicker .sep { color: var(--pink); padding: 0 0.35em; }
+.front h1 {
+  font-size: 60pt;
+  line-height: 0.98;
+  letter-spacing: -0.045em;
+}
+.front h1 span { display: block; }
+.front h1 .dot { display: inline; color: var(--pink); }
+
+.lead {
+  font-size: 13pt;
+  line-height: 1.5;
+  max-width: 44ch;
+  color: rgba(251, 247, 242, 0.86);
+  margin-top: var(--head);
+}
+
+.rail {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--gap);
+  margin-top: var(--section);
+  padding-top: var(--gap);
+  border-top: 0.3mm solid rgba(251, 247, 242, 0.16);
+}
+.rail h3 { font-size: 10.5pt; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 1.5mm; }
+.rail p { font-size: 8.5pt; line-height: 1.45; color: rgba(251, 247, 242, 0.74); }
+
+.proof {
+  margin-top: var(--section);
+  background: var(--navy);
+  border-radius: var(--radius);
+  padding: var(--pad);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 76mm;
+  gap: var(--pad);
+  align-items: center;
+}
+.stars { width: 22mm; display: block; margin-bottom: 3mm; }
+.quote { font-size: 10.5pt; line-height: 1.5; letter-spacing: -0.015em; }
+.cite { margin-top: 3mm; font-size: 8.5pt; color: rgba(251, 247, 242, 0.74); }
+.cite b { color: var(--cream); font-weight: 600; }
+.shots { position: relative; }
+.shots .desk {
+  display: block; width: 100%;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 2mm 6mm rgba(0, 0, 0, 0.35);
+}
+.shots .phone {
+  position: absolute;
+  right: -2mm; bottom: -4mm;
+  width: 15mm;
+  border-radius: 2mm;
+  box-shadow: 0 1.5mm 4mm rgba(0, 0, 0, 0.45);
+}
+
+.front-foot {
+  margin-top: var(--section);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 10pt;
+  color: rgba(251, 247, 242, 0.74);
+}
+.front-foot b { color: var(--cream); font-weight: 600; }
+.front-foot .over { color: var(--accent-text); font-weight: 500; }
+
+/* ===================================================================
+   Back: light surface
+   =================================================================== */
+.back { background: var(--light); color: var(--ink); }
+
+.back h2 { font-size: 27pt; line-height: 1.02; letter-spacing: -0.045em; }
+.back .sub { font-size: 11pt; margin-top: 2mm; color: rgba(29, 14, 56, 0.74); max-width: 52ch; }
+
+.panels {
+  margin-top: var(--head);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--gap);
+}
+.panel {
+  background: var(--white);
+  border-radius: var(--radius);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.panel .pic { height: 23mm; background-size: cover; background-position: center top; }
+.panel .pic-web { background-image: url('../lilypawdigital/assets/images/work/ryton-cc-desktop.jpg'); }
+.panel .pic-colo { background-image: url('../lilypawdigital/assets/images/colocation/colocation-1.jpg'); background-position: center; }
+.panel .body { padding: var(--pad); display: flex; flex-direction: column; flex: 1; }
+.panel h3 { font-size: 15pt; letter-spacing: -0.035em; line-height: 1.1; }
+.panel p { font-size: 9pt; line-height: 1.5; margin-top: 2mm; }
+.panel .price {
+  margin-top: auto;
+  padding-top: 3mm;
+  font-size: 9pt;
+  font-weight: 600;
+  color: var(--pink-ink);
+}
+
+.tiles {
+  margin-top: var(--gap);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--gap);
+}
+.tile {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: var(--gap) var(--pad) var(--pad);
+}
+.tile .icon { margin-bottom: 2.5mm; width: 6.5mm; height: 6.5mm; }
+.tile h3 { font-size: 11pt; letter-spacing: -0.03em; line-height: 1.15; }
+.tile ul { list-style: none; margin-top: 2.5mm; }
+.tile li {
+  font-size: 8.25pt;
+  line-height: 1.4;
+  padding-left: 4.2mm;
+  position: relative;
+  margin-top: 1.2mm;
+}
+.tile li::before {
+  content: "";
+  position: absolute; left: 0; top: 0.9mm;
+  width: 2.6mm; height: 2.6mm;
+  background: var(--pink-ink);
+  -webkit-mask: url('../lilypawdigital/assets/icons/check.svg') center / contain no-repeat;
+  mask: url('../lilypawdigital/assets/icons/check.svg') center / contain no-repeat;
+}
+.tile .price { font-size: 8.25pt; font-weight: 600; color: var(--pink-ink); margin-top: 2.5mm; }
+
+.i-maint { --icon: url('../lilypawdigital/assets/icons/we-build-it.svg'); }
+.i-dns { --icon: url('../lilypawdigital/assets/icons/usecase-web.svg'); }
+.i-email { --icon: url('../lilypawdigital/assets/icons/email.svg'); }
+.i-sec { --icon: url('../lilypawdigital/assets/icons/security.svg'); }
+.i-m365 { --icon: url('../lilypawdigital/assets/icons/usecase-cloud.svg'); }
+.i-pbx { --icon: url('../lilypawdigital/assets/icons/phone.svg'); }
+
+/* the one loud panel */
+.cta {
+  margin-top: var(--gap);
+  background: var(--paw);
+  color: var(--night);
+  border-radius: var(--radius);
+  padding: var(--pad);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--pad);
+  align-items: center;
+}
+.cta h2 { font-size: 22pt; }
+.cta p { font-size: 10pt; line-height: 1.5; margin-top: 2.5mm; max-width: 46ch; }
+.cta .contact { margin-top: 3mm; display: flex; gap: 7mm; align-items: baseline; flex-wrap: wrap; }
+.cta .phone-no { font-size: 17pt; font-weight: 600; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+.cta .web { font-size: 12pt; font-weight: 600; letter-spacing: -0.02em; }
+.qr {
+  background: var(--white);
+  border-radius: var(--radius-sm);
+  padding: 3.5mm;
+  text-align: center;
+}
+.qr img { width: 28mm; height: 28mm; display: block; }
+.qr span { display: block; font-size: 7.5pt; font-weight: 600; margin-top: 2.5mm; letter-spacing: -0.01em; }
+
+.small {
+  margin-top: auto;
+  padding-top: var(--gap);
+  font-size: 7pt;
+  color: rgba(29, 14, 56, 0.6);
+  line-height: 1.4;
+}
+</style>
+</head>
+<body>
+
+<!-- ============================== FRONT ============================== -->
+<section class="sheet front">
+  <div class="front-photo"></div>
+  <div class="safe">
+    <img class="logo" src="../lilypawdigital/assets/images/logo-stacked.png" alt="Lily Paw Digital">
+
+    <div class="hero">
+      <p class="kicker">Web Design<span class="sep">•</span>Hosting<span class="sep">•</span>Cybersecurity<span class="sep">•</span>Communications</p>
+      <h1><span>Capable<span class="dot">.</span></span><span>Connected<span class="dot">.</span></span><span>Considered<span class="dot">.</span></span></h1>
+    </div>
+
+    <p class="lead">Everything your business needs online, from one local team. Websites, hosting, email, domains, security and phones, looked after by real people in the North East.</p>
+
+    <div class="rail">
+      <div><h3>Newcastle data centre</h3><p>Servers racked at Reliance House, minutes from the city centre.</p></div>
+      <div><h3>UK-based hardware</h3><p>Everything we host runs on real hardware in the UK.</p></div>
+      <div><h3>Real people</h3><p>You talk to someone who knows your project, not a support queue.</p></div>
+    </div>
+
+    <div class="proof">
+      <div>
+        <img class="stars" src="../lilypawdigital/assets/images/stars-5.svg" alt="Five stars">
+        <p class="quote">“Absolutely brilliant service from Lily Paw Digital! From start to finish, the whole process was efficient, professional and completely stress-free.”</p>
+        <p class="cite"><b>Joanna T</b>, RytonSingers.org.uk</p>
+      </div>
+      <div class="shots">
+        <img class="desk" src="../lilypawdigital/assets/images/work/ryton-singers-desktop.jpg" alt="">
+        <img class="phone" src="../lilypawdigital/assets/images/work/ryton-singers-phone.jpg" alt="">
+      </div>
+    </div>
+
+    <div class="front-foot">
+      <span><b>0333 112 7191</b> &nbsp;·&nbsp; <b>lilypaw.digital</b></span>
+      <span class="over">Everything we do, over the page →</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== BACK =============================== -->
+<section class="sheet back">
+  <div class="safe">
+    <h2>What We Do</h2>
+    <p class="sub">The technology small businesses depend on, explained in plain English.</p>
+
+    <div class="panels">
+      <div class="panel">
+        <div class="pic pic-web"></div>
+        <div class="body">
+          <h3>Web Design &amp; Hosting</h3>
+          <p>A website designed and built for you, then hosted on UK-based hardware, all as one simple package.</p>
+          <p class="price">Try it free for 30 days. Then £99, plus hosting from £5.75 a month.</p>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="pic pic-colo"></div>
+        <div class="body">
+          <h3>Colocation</h3>
+          <p>Rack your own servers in our secure Newcastle data centre, with power, cooling and connectivity included. 24/7 access.</p>
+          <p class="price">Plans from £65.99 a month.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="tiles">
+      <div class="tile">
+        <div class="icon i-maint"></div>
+        <h3>Website Maintenance</h3>
+        <ul><li>Plugin and theme updates</li><li>Security checks</li><li>Backup monitoring</li></ul>
+      </div>
+      <div class="tile">
+        <div class="icon i-dns"></div>
+        <h3>Domains and DNS</h3>
+        <ul><li>DNS record management</li><li>SPF, DKIM and DMARC configuration</li><li>Domain and SSL expiry monitoring</li></ul>
+      </div>
+      <div class="tile">
+        <div class="icon i-email"></div>
+        <h3>Business Email</h3>
+        <ul><li>Email on your own domain</li><li>Mailbox migration assistance</li><li>Troubleshooting delivery problems</li></ul>
+      </div>
+      <div class="tile">
+        <div class="icon i-sec"></div>
+        <h3>Website Security</h3>
+        <ul><li>Security configuration reviews</li><li>Malware scan monitoring</li><li>Login protection</li></ul>
+      </div>
+      <div class="tile">
+        <div class="icon i-m365"></div>
+        <h3>Microsoft 365</h3>
+        <ul><li>Email, files and Teams working together</li><li>Set-up on your own domain</li><li>Support from our local team</li></ul>
+        <p class="price">From £7.49 per user, per month</p>
+      </div>
+      <div class="tile">
+        <div class="icon i-pbx"></div>
+        <h3>Hosted PBX</h3>
+        <ul><li>Your choice of PBX: FreePBX, FusionPBX and more</li><li>Security and DDoS protection</li><li>Phone numbers available on request</li></ul>
+        <p class="price">From £16.99 a month</p>
+      </div>
+    </div>
+
+    <div class="cta">
+      <div>
+        <h2>Talk to Us</h2>
+        <p>Tell us what you need and we will get back to you with clear advice and a clear price. No pressure, no jargon.</p>
+        <div class="contact">
+          <span class="phone-no">0333 112 7191</span>
+          <span class="web">lilypaw.digital</span>
+        </div>
+      </div>
+      <div class="qr">
+        <img src="qr-lilypaw-digital.svg" alt="QR code for lilypaw.digital">
+        <span>Scan to visit our website</span>
+      </div>
+    </div>
+
+    <p class="small">Microsoft 365 prices are per user, per month, on an annual commitment. Free trial: your new website goes live on a demo address for 30 days at no cost and no obligation.</p>
+  </div>
+</section>
+
+<script>
+  if (new URLSearchParams(location.search).get('trim') === '1') document.documentElement.classList.add('trim');
+</script>
+</body>
+</html>
