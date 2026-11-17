@@ -49,22 +49,34 @@
 		return dot;
 	};
 	document.querySelectorAll( '.lpd-hero-kicker' ).forEach( function ( line ) {
-		var words = line.textContent.replace( /\s+/g, ' ' ).trim().split( ' ' );
-		line.setAttribute( 'aria-label', words.join( ' ' ) );
+		var text = line.textContent.replace( /\s+/g, ' ' ).trim();
+		// "Web Design • Hosting • ..." keeps each item together and colours
+		// the separators; plain words ("Capable. Connected.") colour their
+		// full stops instead.
+		var bullets = /\s[•·|]\s/.test( text );
+		var parts = bullets ? text.split( /\s*[•·|]\s*/ ) : text.split( ' ' );
 		line.textContent = '';
-		words.forEach( function ( word, i ) {
+		parts.forEach( function ( part, i ) {
 			var span = document.createElement( 'span' );
 			span.className = 'lpd-kw';
-			span.setAttribute( 'aria-hidden', 'true' );
 			span.style.setProperty( '--i', i );
-			if ( /\.$/.test( word ) ) {
-				span.textContent = word.slice( 0, -1 );
+			if ( ! bullets && /\.$/.test( part ) ) {
+				span.textContent = part.slice( 0, -1 );
 				span.appendChild( dotSpan() );
 			} else {
-				span.textContent = word;
+				span.textContent = part;
+			}
+			// the separator travels with the item before it, so a wrapped
+			// line never starts with one
+			if ( bullets && i < parts.length - 1 ) {
+				var sep = document.createElement( 'span' );
+				sep.className = 'lpd-sep';
+				sep.setAttribute( 'aria-hidden', 'true' );
+				sep.textContent = '•';
+				span.appendChild( sep );
 			}
 			line.appendChild( span );
-			if ( i < words.length - 1 ) line.appendChild( document.createTextNode( ' ' ) );
+			if ( i < parts.length - 1 ) line.appendChild( document.createTextNode( ' ' ) );
 		} );
 	} );
 

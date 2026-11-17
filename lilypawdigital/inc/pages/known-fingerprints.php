@@ -23,6 +23,7 @@ return array(
 		'223b5baa611ba390cf3dee3248c37a9c',
 		'081142075514a87bce972f896d970a3c',
 		'a71fe256c852444985e959428b294814',
+		'd5bac85257eacd8dd5a2d73b18b8c3af',
 	),
 	'colocation' => array(
 		'214f43395fcae101b8b8c79000f0074a',

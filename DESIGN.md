@@ -88,6 +88,12 @@ three equal feature cards with icon-title-text, centred hero with a pill
 badge above it, every element fading up on scroll, decorative sparkles,
 stock illustrations, vague superlatives in copy.
 
+One exception, asked for by the owner: the services line "Web Design •
+Hosting • Cybersecurity • Communications" above the hero headline. It is
+set in Sora at reading size (about 1.35rem, weight 500), in normal case
+with pink separators, never as a small uppercase or monospaced label.
+Keep it that way, and don't add similar lines above other headings.
+
 ## 4. Colour
 
 All colours are variables at the top of `lilypawdigital/style.css`. Never
@@ -148,6 +154,7 @@ Sora everywhere, one self-hosted variable file
 
 | Role | Size | Weight | Tracking | Line height |
 |---|---|---|---|---|
+| Hero services line | `clamp(1.05rem, 1.55vw, 1.35rem)` | 500 | -0.02em | 1.3 |
 | Hero h1 | `clamp(2.6rem, 6.3vw, 5.75rem)` | 600 | -0.045em | 0.98 |
 | Page title (inner) | `clamp(2.6rem, 7vw, 5.75rem)` | 600 | -0.05em | 0.98 |
 | Section h2 | `clamp(2rem, 4.4vw, 3.5rem)` | 600 | -0.045em | 1.02 |
@@ -252,7 +259,7 @@ edited by hand keep the old markup forever.
 |---|---|---|
 | Header | `.site-header` | Fixed, transparent over the hero, solid `.is-scrolled` after 24px. Blur only ≥901px (see §14). |
 | Buttons | `.wp-block-button.lpd-btn-primary` / `.lpd-btn-secondary`, `.btn` | Pill, 50px tall, press scales to 0.97. |
-| Hero | `.lpd-hero`, `.lpd-hero-heading`, `.lpd-hero-text`, `.lpd-hero-actions`, `.lpd-hero-note`, `.lpd-rail` | Bottom-aligned. Left: the headline "Capable. Connected. Considered.", one word to a line, each full stop in pink (`.lpd-dot`, added by JS, which also splits it under reduced motion). Right: text and buttons. Four facts on a rail below. The words rise in one at a time (140ms apart). On screens under 900px the headline is set larger, up to 4.5rem, since the words are short. `.lpd-hero-kicker` styles remain only for content saved by v4.14. Background film is injected by JS, never in content. |
+| Hero | `.lpd-hero`, `.lpd-hero-heading`, `.lpd-hero-text`, `.lpd-hero-actions`, `.lpd-hero-note`, `.lpd-rail` | Bottom-aligned. Left: the services line "Web Design • Hosting • Cybersecurity • Communications" (`.lpd-hero-kicker`; JS keeps each item on one line, colours the separators pink and keeps each separator with the item before it), then the headline "Capable. Connected. Considered.", one word to a line, each full stop pink (`.lpd-dot`, added by JS, which also splits it under reduced motion). Right: text and buttons. Four facts on a rail below. Entrance: the services rise in one by one, then the headline words (140ms apart). On screens under 900px the headline is set larger, up to 4.5rem. |
 | Statement | `.lpd-statement`, `.lpd-statement-text` | One sentence, set large. |
 | Section heading | `.lpd-section-heading` | h2 + optional p. |
 | Service panel | `.lpd-service-card` + `.lpd-service-web` / `.lpd-service-colo` / `.lpd-service-more` | Picture on top (CSS background), title, text, price line, outline link. |
