@@ -88,6 +88,12 @@ three equal feature cards with icon-title-text, centred hero with a pill
 badge above it, every element fading up on scroll, decorative sparkles,
 stock illustrations, vague superlatives in copy.
 
+One exception, asked for by the owner: the hero line "Capable. Connected.
+Considered." above the main headline. It is set in Sora at reading size
+(about 1.35rem, weight 500), in normal case with pink full stops, never as
+a small uppercase or monospaced label. Keep it that way, and don't add
+similar lines above other headings.
+
 ## 4. Colour
 
 All colours are variables at the top of `lilypawdigital/style.css`. Never
@@ -148,6 +154,7 @@ Sora everywhere, one self-hosted variable file
 
 | Role | Size | Weight | Tracking | Line height |
 |---|---|---|---|---|
+| Hero line ("Capable. Connected. Considered.") | `clamp(1.05rem, 1.55vw, 1.35rem)` | 500 | -0.02em | 1.3 |
 | Hero h1 | `clamp(2.6rem, 6.3vw, 5.75rem)` | 600 | -0.045em | 0.98 |
 | Page title (inner) | `clamp(2.6rem, 7vw, 5.75rem)` | 600 | -0.05em | 0.98 |
 | Section h2 | `clamp(2rem, 4.4vw, 3.5rem)` | 600 | -0.045em | 1.02 |
@@ -252,7 +259,7 @@ edited by hand keep the old markup forever.
 |---|---|---|
 | Header | `.site-header` | Fixed, transparent over the hero, solid `.is-scrolled` after 24px. Blur only ≥901px (see §14). |
 | Buttons | `.wp-block-button.lpd-btn-primary` / `.lpd-btn-secondary`, `.btn` | Pill, 50px tall, press scales to 0.97. |
-| Hero | `.lpd-hero`, `.lpd-hero-heading`, `.lpd-hero-text`, `.lpd-hero-actions`, `.lpd-hero-note`, `.lpd-rail` | Bottom-aligned; title left, text and buttons right; four facts on a rail. Background film is injected by JS, never in content. |
+| Hero | `.lpd-hero`, `.lpd-hero-kicker`, `.lpd-hero-heading`, `.lpd-hero-text`, `.lpd-hero-actions`, `.lpd-hero-note`, `.lpd-rail` | Bottom-aligned. Left: the line "Capable. Connected. Considered." above the headline "Your Digital Business Partner." Right: text and buttons. Four facts on a rail below. The full stops in both are pink (`.lpd-dot`, added by JS); the three words rise in one by one before the headline. Background film is injected by JS, never in content. |
 | Statement | `.lpd-statement`, `.lpd-statement-text` | One sentence, set large. |
 | Section heading | `.lpd-section-heading` | h2 + optional p. |
 | Service panel | `.lpd-service-card` + `.lpd-service-web` / `.lpd-service-colo` / `.lpd-service-more` | Picture on top (CSS background), title, text, price line, outline link. |
@@ -293,7 +300,7 @@ Component rules:
 | `assets/images/colocation/colocation-1/2/3.jpg` | The actual data hall, cable trays, fire suppression |
 | `assets/images/work/ryton-singers-desktop.jpg`, `ryton-singers-phone.jpg` | rytonsingers.org.uk — Web Design service panel, and beside Joanna T's review (the main one) |
 | `assets/images/work/ryton-cc-desktop.jpg`, `ryton-cc-phone.jpg` | rytoncc.org.uk — beside Amanda's testimonial and on Our Work |
-| `assets/images/share.jpg` | 1200×630 link-preview image (logo, headline, tagline). `lpd_share_meta()` in `functions.php` prints it with a title and description unless an SEO plugin is active. Regenerate it if the headline or logo changes. |
+| `assets/images/share.jpg` | 1200×630 link-preview image (logo, hero line, headline, services). Source page: `.preview/share/index.html` is not committed; rebuild it from this description if the headline changes. `lpd_share_meta()` in `functions.php` prints it with a title and description unless an SEO plugin is active. Regenerate it if the headline or logo changes. |
 | `assets/images/hero-poster.jpg`, `assets/video/hero-bg.{webm,mp4}` | Hero film (skipped on phones, data saver, reduced motion) |
 
 Rules for client-site screenshots:

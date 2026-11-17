@@ -38,12 +38,49 @@
 	} )();
 
 	/* ---------------------------------------------------------------
+	 * Hero line above the headline, and the headline's closing full
+	 * stop: the full stops are coloured, which needs them in their own
+	 * element. Runs for everyone (it is colour, not motion).
+	 * ------------------------------------------------------------- */
+	var dotSpan = function () {
+		var dot = document.createElement( 'span' );
+		dot.className = 'lpd-dot';
+		dot.textContent = '.';
+		return dot;
+	};
+	document.querySelectorAll( '.lpd-hero-kicker' ).forEach( function ( line ) {
+		var words = line.textContent.replace( /\s+/g, ' ' ).trim().split( ' ' );
+		line.setAttribute( 'aria-label', words.join( ' ' ) );
+		line.textContent = '';
+		words.forEach( function ( word, i ) {
+			var span = document.createElement( 'span' );
+			span.className = 'lpd-kw';
+			span.setAttribute( 'aria-hidden', 'true' );
+			span.style.setProperty( '--i', i );
+			if ( /\.$/.test( word ) ) {
+				span.textContent = word.slice( 0, -1 );
+				span.appendChild( dotSpan() );
+			} else {
+				span.textContent = word;
+			}
+			line.appendChild( span );
+			if ( i < words.length - 1 ) line.appendChild( document.createTextNode( ' ' ) );
+		} );
+	} );
+
+	/* ---------------------------------------------------------------
 	 * Headline entrance: wrap each word so it can rise out of its own
 	 * line box (CSS does the motion). Inline elements inside the heading
 	 * are kept; only text nodes are split.
 	 * ------------------------------------------------------------- */
 	document.querySelectorAll( '.lpd-hero-heading, .page-hero .entry-title' ).forEach( function ( heading ) {
 		if ( reduceMotion ) {
+			// No word animation, but keep the pink full stop.
+			var tail = heading.lastChild;
+			if ( heading.classList.contains( 'lpd-hero-heading' ) && tail && tail.nodeType === 3 && /\.\s*$/.test( tail.textContent ) ) {
+				tail.textContent = tail.textContent.replace( /\.\s*$/, '' );
+				heading.appendChild( dotSpan() );
+			}
 			heading.classList.add( 'is-split' );
 			return;
 		}
@@ -78,6 +115,14 @@
 		};
 
 		split( heading );
+		if ( heading.classList.contains( 'lpd-hero-heading' ) ) {
+			var words = heading.querySelectorAll( '.lpd-w > span' );
+			var last = words[ words.length - 1 ];
+			if ( last && /\.$/.test( last.textContent ) ) {
+				last.textContent = last.textContent.slice( 0, -1 );
+				last.appendChild( dotSpan() );
+			}
+		}
 		// Screen readers get the sentence once, not a word at a time.
 		heading.setAttribute( 'aria-label', label );
 		heading.classList.add( 'is-split' );
