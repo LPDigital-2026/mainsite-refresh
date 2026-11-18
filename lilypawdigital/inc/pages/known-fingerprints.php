@@ -71,6 +71,7 @@ return array(
 		'6c4d14c62592924271d62a677532db34',
 		'2747d4627f8f192274418b4ba2816b0f',
 		'5b631e1ea2ede5fd12263418e8063afa',
+		'6c02dbc1837258d7ce8be5d533ab45e0',
 	),
 	'website-maintenance' => array(
 		'0b18d4a78c29b2e970c2c88c0bdb0670',

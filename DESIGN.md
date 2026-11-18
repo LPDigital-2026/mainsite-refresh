@@ -281,6 +281,7 @@ edited by hand keep the old markup forever.
 | Inner-page band | `.lpd-band`, `.lpd-band-alt`, `.lpd-split` (`-top`, `-narrow`), `.lpd-grid-2`, `.lpd-grid-3`, `.lpd-lead`, `.lpd-prose`, `.lpd-checklist`, `.lpd-form-card`, `.lpd-pointer`, `.lpd-photo`, `.lpd-alt-contact`, `.lpd-colo-gallery` | A page whose content contains `lpd-band` renders full width (`page.php`); otherwise it falls back to a single reading column. |
 | Specification | `.lpd-figures` > `.lpd-figure` (`-number`, `-label`); `.lpd-spec` > `.lpd-spec-row` (h3 + list) | Colocation page. Four headline figures, then labelled rows of ticked facts. Figures do not count up. |
 | Page not found | `404.php`, `.lpd-404-links` | Same title header as any page, the owner's sentence as a lead, then four link panels. |
+| Price calculator | `.lpd-calculator` (theme wrapper) around the `[lpd_form …]` shortcode, which renders `.lpd-calc-wrap` from its own plugin | A full-width, multi-step tool. Get Started gives it a whole section (heading, calculator, phone line). The theme widens `.lpd-calc-wrap` to the full content width in any layout, including a two-column split, a form card or an older single-column page. The same shortcode renders an ordinary form (`.lpd-form`) on Contact; inside `.lpd-calculator` a plain form gets a white card instead. |
 | Legacy | `.lpd-colo-teaser`, `.lpd-page-content` | Styled so old content still looks right. Don't use in new content. |
 | Footer | `.site-footer`, `.lpd-footer-cats`, `.lpd-cat-eye` | Cats stay. |
 
