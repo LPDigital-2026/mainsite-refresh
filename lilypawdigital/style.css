@@ -4,7 +4,7 @@ Theme URI: https://lilypawdigital.xyz
 Author: Lily Paw Digital
 Author URI: https://lilypawdigital.xyz
 Description: Theme for Lily Paw Digital - North East web design, hosting and colocation. Navy and paper, set large, with the paw pink used sparingly.
-Version: 4.30
+Version: 4.31
 Requires at least: 6.0
 Tested up to: 6.6
 Requires PHP: 7.4
@@ -1268,7 +1268,11 @@ body:has(.lpd-bands > .lpd-process:first-child) .page-hero .container::after { d
    lands: in the Get Started section, in a two-column layout or form card on
    a page edited by hand, or in an older single-column page. */
 .lpd-calculator { margin-top: var(--head); }
-.lpd-calculator:not(:has(.lpd-calc-wrap)) { max-width: 760px; padding: var(--pad); background: var(--white); border-radius: var(--radius); --bg: var(--light); --panel: var(--white); --fg: var(--ink); --fg-dim: #564a6c; --rule: rgba(29, 14, 56, 0.14); --rule-strong: rgba(29, 14, 56, 0.42); --accent-text: var(--pink-ink); --field-bg: #fff; --field-border: rgba(29, 14, 56, 0.3); color: var(--fg); }
+.lpd-calculator { padding: var(--pad); background: var(--white); border-radius: var(--radius); --bg: var(--white); --panel: var(--light); --fg: var(--ink); --fg-dim: #564a6c; --rule: rgba(29, 14, 56, 0.14); --rule-strong: rgba(29, 14, 56, 0.42); --accent-text: var(--pink-ink); --field-bg: #fff; --field-border: rgba(29, 14, 56, 0.3); color: var(--fg); }
+.lpd-calculator:not(:has(.lpd-calc-wrap)) { max-width: 760px; }
+/* a calculator placed outside the Get Started section (a page edited by
+   hand) gets the same white card */
+:not(.lpd-calculator) > .lpd-calc-wrap { padding: var(--pad); background: var(--white); border-radius: var(--radius); color: var(--ink); }
 .lpd-calculator + .lpd-alt-contact { max-width: none; }
 .lpd-bands .wp-block-columns.lpd-split:has(.lpd-calc-wrap) { grid-template-columns: minmax(0, 1fr); }
 .lpd-form-card:has(.lpd-calc-wrap) { padding: 0; background: none; }
