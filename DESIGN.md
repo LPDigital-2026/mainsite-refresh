@@ -282,6 +282,7 @@ edited by hand keep the old markup forever.
 | Specification | `.lpd-figures` > `.lpd-figure` (`-number`, `-label`); `.lpd-spec` > `.lpd-spec-row` (h3 + list) | Colocation page. Four headline figures, then labelled rows of ticked facts. Figures do not count up. |
 | Page not found | `404.php`, `.lpd-404-links` | Same title header as any page, the owner's sentence as a lead, then four link panels. |
 | Price calculator | `.lpd-calculator` (theme wrapper) around the `[lpd_form …]` shortcode, which renders `.lpd-calc-wrap` from its own plugin | A full-width, multi-step tool. Get Started gives it a whole section (heading, calculator, phone line). The theme widens `.lpd-calc-wrap` to the full content width in any layout, including a two-column split, a form card or an older single-column page. The same shortcode renders an ordinary form (`.lpd-form`) on Contact; inside `.lpd-calculator` a plain form gets a white card instead. |
+| Forms | `.lpd-form-wrap` / `.lpd-form` from the owner's form plugin (`[lpd_form …]`) | The plugin caps forms at 520px, centres them and sets its own font and colours. `style.css` overrides that so a form fills its card and uses Sora, the site's 52px fields and the pink pill submit button. Tested against the plugin's real markup and inline CSS copied from the live Contact page. |
 | Legacy | `.lpd-colo-teaser`, `.lpd-page-content` | Styled so old content still looks right. Don't use in new content. |
 | Footer | `.site-footer`, `.lpd-footer-cats`, `.lpd-cat-eye` | Cats stay. |
 
@@ -671,6 +672,8 @@ Unresolved when this guide was written:
   screenshot) and inspect the real output.
 - **Nothing has been verified in real WordPress, Safari, Firefox or on a
   physical phone** — only in Chromium against the preview.
-- The contact form (`[lpd_form id="lpd_form_9d620c8f7c"]`), the photo of
-  Lily on About, and the status badge iframe come from outside the theme
+- Lily's photo on About is `https://lilypaw.digital/wp-content/uploads/2026/07/Lily-scaled-1.jpeg`
+  in the media library (the server refuses automated downloads, so it is
+  linked, not copied into the theme).
+- The contact form (`[lpd_form id="lpd_form_9d620c8f7c"]`) and the status badge iframe come from outside the theme
   and have only been seen as stand-ins.

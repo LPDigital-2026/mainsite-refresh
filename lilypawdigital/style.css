@@ -4,7 +4,7 @@ Theme URI: https://lilypawdigital.xyz
 Author: Lily Paw Digital
 Author URI: https://lilypawdigital.xyz
 Description: Theme for Lily Paw Digital - North East web design, hosting and colocation. Navy and paper, set large, with the paw pink used sparingly.
-Version: 4.29
+Version: 4.30
 Requires at least: 6.0
 Tested up to: 6.6
 Requires PHP: 7.4
@@ -1144,6 +1144,51 @@ label { display: block; font-size: 0.92rem; font-weight: 600; margin-bottom: 6px
 .wpforms-container .wpforms-field-checkbox label,
 .wpforms-container .wpforms-field-gdpr-checkbox label { color: var(--fg-dim); font-size: 0.9rem; }
 .wpforms-container .wpforms-error, .wpforms-container .wpforms-field-description { font-size: 0.86rem; }
+
+/* The site's own form plugin ([lpd_form], .lpd-form-wrap) caps itself at
+   520px, centres itself and brings its own font, sizes and colours. Inside
+   the theme it fills the space it is given and uses the site's type,
+   fields and buttons. */
+.lpd-form-wrap,
+.lpd-form-wrap.lpd-form-align-center { max-width: none; width: 100%; margin: 0; font-family: var(--font); }
+.lpd-form-wrap .lpd-form-field { margin: 0 0 18px; }
+.lpd-form-wrap .lpd-form-field label { margin-bottom: 8px; color: var(--fg); font-size: 0.95rem; font-weight: 600; letter-spacing: -0.01em; }
+.lpd-form-wrap .lpd-form-required { color: var(--accent-text); }
+.lpd-form-wrap .lpd-form :is(input[type="text"], input[type="email"], input[type="tel"], input[type="number"], textarea, select) {
+  min-height: 52px;
+  margin: 0;
+  padding: 14px 16px;
+  border: 1px solid var(--field-border);
+  border-radius: var(--radius-sm);
+  background: var(--field-bg);
+  color: var(--fg);
+  font-family: var(--font);
+  font-size: 16px;
+}
+.lpd-form-wrap .lpd-form :is(input, textarea, select):focus { border-color: var(--pink); box-shadow: 0 0 0 3px rgba(240, 82, 156, 0.28); }
+.lpd-form-wrap .lpd-form textarea { min-height: 140px; }
+.lpd-form-wrap .lpd-form-radio-option,
+.lpd-form-wrap .lpd-form-field-checkbox label { color: var(--fg); font-size: 0.97rem; }
+.lpd-form-wrap .lpd-form-radio-option input { accent-color: var(--pink); }
+.lpd-form-wrap .lpd-form-submit {
+  min-height: 50px;
+  margin-top: 6px;
+  padding: 13px 26px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--pink);
+  color: var(--night);
+  font-family: var(--font);
+  font-size: 0.97rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  transition: transform 0.16s var(--ease-out), background-color 0.15s ease;
+}
+.lpd-form-wrap .lpd-form-submit:active { transform: scale(0.97); }
+@media (hover: hover) and (pointer: fine) { .lpd-form-wrap .lpd-form-submit:hover { background: var(--pink-hi); } }
+.lpd-form-wrap .lpd-form-message { border-radius: var(--radius-sm); font-size: 0.95rem; }
+/* the Turnstile check keeps its own fixed width; let it sit on its own line */
+.lpd-form-wrap .cf-turnstile { margin: 4px 0 18px; }
 
 /* ==========================================================================
    Inner pages - page hero and bands (content shipped in inc/pages/)

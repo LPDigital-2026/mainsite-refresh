@@ -53,6 +53,7 @@ return array(
 	'about-us' => array(
 		'81429345e1a3fe48bb8f7ac3404837a2',
 		'4f7c2ff021149cf5fac1fc29ec35fd79',
+		'b2df8e168b6400b351617df6e2e8e1d4',
 	),
 	'our-work' => array(
 		'e4dddc39e5008b892fd425ea9b34e6ad',
