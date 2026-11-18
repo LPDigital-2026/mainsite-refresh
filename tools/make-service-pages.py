@@ -26,14 +26,15 @@ SERVICES = [
     dict(slug='microsoft-365', cls='lpd-service-m365', short='Microsoft 365',
          lead='Set-up and support for Microsoft 365, so your email, files and Teams work together.',
          body='Tell us how your business works and we will help you get Microsoft 365 set up to suit it, with a local team to call when you need help.',
-         items=['Microsoft 365 licences, billed monthly', 'Set-up on your own domain', 'Support from our local team'],
+         items=['Microsoft 365 licences on a 1-year commitment, billed monthly', 'Set-up on your own domain', 'Support from our local team'],
          # Selling prices: Microsoft's UK list price (annual commitment, ex VAT,
          # from 1 July 2026: Basic 5.75, Standard 11.55, Premium 18.10) plus a
          # 20% markup, plus Stripe's UK card fee (1.5% + 20p per user, the
          # cautious case), rounded up to .49/.99. Re-check when Microsoft
          # changes its prices.
          plans_title='Microsoft 365 Plans',
-         plans_intro='Per user, per month, on an annual commitment.',
+         plans_intro='Prices are per user, per month. Every plan has a 1-year commitment, billed monthly.',
+         plans_subprice='Per user, per month, 1-year commitment',
          plans=[
              dict(name='Business Basic', desc='Email, Teams and storage, with the apps in your browser.', price='£7.49',
                   features=['Business email on your domain (50 GB mailbox)', 'Teams for chat, calls and meetings', '1 TB of OneDrive storage per user', 'Web and mobile Word, Excel and PowerPoint']),
@@ -114,7 +115,7 @@ def page(s):
             if plan.get('featured'):
                 inner += p('Most Popular', 'lpd-pricing-badge') + '\n'
             inner += p(plan['name'], 'lpd-pricing-name') + '\n' + p(plan['desc'], 'lpd-pricing-desc') + '\n'
-            inner += p(plan['price'], 'lpd-pricing-price') + '\n' + p('Per user, per month', 'lpd-pricing-subprice') + '\n'
+            inner += p(plan['price'], 'lpd-pricing-price') + '\n' + p(s.get('plans_subprice', 'Per user, per month'), 'lpd-pricing-subprice') + '\n'
             inner += '\n'.join(p(f, 'lpd-pricing-feature') for f in plan['features'])
             inner += '\n<!-- wp:buttons -->\n<div class="wp-block-buttons">\n' + button('lpd-btn-primary' if plan.get('featured') else 'lpd-btn-secondary', '/contact-us/', 'Get Started') + '\n</div>\n<!-- /wp:buttons -->'
             cls = 'lpd-pricing-card lpd-featured' if plan.get('featured') else 'lpd-pricing-card'

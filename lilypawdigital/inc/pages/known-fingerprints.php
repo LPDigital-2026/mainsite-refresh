@@ -89,7 +89,7 @@ return array(
 		'7c8c1158e17556c59b7b6b65a0b69608',
 	),
 	'microsoft-365' => array(
-		'8e4e80fe73913e63f2324e0018e02c8f',
+		'4aed1820ab9336dae46680bb07a61b55',
 	),
 	'hosted-pbx' => array(
 		'bf8f51b8e795bcc30fa502e11a5fdace',
