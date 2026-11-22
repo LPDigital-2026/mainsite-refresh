@@ -124,6 +124,14 @@
 		};
 
 		split( heading );
+		// Long titles (articles) would take over a second to arrive word by
+		// word; squeeze the stagger so every title lands in about the same
+		// time as a short page title.
+		if ( index > 6 ) {
+			heading.querySelectorAll( '.lpd-w > span' ).forEach( function ( word ) {
+				word.style.setProperty( '--i', ( parseFloat( word.style.getPropertyValue( '--i' ) ) * 6 / index ).toFixed( 2 ) );
+			} );
+		}
 		if ( heading.classList.contains( 'lpd-hero-heading' ) ) {
 			heading.querySelectorAll( '.lpd-w > span' ).forEach( function ( word ) {
 				if ( /\.$/.test( word.textContent ) ) {

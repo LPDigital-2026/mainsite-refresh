@@ -22,7 +22,8 @@ $samples = [
   ['Keeping Your Domain Safe From Expiry', 'Domains', 'Losing your domain can take your website and email down overnight. Here is how to make sure it never happens.', 600, false],
 ];
 foreach ($samples as $i => $x) {
-  $GLOBALS['POSTS'][] = (object)['ID'=>100+$i,'post_title'=>$x[0],'cat'=>$x[1],'excerpt'=>$x[2],'post_content'=>str_repeat('word ', $x[3]),'thumb'=>$x[4],'date'=>date('j F Y', strtotime("2026-11-20 -".($i*6)." days"))];
+  $slugs=['spf-dkim-dmarc-explained','does-my-small-business-need-a-website','what-is-colocation','signs-your-wordpress-site-needs-maintenance','microsoft-365-business-plans-compared','hosted-pbx-explained','keeping-domain-safe'];
+  $GLOBALS['POSTS'][] = (object)['ID'=>100+$i,'post_name'=>$slugs[$i],'post_title'=>$x[0],'cat'=>$x[1],'excerpt'=>$x[2],'post_content'=>str_repeat('word ', $x[3]),'thumb'=>false,'date'=>date('j F Y', strtotime("2026-11-20 -".($i*6)." days"))];
 }
 $GLOBALS['LOOP'] = null; $GLOBALS['CUR'] = null;
 class WP_Query { public $posts; public $post_count; private $i = -1;

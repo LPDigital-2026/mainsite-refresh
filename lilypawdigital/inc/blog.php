@@ -16,6 +16,42 @@ function lpd_reading_time( $post = null ) {
 }
 
 /**
+ * A post's picture: its featured image if it has one, otherwise the cover
+ * the theme ships for that article (assets/images/blog/<slug>.jpg), or a
+ * general cover. So every article has an image, and one set in WordPress
+ * always takes over.
+ */
+function lpd_post_cover_url( $post = null ) {
+	$post = get_post( $post );
+	$dir  = get_template_directory() . '/assets/images/blog/';
+	$file = ( $post && is_readable( $dir . $post->post_name . '.jpg' ) ) ? $post->post_name . '.jpg' : 'default.jpg';
+	return get_template_directory_uri() . '/assets/images/blog/' . $file;
+}
+
+function lpd_post_image_url( $post = null, $size = 'large' ) {
+	$post = get_post( $post );
+	if ( $post && has_post_thumbnail( $post ) ) {
+		$url = wp_get_attachment_image_url( get_post_thumbnail_id( $post ), $size );
+		if ( $url ) {
+			return $url;
+		}
+	}
+	return lpd_post_cover_url( $post );
+}
+
+function lpd_post_image( $size = 'large', $attr = array() ) {
+	if ( has_post_thumbnail() ) {
+		the_post_thumbnail( $size, $attr );
+		return;
+	}
+	printf(
+		'<img src="%s" alt="" width="1600" height="1000" loading="%s" decoding="async">',
+		esc_url( lpd_post_cover_url() ),
+		esc_attr( isset( $attr['loading'] ) ? $attr['loading'] : 'lazy' )
+	);
+}
+
+/**
  * The first category, for the small label above a title.
  */
 function lpd_primary_category( $post = null ) {
@@ -39,13 +75,7 @@ function lpd_post_card( $size = 'card', $heading = 'h3' ) {
 	<article <?php post_class( 'lpd-post-card' . ( 'large' === $size ? ' lpd-post-card-featured' : '' ) ); ?>>
 		<a class="lpd-post-card-link" href="<?php the_permalink(); ?>">
 			<figure class="lpd-post-card-image">
-				<?php
-				if ( has_post_thumbnail() ) {
-					the_post_thumbnail( 'large' === $size ? 'large' : 'medium_large', array( 'loading' => 'large' === $size ? 'eager' : 'lazy' ) );
-				} else {
-					echo '<span class="lpd-post-card-placeholder" aria-hidden="true"></span>';
-				}
-				?>
+				<?php lpd_post_image( 'large' === $size ? 'large' : 'medium_large', array( 'loading' => 'large' === $size ? 'eager' : 'lazy' ) ); ?>
 			</figure>
 			<div class="lpd-post-card-body">
 				<p class="lpd-post-card-meta">
@@ -164,7 +194,7 @@ function lpd_structured_data() {
 
 	if ( is_singular( 'post' ) ) {
 		$post  = get_queried_object();
-		$image = has_post_thumbnail( $post ) ? wp_get_attachment_image_url( get_post_thumbnail_id( $post ), 'large' ) : get_template_directory_uri() . '/assets/images/share.jpg';
+		$image = lpd_post_image_url( $post );
 		$data[] = array(
 			'@context'         => 'https://schema.org',
 			'@type'            => 'BlogPosting',

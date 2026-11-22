@@ -5,7 +5,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-define( 'LPD_VERSION', '4.34' );
+define( 'LPD_VERSION', '4.35' );
 
 function lpd_setup() {
 	load_theme_textdomain( 'lilypawdigital', get_template_directory() . '/languages' );
@@ -152,6 +152,9 @@ function lpd_share_meta() {
 			if ( $thumbnail ) {
 				$image = $thumbnail[0];
 			}
+		}
+		if ( is_singular( 'post' ) && function_exists( 'lpd_post_image_url' ) ) {
+			$image = lpd_post_image_url();
 		}
 	}
 
