@@ -54,6 +54,7 @@ function get_permalink($id=0){ return $id ? 'blogindex.html' : 'post.html'; }
 function the_posts_pagination($a=[]){ echo '<nav class="navigation pagination"><div class="nav-links"><span class="page-numbers current">1</span><a class="page-numbers" href="#">2</a><a class="page-numbers" href="#">3</a><a class="next page-numbers" href="#">Older</a></div></nav>'; }
 function get_the_archive_title(){ return 'Category: Email'; } function get_the_archive_description(){ return ''; }
 function comments_template(){}
+function get_the_content(){ return $GLOBALS['CUR']->post_content; } function sanitize_title($t){ return trim(preg_replace('/[^a-z0-9]+/','-',strtolower($t)),'-'); }
 $TITLES = ['home'=>'Home','webdesign'=>'Web Design','colocation'=>'Colocation','about'=>'About Us','work'=>'Our Work','contact'=>'Contact Us','getstarted'=>'Get Started','websitemaintenance'=>'Website Maintenance','domainsanddns'=>'Domain and DNS Management','businessemail'=>'Business Email Setup','websitesecurity'=>'Website Security Monitoring','microsoft365'=>'Microsoft 365','hostedpbx'=>'Hosted PBX','404'=>'Page Not Found','blogindex'=>'Blog','post'=>'Article'];
 
 function __($s){return $s;} function esc_html__($s){return htmlspecialchars($s);} function esc_html_e($s){echo htmlspecialchars($s);}

@@ -517,6 +517,45 @@
 	} )();
 
 	/* ---------------------------------------------------------------
+	 * Articles: a reading-progress line, the current section highlighted
+	 * in "On this page", and the copy-link button.
+	 * ------------------------------------------------------------- */
+	( function () {
+		var body = document.querySelector( '.lpd-article-body' );
+		if ( ! body ) return;
+		var bar = document.querySelector( '.lpd-read-progress' );
+		var links = Array.prototype.slice.call( document.querySelectorAll( '.lpd-article-aside .lpd-toc a' ) );
+		var heads = links.map( function ( a ) { return document.getElementById( a.getAttribute( 'href' ).slice( 1 ) ); } );
+		var queued = false;
+		var update = function () {
+			queued = false;
+			var box = body.getBoundingClientRect();
+			var vh = window.innerHeight;
+			if ( bar ) {
+				var p = ( vh * 0.4 - box.top ) / Math.max( box.height - vh * 0.4, 1 );
+				bar.style.setProperty( '--p', Math.min( Math.max( p, 0 ), 1 ).toFixed( 4 ) );
+			}
+			var current = -1;
+			heads.forEach( function ( h, i ) { if ( h && h.getBoundingClientRect().top < vh * 0.3 ) current = i; } );
+			links.forEach( function ( a, i ) { a.classList.toggle( 'is-current', i === current ); } );
+		};
+		var queue = function () { if ( ! queued ) { queued = true; window.requestAnimationFrame( update ); } };
+		window.addEventListener( 'scroll', queue, { passive: true } );
+		window.addEventListener( 'resize', queue, { passive: true } );
+		update();
+
+		document.querySelectorAll( '.lpd-share-copy' ).forEach( function ( btn ) {
+			var label = btn.textContent;
+			btn.addEventListener( 'click', function () {
+				var done = function () { btn.textContent = btn.getAttribute( 'data-done' ); setTimeout( function () { btn.textContent = label; }, 1800 ); };
+				if ( navigator.clipboard && navigator.clipboard.writeText ) {
+					navigator.clipboard.writeText( btn.getAttribute( 'data-url' ) ).then( done, function () {} );
+				}
+			} );
+		} );
+	} )();
+
+	/* ---------------------------------------------------------------
 	 * Stats: show a leading "+" as trailing ("+15" -> "15+"), and count
 	 * up once when the figure scrolls into view.
 	 * ------------------------------------------------------------- */

@@ -4,7 +4,7 @@ Theme URI: https://lilypawdigital.xyz
 Author: Lily Paw Digital
 Author URI: https://lilypawdigital.xyz
 Description: Theme for Lily Paw Digital - North East web design, hosting and colocation. Navy and paper, set large, with the paw pink used sparingly.
-Version: 4.37
+Version: 4.38
 Requires at least: 6.0
 Tested up to: 6.6
 Requires PHP: 7.4
@@ -1383,21 +1383,83 @@ body:has(.lpd-bands > .lpd-process:first-child) .page-hero .container::after { d
 .lpd-article { padding: clamp(40px, 5vw, 72px) 0 var(--section); }
 .lpd-article-image { max-width: 1000px; margin: 0 0 clamp(36px, 5vw, 64px); overflow: hidden; border-radius: var(--radius); box-shadow: 0 0 0 1px var(--rule); }
 .lpd-article-image img { width: 100%; }
+/* article layout: reading column on the left edge, tools in a column on
+   the right on wide screens (it follows you down the page) */
+.lpd-article-layout { display: grid; grid-template-columns: minmax(0, 720px) minmax(240px, 300px); justify-content: space-between; gap: clamp(40px, 6vw, 96px); align-items: start; }
+.lpd-article-main { min-width: 0; }
+.lpd-article-aside { align-self: stretch; }
+.lpd-article-aside-inner { position: sticky; top: calc(var(--bar) + 28px); display: grid; gap: var(--gap); }
 .lpd-article-body,
-.lpd-article-tags,
-.lpd-article-comments { max-width: 720px; margin-inline: 0; }
-/* everything in an article starts on the same left edge as its title */
+.lpd-article-tags { max-width: 720px; margin-inline: 0; }
+.lpd-article-image { max-width: none; }
+@media (max-width: 1100px) {
+  .lpd-article-layout { grid-template-columns: minmax(0, 1fr); }
+  .lpd-article-aside { display: none; }
+}
+
+/* the summary under the title */
+.lpd-article-standfirst { max-width: 40ch; margin: 22px 0 0; color: rgba(251, 247, 242, 0.82); font-size: clamp(1.1rem, 1.7vw, 1.35rem); line-height: 1.45; letter-spacing: -0.015em; }
+
+/* reading progress: a thin paw-gradient line under the header */
+.lpd-read-progress { position: fixed; inset: var(--bar) 0 auto 0; z-index: 49; height: 3px; pointer-events: none; }
+.admin-bar .lpd-read-progress { top: calc(var(--bar) + 32px); }
+.lpd-read-progress span { display: block; height: 100%; background: var(--paw); transform-origin: left center; transform: scaleX(var(--p, 0)); }
+
+/* on this page */
+.lpd-toc { padding: var(--pad); background: var(--panel); border-radius: var(--radius); }
+.lpd-toc-title { margin: 0 0 14px; color: var(--fg); font-size: 0.9rem; font-weight: 600; }
+.lpd-toc ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; counter-reset: toc; }
+.lpd-toc li { counter-increment: toc; }
+.lpd-toc a { display: grid; grid-template-columns: 1.6em minmax(0, 1fr); gap: 4px; padding: 7px 10px 7px 0; border-radius: var(--radius-sm); color: var(--fg-dim); font-size: 0.93rem; line-height: 1.4; transition: color 0.15s ease; }
+.lpd-toc a::before { content: counter(toc, decimal-leading-zero); color: var(--fg-dim); font-size: 0.8rem; font-variant-numeric: tabular-nums; padding-top: 2px; opacity: 0.7; }
+.lpd-toc a.is-current { color: var(--fg); font-weight: 500; }
+.lpd-toc a.is-current::before { color: var(--accent-text); opacity: 1; }
+@media (hover: hover) and (pointer: fine) { .lpd-toc a:hover { color: var(--fg); } }
+/* the same list, collapsed above the text on smaller screens */
+.lpd-toc-inline { display: none; margin: 0 0 clamp(28px, 4vw, 44px); padding: 0; }
+.lpd-toc-inline summary { cursor: pointer; padding: 16px var(--pad); color: var(--fg); font-weight: 600; list-style: none; }
+.lpd-toc-inline summary::-webkit-details-marker { display: none; }
+.lpd-toc-inline summary::after { content: '+'; float: right; color: var(--accent-text); font-weight: 400; }
+.lpd-toc-inline[open] summary::after { content: '\2212'; }
+.lpd-toc-inline ol { padding: 0 var(--pad) var(--pad); }
+@media (max-width: 1100px) { .lpd-toc-inline { display: block; } }
+
+/* help card */
+.lpd-aside-card { padding: var(--pad); background: var(--paw); border-radius: var(--radius); color: var(--night); }
+.lpd-aside-card p { margin: 0 0 14px; color: var(--night); font-size: 0.95rem; line-height: 1.5; }
+.lpd-aside-card .lpd-aside-card-title { margin-bottom: 6px; font-size: 1.15rem; font-weight: 600; letter-spacing: -0.03em; }
+.lpd-aside-card .btn { min-height: 44px; background: var(--night); border-color: var(--night); color: var(--cream); }
+@media (hover: hover) and (pointer: fine) { .lpd-aside-card .btn:hover { background: var(--navy); border-color: var(--navy); color: var(--cream); } }
+
+/* share */
+.lpd-article-share { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; max-width: 720px; margin-top: clamp(36px, 5vw, 56px); padding-top: 28px; border-top: 1px solid var(--rule); }
+.lpd-article-share p { margin: 0; color: var(--fg); font-weight: 600; }
+.lpd-share { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.lpd-share a, .lpd-share button { display: inline-flex; align-items: center; min-height: 40px; padding: 8px 16px; border: 1.5px solid var(--rule-strong); border-radius: 999px; background: none; color: var(--fg); font: inherit; font-size: 0.9rem; font-weight: 500; cursor: pointer; transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease, transform 0.16s var(--ease-out); }
+.lpd-share a:active, .lpd-share button:active { transform: scale(0.97); }
+@media (hover: hover) and (pointer: fine) { .lpd-share a:hover, .lpd-share button:hover { background: var(--fg); border-color: var(--fg); color: var(--bg); } }
+
+/* author */
+.lpd-author { display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 18px; max-width: 720px; margin-top: 28px; padding: var(--pad); background: var(--panel); border-radius: var(--radius); }
+.lpd-author-mark { width: 56px; height: 56px; border-radius: 50%; background: var(--paw); position: relative; }
+.lpd-author-mark::after { content: ''; position: absolute; inset: 14px; background: var(--night); -webkit-mask: url('assets/icons/paw.svg') center / contain no-repeat; mask: url('assets/icons/paw.svg') center / contain no-repeat; }
+.lpd-author p { margin: 0 0 8px; color: var(--fg-dim); font-size: 0.97rem; line-height: 1.6; }
+.lpd-author p:last-child { margin: 0; }
+.lpd-author .lpd-author-name { color: var(--fg); font-weight: 600; }
+.lpd-author a { color: var(--accent-text); text-decoration: underline; text-underline-offset: 0.2em; }
 .lpd-article-body > * { margin-top: 0; }
-.entry-content.lpd-article-body p { color: var(--fg); font-size: 1.12rem; line-height: 1.75; margin: 0 0 1.4em; }
-.entry-content.lpd-article-body > p:first-of-type { font-size: clamp(1.25rem, 2vw, 1.45rem); line-height: 1.5; letter-spacing: -0.02em; margin-bottom: 1.4em; }
-.entry-content.lpd-article-body h2 { font-size: clamp(1.6rem, 2.8vw, 2.1rem); letter-spacing: -0.04em; line-height: 1.15; margin: 2.2em 0 0.7em; }
+.entry-content.lpd-article-body p { color: rgba(251, 247, 242, 0.86); font-size: 1.12rem; line-height: 1.75; margin: 0 0 1.4em; }
+.entry-content.lpd-article-body strong { color: var(--fg); font-weight: 600; }
+.entry-content.lpd-article-body > p:first-of-type { color: var(--fg); font-size: clamp(1.25rem, 2vw, 1.45rem); line-height: 1.5; letter-spacing: -0.02em; margin-bottom: 1.4em; }
+.entry-content.lpd-article-body h2 { font-size: clamp(1.6rem, 2.8vw, 2.1rem); letter-spacing: -0.04em; line-height: 1.15; margin: 2.2em 0 0.7em; scroll-margin-top: calc(var(--bar) + 32px); }
 .entry-content.lpd-article-body h3 { font-size: clamp(1.25rem, 2vw, 1.45rem); letter-spacing: -0.03em; margin: 1.8em 0 0.6em; }
-.entry-content.lpd-article-body :is(ul, ol) { color: var(--fg); font-size: 1.12rem; line-height: 1.7; margin: 0 0 1.4em; padding-left: 1.3em; }
+.entry-content.lpd-article-body :is(ul, ol) { color: rgba(251, 247, 242, 0.86); font-size: 1.12rem; line-height: 1.7; margin: 0 0 1.4em; padding-left: 1.3em; }
 .entry-content.lpd-article-body li { margin-bottom: 0.45em; }
 .entry-content.lpd-article-body li::marker { color: var(--pink); }
 .entry-content.lpd-article-body a:not(.wp-block-button__link) { color: var(--accent-text); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
-.entry-content.lpd-article-body blockquote { margin: 2em 0; padding: 0 0 0 24px; border-left: 3px solid var(--pink); }
-.entry-content.lpd-article-body blockquote p { font-size: 1.3rem; font-weight: 500; letter-spacing: -0.02em; line-height: 1.45; }
+.entry-content.lpd-article-body blockquote { margin: 2.2em 0; padding: clamp(22px, 3vw, 32px); border-left: 0; border-radius: var(--radius); background: var(--panel); position: relative; }
+.entry-content.lpd-article-body blockquote::before { content: ''; display: block; width: 40px; height: 3px; margin-bottom: 18px; border-radius: 3px; background: var(--paw); }
+.entry-content.lpd-article-body blockquote p { margin: 0; color: var(--fg); font-size: clamp(1.2rem, 1.9vw, 1.4rem); font-weight: 500; letter-spacing: -0.025em; line-height: 1.45; }
 .entry-content.lpd-article-body :is(figure, .wp-block-image) { margin: 2em 0; }
 .entry-content.lpd-article-body img { border-radius: var(--radius-sm); margin: 0; height: auto; }
 .entry-content.lpd-article-body figcaption { margin-top: 10px; color: var(--fg-dim); font-size: 0.9rem; text-align: left; }
@@ -1407,7 +1469,7 @@ body:has(.lpd-bands > .lpd-process:first-child) .page-hero .container::after { d
 .entry-content.lpd-article-body table { width: 100%; margin: 2em 0; border-collapse: collapse; font-size: 1rem; }
 .entry-content.lpd-article-body :is(th, td) { padding: 12px 14px; border-bottom: 1px solid var(--rule); text-align: left; }
 .entry-content.lpd-article-body hr { margin: 2.5em 0; border: 0; border-top: 1px solid var(--rule); }
-.lpd-article-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 40px; padding: 0; list-style: none; }
+.lpd-article-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 36px; padding: 0; list-style: none; }
 .lpd-article-tags a { display: inline-block; padding: 6px 14px; border-radius: 999px; background: var(--panel); color: var(--fg); font-size: 0.9rem; font-weight: 500; }
 .lpd-article-comments { margin-top: 56px; }
 .lpd-related { padding: 0 0 var(--section); }

@@ -303,3 +303,72 @@ function lpd_blog_list( $title, $intro = '' ) {
 	</main>
 	<?php
 }
+
+/**
+ * An article's content with an id on every section heading (h2), so the
+ * contents list can link to them, plus that list.
+ * Returns array( 'html' => ..., 'toc' => array( array( id, text ), ... ) ).
+ */
+function lpd_article_content_and_toc() {
+	$html = apply_filters( 'the_content', get_the_content() );
+	$html = str_replace( ']]>', ']]&gt;', $html );
+	$toc  = array();
+	$used = array();
+	$html = preg_replace_callback(
+		'#<h2([^>]*)>(.*?)</h2>#is',
+		function ( $m ) use ( &$toc, &$used ) {
+			$attrs = $m[1];
+			$text  = trim( wp_strip_all_tags( $m[2] ) );
+			if ( '' === $text ) {
+				return $m[0];
+			}
+			if ( preg_match( '#\sid=["\']([^"\']+)["\']#', $attrs, $id ) ) {
+				$id = $id[1];
+			} else {
+				$base = sanitize_title( $text );
+				$id   = $base ? $base : 'section';
+				$n    = 2;
+				while ( isset( $used[ $id ] ) ) {
+					$id = $base . '-' . $n++;
+				}
+				$attrs .= ' id="' . esc_attr( $id ) . '"';
+			}
+			$used[ $id ] = true;
+			$toc[]       = array( $id, $text );
+			return '<h2' . $attrs . '>' . $m[2] . '</h2>';
+		},
+		$html
+	);
+	return array( 'html' => $html, 'toc' => $toc );
+}
+
+/**
+ * Share links for an article. Plain links (no tracking scripts), plus a
+ * copy-link button that interactions.js wires up.
+ */
+function lpd_share_links() {
+	$url   = rawurlencode( get_permalink() );
+	$title = rawurlencode( wp_strip_all_tags( get_the_title() ) );
+	$links = array(
+		'LinkedIn' => 'https://www.linkedin.com/sharing/share-offsite/?url=' . $url,
+		'Facebook' => 'https://www.facebook.com/sharer/sharer.php?u=' . $url,
+		'X'        => 'https://x.com/intent/post?url=' . $url . '&text=' . $title,
+	);
+	echo '<ul class="lpd-share">';
+	foreach ( $links as $name => $href ) {
+		printf(
+			'<li><a href="%1$s" target="_blank" rel="noopener" aria-label="%2$s">%3$s</a></li>',
+			esc_url( $href ),
+			/* translators: %s: a social network */
+			esc_attr( sprintf( __( 'Share on %s', 'lilypawdigital' ), $name ) ),
+			esc_html( $name )
+		);
+	}
+	printf(
+		'<li><button type="button" class="lpd-share-copy" data-url="%1$s" data-done="%2$s">%3$s</button></li>',
+		esc_url( get_permalink() ),
+		esc_attr__( 'Link copied', 'lilypawdigital' ),
+		esc_html__( 'Copy link', 'lilypawdigital' )
+	);
+	echo '</ul>';
+}
