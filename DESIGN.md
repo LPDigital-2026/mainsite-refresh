@@ -247,12 +247,10 @@ Any other number is a bug.
 - Breakpoints in use: **1100 / 1080** (4-up grids go 2-up, nav tightens),
   **900** (two-column layouts stack, mobile menu, scene switches to phone
   layout), **760 / 640** (grids go single column), **400** (logo shrinks).
-- Left-align by default, with one exception: on the home page, headings of
-  full-width sections (What We Do, How We're Different, Testimonials, How
-  It Works, Pricing, website features) are centred, with a larger subhead
-  (up to 1.35rem), in the manner of Apple's product pages. Two-column
-  sections (FAQ, About, Contact) and inner pages keep left-aligned
-  headings.
+- Left-align everything. No centred text anywhere (owner's request,
+  after a centred-headings pass and a centred article column were both
+  reported as "all the text is centred"). Centred text is only used inside
+  buttons.
 
 ## 8. Components
 
@@ -283,7 +281,7 @@ edited by hand keep the old markup forever.
 | Page not found | `404.php`, `.lpd-404-links` | Same title header as any page, the owner's sentence as a lead, then four link panels. |
 | Price calculator | `.lpd-calculator` (theme wrapper) around the `[lpd_form …]` shortcode, which renders `.lpd-calc-wrap` from its own plugin | A full-width, multi-step tool. Get Started gives it a whole section (heading, calculator, phone line), on a white card (owner's request) with the light-surface colours, wherever it appears. The theme widens `.lpd-calc-wrap` to the full content width in any layout, including a two-column split, a form card or an older single-column page. The same shortcode renders an ordinary form (`.lpd-form`) on Contact; inside `.lpd-calculator` a plain form gets a white card instead. |
 | Forms | `.lpd-form-wrap` / `.lpd-form` from the owner's form plugin (`[lpd_form …]`) | The plugin caps forms at 520px, centres them and sets its own font and colours. `style.css` overrides that so a form fills its card and uses Sora, the site's 52px fields and the pink pill submit button. Tested against the plugin's real markup and inline CSS copied from the live Contact page. |
-| Blog | `home.php` (the posts page), `archive.php`, `single.php`, helpers in `inc/blog.php`; `.lpd-post-card` (`-featured`), `.lpd-post-grid`, `.lpd-article*`, `.lpd-related`, `.lpd-latest` | Posts page: title and intro come from the Blog page itself; newest post as a large side-by-side card, the rest in a 3-column grid, 9 a page, pill page numbers. Cards: picture (featured image, else the theme's cover `assets/images/blog/<slug>.jpg`, else `default.jpg`; see `lpd_post_image_url()`), category, reading time, title, excerpt, date. Article: the same header as every page (category, date and reading time in a small line, the title, the drawn track; long titles have their word stagger squeezed so they arrive as quickly as short ones), then on the night surface like other pages: breadcrumbs, the picture up to 1000px, text column 680px at 1.12rem, tags, related posts and a call to action. The site's generic `.entry-content` styles exclude `.lpd-article-body`, or they override the article styles. Home: "From the Blog" (`[lpd_latest_posts count="3"]`) before Contact, hidden until there are posts. |
+| Blog | `home.php` (the posts page), `archive.php`, `single.php`, helpers in `inc/blog.php`; `.lpd-post-card` (`-featured`), `.lpd-post-grid`, `.lpd-article*`, `.lpd-related`, `.lpd-latest` | Posts page: title and intro come from the Blog page itself; newest post as a large side-by-side card, the rest in a 3-column grid, 9 a page, pill page numbers. Cards: picture (featured image, else the theme's cover `assets/images/blog/<slug>.jpg`, else `default.jpg`; see `lpd_post_image_url()`), category, reading time, title, excerpt, date. Article: the same header as every page (category, date and reading time in a small line, the title, the drawn track; long titles have their word stagger squeezed so they arrive as quickly as short ones), then on the night surface like other pages: breadcrumbs, the picture up to 1000px, text column 720px at 1.12rem, all left-aligned on the same edge as the title (the owner disliked a centred column), tags, related posts and a call to action. The site's generic `.entry-content` styles exclude `.lpd-article-body`, or they override the article styles. Home: "From the Blog" (`[lpd_latest_posts count="3"]`) before Contact, hidden until there are posts. |
 | Legacy | `.lpd-colo-teaser`, `.lpd-page-content` | Styled so old content still looks right. Don't use in new content. |
 | Footer | `.site-footer`, `.lpd-footer-cats`, `.lpd-cat-eye` | Cats stay. |
 

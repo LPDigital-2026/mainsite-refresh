@@ -4,7 +4,7 @@ Theme URI: https://lilypawdigital.xyz
 Author: Lily Paw Digital
 Author URI: https://lilypawdigital.xyz
 Description: Theme for Lily Paw Digital - North East web design, hosting and colocation. Navy and paper, set large, with the paw pink used sparingly.
-Version: 4.35
+Version: 4.36
 Requires at least: 6.0
 Tested up to: 6.6
 Requires PHP: 7.4
@@ -463,12 +463,10 @@ button[type="submit"], input[type="submit"] { background: var(--pink); border-co
 .lpd-section-heading { margin: 0 0 var(--head); text-align: left; }
 .lpd-section-heading h2 { font-size: clamp(2rem, 4.4vw, 3.5rem); letter-spacing: -0.045em; line-height: 1.02; margin: 0; max-width: 16em; }
 .lpd-section-heading p { color: var(--fg-dim); font-size: clamp(1.02rem, 1.3vw, 1.15rem); line-height: 1.55; margin: 16px 0 0; max-width: 44ch; }
-/* Home page: section headlines centred over full-width content, with a
-   larger subhead. Two-column sections (FAQ, About, Contact) keep theirs
-   left, beside the content. */
-.lpd-front-page > .wp-block-group:not(.lpd-faq, .lpd-about, .lpd-contact) .lpd-section-heading { text-align: center; }
-.lpd-front-page > .wp-block-group:not(.lpd-faq, .lpd-about, .lpd-contact) .lpd-section-heading h2 { margin-inline: auto; font-size: clamp(2.2rem, 5vw, 4rem); }
-.lpd-front-page > .wp-block-group:not(.lpd-faq, .lpd-about, .lpd-contact) .lpd-section-heading p { margin: 18px auto 0; max-width: 40ch; font-size: clamp(1.1rem, 1.6vw, 1.35rem); line-height: 1.45; letter-spacing: -0.015em; }
+/* Home page: section headlines set a step larger, with a larger subhead,
+   left-aligned like everything else (the owner asked for no centred text). */
+.lpd-front-page > .wp-block-group:not(.lpd-faq, .lpd-about, .lpd-contact) .lpd-section-heading h2 { font-size: clamp(2.2rem, 5vw, 4rem); }
+.lpd-front-page > .wp-block-group:not(.lpd-faq, .lpd-about, .lpd-contact) .lpd-section-heading p { margin: 18px 0 0; max-width: 40ch; font-size: clamp(1.1rem, 1.6vw, 1.35rem); line-height: 1.45; letter-spacing: -0.015em; }
 
 /* ==========================================================================
    Services - two large media panels, then a line for what's next
@@ -1378,16 +1376,17 @@ body:has(.lpd-bands > .lpd-process:first-child) .page-hero .container::after { d
 /* the same header as every other page: a small line, the title, the track */
 .lpd-article-meta { display: flex; flex-wrap: wrap; gap: 6px 12px; margin: 0 0 20px; color: rgba(251, 247, 242, 0.74); font-size: 0.95rem; }
 .lpd-article-cat { color: var(--accent-text); font-weight: 600; }
-.lpd-breadcrumbs { display: flex; flex-wrap: wrap; gap: 6px 10px; max-width: 1000px; margin: 0 auto 24px; color: var(--fg-dim); font-size: 0.88rem; }
+.lpd-breadcrumbs { display: flex; flex-wrap: wrap; gap: 6px 10px; margin: 0 0 24px; color: var(--fg-dim); font-size: 0.88rem; }
 .lpd-breadcrumbs a { color: var(--fg-dim); }
 .lpd-breadcrumbs [aria-current] { overflow: hidden; max-width: 34ch; white-space: nowrap; text-overflow: ellipsis; }
 @media (hover: hover) and (pointer: fine) { .lpd-breadcrumbs a:hover, .lpd-article-cat:hover { color: var(--fg); text-decoration: underline; text-underline-offset: 0.2em; } }
 .lpd-article { padding: clamp(40px, 5vw, 72px) 0 var(--section); }
-.lpd-article-image { max-width: 1000px; margin: 0 auto clamp(36px, 5vw, 64px); overflow: hidden; border-radius: var(--radius); box-shadow: 0 0 0 1px var(--rule); }
+.lpd-article-image { max-width: 1000px; margin: 0 0 clamp(36px, 5vw, 64px); overflow: hidden; border-radius: var(--radius); box-shadow: 0 0 0 1px var(--rule); }
 .lpd-article-image img { width: 100%; }
 .lpd-article-body,
 .lpd-article-tags,
-.lpd-article-comments { max-width: 680px; margin-inline: auto; }
+.lpd-article-comments { max-width: 720px; margin-inline: 0; }
+/* everything in an article starts on the same left edge as its title */
 .lpd-article-body > * { margin-top: 0; }
 .entry-content.lpd-article-body p { color: var(--fg); font-size: 1.12rem; line-height: 1.75; margin: 0 0 1.4em; }
 .entry-content.lpd-article-body > p:first-of-type { font-size: clamp(1.25rem, 2vw, 1.45rem); line-height: 1.5; letter-spacing: -0.02em; margin-bottom: 1.4em; }
@@ -1417,7 +1416,7 @@ body:has(.lpd-bands > .lpd-process:first-child) .page-hero .container::after { d
 
 /* home page: newest articles (hidden until there are some) */
 .lpd-latest:not(:has(.lpd-post-card)) { display: none; }
-.lpd-latest .lpd-latest-more { justify-content: center; margin-top: var(--head); }
+.lpd-latest .lpd-latest-more { margin-top: var(--head); }
 
 /* ==========================================================================
    Pages whose content has not been brought up to date, posts, search:
