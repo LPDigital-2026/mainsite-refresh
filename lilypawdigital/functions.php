@@ -5,7 +5,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-define( 'LPD_VERSION', '4.33' );
+define( 'LPD_VERSION', '4.34' );
 
 function lpd_setup() {
 	load_theme_textdomain( 'lilypawdigital', get_template_directory() . '/languages' );
@@ -196,3 +196,4 @@ require get_template_directory() . '/inc/template-tags.php';
 require get_template_directory() . '/inc/customizer-defaults.php';
 require get_template_directory() . '/inc/page-setup.php';
 require get_template_directory() . '/inc/blog.php';
+require get_template_directory() . '/inc/drafts.php';

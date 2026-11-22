@@ -1,0 +1,106 @@
+<?php
+/**
+ * Starter blog articles. Appearance → Page Setup → "Add draft articles"
+ * saves them as drafts (never published) for the owner to read, edit,
+ * give a featured image and publish. An article is skipped if a post
+ * with the same slug already exists, so the button is safe to press twice.
+ */
+
+if ( ! defined( 'ABSPATH' ) ) exit;
+
+function lpd_draft_articles() {
+	return array(
+		'spf-dkim-dmarc-explained'          => array(
+			'title'    => 'SPF, DKIM and DMARC Explained: Stop Your Emails Going to Spam',
+			'file'     => 'spf-dkim-dmarc.html',
+			'category' => 'Email',
+			'tags'     => array( 'Email', 'DNS', 'Security' ),
+			'excerpt'  => 'Three DNS records decide whether your business emails reach the inbox or the spam folder. Here is what SPF, DKIM and DMARC do and how to set them up.',
+		),
+		'microsoft-365-business-plans-compared' => array(
+			'title'    => 'Microsoft 365 Business Basic vs Standard vs Premium: Which Do You Need?',
+			'file'     => 'microsoft-365-plans.html',
+			'category' => 'Microsoft 365',
+			'tags'     => array( 'Microsoft 365', 'Email', 'Security' ),
+			'excerpt'  => 'The three Microsoft 365 business plans compared in plain English, so you can pick the right one for your team without paying for features you will not use.',
+		),
+		'does-my-small-business-need-a-website' => array(
+			'title'    => 'Does Your Small Business Still Need a Website in 2026?',
+			'file'     => 'small-business-website.html',
+			'category' => 'Web Design',
+			'tags'     => array( 'Web Design', 'Small Business', 'Local SEO' ),
+			'excerpt'  => 'A social media page is not enough on its own. What a simple website does for a local business, and what it needs to include.',
+		),
+		'what-is-colocation'                => array(
+			'title'    => 'What Is Colocation, and Is It Right for Your Business?',
+			'file'     => 'what-is-colocation.html',
+			'category' => 'Colocation',
+			'tags'     => array( 'Colocation', 'Data Centre', 'Newcastle' ),
+			'excerpt'  => 'Colocation moves your own servers into a professional data centre. How it works, how it compares with the cloud and the office, and who it suits.',
+		),
+		'signs-your-wordpress-site-needs-maintenance' => array(
+			'title'    => 'Five Signs Your WordPress Website Needs Maintenance',
+			'file'     => 'wordpress-maintenance.html',
+			'category' => 'Website Maintenance',
+			'tags'     => array( 'WordPress', 'Security', 'Backups' ),
+			'excerpt'  => 'Waiting updates, missing backups and slow pages all add up. Five warning signs your WordPress site needs attention, and what good maintenance looks like.',
+		),
+		'hosted-pbx-explained'              => array(
+			'title'    => 'Hosted PBX Explained: Business Phones Ready for the Digital Switchover',
+			'file'     => 'hosted-pbx.html',
+			'category' => 'Hosted PBX',
+			'tags'     => array( 'Hosted PBX', 'Phones', 'Digital Switchover' ),
+			'excerpt'  => 'The UK copper phone network is being switched off. What a hosted PBX is, how FreePBX and FusionPBX compare, and whether you can keep your number.',
+		),
+		'domain-and-ssl-expiry'             => array(
+			'title'    => 'Domain and SSL Expiry: How to Stop Your Website Going Offline',
+			'file'     => 'domain-and-ssl-expiry.html',
+			'category' => 'Domains and DNS',
+			'tags'     => array( 'Domains', 'SSL', 'Security' ),
+			'excerpt'  => 'A missed domain or SSL renewal can take your website and email offline overnight. How to make sure it never happens to your business.',
+		),
+	);
+}
+
+/**
+ * Saves the articles as drafts. Returns the number added.
+ */
+function lpd_add_draft_articles() {
+	$added = 0;
+	foreach ( lpd_draft_articles() as $slug => $article ) {
+		if ( get_page_by_path( $slug, OBJECT, 'post' ) ) {
+			continue;
+		}
+		$path = get_template_directory() . '/inc/drafts/' . $article['file'];
+		if ( ! is_readable( $path ) ) {
+			continue;
+		}
+		$cat_id = 0;
+		$term   = term_exists( $article['category'], 'category' );
+		if ( ! $term ) {
+			$term = wp_insert_term( $article['category'], 'category' );
+		}
+		if ( ! is_wp_error( $term ) && $term ) {
+			$cat_id = (int) ( is_array( $term ) ? $term['term_id'] : $term );
+		}
+		$id = wp_insert_post(
+			wp_slash(
+				array(
+					'post_type'     => 'post',
+					'post_status'   => 'draft',
+					'post_name'     => $slug,
+					'post_title'    => $article['title'],
+					'post_content'  => file_get_contents( $path ),
+					'post_excerpt'  => $article['excerpt'],
+					'post_category' => $cat_id ? array( $cat_id ) : array(),
+					'tags_input'    => $article['tags'],
+				)
+			),
+			true
+		);
+		if ( ! is_wp_error( $id ) && $id ) {
+			$added++;
+		}
+	}
+	return $added;
+}

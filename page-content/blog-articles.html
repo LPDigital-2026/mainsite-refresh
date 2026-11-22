@@ -1,0 +1,1143 @@
+<!doctype html><html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lily Paw Digital - starter blog articles</title>
+<style>
+body{margin:0;background:#f5f1fb;color:#1d0e38;font:17px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:820px;margin:0 auto;padding:40px 20px 80px}
+h1{font-size:2rem;letter-spacing:-.03em;margin:0 0 8px} .lead{color:#564a6c;margin:0 0 28px}
+.post{background:#fff;border-radius:18px;margin:0 0 14px;padding:0 24px} summary{cursor:pointer;padding:18px 0;font-weight:600;display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.n{color:#b3276b} .w{color:#564a6c;font-weight:400;font-size:.9rem}
+dl{display:grid;grid-template-columns:110px 1fr;gap:6px 14px;margin:0 0 20px;padding:16px;background:#f5f1fb;border-radius:12px;font-size:.95rem} dt{font-weight:600} dd{margin:0} small{color:#564a6c}
+article{border-top:1px solid #e5def0;padding-top:12px} article h2{font-size:1.4rem;margin:1.6em 0 .4em} article h3{font-size:1.15rem} article a{color:#b3276b}
+textarea{width:100%;height:110px;margin:16px 0 8px;font:12px/1.4 ui-monospace,monospace;border:1px solid #d8d0e6;border-radius:8px;padding:8px}
+button{margin:0 0 22px;padding:10px 18px;border:0;border-radius:999px;background:#f0529c;color:#1d0e38;font-weight:600;cursor:pointer}
+</style></head><body><main>
+<h1>Starter blog articles</h1>
+<p class="lead">7 articles about your services. The easiest way to use them: upload the theme, go to <strong>Appearance → Page Setup</strong> and press <strong>Add draft articles</strong>. They arrive as drafts with their titles, excerpts, categories and tags filled in. Read each one, change anything that is not right, add a featured image, then publish. This page is the same articles to read first, or to paste in by hand.</p>
+
+<details class="post" open>
+  <summary><span class="n">1</span> <span class="t">SPF, DKIM and DMARC Explained: Stop Your Emails Going to Spam</span> <span class="w">507 words, about 2 min read</span></summary>
+  <dl>
+    <dt>Title</dt><dd>SPF, DKIM and DMARC Explained: Stop Your Emails Going to Spam</dd>
+    <dt>Address</dt><dd>/blog/spf-dkim-dmarc-explained/ <small>(set automatically when added from Page Setup)</small></dd>
+    <dt>Category</dt><dd>Email</dd>
+    <dt>Tags</dt><dd>Email, DNS, Security</dd>
+    <dt>Excerpt</dt><dd>Three DNS records decide whether your business emails reach the inbox or the spam folder. Here is what SPF, DKIM and DMARC do and how to set them up. <small>(149 characters: shown in Google results)</small></dd>
+  </dl>
+  <article>
+<p>If customers tell you your emails went to their spam folder, or an invoice you sent never arrived, the cause is very often three missing records in your domain's settings: SPF, DKIM and DMARC.</p>
+
+
+
+<p>They sound technical, but each one has a simple job. Together they prove to other email systems that a message really came from your business, and they make it much harder for anyone to send fake emails pretending to be you.</p>
+
+
+
+<h2 class="wp-block-heading">Why this matters now</h2>
+
+
+
+<p>Gmail, Yahoo and Outlook have all tightened their rules on incoming email over the last couple of years. Mail from a domain without these records is far more likely to be filtered as spam or rejected outright, even if you only send a handful of emails a day. If you use your own domain for email, it is worth checking all three are in place.</p>
+
+
+
+<h2 class="wp-block-heading">SPF: who is allowed to send as you</h2>
+
+
+
+<p>SPF (Sender Policy Framework) is a list of the services allowed to send email using your domain. When a message arrives, the receiving server checks whether it came from one of them.</p>
+
+
+
+<ul class="wp-block-list">
+<li>You can only have one SPF record per domain, so every service has to go in the same record.</li>
+
+
+
+<li>Include everything that sends as you: Microsoft 365 or Google Workspace, your website's contact form, your invoicing software and any newsletter tool.</li>
+
+
+
+<li>A missing service is one of the most common reasons legitimate emails fail.</li>
+</ul>
+
+
+
+<h2 class="wp-block-heading">DKIM: a signature on every email</h2>
+
+
+
+<p>DKIM (DomainKeys Identified Mail) adds a hidden digital signature to each email you send. The receiving server checks it against a public key published in your domain's settings. If the signature matches, it knows the message came from you and was not changed on the way.</p>
+
+
+
+<p>Your email provider creates the keys; you add the records it gives you to your domain. In Microsoft 365 it is a couple of records and a switch to turn signing on.</p>
+
+
+
+<h2 class="wp-block-heading">DMARC: what to do when a check fails</h2>
+
+
+
+<p>DMARC ties the other two together. It tells receiving servers what to do with a message that fails SPF and DKIM, and it sends you reports showing who is sending email using your domain. That is often the first time a business discovers a forgotten service, or someone trying to impersonate them.</p>
+
+
+
+<p>A DMARC policy has three settings:</p>
+
+
+
+<ul class="wp-block-list">
+<li><strong>none</strong>: just watch and report. This is where everyone should start.</li>
+
+
+
+<li><strong>quarantine</strong>: send failing messages to spam.</li>
+
+
+
+<li><strong>reject</strong>: refuse failing messages completely.</li>
+</ul>
+
+
+
+<h2 class="wp-block-heading">Where to start</h2>
+
+
+
+<p>Set up SPF and DKIM first, then add DMARC in monitoring mode. Read the reports for a few weeks, fix anything legitimate that is failing, and only then move to quarantine and, eventually, reject. Jumping straight to reject is the quickest way to block your own emails.</p>
+
+
+
+<p>If you would rather not touch your DNS settings yourself, this is exactly the kind of job our <a href="/domains-and-dns/">domain and DNS management</a> service handles. We set up all three records, keep an eye on the reports and explain what we find in plain English.</p>
+
+</article>
+  <textarea id="a0" readonly>&lt;!-- wp:paragraph --&gt;
+&lt;p&gt;If customers tell you your emails went to their spam folder, or an invoice you sent never arrived, the cause is very often three missing records in your domain&#x27;s settings: SPF, DKIM and DMARC.&lt;/p&gt;
+&lt;!-- /wp:paragraph --&gt;
+
+&lt;!-- wp:paragraph --&gt;
+&lt;p&gt;They sound technical, but each one has a simple job. Together they prove to other email systems that a message really came from your business, and they make it much harder for anyone to send fake emails pretending to be you.&lt;/p&gt;
+&lt;!-- /wp:paragraph --&gt;
+
+&lt;!-- wp:heading --&gt;
+&lt;h2 class=&quot;wp-block-heading&quot;&gt;Why this matters now&lt;/h2&gt;
+&lt;!-- /wp:heading --&gt;
+
+&lt;!-- wp:paragraph --&gt;
+&lt;p&gt;Gmail, Yahoo and Outlook have all tightened their rules on incoming email over the last couple of years. Mail from a domain without these records is far more likely to be filtered as spam or rejected outright, even if you only send a handful of emails a day. If you use your own domain for email, it is worth checking all three are in place.&lt;/p&gt;
+&lt;!-- /wp:paragraph --&gt;
+
+&lt;!-- wp:heading --&gt;
+&lt;h2 class=&quot;wp-block-heading&quot;&gt;SPF: who is allowed to send as you&lt;/h2&gt;
+&lt;!-- /wp:heading --&gt;
+
+&lt;!-- wp:paragraph --&gt;
+&lt;p&gt;SPF (Sender Policy Framework) is a list of the services allowed to send email using your domain. When a message arrives, the receiving server checks whether it came from one of them.&lt;/p&gt;
+&lt;!-- /wp:paragraph --&gt;
+
+&lt;!-- wp:list --&gt;
+&lt;ul class=&quot;wp-block-list&quot;&gt;&lt;!-- wp:list-item --&gt;
+&lt;li&gt;You can only have one SPF record per domain, so every service has to go in the same record.&lt;/li&gt;
+&lt;!-- /wp:list-item --&gt;
+
+&lt;!-- wp:list-item --&gt;
+&lt;li&gt;Include everything that sends as you: Microsoft 365 or Google Workspace, your website&#x27;s contact form, your invoicing software and any newsletter tool.&lt;/li&gt;
+&lt;!-- /wp:list-item --&gt;
+
+&lt;!-- wp:list-item --&gt;
+&lt;li&gt;A missing service is one of the most common reasons legitimate emails fail.&lt;/li&gt;
+&lt;!-- /wp:list-item --&gt;&lt;/ul&gt;
+&lt;!-- /wp:list --&gt;
+
+&lt;!-- wp:heading --&gt;
+&lt;h2 class=&quot;wp-block-heading&quot;&gt;DKIM: a signature on every email&lt;/h2&gt;
+&lt;!-- /wp:heading --&gt;
+
+&lt;!-- wp:paragraph --&gt;
+&lt;p&gt;DKIM (DomainKeys Identified Mail) adds a hidden digital signature to each email you send. The receiving server checks it against a public key published in your domain&#x27;s settings. If the signature matches, it knows the message came from you and was not changed on the way.&lt;/p&gt;
+&lt;!-- /wp:paragraph --&gt;
+
+&lt;!-- wp:paragraph --&gt;
+&lt;p&gt;Your email provider creates the keys; you add the records it gives you to your domain. In Microsoft 365 it is a couple of records and a switch to turn signing on.&lt;/p&gt;
+&lt;!-- /wp:paragraph --&gt;
+
+&lt;!-- wp:heading --&gt;
+&lt;h2 class=&quot;wp-block-heading&quot;&gt;DMARC: what to do when a check fails&lt;/h2&gt;
+&lt;!-- /wp:heading --&gt;
+
+&lt;!-- wp:paragraph --&gt;
+&lt;p&gt;DMARC ties the other two together. It tells receiving servers what to do with a message that fails SPF and DKIM, and it sends you reports showing who is sending email using your domain. That is often the first time a business discovers a forgotten service, or someone trying to impersonate them.&lt;/p&gt;
+&lt;!-- /wp:paragraph --&gt;
+
+&lt;!-- wp:paragraph --&gt;
+&lt;p&gt;A DMARC policy has three settings:&lt;/p&gt;
+&lt;!-- /wp:paragraph --&gt;
+
+&lt;!-- wp:list --&gt;
+&lt;ul class=&quot;wp-block-list&quot;&gt;&lt;!-- wp:list-item --&gt;
+&lt;li&gt;&lt;strong&gt;none&lt;/strong&gt;: just watch and report. This is where everyone should start.&lt;/li&gt;
+&lt;!-- /wp:list-item --&gt;
+
+&lt;!-- wp:list-item --&gt;
+&lt;li&gt;&lt;strong&gt;quarantine&lt;/strong&gt;: send failing messages to spam.&lt;/li&gt;
+&lt;!-- /wp:list-item --&gt;
+
+&lt;!-- wp:list-item --&gt;
+&lt;li&gt;&lt;strong&gt;reject&lt;/strong&gt;: refuse failing messages completely.&lt;/li&gt;
+&lt;!-- /wp:list-item --&gt;&lt;/ul&gt;
+&lt;!-- /wp:list --&gt;
+
+&lt;!-- wp:heading --&gt;
+&lt;h2 class=&quot;wp-block-heading&quot;&gt;Where to start&lt;/h2&gt;
+&lt;!-- /wp:heading --&gt;
+
+&lt;!-- wp:paragraph --&gt;
+&lt;p&gt;Set up SPF and DKIM first, then add DMARC in monitoring mode. Read the reports for a few weeks, fix anything legitimate that is failing, and only then move to quarantine and, eventually, reject. Jumping straight to reject is the quickest way to block your own emails.&lt;/p&gt;
+&lt;!-- /wp:paragraph --&gt;
+
+&lt;!-- wp:paragraph --&gt;
+&lt;p&gt;If you would rather not touch your DNS settings yourself, this is exactly the kind of job our &lt;a href=&quot;/domains-and-dns/&quot;&gt;domain and DNS management&lt;/a&gt; service handles. We set up all three records, keep an eye on the reports and explain what we find in plain English.&lt;/p&gt;
+&lt;!-- /wp:paragraph --&gt;
+</textarea>
+  <button data-t="a0">Copy article content (for the code editor)</button>
+</details>
+<details class="post" >
+  <summary><span class="n">2</span> <span class="t">Microsoft 365 Business Basic vs Standard vs Premium: Which Do You Need?</span> <span class="w">399 words, about 2 min read</span></summary>
+  <dl>
+    <dt>Title</dt><dd>Microsoft 365 Business Basic vs Standard vs Premium: Which Do You Need?</dd>
+    <dt>Address</dt><dd>/blog/microsoft-365-business-plans-compared/ <small>(set automatically when added from Page Setup)</small></dd>
+    <dt>Category</dt><dd>Microsoft 365</dd>
+    <dt>Tags</dt><dd>Microsoft 365, Email, Security</dd>
+    <dt>Excerpt</dt><dd>The three Microsoft 365 business plans compared in plain English, so you can pick the right one for your team without paying for features you will not use. <small>(155 characters: shown in Google results)</small></dd>
+  </dl>
+  <article>
+<p>Microsoft 365 comes in three main business plans: Business Basic, Business Standard and Business Premium. They share the same core, so the question is not which one is best, but which one your business actually needs. Here is the difference in plain English.</p>
+
+
+
+<h2 class="wp-block-heading">What every plan includes</h2>
+
+
+
+<ul class="wp-block-list">
+<li>Professional email on your own domain, with a 50 GB mailbox per user</li>
+
+
+
+<li>Teams for chat, calls and video meetings</li>
+
+
+
+<li>1 TB of OneDrive storage per user, plus SharePoint for shared files</li>
+
+
+
+<li>Word, Excel, PowerPoint and Outlook in a web browser and on phones and tablets</li>
+</ul>
+
+
+
+<h2 class="wp-block-heading">Business Basic: email, Teams and storage</h2>
+
+
+
+<p>Basic suits teams that mostly work in email and a browser. You get everything above, but not the installed desktop versions of Word, Excel and PowerPoint. If your staff already have Office on their computers, or rarely do more than read and edit documents, Basic is often all you need.</p>
+
+
+
+<h2 class="wp-block-heading">Business Standard: the full desktop apps</h2>
+
+
+
+<p>Standard adds the installed desktop apps, which each user can install on up to five PCs or Macs, five tablets and five phones. It also adds webinar tools and Bookings, which lets customers book appointments with you online. This is the plan most small offices choose, because the desktop apps are what people expect to use every day.</p>
+
+
+
+<h2 class="wp-block-heading">Business Premium: Standard plus security</h2>
+
+
+
+<p>Premium includes everything in Standard, plus Microsoft's business security tools:</p>
+
+
+
+<ul class="wp-block-list">
+<li><strong>Defender for Business</strong>, which protects laptops and computers against malware and ransomware</li>
+
+
+
+<li><strong>Intune</strong>, which manages your devices: you can enforce passwords and encryption, and wipe a lost laptop remotely</li>
+
+
+
+<li><strong>Conditional access</strong>, which controls who can sign in, from where and on which devices</li>
+</ul>
+
+
+
+<p>Premium makes sense if you handle sensitive client information, have staff working from home on company laptops, or need to show insurers or customers that your devices are managed and protected.</p>
+
+
+
+<h2 class="wp-block-heading">How to choose</h2>
+
+
+
+<ul class="wp-block-list">
+<li>Email and Teams, mostly in a browser: <strong>Business Basic</strong></li>
+
+
+
+<li>You want the full Office apps on your computers: <strong>Business Standard</strong></li>
+
+
+
+<li>You also need devices managed and properly protected: <strong>Business Premium</strong></li>
+</ul>
+
+
+
+<p>You can also mix plans, giving Standard to office staff and Basic to people who only need email. Plans can be changed later as your needs grow.</p>
+
+
+
+<p>We set up and support Microsoft 365 for businesses across the North East. See our <a href="/microsoft-365/">Microsoft 365 plans and prices</a>, or get in touch and we will help you pick the right mix.</p>
+
+</article>
+  <textarea id="a1" readonly>&lt;!-- wp:paragraph --&gt;
+&lt;p&gt;Microsoft 365 comes in three main business plans: Business Basic, Business Standard and Business Premium. They share the same core, so the question is not which one is best, but which one your business actually needs. Here is the difference in plain English.&lt;/p&gt;
+&lt;!-- /wp:paragraph --&gt;
+
+&lt;!-- wp:heading --&gt;
+&lt;h2 class=&quot;wp-block-heading&quot;&gt;What every plan includes&lt;/h2&gt;
+&lt;!-- /wp:heading --&gt;
+
+&lt;!-- wp:list --&gt;
+&lt;ul class=&quot;wp-block-list&quot;&gt;&lt;!-- wp:list-item --&gt;
+&lt;li&gt;Professional email on your own domain, with a 50 GB mailbox per user&lt;/li&gt;
+&lt;!-- /wp:list-item --&gt;
+
+&lt;!-- wp:list-item --&gt;
+&lt;li&gt;Teams for chat, calls and video meetings&lt;/li&gt;
+&lt;!-- /wp:list-item --&gt;
+
+&lt;!-- wp:list-item --&gt;
+&lt;li&gt;1 TB of OneDrive storage per user, plus SharePoint for shared files&lt;/li&gt;
+&lt;!-- /wp:list-item --&gt;
+
+&lt;!-- wp:list-item --&gt;
+&lt;li&gt;Word, Excel, PowerPoint and Outlook in a web browser and on phones and tablets&lt;/li&gt;
+&lt;!-- /wp:list-item --&gt;&lt;/ul&gt;
+&lt;!-- /wp:list --&gt;
+
+&lt;!-- wp:heading --&gt;
+&lt;h2 class=&quot;wp-block-heading&quot;&gt;Business Basic: email, Teams and storage&lt;/h2&gt;
+&lt;!-- /wp:heading --&gt;
+
+&lt;!-- wp:paragraph --&gt;
+&lt;p&gt;Basic suits teams that mostly work in email and a browser. You get everything above, but not the installed desktop versions of Word, Excel and PowerPoint. If your staff already have Office on their computers, or rarely do more than read and edit documents, Basic is often all you need.&lt;/p&gt;
+&lt;!-- /wp:paragraph --&gt;
+
+&lt;!-- wp:heading --&gt;
+&lt;h2 class=&quot;wp-block-heading&quot;&gt;Business Standard: the full desktop apps&lt;/h2&gt;
+&lt;!-- /wp:heading --&gt;
+
+&lt;!-- wp:paragraph --&gt;
+&lt;p&gt;Standard adds the installed desktop apps, which each user can install on up to five PCs or Macs, five tablets and five phones. It also adds webinar tools and Bookings, which lets customers book appointments with you online. This is the plan most small offices choose, because the desktop apps are what people expect to use every day.&lt;/p&gt;
+&lt;!-- /wp:paragraph --&gt;
+
+&lt;!-- wp:heading --&gt;
+&lt;h2 class=&quot;wp-block-heading&quot;&gt;Business Premium: Standard plus security&lt;/h2&gt;
+&lt;!-- /wp:heading --&gt;
+
+&lt;!-- wp:paragraph --&gt;
+&lt;p&gt;Premium includes everything in Standard, plus Microsoft&#x27;s business security tools:&lt;/p&gt;
+&lt;!-- /wp:paragraph --&gt;
+
+&lt;!-- wp:list --&gt;
+&lt;ul class=&quot;wp-block-list&quot;&gt;&lt;!-- wp:list-item --&gt;
+&lt;li&gt;&lt;strong&gt;Defender for Business&lt;/strong&gt;, which protects laptops and computers against malware and ransomware&lt;/li&gt;
+&lt;!-- /wp:list-item --&gt;
+
+&lt;!-- wp:list-item --&gt;
+&lt;li&gt;&lt;strong&gt;Intune&lt;/strong&gt;, which manages your devices: you can enforce passwords and encryption, and wipe a lost laptop remotely&lt;/li&gt;
+&lt;!-- /wp:list-item --&gt;
+
+&lt;!-- wp:list-item --&gt;
+&lt;li&gt;&lt;strong&gt;Conditional access&lt;/strong&gt;, which controls who can sign in, from where and on which devices&lt;/li&gt;
+&lt;!-- /wp:list-item --&gt;&lt;/ul&gt;
+&lt;!-- /wp:list --&gt;
+
+&lt;!-- wp:paragraph --&gt;
+&lt;p&gt;Premium makes sense if you handle sensitive client information, have staff working from home on company laptops, or need to show insurers or customers that your devices are managed and protected.&lt;/p&gt;
+&lt;!-- /wp:paragraph --&gt;
+
+&lt;!-- wp:heading --&gt;
+&lt;h2 class=&quot;wp-block-heading&quot;&gt;How to choose&lt;/h2&gt;
+&lt;!-- /wp:heading --&gt;
+
+&lt;!-- wp:list --&gt;
+&lt;ul class=&quot;wp-block-list&quot;&gt;&lt;!-- wp:list-item --&gt;
+&lt;li&gt;Email and Teams, mostly in a browser: &lt;strong&gt;Business Basic&lt;/strong&gt;&lt;/li&gt;
+&lt;!-- /wp:list-item --&gt;
+
+&lt;!-- wp:list-item --&gt;
+&lt;li&gt;You want the full Office apps on your computers: &lt;strong&gt;Business Standard&lt;/strong&gt;&lt;/li&gt;
+&lt;!-- /wp:list-item --&gt;
+
+&lt;!-- wp:list-item --&gt;
+&lt;li&gt;You also need devices managed and properly protected: &lt;strong&gt;Business Premium&lt;/strong&gt;&lt;/li&gt;
+&lt;!-- /wp:list-item --&gt;&lt;/ul&gt;
+&lt;!-- /wp:list --&gt;
+
+&lt;!-- wp:paragraph --&gt;
+&lt;p&gt;You can also mix plans, giving Standard to office staff and Basic to people who only need email. Plans can be changed later as your needs grow.&lt;/p&gt;
+&lt;!-- /wp:paragraph --&gt;
+
+&lt;!-- wp:paragraph --&gt;
+&lt;p&gt;We set up and support Microsoft 365 for businesses across the North East. See our &lt;a href=&quot;/microsoft-365/&quot;&gt;Microsoft 365 plans and prices&lt;/a&gt;, or get in touch and we will help you pick the right mix.&lt;/p&gt;
+&lt;!-- /wp:paragraph --&gt;
+</textarea>
+  <button data-t="a1">Copy article content (for the code editor)</button>
+</details>
+<details class="post" >
+  <summary><span class="n">3</span> <span class="t">Does Your Small Business Still Need a Website in 2026?</span> <span class="w">364 words, about 2 min read</span></summary>
+  <dl>
+    <dt>Title</dt><dd>Does Your Small Business Still Need a Website in 2026?</dd>
+    <dt>Address</dt><dd>/blog/does-my-small-business-need-a-website/ <small>(set automatically when added from Page Setup)</small></dd>
+    <dt>Category</dt><dd>Web Design</dd>
+    <dt>Tags</dt><dd>Web Design, Small Business, Local SEO</dd>
+    <dt>Excerpt</dt><dd>A social media page is not enough on its own. What a simple website does for a local business, and what it needs to include. <small>(124 characters: shown in Google results)</small></dd>
+  </dl>
+  <article>
+<p>Plenty of small businesses get by on a Facebook page and word of mouth. So is a website still worth having in 2026? For most local businesses, yes, and not for the reasons you might think.</p>
+
+
+
+<h2 class="wp-block-heading">People check before they call</h2>
+
+
+
+<p>Even when someone hears about you from a friend, they will usually look you up before getting in touch. If they find a clear, up-to-date website with your services, prices and contact details, you look established and trustworthy. If they find nothing, or a page that has not been touched in years, many will quietly move on to the next name.</p>
+
+
+
+<h2 class="wp-block-heading">You own it</h2>
+
+
+
+<p>Social media platforms change the rules regularly. Posts reach fewer people, accounts get locked, and you cannot control how your business is presented. A website is yours: your name, your layout, your message, and it stays put.</p>
+
+
+
+<h2 class="wp-block-heading">It helps you get found locally</h2>
+
+
+
+<p>When someone searches for a service "near me" or in Newcastle, Gateshead or Sunderland, Google looks at your website alongside your Google Business Profile. A site that clearly says what you do and where you work gives you a much better chance of appearing in those local results.</p>
+
+
+
+<h2 class="wp-block-heading">It answers questions for you</h2>
+
+
+
+<p>Opening hours, prices, what is included, where to park: a good website answers the questions you get asked every day, so fewer calls are spent on the basics and more on real enquiries.</p>
+
+
+
+<h2 class="wp-block-heading">What a small business website needs</h2>
+
+
+
+<ul class="wp-block-list">
+<li>A clear headline saying what you do and where</li>
+
+
+
+<li>Your services, ideally with prices or a starting price</li>
+
+
+
+<li>Reviews or examples of your work</li>
+
+
+
+<li>An easy way to get in touch: phone, email and a short form</li>
+
+
+
+<li>It must work well on a phone, because that is where most people will see it</li>
+</ul>
+
+
+
+<p>That does not have to mean a big project. A single well-made page is enough for many businesses, and you can add more as you grow.</p>
+
+
+
+<p>We design and build websites for small businesses across the North East, and you can see your new site live on a demo address before you pay anything. Have a look at our <a href="/web-design/">web design plans</a> or <a href="/our-work/">some of the sites we have built</a>.</p>
+
+</article>
+  <textarea id="a2" readonly>&lt;!-- wp:paragraph --&gt;
+&lt;p&gt;Plenty of small businesses get by on a Facebook page and word of mouth. So is a website still worth having in 2026? For most local businesses, yes, and not for the reasons you might think.&lt;/p&gt;
+&lt;!-- /wp:paragraph --&gt;
+
+&lt;!-- wp:heading --&gt;
+&lt;h2 class=&quot;wp-block-heading&quot;&gt;People check before they call&lt;/h2&gt;
+&lt;!-- /wp:heading --&gt;
+
+&lt;!-- wp:paragraph --&gt;
+&lt;p&gt;Even when someone hears about you from a friend, they will usually look you up before getting in touch. If they find a clear, up-to-date website with your services, prices and contact details, you look established and trustworthy. If they find nothing, or a page that has not been touched in years, many will quietly move on to the next name.&lt;/p&gt;
+&lt;!-- /wp:paragraph --&gt;
+
+&lt;!-- wp:heading --&gt;
+&lt;h2 class=&quot;wp-block-heading&quot;&gt;You own it&lt;/h2&gt;
+&lt;!-- /wp:heading --&gt;
+
+&lt;!-- wp:paragraph --&gt;
+&lt;p&gt;Social media platforms change the rules regularly. Posts reach fewer people, accounts get locked, and you cannot control how your business is presented. A website is yours: your name, your layout, your message, and it stays put.&lt;/p&gt;
+&lt;!-- /wp:paragraph --&gt;
+
+&lt;!-- wp:heading --&gt;
+&lt;h2 class=&quot;wp-block-heading&quot;&gt;It helps you get found locally&lt;/h2&gt;
+&lt;!-- /wp:heading --&gt;
+
+&lt;!-- wp:paragraph --&gt;
+&lt;p&gt;When someone searches for a service &quot;near me&quot; or in Newcastle, Gateshead or Sunderland, Google looks at your website alongside your Google Business Profile. A site that clearly says what you do and where you work gives you a much better chance of appearing in those local results.&lt;/p&gt;
+&lt;!-- /wp:paragraph --&gt;
+
+&lt;!-- wp:heading --&gt;
+&lt;h2 class=&quot;wp-block-heading&quot;&gt;It answers questions for you&lt;/h2&gt;
+&lt;!-- /wp:heading --&gt;
+
+&lt;!-- wp:paragraph --&gt;
+&lt;p&gt;Opening hours, prices, what is included, where to park: a good website answers the questions you get asked every day, so fewer calls are spent on the basics and more on real enquiries.&lt;/p&gt;
+&lt;!-- /wp:paragraph --&gt;
+
+&lt;!-- wp:heading --&gt;
+&lt;h2 class=&quot;wp-block-heading&quot;&gt;What a small business website needs&lt;/h2&gt;
+&lt;!-- /wp:heading --&gt;
+
+&lt;!-- wp:list --&gt;
+&lt;ul class=&quot;wp-block-list&quot;&gt;&lt;!-- wp:list-item --&gt;
+&lt;li&gt;A clear headline saying what you do and where&lt;/li&gt;
+&lt;!-- /wp:list-item --&gt;
+
+&lt;!-- wp:list-item --&gt;
+&lt;li&gt;Your services, ideally with prices or a starting price&lt;/li&gt;
+&lt;!-- /wp:list-item --&gt;
+
+&lt;!-- wp:list-item --&gt;
+&lt;li&gt;Reviews or examples of your work&lt;/li&gt;
+&lt;!-- /wp:list-item --&gt;
+
+&lt;!-- wp:list-item --&gt;
+&lt;li&gt;An easy way to get in touch: phone, email and a short form&lt;/li&gt;
+&lt;!-- /wp:list-item --&gt;
+
+&lt;!-- wp:list-item --&gt;
+&lt;li&gt;It must work well on a phone, because that is where most people will see it&lt;/li&gt;
+&lt;!-- /wp:list-item --&gt;&lt;/ul&gt;
+&lt;!-- /wp:list --&gt;
+
+&lt;!-- wp:paragraph --&gt;
+&lt;p&gt;That does not have to mean a big project. A single well-made page is enough for many businesses, and you can add more as you grow.&lt;/p&gt;
+&lt;!-- /wp:paragraph --&gt;
+
+&lt;!-- wp:paragraph --&gt;
+&lt;p&gt;We design and build websites for small businesses across the North East, and you can see your new site live on a demo address before you pay anything. Have a look at our &lt;a href=&quot;/web-design/&quot;&gt;web design plans&lt;/a&gt; or &lt;a href=&quot;/our-work/&quot;&gt;some of the sites we have built&lt;/a&gt;.&lt;/p&gt;
+&lt;!-- /wp:paragraph --&gt;
+</textarea>
+  <button data-t="a2">Copy article content (for the code editor)</button>
+</details>
+<details class="post" >
+  <summary><span class="n">4</span> <span class="t">What Is Colocation, and Is It Right for Your Business?</span> <span class="w">342 words, about 2 min read</span></summary>
+  <dl>
+    <dt>Title</dt><dd>What Is Colocation, and Is It Right for Your Business?</dd>
+    <dt>Address</dt><dd>/blog/what-is-colocation/ <small>(set automatically when added from Page Setup)</small></dd>
+    <dt>Category</dt><dd>Colocation</dd>
+    <dt>Tags</dt><dd>Colocation, Data Centre, Newcastle</dd>
+    <dt>Excerpt</dt><dd>Colocation moves your own servers into a professional data centre. How it works, how it compares with the cloud and the office, and who it suits. <small>(145 characters: shown in Google results)</small></dd>
+  </dl>
+  <article>
+<p>If your business runs its own servers, they probably live in a cupboard, a back office or under someone's desk. Colocation means moving that equipment into a professional data centre, where it gets proper power, cooling, security and connectivity, while you keep full ownership and control of it.</p>
+
+
+
+<h2 class="wp-block-heading">How colocation works</h2>
+
+
+
+<p>You rent space in a rack, from a single unit for one server up to a full rack, and bring your own hardware. The data centre provides the building, the power, the cooling and the network connection. Your servers, your software and your data stay exactly as they are; they just live somewhere far better suited to them.</p>
+
+
+
+<h2 class="wp-block-heading">Colocation, cloud or the office?</h2>
+
+
+
+<ul class="wp-block-list">
+<li><strong>In the office:</strong> cheap to start, but exposed to power cuts, overheating, break-ins and slow office broadband.</li>
+
+
+
+<li><strong>In the cloud:</strong> no hardware to own, but monthly costs can climb quickly for steady, always-on workloads, and you are tied to one provider.</li>
+
+
+
+<li><strong>Colocation:</strong> you keep your own hardware and costs stay predictable, with data-centre reliability.</li>
+</ul>
+
+
+
+<h2 class="wp-block-heading">What you get in a data centre</h2>
+
+
+
+<ul class="wp-block-list">
+<li>Backup power: UPS systems and a standby generator that take over if the mains fails</li>
+
+
+
+<li>Precision cooling, so your equipment runs at the right temperature all year</li>
+
+
+
+<li>Fire suppression designed for IT equipment, using gas rather than water</li>
+
+
+
+<li>Physical security: fencing, CCTV, alarms and controlled access</li>
+
+
+
+<li>Fast, resilient connectivity from multiple fibre providers</li>
+</ul>
+
+
+
+<h2 class="wp-block-heading">Who it suits</h2>
+
+
+
+<p>Colocation is a good fit if you run your own servers for websites, business applications, backups, private cloud or game servers, and you want them to be more reliable without handing everything over to a cloud provider. It is also a sensible home for a second copy of your data, away from the office, in case of fire, flood or theft.</p>
+
+
+
+<h2 class="wp-block-heading">Colocation in Newcastle</h2>
+
+
+
+<p>We offer colocation at Reliance House in Newcastle, a short walk from Newcastle Central Station. You can visit your equipment 24 hours a day, and our remote hands service can help when you cannot get there yourself. See our <a href="/colocation/">colocation plans and the full facility specification</a>.</p>
+
+</article>
+  <textarea id="a3" readonly>&lt;!-- wp:paragraph --&gt;
+&lt;p&gt;If your business runs its own servers, they probably live in a cupboard, a back office or under someone&#x27;s desk. Colocation means moving that equipment into a professional data centre, where it gets proper power, cooling, security and connectivity, while you keep full ownership and control of it.&lt;/p&gt;
+&lt;!-- /wp:paragraph --&gt;
+
+&lt;!-- wp:heading --&gt;
+&lt;h2 class=&quot;wp-block-heading&quot;&gt;How colocation works&lt;/h2&gt;
+&lt;!-- /wp:heading --&gt;
+
+&lt;!-- wp:paragraph --&gt;
+&lt;p&gt;You rent space in a rack, from a single unit for one server up to a full rack, and bring your own hardware. The data centre provides the building, the power, the cooling and the network connection. Your servers, your software and your data stay exactly as they are; they just live somewhere far better suited to them.&lt;/p&gt;
+&lt;!-- /wp:paragraph --&gt;
+
+&lt;!-- wp:heading --&gt;
+&lt;h2 class=&quot;wp-block-heading&quot;&gt;Colocation, cloud or the office?&lt;/h2&gt;
+&lt;!-- /wp:heading --&gt;
+
+&lt;!-- wp:list --&gt;
+&lt;ul class=&quot;wp-block-list&quot;&gt;&lt;!-- wp:list-item --&gt;
+&lt;li&gt;&lt;strong&gt;In the office:&lt;/strong&gt; cheap to start, but exposed to power cuts, overheating, break-ins and slow office broadband.&lt;/li&gt;
+&lt;!-- /wp:list-item --&gt;
+
+&lt;!-- wp:list-item --&gt;
+&lt;li&gt;&lt;strong&gt;In the cloud:&lt;/strong&gt; no hardware to own, but monthly costs can climb quickly for steady, always-on workloads, and you are tied to one provider.&lt;/li&gt;
+&lt;!-- /wp:list-item --&gt;
+
+&lt;!-- wp:list-item --&gt;
+&lt;li&gt;&lt;strong&gt;Colocation:&lt;/strong&gt; you keep your own hardware and costs stay predictable, with data-centre reliability.&lt;/li&gt;
+&lt;!-- /wp:list-item --&gt;&lt;/ul&gt;
+&lt;!-- /wp:list --&gt;
+
+&lt;!-- wp:heading --&gt;
+&lt;h2 class=&quot;wp-block-heading&quot;&gt;What you get in a data centre&lt;/h2&gt;
+&lt;!-- /wp:heading --&gt;
+
+&lt;!-- wp:list --&gt;
+&lt;ul class=&quot;wp-block-list&quot;&gt;&lt;!-- wp:list-item --&gt;
+&lt;li&gt;Backup power: UPS systems and a standby generator that take over if the mains fails&lt;/li&gt;
+&lt;!-- /wp:list-item --&gt;
+
+&lt;!-- wp:list-item --&gt;
+&lt;li&gt;Precision cooling, so your equipment runs at the right temperature all year&lt;/li&gt;
+&lt;!-- /wp:list-item --&gt;
+
+&lt;!-- wp:list-item --&gt;
+&lt;li&gt;Fire suppression designed for IT equipment, using gas rather than water&lt;/li&gt;
+&lt;!-- /wp:list-item --&gt;
+
+&lt;!-- wp:list-item --&gt;
+&lt;li&gt;Physical security: fencing, CCTV, alarms and controlled access&lt;/li&gt;
+&lt;!-- /wp:list-item --&gt;
+
+&lt;!-- wp:list-item --&gt;
+&lt;li&gt;Fast, resilient connectivity from multiple fibre providers&lt;/li&gt;
+&lt;!-- /wp:list-item --&gt;&lt;/ul&gt;
+&lt;!-- /wp:list --&gt;
+
+&lt;!-- wp:heading --&gt;
+&lt;h2 class=&quot;wp-block-heading&quot;&gt;Who it suits&lt;/h2&gt;
+&lt;!-- /wp:heading --&gt;
+
+&lt;!-- wp:paragraph --&gt;
+&lt;p&gt;Colocation is a good fit if you run your own servers for websites, business applications, backups, private cloud or game servers, and you want them to be more reliable without handing everything over to a cloud provider. It is also a sensible home for a second copy of your data, away from the office, in case of fire, flood or theft.&lt;/p&gt;
+&lt;!-- /wp:paragraph --&gt;
+
+&lt;!-- wp:heading --&gt;
+&lt;h2 class=&quot;wp-block-heading&quot;&gt;Colocation in Newcastle&lt;/h2&gt;
+&lt;!-- /wp:heading --&gt;
+
+&lt;!-- wp:paragraph --&gt;
+&lt;p&gt;We offer colocation at Reliance House in Newcastle, a short walk from Newcastle Central Station. You can visit your equipment 24 hours a day, and our remote hands service can help when you cannot get there yourself. See our &lt;a href=&quot;/colocation/&quot;&gt;colocation plans and the full facility specification&lt;/a&gt;.&lt;/p&gt;
+&lt;!-- /wp:paragraph --&gt;
+</textarea>
+  <button data-t="a3">Copy article content (for the code editor)</button>
+</details>
+<details class="post" >
+  <summary><span class="n">5</span> <span class="t">Five Signs Your WordPress Website Needs Maintenance</span> <span class="w">329 words, about 1 min read</span></summary>
+  <dl>
+    <dt>Title</dt><dd>Five Signs Your WordPress Website Needs Maintenance</dd>
+    <dt>Address</dt><dd>/blog/signs-your-wordpress-site-needs-maintenance/ <small>(set automatically when added from Page Setup)</small></dd>
+    <dt>Category</dt><dd>Website Maintenance</dd>
+    <dt>Tags</dt><dd>WordPress, Security, Backups</dd>
+    <dt>Excerpt</dt><dd>Waiting updates, missing backups and slow pages all add up. Five warning signs your WordPress site needs attention, and what good maintenance looks like. <small>(153 characters: shown in Google results)</small></dd>
+  </dl>
+  <article>
+<p>A WordPress website is not something you build once and forget. Behind the scenes it is made of WordPress itself, a theme and a collection of plugins, and all of them are updated regularly. Leave them alone for long enough and problems start to appear. Here are the signs your site needs some attention.</p>
+
+
+
+<h2 class="wp-block-heading">1. You see "updates available" every time you log in</h2>
+
+
+
+<p>Many updates fix security holes. Out-of-date plugins are one of the most common ways WordPress sites get hacked, so a long list of waiting updates is a risk, not just an inconvenience.</p>
+
+
+
+<h2 class="wp-block-heading">2. You are not sure when it was last backed up</h2>
+
+
+
+<p>A backup is only useful if it exists, is recent and can actually be restored. If you do not know where your backups are kept or when the last one ran, assume you do not have one.</p>
+
+
+
+<h2 class="wp-block-heading">3. It has slowed down</h2>
+
+
+
+<p>Sites tend to get slower over time as plugins pile up and old ones stop being looked after. Slow pages frustrate visitors and can count against you in search results.</p>
+
+
+
+<h2 class="wp-block-heading">4. Something has quietly stopped working</h2>
+
+
+
+<p>A contact form that no longer sends, a gallery that will not load, a layout broken on phones. These problems are easy to miss if nobody checks, and every missed enquiry is a lost customer.</p>
+
+
+
+<h2 class="wp-block-heading">5. Your browser shows a security warning</h2>
+
+
+
+<p>If your SSL certificate lapses, browsers warn visitors that your site is not secure, and most will leave immediately. Certificates now need renewing more often than they used to, so this is worth monitoring.</p>
+
+
+
+<h2 class="wp-block-heading">What good maintenance looks like</h2>
+
+
+
+<ul class="wp-block-list">
+<li>Regular updates to WordPress, plugins and the theme, checked afterwards so nothing breaks</li>
+
+
+
+<li>Automatic backups, stored away from the website, and checked</li>
+
+
+
+<li>Security checks and monitoring</li>
+
+
+
+<li>Someone to call when something goes wrong</li>
+</ul>
+
+
+
+<p>Our <a href="/website-maintenance/">website maintenance</a> service handles all of this for you, from plugin and theme updates to backup monitoring and basic troubleshooting, so you can get on with running your business.</p>
+
+</article>
+  <textarea id="a4" readonly>&lt;!-- wp:paragraph --&gt;
+&lt;p&gt;A WordPress website is not something you build once and forget. Behind the scenes it is made of WordPress itself, a theme and a collection of plugins, and all of them are updated regularly. Leave them alone for long enough and problems start to appear. Here are the signs your site needs some attention.&lt;/p&gt;
+&lt;!-- /wp:paragraph --&gt;
+
+&lt;!-- wp:heading --&gt;
+&lt;h2 class=&quot;wp-block-heading&quot;&gt;1. You see &quot;updates available&quot; every time you log in&lt;/h2&gt;
+&lt;!-- /wp:heading --&gt;
+
+&lt;!-- wp:paragraph --&gt;
+&lt;p&gt;Many updates fix security holes. Out-of-date plugins are one of the most common ways WordPress sites get hacked, so a long list of waiting updates is a risk, not just an inconvenience.&lt;/p&gt;
+&lt;!-- /wp:paragraph --&gt;
+
+&lt;!-- wp:heading --&gt;
+&lt;h2 class=&quot;wp-block-heading&quot;&gt;2. You are not sure when it was last backed up&lt;/h2&gt;
+&lt;!-- /wp:heading --&gt;
+
+&lt;!-- wp:paragraph --&gt;
+&lt;p&gt;A backup is only useful if it exists, is recent and can actually be restored. If you do not know where your backups are kept or when the last one ran, assume you do not have one.&lt;/p&gt;
+&lt;!-- /wp:paragraph --&gt;
+
+&lt;!-- wp:heading --&gt;
+&lt;h2 class=&quot;wp-block-heading&quot;&gt;3. It has slowed down&lt;/h2&gt;
+&lt;!-- /wp:heading --&gt;
+
+&lt;!-- wp:paragraph --&gt;
+&lt;p&gt;Sites tend to get slower over time as plugins pile up and old ones stop being looked after. Slow pages frustrate visitors and can count against you in search results.&lt;/p&gt;
+&lt;!-- /wp:paragraph --&gt;
+
+&lt;!-- wp:heading --&gt;
+&lt;h2 class=&quot;wp-block-heading&quot;&gt;4. Something has quietly stopped working&lt;/h2&gt;
+&lt;!-- /wp:heading --&gt;
+
+&lt;!-- wp:paragraph --&gt;
+&lt;p&gt;A contact form that no longer sends, a gallery that will not load, a layout broken on phones. These problems are easy to miss if nobody checks, and every missed enquiry is a lost customer.&lt;/p&gt;
+&lt;!-- /wp:paragraph --&gt;
+
+&lt;!-- wp:heading --&gt;
+&lt;h2 class=&quot;wp-block-heading&quot;&gt;5. Your browser shows a security warning&lt;/h2&gt;
+&lt;!-- /wp:heading --&gt;
+
+&lt;!-- wp:paragraph --&gt;
+&lt;p&gt;If your SSL certificate lapses, browsers warn visitors that your site is not secure, and most will leave immediately. Certificates now need renewing more often than they used to, so this is worth monitoring.&lt;/p&gt;
+&lt;!-- /wp:paragraph --&gt;
+
+&lt;!-- wp:heading --&gt;
+&lt;h2 class=&quot;wp-block-heading&quot;&gt;What good maintenance looks like&lt;/h2&gt;
+&lt;!-- /wp:heading --&gt;
+
+&lt;!-- wp:list --&gt;
+&lt;ul class=&quot;wp-block-list&quot;&gt;&lt;!-- wp:list-item --&gt;
+&lt;li&gt;Regular updates to WordPress, plugins and the theme, checked afterwards so nothing breaks&lt;/li&gt;
+&lt;!-- /wp:list-item --&gt;
+
+&lt;!-- wp:list-item --&gt;
+&lt;li&gt;Automatic backups, stored away from the website, and checked&lt;/li&gt;
+&lt;!-- /wp:list-item --&gt;
+
+&lt;!-- wp:list-item --&gt;
+&lt;li&gt;Security checks and monitoring&lt;/li&gt;
+&lt;!-- /wp:list-item --&gt;
+
+&lt;!-- wp:list-item --&gt;
+&lt;li&gt;Someone to call when something goes wrong&lt;/li&gt;
+&lt;!-- /wp:list-item --&gt;&lt;/ul&gt;
+&lt;!-- /wp:list --&gt;
+
+&lt;!-- wp:paragraph --&gt;
+&lt;p&gt;Our &lt;a href=&quot;/website-maintenance/&quot;&gt;website maintenance&lt;/a&gt; service handles all of this for you, from plugin and theme updates to backup monitoring and basic troubleshooting, so you can get on with running your business.&lt;/p&gt;
+&lt;!-- /wp:paragraph --&gt;
+</textarea>
+  <button data-t="a4">Copy article content (for the code editor)</button>
+</details>
+<details class="post" >
+  <summary><span class="n">6</span> <span class="t">Hosted PBX Explained: Business Phones Ready for the Digital Switchover</span> <span class="w">393 words, about 2 min read</span></summary>
+  <dl>
+    <dt>Title</dt><dd>Hosted PBX Explained: Business Phones Ready for the Digital Switchover</dd>
+    <dt>Address</dt><dd>/blog/hosted-pbx-explained/ <small>(set automatically when added from Page Setup)</small></dd>
+    <dt>Category</dt><dd>Hosted PBX</dd>
+    <dt>Tags</dt><dd>Hosted PBX, Phones, Digital Switchover</dd>
+    <dt>Excerpt</dt><dd>The UK copper phone network is being switched off. What a hosted PBX is, how FreePBX and FusionPBX compare, and whether you can keep your number. <small>(145 characters: shown in Google results)</small></dd>
+  </dl>
+  <article>
+<p>The UK's old copper phone network is being switched off, and traditional business phone lines are going with it. Openreach has been moving everyone onto digital lines, with the final switch-off due by January 2027. If your business still relies on an old phone system, now is a good time to look at a hosted PBX.</p>
+
+
+
+<h2 class="wp-block-heading">What is a PBX?</h2>
+
+
+
+<p>A PBX (private branch exchange) is the system that runs a business phone setup: extensions, transferring calls, hunt groups, voicemail, call queues, opening hours and on-hold music. Traditionally it was a box on the office wall. A hosted PBX does the same job from a server in a data centre, and your phones connect to it over the internet.</p>
+
+
+
+<h2 class="wp-block-heading">Why businesses switch</h2>
+
+
+
+<ul class="wp-block-list">
+<li><strong>Your number goes with you.</strong> Staff can answer calls on a desk phone, a laptop or a mobile app, in the office or at home.</li>
+
+
+
+<li><strong>No box to maintain.</strong> There is no hardware in the office to fail, and changes can be made in minutes.</li>
+
+
+
+<li><strong>It grows with you.</strong> Adding a new extension or a new office is a setting, not an engineer visit.</li>
+
+
+
+<li><strong>Ready for the digital switch-off.</strong> It already works the way all UK phone lines will soon have to.</li>
+</ul>
+
+
+
+<h2 class="wp-block-heading">FreePBX, FusionPBX and the rest</h2>
+
+
+
+<p>There are several proven phone systems to choose from. FreePBX is one of the most widely used, with a friendly web interface that suits most small and medium businesses. FusionPBX is built for flexibility and handles several companies or sites on one system well. Others suit more specialised needs. With a hosted PBX from us you choose the system that fits, and it runs on a dedicated server with its own processing power, memory, storage and daily backups.</p>
+
+
+
+<h2 class="wp-block-heading">Can I keep my phone number?</h2>
+
+
+
+<p>In most cases, yes. UK numbers can usually be moved, or "ported", from your current provider to a new one. New numbers, including local Newcastle and North East numbers, are also available on request.</p>
+
+
+
+<h2 class="wp-block-heading">What you need</h2>
+
+
+
+<ul class="wp-block-list">
+<li>A reliable internet connection at each site</li>
+
+
+
+<li>Phones: desk handsets, softphone apps on computers and mobiles, or a mixture</li>
+
+
+
+<li>A plan for your numbers: keep the ones you have, add new ones, or both</li>
+</ul>
+
+
+
+<p>Our <a href="/hosted-pbx/">hosted PBX</a> starts from £16.99 a month and includes powerful security and DDoS protection. Get in touch and we will talk you through the options in plain English.</p>
+
+</article>
+  <textarea id="a5" readonly>&lt;!-- wp:paragraph --&gt;
+&lt;p&gt;The UK&#x27;s old copper phone network is being switched off, and traditional business phone lines are going with it. Openreach has been moving everyone onto digital lines, with the final switch-off due by January 2027. If your business still relies on an old phone system, now is a good time to look at a hosted PBX.&lt;/p&gt;
+&lt;!-- /wp:paragraph --&gt;
+
+&lt;!-- wp:heading --&gt;
+&lt;h2 class=&quot;wp-block-heading&quot;&gt;What is a PBX?&lt;/h2&gt;
+&lt;!-- /wp:heading --&gt;
+
+&lt;!-- wp:paragraph --&gt;
+&lt;p&gt;A PBX (private branch exchange) is the system that runs a business phone setup: extensions, transferring calls, hunt groups, voicemail, call queues, opening hours and on-hold music. Traditionally it was a box on the office wall. A hosted PBX does the same job from a server in a data centre, and your phones connect to it over the internet.&lt;/p&gt;
+&lt;!-- /wp:paragraph --&gt;
+
+&lt;!-- wp:heading --&gt;
+&lt;h2 class=&quot;wp-block-heading&quot;&gt;Why businesses switch&lt;/h2&gt;
+&lt;!-- /wp:heading --&gt;
+
+&lt;!-- wp:list --&gt;
+&lt;ul class=&quot;wp-block-list&quot;&gt;&lt;!-- wp:list-item --&gt;
+&lt;li&gt;&lt;strong&gt;Your number goes with you.&lt;/strong&gt; Staff can answer calls on a desk phone, a laptop or a mobile app, in the office or at home.&lt;/li&gt;
+&lt;!-- /wp:list-item --&gt;
+
+&lt;!-- wp:list-item --&gt;
+&lt;li&gt;&lt;strong&gt;No box to maintain.&lt;/strong&gt; There is no hardware in the office to fail, and changes can be made in minutes.&lt;/li&gt;
+&lt;!-- /wp:list-item --&gt;
+
+&lt;!-- wp:list-item --&gt;
+&lt;li&gt;&lt;strong&gt;It grows with you.&lt;/strong&gt; Adding a new extension or a new office is a setting, not an engineer visit.&lt;/li&gt;
+&lt;!-- /wp:list-item --&gt;
+
+&lt;!-- wp:list-item --&gt;
+&lt;li&gt;&lt;strong&gt;Ready for the digital switch-off.&lt;/strong&gt; It already works the way all UK phone lines will soon have to.&lt;/li&gt;
+&lt;!-- /wp:list-item --&gt;&lt;/ul&gt;
+&lt;!-- /wp:list --&gt;
+
+&lt;!-- wp:heading --&gt;
+&lt;h2 class=&quot;wp-block-heading&quot;&gt;FreePBX, FusionPBX and the rest&lt;/h2&gt;
+&lt;!-- /wp:heading --&gt;
+
+&lt;!-- wp:paragraph --&gt;
+&lt;p&gt;There are several proven phone systems to choose from. FreePBX is one of the most widely used, with a friendly web interface that suits most small and medium businesses. FusionPBX is built for flexibility and handles several companies or sites on one system well. Others suit more specialised needs. With a hosted PBX from us you choose the system that fits, and it runs on a dedicated server with its own processing power, memory, storage and daily backups.&lt;/p&gt;
+&lt;!-- /wp:paragraph --&gt;
+
+&lt;!-- wp:heading --&gt;
+&lt;h2 class=&quot;wp-block-heading&quot;&gt;Can I keep my phone number?&lt;/h2&gt;
+&lt;!-- /wp:heading --&gt;
+
+&lt;!-- wp:paragraph --&gt;
+&lt;p&gt;In most cases, yes. UK numbers can usually be moved, or &quot;ported&quot;, from your current provider to a new one. New numbers, including local Newcastle and North East numbers, are also available on request.&lt;/p&gt;
+&lt;!-- /wp:paragraph --&gt;
+
+&lt;!-- wp:heading --&gt;
+&lt;h2 class=&quot;wp-block-heading&quot;&gt;What you need&lt;/h2&gt;
+&lt;!-- /wp:heading --&gt;
+
+&lt;!-- wp:list --&gt;
+&lt;ul class=&quot;wp-block-list&quot;&gt;&lt;!-- wp:list-item --&gt;
+&lt;li&gt;A reliable internet connection at each site&lt;/li&gt;
+&lt;!-- /wp:list-item --&gt;
+
+&lt;!-- wp:list-item --&gt;
+&lt;li&gt;Phones: desk handsets, softphone apps on computers and mobiles, or a mixture&lt;/li&gt;
+&lt;!-- /wp:list-item --&gt;
+
+&lt;!-- wp:list-item --&gt;
+&lt;li&gt;A plan for your numbers: keep the ones you have, add new ones, or both&lt;/li&gt;
+&lt;!-- /wp:list-item --&gt;&lt;/ul&gt;
+&lt;!-- /wp:list --&gt;
+
+&lt;!-- wp:paragraph --&gt;
+&lt;p&gt;Our &lt;a href=&quot;/hosted-pbx/&quot;&gt;hosted PBX&lt;/a&gt; starts from £16.99 a month and includes powerful security and DDoS protection. Get in touch and we will talk you through the options in plain English.&lt;/p&gt;
+&lt;!-- /wp:paragraph --&gt;
+</textarea>
+  <button data-t="a5">Copy article content (for the code editor)</button>
+</details>
+<details class="post" >
+  <summary><span class="n">7</span> <span class="t">Domain and SSL Expiry: How to Stop Your Website Going Offline</span> <span class="w">326 words, about 1 min read</span></summary>
+  <dl>
+    <dt>Title</dt><dd>Domain and SSL Expiry: How to Stop Your Website Going Offline</dd>
+    <dt>Address</dt><dd>/blog/domain-and-ssl-expiry/ <small>(set automatically when added from Page Setup)</small></dd>
+    <dt>Category</dt><dd>Domains and DNS</dd>
+    <dt>Tags</dt><dd>Domains, SSL, Security</dd>
+    <dt>Excerpt</dt><dd>A missed domain or SSL renewal can take your website and email offline overnight. How to make sure it never happens to your business. <small>(133 characters: shown in Google results)</small></dd>
+  </dl>
+  <article>
+<p>Two small renewals keep your business online: your domain name and your SSL certificate. Miss either one and the effect is immediate. Your website disappears or shows a security warning, and with a lapsed domain your email can stop too. Here is how to make sure it never happens to you.</p>
+
+
+
+<h2 class="wp-block-heading">What happens when a domain expires</h2>
+
+
+
+<p>Your domain is rented, usually a year at a time. If the renewal fails, often because a card on file has expired or a reminder went to an old email address, your website and email stop working. There is normally a short grace period to renew, but after that the domain can be released, and some people buy up lapsed domains to resell them at a high price.</p>
+
+
+
+<h2 class="wp-block-heading">How to protect your domain</h2>
+
+
+
+<ul class="wp-block-list">
+<li>Turn on auto-renew, and keep the payment card up to date</li>
+
+
+
+<li>Make sure renewal reminders go to an inbox someone actually reads, not a former employee's address</li>
+
+
+
+<li>Register the domain in the business's name, and keep the login details somewhere safe</li>
+
+
+
+<li>Consider renewing for several years at a time</li>
+</ul>
+
+
+
+<h2 class="wp-block-heading">What an SSL certificate does</h2>
+
+
+
+<p>An SSL certificate is what puts the padlock next to your web address and encrypts information moving between your site and its visitors, such as contact form details. When it expires, browsers show a full-page warning that your site is not secure, and most visitors leave immediately.</p>
+
+
+
+<h2 class="wp-block-heading">Certificates are getting shorter</h2>
+
+
+
+<p>The industry is steadily reducing how long certificates last, so they have to be renewed more often. Certificates used to last over a year; they are now limited to around six months, and that will keep falling over the next few years. Renewing by hand is no longer realistic. Certificates should renew automatically, and something should check that they actually did.</p>
+
+
+
+<h2 class="wp-block-heading">Let someone keep an eye on it</h2>
+
+
+
+<p>Our <a href="/domains-and-dns/">domain and DNS management</a> service includes domain expiry monitoring and SSL certificate monitoring, so a missed renewal never takes your business offline.</p>
+
+</article>
+  <textarea id="a6" readonly>&lt;!-- wp:paragraph --&gt;
+&lt;p&gt;Two small renewals keep your business online: your domain name and your SSL certificate. Miss either one and the effect is immediate. Your website disappears or shows a security warning, and with a lapsed domain your email can stop too. Here is how to make sure it never happens to you.&lt;/p&gt;
+&lt;!-- /wp:paragraph --&gt;
+
+&lt;!-- wp:heading --&gt;
+&lt;h2 class=&quot;wp-block-heading&quot;&gt;What happens when a domain expires&lt;/h2&gt;
+&lt;!-- /wp:heading --&gt;
+
+&lt;!-- wp:paragraph --&gt;
+&lt;p&gt;Your domain is rented, usually a year at a time. If the renewal fails, often because a card on file has expired or a reminder went to an old email address, your website and email stop working. There is normally a short grace period to renew, but after that the domain can be released, and some people buy up lapsed domains to resell them at a high price.&lt;/p&gt;
+&lt;!-- /wp:paragraph --&gt;
+
+&lt;!-- wp:heading --&gt;
+&lt;h2 class=&quot;wp-block-heading&quot;&gt;How to protect your domain&lt;/h2&gt;
+&lt;!-- /wp:heading --&gt;
+
+&lt;!-- wp:list --&gt;
+&lt;ul class=&quot;wp-block-list&quot;&gt;&lt;!-- wp:list-item --&gt;
+&lt;li&gt;Turn on auto-renew, and keep the payment card up to date&lt;/li&gt;
+&lt;!-- /wp:list-item --&gt;
+
+&lt;!-- wp:list-item --&gt;
+&lt;li&gt;Make sure renewal reminders go to an inbox someone actually reads, not a former employee&#x27;s address&lt;/li&gt;
+&lt;!-- /wp:list-item --&gt;
+
+&lt;!-- wp:list-item --&gt;
+&lt;li&gt;Register the domain in the business&#x27;s name, and keep the login details somewhere safe&lt;/li&gt;
+&lt;!-- /wp:list-item --&gt;
+
+&lt;!-- wp:list-item --&gt;
+&lt;li&gt;Consider renewing for several years at a time&lt;/li&gt;
+&lt;!-- /wp:list-item --&gt;&lt;/ul&gt;
+&lt;!-- /wp:list --&gt;
+
+&lt;!-- wp:heading --&gt;
+&lt;h2 class=&quot;wp-block-heading&quot;&gt;What an SSL certificate does&lt;/h2&gt;
+&lt;!-- /wp:heading --&gt;
+
+&lt;!-- wp:paragraph --&gt;
+&lt;p&gt;An SSL certificate is what puts the padlock next to your web address and encrypts information moving between your site and its visitors, such as contact form details. When it expires, browsers show a full-page warning that your site is not secure, and most visitors leave immediately.&lt;/p&gt;
+&lt;!-- /wp:paragraph --&gt;
+
+&lt;!-- wp:heading --&gt;
+&lt;h2 class=&quot;wp-block-heading&quot;&gt;Certificates are getting shorter&lt;/h2&gt;
+&lt;!-- /wp:heading --&gt;
+
+&lt;!-- wp:paragraph --&gt;
+&lt;p&gt;The industry is steadily reducing how long certificates last, so they have to be renewed more often. Certificates used to last over a year; they are now limited to around six months, and that will keep falling over the next few years. Renewing by hand is no longer realistic. Certificates should renew automatically, and something should check that they actually did.&lt;/p&gt;
+&lt;!-- /wp:paragraph --&gt;
+
+&lt;!-- wp:heading --&gt;
+&lt;h2 class=&quot;wp-block-heading&quot;&gt;Let someone keep an eye on it&lt;/h2&gt;
+&lt;!-- /wp:heading --&gt;
+
+&lt;!-- wp:paragraph --&gt;
+&lt;p&gt;Our &lt;a href=&quot;/domains-and-dns/&quot;&gt;domain and DNS management&lt;/a&gt; service includes domain expiry monitoring and SSL certificate monitoring, so a missed renewal never takes your business offline.&lt;/p&gt;
+&lt;!-- /wp:paragraph --&gt;
+</textarea>
+  <button data-t="a6">Copy article content (for the code editor)</button>
+</details>
+</main><script>document.querySelectorAll('button[data-t]').forEach(b=>b.onclick=()=>{const t=document.getElementById(b.dataset.t);t.select();navigator.clipboard.writeText(t.value);b.textContent='Copied';setTimeout(()=>b.textContent='Copy article content (for the code editor)',1500)})</script>
+</body></html>

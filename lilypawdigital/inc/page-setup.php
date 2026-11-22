@@ -457,6 +457,9 @@ function lpd_setup_handle_action() {
 		$done = lpd_setup_set_front_page() ? 'front_page' : 'error';
 	} elseif ( 'menu' === $do ) {
 		$done = is_wp_error( lpd_setup_build_menu() ) ? 'error' : 'menu';
+	} elseif ( 'drafts' === $do && function_exists( 'lpd_add_draft_articles' ) ) {
+		$slug = (string) lpd_add_draft_articles(); // carries the count to the notice
+		$done = 'drafts';
 	}
 
 	wp_safe_redirect(
@@ -505,6 +508,8 @@ function lpd_setup_render_admin_page() {
 		'create_missing' => __( 'Missing pages created.', 'lilypawdigital' ),
 		'front_page'     => __( 'Home is now the front page.', 'lilypawdigital' ),
 		'menu'           => __( 'Main menu built and assigned.', 'lilypawdigital' ),
+		/* translators: %s: number of articles */
+		'drafts'         => sprintf( __( 'Added %s draft articles. Find them under Posts → All Posts, read them through, add a featured image and publish when ready.', 'lilypawdigital' ), isset( $_GET['lpd_slug'] ) ? (int) $_GET['lpd_slug'] : 0 ), // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- display only
 		'error'          => __( 'That didn\'t work. Check you have permission to publish pages, then try again.', 'lilypawdigital' ),
 	);
 	$done = isset( $_GET['lpd_done'] ) ? sanitize_key( wp_unslash( $_GET['lpd_done'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- display only
@@ -605,6 +610,17 @@ function lpd_setup_render_admin_page() {
 		<p class="description" style="max-width:640px;">
 			<?php esc_html_e( 'The menu button adds any of these pages missing from the header menu (or creates "Main Menu" if the header has none). Pages already in it aren\'t added twice; reorder it under Appearance → Menus.', 'lilypawdigital' ); ?>
 		</p>
+
+		<?php if ( function_exists( 'lpd_draft_articles' ) ) : ?>
+			<h2 style="margin-top:28px;"><?php esc_html_e( 'Blog', 'lilypawdigital' ); ?></h2>
+			<p class="description" style="max-width:640px;">
+				<?php
+				/* translators: %d: number of articles */
+				printf( esc_html__( 'The theme comes with %d starter articles about your services. This saves them as drafts, never published, so you can read them, change anything, add a featured image and publish them one at a time. Articles that already exist are skipped.', 'lilypawdigital' ), count( lpd_draft_articles() ) );
+				?>
+			</p>
+			<p><?php lpd_setup_button( 'drafts', __( 'Add draft articles', 'lilypawdigital' ) ); ?></p>
+		<?php endif; ?>
 	</div>
 	<?php
 }

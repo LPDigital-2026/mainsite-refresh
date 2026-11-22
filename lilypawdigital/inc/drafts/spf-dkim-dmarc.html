@@ -1,0 +1,87 @@
+<!-- wp:paragraph -->
+<p>If customers tell you your emails went to their spam folder, or an invoice you sent never arrived, the cause is very often three missing records in your domain's settings: SPF, DKIM and DMARC.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>They sound technical, but each one has a simple job. Together they prove to other email systems that a message really came from your business, and they make it much harder for anyone to send fake emails pretending to be you.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Why this matters now</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Gmail, Yahoo and Outlook have all tightened their rules on incoming email over the last couple of years. Mail from a domain without these records is far more likely to be filtered as spam or rejected outright, even if you only send a handful of emails a day. If you use your own domain for email, it is worth checking all three are in place.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">SPF: who is allowed to send as you</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>SPF (Sender Policy Framework) is a list of the services allowed to send email using your domain. When a message arrives, the receiving server checks whether it came from one of them.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li>You can only have one SPF record per domain, so every service has to go in the same record.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Include everything that sends as you: Microsoft 365 or Google Workspace, your website's contact form, your invoicing software and any newsletter tool.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>A missing service is one of the most common reasons legitimate emails fail.</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">DKIM: a signature on every email</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>DKIM (DomainKeys Identified Mail) adds a hidden digital signature to each email you send. The receiving server checks it against a public key published in your domain's settings. If the signature matches, it knows the message came from you and was not changed on the way.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Your email provider creates the keys; you add the records it gives you to your domain. In Microsoft 365 it is a couple of records and a switch to turn signing on.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">DMARC: what to do when a check fails</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>DMARC ties the other two together. It tells receiving servers what to do with a message that fails SPF and DKIM, and it sends you reports showing who is sending email using your domain. That is often the first time a business discovers a forgotten service, or someone trying to impersonate them.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A DMARC policy has three settings:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li><strong>none</strong>: just watch and report. This is where everyone should start.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li><strong>quarantine</strong>: send failing messages to spam.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li><strong>reject</strong>: refuse failing messages completely.</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Where to start</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Set up SPF and DKIM first, then add DMARC in monitoring mode. Read the reports for a few weeks, fix anything legitimate that is failing, and only then move to quarantine and, eventually, reject. Jumping straight to reject is the quickest way to block your own emails.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>If you would rather not touch your DNS settings yourself, this is exactly the kind of job our <a href="/domains-and-dns/">domain and DNS management</a> service handles. We set up all three records, keep an eye on the reports and explain what we find in plain English.</p>
+<!-- /wp:paragraph -->

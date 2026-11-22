@@ -467,6 +467,13 @@ Rules:
   (/wp-sitemap.xml) and canonical links. `tools/tests/test-blog.php` checks
   the structured data. Write a custom excerpt for every post: it becomes
   the search result description.
+- **Starter articles** live in `lilypawdigital/inc/drafts/` (block HTML)
+  with their titles, excerpts, categories and tags in `inc/drafts.php`.
+  Page Setup → "Add draft articles" saves them as drafts, skipping any slug
+  that already exists. `tools/make-articles-page.py` rebuilds the readable
+  copy in `page-content/blog-articles.html`. Each article ends by linking
+  to its service page; `tools/tests/test-drafts.php` checks those links
+  point at pages the theme creates.
 - **Header menu breakpoint is 1100px** (eight pages no longer fit on one
   line below that); the frosted header blur follows the same breakpoint.
 - Facts in use (don't alter without the owner): founded 2026; four years'

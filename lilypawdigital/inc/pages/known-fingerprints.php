@@ -40,6 +40,7 @@ return array(
 		'09fa124297dc269b5b0c2c76829e8d52',
 		'fb7b49c5f080a8a959281535391ba5c1',
 		'ccfd362276ed24731f96bc3f2a6ccf35',
+		'70547f4517d10031b47f3b46d6a8dc52',
 	),
 	'web-design' => array(
 		'fff208ce0e9c40ec9af10c173781afc8',

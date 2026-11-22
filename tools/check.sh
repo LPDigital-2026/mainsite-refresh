@@ -22,3 +22,4 @@ for t in "test.php $T" "test-auto.php $T $HASH"; do
   if echo "$out" | grep -qE '^FAIL|Fatal'; then echo "$out" | grep -E '^FAIL|Fatal'; exit 1; fi
 done
 php tools/tests/test-blog.php "$T" | tail -1
+php tools/tests/test-drafts.php "$T" | tail -1

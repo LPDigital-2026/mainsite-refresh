@@ -7,12 +7,13 @@ WordPress theme for lilypawdigital.xyz, plus the page content it ships with.
 | `lilypawdigital/` | The theme. Zip this folder to upload it. |
 | `lilypawdigital/inc/pages/` | Block content for Home, Web Design, Colocation, Our Work, About Us, Contact Us, Get Started and the six service pages (Website Maintenance, Domains and DNS, Business Email, Website Security, Microsoft 365, Hosted PBX). |
 | `lilypawdigital/inc/page-setup.php` | Creates those pages, sets the homepage and builds the menu. |
+| `page-content/blog-articles.html` | The starter blog articles, readable, with copy buttons. The theme can also add them as drafts (Appearance → Page Setup). |
 | `page-content/copy-all-page-content.html` | The same content as copy buttons, for pasting by hand. |
 | `DESIGN.md` | The design guide: colours, type, spacing, motion, what has been rejected, and how to check a change. Read this first. |
 | `tools/` | Local preview, checks and tests (`bash tools/check.sh`). |
 | `docs/impeccable-audit.md` | Design and accessibility audit, before and after v3.1. |
 
-## Design (v4.33)
+## Design (v4.34)
 
 - **Spacing:** one scale, set as variables at the top of `style.css`. Every section is separated by the same distance, every heading sits the same distance above its content, and every grid and panel uses the same gap and padding.
 - **Surfaces:** the brand purple is the page colour; pricing, FAQ, About and Contact sit on a pale lilac.
