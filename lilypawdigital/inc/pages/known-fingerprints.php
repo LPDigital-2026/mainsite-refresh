@@ -39,9 +39,13 @@ return array(
 		'1714a41fba9e31ded9ead30b7459d5ff',
 		'09fa124297dc269b5b0c2c76829e8d52',
 		'fb7b49c5f080a8a959281535391ba5c1',
+		'ccfd362276ed24731f96bc3f2a6ccf35',
 	),
 	'web-design' => array(
 		'fff208ce0e9c40ec9af10c173781afc8',
+	),
+	'blog' => array(
+		'a4c172ed8ea2cd9fead4bcee3c4a13a9',
 	),
 	'colocation' => array(
 		'214f43395fcae101b8b8c79000f0074a',

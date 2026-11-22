@@ -283,6 +283,7 @@ edited by hand keep the old markup forever.
 | Page not found | `404.php`, `.lpd-404-links` | Same title header as any page, the owner's sentence as a lead, then four link panels. |
 | Price calculator | `.lpd-calculator` (theme wrapper) around the `[lpd_form …]` shortcode, which renders `.lpd-calc-wrap` from its own plugin | A full-width, multi-step tool. Get Started gives it a whole section (heading, calculator, phone line), on a white card (owner's request) with the light-surface colours, wherever it appears. The theme widens `.lpd-calc-wrap` to the full content width in any layout, including a two-column split, a form card or an older single-column page. The same shortcode renders an ordinary form (`.lpd-form`) on Contact; inside `.lpd-calculator` a plain form gets a white card instead. |
 | Forms | `.lpd-form-wrap` / `.lpd-form` from the owner's form plugin (`[lpd_form …]`) | The plugin caps forms at 520px, centres them and sets its own font and colours. `style.css` overrides that so a form fills its card and uses Sora, the site's 52px fields and the pink pill submit button. Tested against the plugin's real markup and inline CSS copied from the live Contact page. |
+| Blog | `home.php` (the posts page), `archive.php`, `single.php`, helpers in `inc/blog.php`; `.lpd-post-card` (`-featured`), `.lpd-post-grid`, `.lpd-article*`, `.lpd-related`, `.lpd-latest` | Posts page: title and intro come from the Blog page itself; newest post as a large side-by-side card, the rest in a 3-column grid, 9 a page, pill page numbers. Cards: picture (or the paw on the brand gradient when a post has none), category, reading time, title, excerpt, date. Article: night header with breadcrumbs, date and reading time, then a white reading surface: picture up to 1000px, text column 680px at 1.12rem, related posts (same category), and a call to action. Home: "From the Blog" (`[lpd_latest_posts count="3"]`) before Contact, hidden until there are posts. |
 | Legacy | `.lpd-colo-teaser`, `.lpd-page-content` | Styled so old content still looks right. Don't use in new content. |
 | Footer | `.site-footer`, `.lpd-footer-cats`, `.lpd-cat-eye` | Cats stay. |
 
@@ -457,6 +458,17 @@ Rules:
   0.06em of padding from the bottom of each pill to the top. Measured in
   Chrome: every button's capitals now sit within 0.5px of centre. A new
   pill style with its own padding needs the same adjustment.
+- **Blog and SEO.** Articles are ordinary WordPress posts. The theme adds
+  BlogPosting and BreadcrumbList structured data on articles, a
+  ProfessionalService description on the home page, article dates for link
+  previews, and a meta description from each post's excerpt. All of it
+  steps aside when an SEO plugin (Yoast, Rank Math, AIOSEO, SEOPress, The
+  SEO Framework, Slim SEO) is active. WordPress itself provides the sitemap
+  (/wp-sitemap.xml) and canonical links. `tools/tests/test-blog.php` checks
+  the structured data. Write a custom excerpt for every post: it becomes
+  the search result description.
+- **Header menu breakpoint is 1100px** (eight pages no longer fit on one
+  line below that); the frosted header blur follows the same breakpoint.
 - Facts in use (don't alter without the owner): founded 2026; four years'
   web design experience; websites from £99 then £5.75/month; colocation from
   £65.99/month; 30-day free trial on a demo URL; phone 0333 112 7191;

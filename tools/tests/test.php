@@ -6,16 +6,16 @@ $slugs=array_keys(lpd_setup_pages());
 
 echo "== 1. Fresh site: activate\n"; reset_db();
 do_action_hook('after_switch_theme');
-ok(count($db['posts'])===13, '13 pages created');
+ok(count($db['posts'])===14, '14 pages created');
 foreach($slugs as $s){ $p=lpd_setup_find_page($s); ok($p && $p->post_content===lpd_setup_page_content($s) && strlen($p->post_content)>100, "$s content stored intact"); }
 $home=lpd_setup_find_page('home');
 ok(strpos($home->post_content,'{{theme_uri}}')===false && strpos($home->post_content,'https://example.test/wp-content/themes/lilypawdigital/assets/images/')!==false, 'theme asset paths filled in');
 ok(strpos(lpd_setup_find_page('colocation')->post_content,'{"className":"lpd-colocation-pricing"}')!==false, 'block JSON quotes survive wp_slash/unslash');
 ok(get_option('show_on_front')==='page' && get_option('page_on_front')===$home->ID, 'Home set as front page');
 $loc=get_nav_menu_locations(); $items=wp_get_nav_menu_items($loc['primary']);
-ok(count($items)===7 && implode(',',array_map(fn($i)=>$i->title,$items))==='Home,Web Design,Colocation,Our Work,About Us,Contact Us,Get Started', 'menu built in order: '.implode(',',array_map(fn($i)=>$i->title,$items)));
+ok(count($items)===8 && implode(',',array_map(fn($i)=>$i->title,$items))==='Home,Web Design,Colocation,Blog,Our Work,About Us,Contact Us,Get Started', 'menu built in order: '.implode(',',array_map(fn($i)=>$i->title,$items)));
 ob_start(); lpd_setup_activation_notice(); $n=ob_get_clean();
-ok(strpos($n,'created 13 pages, set Home as the front page, built the main menu')!==false, 'activation notice: '.strip_tags($n));
+ok(strpos($n,'created 14 pages, set Home as the front page, built the main menu')!==false, 'activation notice: '.strip_tags($n));
 ob_start(); lpd_setup_activation_notice(); ok(ob_get_clean()==='', 'notice shows once');
 
 echo "== 2. Existing live site: activate leaves everything alone\n"; reset_db();
@@ -28,10 +28,11 @@ $m=wp_create_nav_menu('My Header'); wp_update_nav_menu_item($m,0,['menu-item-obj
 do_action_hook('after_switch_theme');
 ok(lpd_setup_find_page('get-started')->post_content===$custom, 'existing Get Started (calculator) untouched');
 ok(lpd_setup_find_page('home')->post_content==='old home', 'existing Home untouched');
-ok(count($db['posts'])===14, 'only the 11 missing pages created (3 existing + 11)');
+ok(count($db['posts'])===15, 'only the 12 missing pages created (3 existing + 12)');
 ok(get_option('page_on_front')===$landing, 'existing front page kept');
+ok((int)get_option('page_for_posts')===(int)lpd_setup_find_page('blog')->ID, 'Blog page set as the posts page');
 ok(count(wp_get_nav_menu_items($m))===1 && count($db['menus'])===1, 'existing header menu untouched');
-ob_start(); lpd_setup_activation_notice(); ok(strpos(strip_tags(ob_get_clean()),'created 11 pages')!==false, 'notice reports 11 created');
+ob_start(); lpd_setup_activation_notice(); ok(strpos(strip_tags(ob_get_clean()),'created 12 pages')!==false, 'notice reports 12 created');
 
 echo "== 3. Replace + menu top-up via the admin screen\n";
 function post_action($do,$slug=''){ $_POST=['_wpnonce'=>'ok','lpd_do'=>$do,'lpd_slug'=>$slug,'action'=>'lpd_page_setup']; try{ lpd_setup_handle_action(); }catch(Redirect $r){ return $r->getMessage(); } return 'no redirect'; }
@@ -41,7 +42,7 @@ ok(($db['revisions'][$gs][0]??'')===$custom, 'old content kept as a revision');
 ok(strpos($u,'lpd_done=replace')!==false, 'redirects with success flag');
 post_action('menu'); post_action('menu');
 $items=wp_get_nav_menu_items($m);
-ok(count($items)===7 && count($db['menus'])===1 && !in_array('Hosted PBX',array_map(fn($i)=>$i->title,$items),true), 'service pages kept out of the menu; menu topped up to 7 in the existing header menu, no duplicates, no new menu');
+ok(count($items)===8 && count($db['menus'])===1 && !in_array('Hosted PBX',array_map(fn($i)=>$i->title,$items),true), 'service pages kept out of the menu; menu topped up to 8 in the existing header menu, no duplicates, no new menu');
 post_action('front_page'); ok(get_option('page_on_front')===lpd_setup_find_page('home')->ID, 'front page button sets Home');
 ok(strpos(post_action('create','not-a-page'),'lpd_done=&')!==false, 'unknown slug does nothing');
 $_POST=['_wpnonce'=>'bad','lpd_do'=>'create_missing']; try{ lpd_setup_handle_action(); ok(false,'nonce'); }catch(Exception $e){ ok($e->getMessage()==='bad nonce','bad nonce rejected'); }

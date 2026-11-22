@@ -4,7 +4,7 @@ Theme URI: https://lilypawdigital.xyz
 Author: Lily Paw Digital
 Author URI: https://lilypawdigital.xyz
 Description: Theme for Lily Paw Digital - North East web design, hosting and colocation. Navy and paper, set large, with the paw pink used sparingly.
-Version: 4.32
+Version: 4.33
 Requires at least: 6.0
 Tested up to: 6.6
 Requires PHP: 7.4
@@ -192,8 +192,8 @@ p:last-child { margin-bottom: 0; }
 
 /* Section rhythm: neighbours on the same surface share one gap, so the
    distance between any two sections is always --section */
-:is(.lpd-statement, .lpd-services, .lpd-features, .lpd-why-different, .lpd-proof, .lpd-section-alt:not(:has(.lpd-stat)))
-  + :is(.lpd-statement, .lpd-services, .lpd-features, .lpd-why-different, .lpd-proof, .lpd-section-alt:not(:has(.lpd-stat))) > .lpd-inner,
+:is(.lpd-statement, .lpd-services, .lpd-features, .lpd-why-different, .lpd-proof, .lpd-latest, .lpd-section-alt:not(:has(.lpd-stat)))
+  + :is(.lpd-statement, .lpd-services, .lpd-features, .lpd-why-different, .lpd-proof, .lpd-latest, .lpd-section-alt:not(:has(.lpd-stat))) > .lpd-inner,
 :is(.lpd-process, .lpd-section-alt:has(.lpd-stat)) + :is(.lpd-process, .lpd-section-alt:has(.lpd-stat)) > .lpd-inner,
 :is(.lpd-pricing, .lpd-cta-section, .lpd-faq, .lpd-about, .lpd-contact) + :is(.lpd-pricing, .lpd-cta-section, .lpd-faq, .lpd-about, .lpd-contact) > .lpd-inner { padding-top: 0; }
 
@@ -228,12 +228,12 @@ p:last-child { margin-bottom: 0; }
 .admin-bar .site-header { top: 32px; }
 @media (max-width: 782px) { .admin-bar .site-header { top: 46px; } }
 .site-header.is-scrolled { background: rgba(29, 14, 56, 0.72); }
-@media (min-width: 901px) {
-  /* blur only on desktop: on mobile it would make the header the
+@media (min-width: 1101px) {
+  /* blur only when the full menu shows: on mobile it would make the header the
      containing block for the fixed full-screen menu and clip it */
   .site-header.is-scrolled { -webkit-backdrop-filter: saturate(180%) blur(20px); backdrop-filter: saturate(180%) blur(20px); }
 }
-@media (max-width: 900px) { .site-header.is-scrolled { background: var(--night); } }
+@media (max-width: 1100px) { .site-header.is-scrolled { background: var(--night); } }
 @media (prefers-reduced-transparency: reduce) {
   .site-header.is-scrolled { -webkit-backdrop-filter: none; backdrop-filter: none; background: var(--night); }
 }
@@ -1320,6 +1320,110 @@ body:has(.lpd-bands > .lpd-process:first-child) .page-hero .container::after { d
 @media (max-width: 520px) { .lpd-404-links { grid-template-columns: minmax(0, 1fr); } }
 
 /* ==========================================================================
+   Blog - the posts page, archives, articles and the home page section
+   ========================================================================== */
+.lpd-blog-body { padding: clamp(40px, 5vw, 72px) 0 var(--section); }
+.lpd-blog-intro { max-width: 46ch; margin: 0 0 var(--head); }
+.lpd-blog-intro p { margin: 0; color: var(--fg); font-size: clamp(1.15rem, 1.8vw, 1.4rem); font-weight: 500; letter-spacing: -0.025em; line-height: 1.4; }
+
+.lpd-post-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gap); }
+.lpd-post-card-featured + .lpd-post-grid { margin-top: var(--gap); }
+.lpd-post-card { margin: 0; min-width: 0; }
+.lpd-post-card-link { display: flex; flex-direction: column; height: 100%; background: var(--panel); border-radius: var(--radius); overflow: hidden; color: var(--fg); transition: transform 0.16s var(--ease-out); }
+.lpd-post-card-link:active { transform: scale(0.985); }
+.lpd-post-card-image { margin: 0; aspect-ratio: 16 / 10; overflow: hidden; background: var(--night-deep); }
+.lpd-post-card-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.9s var(--ease-out); }
+/* no picture: the paw on the brand gradient */
+.lpd-post-card-placeholder { position: relative; display: block; width: 100%; height: 100%; background: var(--paw); }
+.lpd-post-card-placeholder::after { content: ''; position: absolute; inset: 0; margin: auto; width: 22%; height: 34%; background: rgba(29, 14, 56, 0.28); -webkit-mask: url('assets/icons/paw.svg') center / contain no-repeat; mask: url('assets/icons/paw.svg') center / contain no-repeat; }
+.lpd-post-card-body { display: flex; flex-direction: column; flex: 1; padding: var(--pad); }
+.lpd-post-card-meta { display: flex; flex-wrap: wrap; gap: 4px 14px; margin: 0 0 12px; color: var(--fg-dim); font-size: 0.85rem; }
+.lpd-post-card-cat { color: var(--accent-text); font-weight: 600; }
+.lpd-post-card-title { margin: 0 0 10px; font-size: clamp(1.2rem, 1.7vw, 1.4rem); letter-spacing: -0.035em; line-height: 1.2; }
+.lpd-post-card-excerpt { margin: 0 0 18px; color: var(--fg-dim); font-size: 0.98rem; line-height: 1.6; }
+.lpd-post-card-date { margin: auto 0 0; color: var(--fg-dim); font-size: 0.85rem; }
+@media (hover: hover) and (pointer: fine) {
+  .lpd-post-card-link:hover .lpd-post-card-image img { transform: scale(1.04); }
+  .lpd-post-card-link:hover .lpd-post-card-title { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
+}
+/* the newest post, side by side */
+.lpd-post-card-featured .lpd-post-card-link { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
+.lpd-post-card-featured .lpd-post-card-image { aspect-ratio: auto; min-height: 340px; }
+.lpd-post-card-featured .lpd-post-card-body { justify-content: center; padding: clamp(28px, 3.6vw, 52px); }
+.lpd-post-card-featured .lpd-post-card-title { font-size: clamp(1.7rem, 3vw, 2.5rem); letter-spacing: -0.045em; line-height: 1.08; margin-bottom: 14px; }
+.lpd-post-card-featured .lpd-post-card-excerpt { font-size: 1.05rem; }
+.lpd-post-card-featured .lpd-post-card-date { margin-top: 0; }
+@media (max-width: 1000px) { .lpd-post-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 760px) {
+  .lpd-post-grid { grid-template-columns: minmax(0, 1fr); }
+  .lpd-post-card-featured .lpd-post-card-link { grid-template-columns: minmax(0, 1fr); }
+  .lpd-post-card-featured .lpd-post-card-image { aspect-ratio: 16 / 10; min-height: 0; }
+}
+
+/* page numbers */
+.lpd-blog .pagination { margin: var(--head) 0 0; }
+.lpd-blog .nav-links { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.lpd-blog .page-numbers { display: inline-flex; align-items: center; justify-content: center; min-width: 46px; min-height: 46px; padding: 0 16px; border: 1.5px solid var(--rule-strong); border-radius: 999px; color: var(--fg); font-weight: 600; font-size: 0.95rem; }
+.lpd-blog .page-numbers.current { background: var(--fg); border-color: var(--fg); color: var(--bg); }
+.lpd-blog .page-numbers.dots { border-color: transparent; }
+@media (hover: hover) and (pointer: fine) { .lpd-blog a.page-numbers:hover { background: rgba(251, 247, 242, 0.1); } }
+.lpd-blog-empty { max-width: 52ch; padding: var(--pad); background: var(--panel); border-radius: var(--radius); }
+.lpd-blog-empty h2 { font-size: clamp(1.4rem, 2.2vw, 1.8rem); margin: 0 0 10px; }
+.lpd-blog-empty p { color: var(--fg-dim); margin: 0 0 20px; }
+.lpd-blog-empty p:last-child { margin: 0; }
+
+/* an article: night header, then a light reading surface */
+.lpd-article-hero .container { padding-bottom: clamp(28px, 3.6vw, 48px); }
+.lpd-article-hero .entry-title { max-width: 18em; font-size: clamp(2.2rem, 5.2vw, 4.25rem); letter-spacing: -0.045em; line-height: 1.02; }
+.lpd-breadcrumbs { display: flex; flex-wrap: wrap; gap: 6px 10px; margin: 0 0 22px; color: rgba(251, 247, 242, 0.6); font-size: 0.9rem; }
+.lpd-breadcrumbs a { color: rgba(251, 247, 242, 0.82); }
+@media (hover: hover) and (pointer: fine) { .lpd-breadcrumbs a:hover { color: var(--cream); text-decoration: underline; text-underline-offset: 0.2em; } }
+.lpd-article-meta { display: flex; flex-wrap: wrap; gap: 6px 12px; margin: 22px 0 0; color: rgba(251, 247, 242, 0.74); font-size: 0.95rem; }
+.lpd-article, .lpd-related, .lpd-article-cta {
+  --bg: var(--white); --panel: var(--light); --fg: var(--ink); --fg-dim: #564a6c;
+  --rule: rgba(29, 14, 56, 0.14); --rule-strong: rgba(29, 14, 56, 0.42); --accent-text: var(--pink-ink);
+  --field-bg: #fff; --field-border: rgba(29, 14, 56, 0.3);
+  background: var(--bg); color: var(--fg);
+}
+.lpd-article { padding: clamp(40px, 5vw, 72px) 0 var(--section); }
+.lpd-article-image { max-width: 1000px; margin: 0 auto clamp(36px, 5vw, 64px); overflow: hidden; border-radius: var(--radius); }
+.lpd-article-image img { width: 100%; }
+.lpd-article-body,
+.lpd-article-tags,
+.lpd-article-comments { max-width: 680px; margin-inline: auto; }
+.lpd-article-body > * { margin-top: 0; }
+.entry-content.lpd-article-body p { color: var(--fg); font-size: 1.12rem; line-height: 1.75; margin: 0 0 1.4em; }
+.entry-content.lpd-article-body > p:first-of-type { font-size: clamp(1.25rem, 2vw, 1.45rem); line-height: 1.5; letter-spacing: -0.02em; margin-bottom: 1.4em; }
+.entry-content.lpd-article-body h2 { font-size: clamp(1.6rem, 2.8vw, 2.1rem); letter-spacing: -0.04em; line-height: 1.15; margin: 2.2em 0 0.7em; }
+.entry-content.lpd-article-body h3 { font-size: clamp(1.25rem, 2vw, 1.45rem); letter-spacing: -0.03em; margin: 1.8em 0 0.6em; }
+.entry-content.lpd-article-body :is(ul, ol) { color: var(--fg); font-size: 1.12rem; line-height: 1.7; margin: 0 0 1.4em; padding-left: 1.3em; }
+.entry-content.lpd-article-body li { margin-bottom: 0.45em; }
+.entry-content.lpd-article-body li::marker { color: var(--pink); }
+.entry-content.lpd-article-body a:not(.wp-block-button__link) { color: var(--accent-text); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
+.entry-content.lpd-article-body blockquote { margin: 2em 0; padding: 0 0 0 24px; border-left: 3px solid var(--pink); }
+.entry-content.lpd-article-body blockquote p { font-size: 1.3rem; font-weight: 500; letter-spacing: -0.02em; line-height: 1.45; }
+.entry-content.lpd-article-body :is(figure, .wp-block-image) { margin: 2em 0; }
+.entry-content.lpd-article-body img { border-radius: var(--radius-sm); margin: 0; }
+.entry-content.lpd-article-body figcaption { margin-top: 10px; color: var(--fg-dim); font-size: 0.9rem; text-align: left; }
+.entry-content.lpd-article-body code { padding: 2px 6px; border-radius: 6px; background: var(--light); font-size: 0.92em; }
+.entry-content.lpd-article-body pre { overflow-x: auto; margin: 2em 0; padding: 20px; border-radius: var(--radius-sm); background: var(--night); color: var(--cream); font-size: 0.92rem; line-height: 1.6; }
+.entry-content.lpd-article-body pre code { padding: 0; background: none; }
+.entry-content.lpd-article-body table { width: 100%; margin: 2em 0; border-collapse: collapse; font-size: 1rem; }
+.entry-content.lpd-article-body :is(th, td) { padding: 12px 14px; border-bottom: 1px solid var(--rule); text-align: left; }
+.entry-content.lpd-article-body hr { margin: 2.5em 0; border: 0; border-top: 1px solid var(--rule); }
+.lpd-article-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 40px; padding: 0; list-style: none; }
+.lpd-article-tags a { display: inline-block; padding: 6px 14px; border-radius: 999px; background: var(--light); color: var(--fg); font-size: 0.9rem; font-weight: 500; }
+.lpd-article-comments { margin-top: 56px; }
+.lpd-related { padding: 0 0 var(--section); }
+.lpd-related h2 { margin: 0 0 var(--head); font-size: clamp(1.8rem, 3.4vw, 2.75rem); letter-spacing: -0.045em; }
+.lpd-related .lpd-post-card-link { background: var(--light); }
+.lpd-article-cta { padding: 0 0 var(--section); }
+
+/* home page: newest articles (hidden until there are some) */
+.lpd-latest:not(:has(.lpd-post-card)) { display: none; }
+.lpd-latest .lpd-latest-more { justify-content: center; margin-top: var(--head); }
+
+/* ==========================================================================
    Pages whose content has not been brought up to date, posts, search:
    a single reading column on night
    ========================================================================== */
@@ -1453,11 +1557,12 @@ body:has(.lpd-bands > .lpd-process:first-child) .page-hero .container::after { d
 /* ==========================================================================
    Mobile menu
    ========================================================================== */
-@media (max-width: 1080px) {
-  .main-navigation ul { gap: 18px; }
-  .main-navigation { gap: 18px; }
+@media (max-width: 1240px) {
+  .main-navigation ul { gap: 20px; }
+  .main-navigation { gap: 20px; }
 }
-@media (max-width: 900px) {
+/* eight pages no longer fit on one line below 1100px: use the menu button */
+@media (max-width: 1100px) {
   .main-navigation { display: none; }
   .menu-toggle { display: flex; }
 

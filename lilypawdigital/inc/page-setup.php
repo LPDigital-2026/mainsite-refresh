@@ -39,6 +39,10 @@ function lpd_setup_pages() {
 			'title' => __( 'Colocation', 'lilypawdigital' ),
 			'file'  => 'colocation.html',
 		),
+		'blog'        => array(
+			'title' => __( 'Blog', 'lilypawdigital' ),
+			'file'  => 'blog.html',
+		),
 		'our-work'    => array(
 			'title' => __( 'Our Work', 'lilypawdigital' ),
 			'file'  => 'our-work.html',
@@ -338,6 +342,14 @@ function lpd_setup_run() {
 
 	if ( 'page' !== get_option( 'show_on_front' ) || ! get_option( 'page_on_front' ) ) {
 		$summary['front_page'] = lpd_setup_set_front_page();
+	}
+
+	// The Blog page lists the posts, unless another page already does.
+	if ( ! get_option( 'page_for_posts' ) ) {
+		$blog = lpd_setup_find_page( 'blog' );
+		if ( $blog ) {
+			update_option( 'page_for_posts', (int) $blog->ID );
+		}
 	}
 
 	if ( ! lpd_setup_has_primary_menu() ) {

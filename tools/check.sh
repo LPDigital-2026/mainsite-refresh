@@ -21,3 +21,4 @@ for t in "test.php $T" "test-auto.php $T $HASH"; do
   out=$(php tools/tests/$t 2>&1); echo "$(echo "$out" | grep -c '^PASS') passed, $(echo "$out" | grep -cE '^FAIL|Fatal' || true) failed  (tools/tests/${t%% *})"
   if echo "$out" | grep -qE '^FAIL|Fatal'; then echo "$out" | grep -E '^FAIL|Fatal'; exit 1; fi
 done
+php tools/tests/test-blog.php "$T" | tail -1

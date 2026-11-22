@@ -1,0 +1,13 @@
+<p>If your emails keep landing in spam, or a customer says they never received your invoice, the cause is very often three missing records in your domain's DNS: SPF, DKIM and DMARC.</p>
+<p>They sound technical, but each one has a simple job. Together they prove to other email servers that a message really came from you.</p>
+<h2>What SPF does</h2>
+<p>SPF lists the servers that are allowed to send email for your domain. When a message arrives, the receiving server checks it came from one of them.</p>
+<ul><li>One SPF record per domain</li><li>List every service that sends as you, such as Microsoft 365 and your website</li><li>Finish with <code>~all</code> or <code>-all</code></li></ul>
+<h2>What DKIM does</h2>
+<p>DKIM adds a digital signature to every email. The receiving server checks the signature against a public key published in your DNS.</p>
+<blockquote><p>Set up all three and your emails are far less likely to be marked as spam, and far harder for anyone to fake.</p></blockquote>
+<h2>What DMARC does</h2>
+<p>DMARC tells receiving servers what to do when a message fails the SPF and DKIM checks, and sends you reports so you can see who is sending as you.</p>
+<pre><code>v=DMARC1; p=quarantine; rua=mailto:reports@example.co.uk</code></pre>
+<h3>Where to start</h3>
+<p>Start DMARC in monitoring mode, read the reports for a couple of weeks, then tighten it. If you would rather not touch DNS yourself, <a href="/contact-us/">we can set it up for you</a>.</p>

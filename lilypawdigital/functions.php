@@ -5,7 +5,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-define( 'LPD_VERSION', '4.32' );
+define( 'LPD_VERSION', '4.33' );
 
 function lpd_setup() {
 	load_theme_textdomain( 'lilypawdigital', get_template_directory() . '/languages' );
@@ -144,7 +144,7 @@ function lpd_share_meta() {
 
 	if ( is_singular() ) {
 		$url = get_permalink();
-		if ( has_excerpt() ) {
+		if ( has_excerpt() || is_singular( 'post' ) ) {
 			$description = wp_strip_all_tags( get_the_excerpt(), true );
 		}
 		if ( has_post_thumbnail() ) {
@@ -195,3 +195,4 @@ add_filter( 'render_block_core/group', 'lpd_strip_group_inner_container', 99, 2 
 require get_template_directory() . '/inc/template-tags.php';
 require get_template_directory() . '/inc/customizer-defaults.php';
 require get_template_directory() . '/inc/page-setup.php';
+require get_template_directory() . '/inc/blog.php';

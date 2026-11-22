@@ -1,68 +1,108 @@
 <?php
 /**
- * Single post template
+ * A blog article: header, picture, a comfortable reading column, then
+ * related articles and a way to get in touch.
  */
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 get_header();
-?>
 
-<main id="primary" class="site-main">
+while ( have_posts() ) :
+	the_post();
+	$lpd_cat  = lpd_primary_category();
+	$lpd_blog = (int) get_option( 'page_for_posts' );
+	?>
+	<main id="primary" class="site-main lpd-article-page">
 
-	<div class="page-hero">
-		<div class="container">
-			<?php while ( have_posts() ) : the_post(); ?>
-				<h1 class="entry-title"><?php the_title(); ?></h1>
-				<div class="entry-meta" style="color:var(--fg-dim);">
-					<?php esc_html_e( 'Written by', 'lilypawdigital' ); ?> <?php the_author(); ?> | <?php lpd_posted_on(); ?>
-				</div>
-			<?php endwhile; ?>
-		</div>
-	</div>
-
-	<div class="container">
-		<div class="content-layout" style="display:grid;grid-template-columns:2fr 1fr;gap:40px;padding-bottom:56px;">
-			<div>
-				<?php
-				while ( have_posts() ) :
-					the_post();
-					?>
-					<article id="post-<?php the_ID(); ?>" <?php post_class( 'entry-content' ); ?>>
-						<?php if ( has_post_thumbnail() ) : ?>
-							<div style="margin-bottom:24px;border-radius:14px;overflow:hidden;">
-								<?php the_post_thumbnail( 'large' ); ?>
-							</div>
-						<?php endif; ?>
-
-						<?php
-						the_content();
-
-						wp_link_pages(
-							array(
-								'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'lilypawdigital' ),
-								'after'  => '</div>',
-							)
-						);
-						?>
-					</article>
-
-					<footer class="entry-footer" style="margin:24px 0;color:var(--fg-dim);">
-						<?php lpd_entry_footer(); ?>
-					</footer>
-
-					<?php if ( comments_open() || get_comments_number() ) : ?>
-						<?php comments_template(); ?>
+		<header class="page-hero lpd-article-hero">
+			<div class="container">
+				<nav class="lpd-breadcrumbs" aria-label="<?php esc_attr_e( 'Breadcrumb', 'lilypawdigital' ); ?>">
+					<a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php esc_html_e( 'Home', 'lilypawdigital' ); ?></a>
+					<?php if ( $lpd_blog ) : ?>
+						<span aria-hidden="true">/</span> <a href="<?php echo esc_url( get_permalink( $lpd_blog ) ); ?>"><?php echo esc_html( get_the_title( $lpd_blog ) ); ?></a>
 					<?php endif; ?>
-
-				<?php endwhile; ?>
+					<?php if ( $lpd_cat ) : ?>
+						<span aria-hidden="true">/</span> <a href="<?php echo esc_url( get_category_link( $lpd_cat ) ); ?>"><?php echo esc_html( $lpd_cat->name ); ?></a>
+					<?php endif; ?>
+				</nav>
+				<h1 class="entry-title"><?php the_title(); ?></h1>
+				<p class="lpd-article-meta">
+					<time datetime="<?php echo esc_attr( get_the_date( DATE_W3C ) ); ?>"><?php echo esc_html( get_the_date() ); ?></time>
+					<span aria-hidden="true">&middot;</span>
+					<span><?php echo esc_html( sprintf( _n( '%d min read', '%d min read', lpd_reading_time(), 'lilypawdigital' ), lpd_reading_time() ) ); ?></span>
+					<?php if ( get_the_modified_date( 'Ymd' ) > get_the_date( 'Ymd' ) ) : ?>
+						<span aria-hidden="true">&middot;</span>
+						<span><?php echo esc_html( sprintf( __( 'Updated %s', 'lilypawdigital' ), get_the_modified_date() ) ); ?></span>
+					<?php endif; ?>
+				</p>
 			</div>
+		</header>
 
-			<aside>
-				<?php get_sidebar(); ?>
-			</aside>
-		</div>
-	</div>
-</main>
+		<article id="post-<?php the_ID(); ?>" <?php post_class( 'lpd-article' ); ?>>
+			<div class="container">
+				<?php if ( has_post_thumbnail() ) : ?>
+					<figure class="lpd-article-image"><?php the_post_thumbnail( 'large', array( 'loading' => 'eager', 'fetchpriority' => 'high' ) ); ?></figure>
+				<?php endif; ?>
+				<div class="entry-content lpd-article-body">
+					<?php
+					the_content();
+					wp_link_pages(
+						array(
+							'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'lilypawdigital' ),
+							'after'  => '</div>',
+						)
+					);
+					?>
+				</div>
+				<?php
+				$lpd_tags = get_the_tags();
+				if ( $lpd_tags ) :
+					?>
+					<ul class="lpd-article-tags" aria-label="<?php esc_attr_e( 'Tags', 'lilypawdigital' ); ?>">
+						<?php foreach ( $lpd_tags as $lpd_tag ) : ?>
+							<li><a href="<?php echo esc_url( get_tag_link( $lpd_tag ) ); ?>"><?php echo esc_html( $lpd_tag->name ); ?></a></li>
+						<?php endforeach; ?>
+					</ul>
+				<?php endif; ?>
 
-<?php
+				<?php if ( comments_open() || get_comments_number() ) : ?>
+					<div class="lpd-article-comments"><?php comments_template(); ?></div>
+				<?php endif; ?>
+			</div>
+		</article>
+
+		<?php
+		$lpd_related = lpd_related_posts_query( get_the_ID() );
+		if ( $lpd_related->have_posts() ) :
+			?>
+			<section class="lpd-related" aria-labelledby="lpd-related-title">
+				<div class="container">
+					<h2 id="lpd-related-title"><?php esc_html_e( 'Keep Reading', 'lilypawdigital' ); ?></h2>
+					<div class="lpd-post-grid">
+						<?php
+						while ( $lpd_related->have_posts() ) {
+							$lpd_related->the_post();
+							lpd_post_card();
+						}
+						wp_reset_postdata();
+						?>
+					</div>
+				</div>
+			</section>
+		<?php endif; ?>
+
+		<section class="lpd-article-cta">
+			<div class="container">
+				<div class="lpd-cta-banner">
+					<h2><?php esc_html_e( 'Need a Hand With This?', 'lilypawdigital' ); ?></h2>
+					<p><?php esc_html_e( 'Tell us what you are trying to do and we will get back to you with clear advice. Real people, no jargon.', 'lilypawdigital' ); ?></p>
+					<div class="wp-block-buttons"><div class="wp-block-button lpd-btn-primary"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( home_url( '/contact-us/' ) ); ?>"><?php esc_html_e( 'Talk to Us', 'lilypawdigital' ); ?></a></div></div>
+				</div>
+			</div>
+		</section>
+
+	</main>
+	<?php
+endwhile;
+
 get_footer();
