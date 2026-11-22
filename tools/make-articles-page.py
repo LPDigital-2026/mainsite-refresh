@@ -21,7 +21,7 @@ def card(i, a):
   <summary><span class="n">{i + 1}</span> <span class="t">{html.escape(title)}</span> <span class="w">{words} words, about {max(1, round(words / 220))} min read</span></summary>
   <dl>
     <dt>Title</dt><dd>{html.escape(title)}</dd>
-    <dt>Address</dt><dd>/blog/{slug}/ <small>(set automatically when added from Page Setup)</small></dd>
+    <dt>Slug</dt><dd>{slug} <small>(the end of the article's web address; set automatically when added from Page Setup)</small></dd>
     <dt>Category</dt><dd>{html.escape(cat)}</dd>
     <dt>Tags</dt><dd>{html.escape(', '.join(tags))}</dd>
     <dt>Excerpt</dt><dd>{html.escape(excerpt)} <small>({len(excerpt)} characters: shown in Google results)</small></dd>
