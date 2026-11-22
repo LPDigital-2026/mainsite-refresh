@@ -478,6 +478,10 @@ Rules:
   copy in `page-content/blog-articles.html`. Each article ends by linking
   to its service page; `tools/tests/test-drafts.php` checks those links
   point at pages the theme creates.
+- **Comments are off** site-wide (`inc/no-comments.php`, owner's request):
+  closed on every post and page, existing comments hidden (not deleted),
+  pingbacks refused, and the Comments screen, menu, toolbar item and
+  dashboard box removed. `tools/tests/test-comments.php` checks it.
 - **Header menu breakpoint is 1100px** (eight pages no longer fit on one
   line below that); the frosted header blur follows the same breakpoint.
 - Facts in use (don't alter without the owner): founded 2026; four years'

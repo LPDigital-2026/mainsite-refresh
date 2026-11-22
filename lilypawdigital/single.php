@@ -61,9 +61,6 @@ while ( have_posts() ) :
 					</ul>
 				<?php endif; ?>
 
-				<?php if ( comments_open() || get_comments_number() ) : ?>
-					<div class="lpd-article-comments"><?php comments_template(); ?></div>
-				<?php endif; ?>
 			</div>
 		</article>
 

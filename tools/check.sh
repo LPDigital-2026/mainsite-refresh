@@ -23,3 +23,4 @@ for t in "test.php $T" "test-auto.php $T $HASH"; do
 done
 php tools/tests/test-blog.php "$T" | tail -1
 php tools/tests/test-drafts.php "$T" | tail -1
+php tools/tests/test-comments.php "$T" | tail -1
