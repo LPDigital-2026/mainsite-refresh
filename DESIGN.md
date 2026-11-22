@@ -262,7 +262,7 @@ edited by hand keep the old markup forever.
 
 | Component | Class | Notes |
 |---|---|---|
-| Header | `.site-header` | 64px, fixed, transparent over the hero; after 24px of scrolling it becomes a translucent purple material (72% opacity, 20px blur, no dividing line). Blur only ≥901px (see §14). Links are 0.88rem regular weight; the current page is brighter, never underlined. Client Login is a small filled pill. |
+| Header | `.site-header` | 64px, fixed, transparent over the hero; after 24px of scrolling it becomes a translucent purple material (72% opacity, 20px blur, no dividing line). Blur only ≥901px (see §14). Links are 0.88rem regular weight; the current page is brighter, never underlined. Client Login is a small filled pill linking to https://my.lilypaw.digital (also in the footer). |
 | Buttons | `.wp-block-button.lpd-btn-primary` / `.lpd-btn-secondary`, `.btn` | Pill, 50px tall, press scales to 0.97. |
 | Hero | `.lpd-hero`, `.lpd-hero-heading`, `.lpd-hero-text`, `.lpd-hero-actions`, `.lpd-hero-note`, `.lpd-rail` | Bottom-aligned. Left: the services line "Web Design • Hosting • Cybersecurity • Communications" (`.lpd-hero-kicker`; JS keeps each item on one line, colours the separators pink and keeps each separator with the item before it), then the headline "Capable. Connected. Considered.", one word to a line, each full stop pink (`.lpd-dot`, added by JS, which also splits it under reduced motion). Right: nothing. The owner removed the intro sentence and both buttons; `.lpd-hero-text` and `.lpd-hero-actions` styles remain only for older content. Three facts on a rail below (on phones, just their titles as a short list). The price line under the buttons (`.lpd-hero-note`) was removed at the owner's request; its styles remain only for older content. Entrance: the services rise in one by one, then the headline words (140ms apart). On screens under 900px the headline is set larger, up to 4.5rem. |
 | Statement | `.lpd-statement`, `.lpd-statement-text` | One sentence, set large. |
@@ -452,6 +452,11 @@ Rules:
   its prices.
 - Hosted PBX: choice of PBX (FreePBX, FusionPBX and more); from £16.99 a month; powerful security and DDoS protection;
   2 vCores at 4.0GHz, 4GB ECC RAM, 48GB SSD storage, daily backups; phone numbers available on request (owner).
+- **Button labels are optically centred.** Sora's capitals sit about 1.5px
+  high in a pill, so `style.css` ("Optical centring", near the end) moves
+  0.06em of padding from the bottom of each pill to the top. Measured in
+  Chrome: every button's capitals now sit within 0.5px of centre. A new
+  pill style with its own padding needs the same adjustment.
 - Facts in use (don't alter without the owner): founded 2026; four years'
   web design experience; websites from £99 then £5.75/month; colocation from
   £65.99/month; 30-day free trial on a demo URL; phone 0333 112 7191;

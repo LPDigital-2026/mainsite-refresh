@@ -52,7 +52,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 				<h2><?php esc_html_e( 'Company', 'lilypawdigital' ); ?></h2>
 				<ul>
 					<li><a href="https://status.lilypaw.digital" target="_blank" rel="noopener"><?php esc_html_e( 'Status', 'lilypawdigital' ); ?></a></li>
-					<li><a href="https://billing.lilypawdigital.com/login" target="_blank" rel="noopener"><?php esc_html_e( 'Client Login', 'lilypawdigital' ); ?></a></li>
+					<li><a href="https://my.lilypaw.digital" target="_blank" rel="noopener"><?php esc_html_e( 'Client Login', 'lilypawdigital' ); ?></a></li>
 					<li><a href="https://uk.trustpilot.com/review/lilypawdigital.xyz" target="_blank" rel="noopener"><?php esc_html_e( 'Reviews', 'lilypawdigital' ); ?></a></li>
 					<li><a href="https://links.lilypawdigital.xyz" target="_blank" rel="noopener"><?php esc_html_e( 'Links', 'lilypawdigital' ); ?></a></li>
 				</ul>

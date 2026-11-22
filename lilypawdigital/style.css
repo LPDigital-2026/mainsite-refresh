@@ -4,7 +4,7 @@ Theme URI: https://lilypawdigital.xyz
 Author: Lily Paw Digital
 Author URI: https://lilypawdigital.xyz
 Description: Theme for Lily Paw Digital - North East web design, hosting and colocation. Navy and paper, set large, with the paw pink used sparingly.
-Version: 4.31
+Version: 4.32
 Requires at least: 6.0
 Tested up to: 6.6
 Requires PHP: 7.4
@@ -1499,6 +1499,16 @@ body:has(.lpd-bands > .lpd-process:first-child) .page-hero .container::after { d
   @keyframes lpd-menu-out { from { clip-path: inset(0 0 0 0); } to { clip-path: inset(0 0 100% 0); } }
 }
 @media (max-width: 400px) { .lpd-logo-img, .custom-logo { height: 36px; } }
+
+/* Optical centring. Sora's capitals sit about 1.5px above the middle of
+   their line box, so in a pill the label looks high (measured in Chrome).
+   Every pill keeps its height; 0.06em of padding moves from the bottom to
+   the top so the capitals sit in the middle. */
+.btn, .wp-block-button__link, button[type="submit"], input[type="submit"] { padding-top: calc(13px + 0.06em); padding-bottom: calc(13px - 0.06em); }
+.main-navigation .lpd-client-login { padding-top: calc(7px + 0.06em); padding-bottom: calc(7px - 0.06em); }
+.lpd-plan-helper-option { padding-top: calc(10px + 0.06em); padding-bottom: calc(10px - 0.06em); }
+.lpd-form-wrap .lpd-form-submit { padding-top: calc(13px + 0.06em); padding-bottom: calc(13px - 0.06em); }
+.lpd-pricing-card p.lpd-pricing-badge { padding-top: calc(5px + 0.06em); padding-bottom: calc(5px - 0.06em); }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-delay: 0s !important; transition-duration: 0.01ms !important; }

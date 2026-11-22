@@ -49,7 +49,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 				)
 			);
 			?>
-			<a href="https://billing.lilypawdigital.com/login" class="lpd-client-login btn btn-secondary" target="_blank" rel="noopener">
+			<a href="https://my.lilypaw.digital" class="lpd-client-login btn btn-secondary" target="_blank" rel="noopener">
 				<?php esc_html_e( 'Client Login', 'lilypawdigital' ); ?>
 			</a>
 		</nav>
