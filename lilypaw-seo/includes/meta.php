@@ -58,7 +58,10 @@ function lpd_seo_title_for( $post ) {
 		return $defaults[ $key ][0];
 	}
 	if ( 'post' === $post->post_type ) {
-		return wp_strip_all_tags( get_the_title( $post ) ) . ' | ' . get_bloginfo( 'name' );
+		$headline = wp_strip_all_tags( get_the_title( $post ) );
+		$full     = $headline . ' | ' . get_bloginfo( 'name' );
+		// Long headlines go out without the site name, so more of them shows.
+		return ( function_exists( 'mb_strlen' ) ? mb_strlen( $full ) : strlen( $full ) ) <= 60 ? $full : $headline;
 	}
 	return '';
 }
@@ -68,6 +71,10 @@ function lpd_seo_description_for( $post ) {
 		$custom = trim( (string) get_post_meta( $post->ID, '_lpd_seo_description', true ) );
 		if ( $custom ) {
 			return lpd_seo_trim( $custom, 300 );
+		}
+		// An article's own excerpt comes first, so editing it changes what Google shows.
+		if ( 'post' === $post->post_type && has_excerpt( $post ) ) {
+			return lpd_seo_trim( $post->post_excerpt );
 		}
 		$defaults = lpd_seo_defaults();
 		$key      = lpd_seo_page_key( $post );
@@ -160,7 +167,11 @@ add_action(
 			printf( '<meta property="article:published_time" content="%s">' . "\n", esc_attr( get_the_date( DATE_W3C, $post ) ) );
 			printf( '<meta property="article:modified_time" content="%s">' . "\n", esc_attr( get_the_modified_date( DATE_W3C, $post ) ) );
 		}
-		// Category pages need a canonical link; WordPress only adds one to single posts and pages.
+		// WordPress only adds a canonical link to single posts and pages; add
+		// one to the blog and category pages too.
+		if ( is_home() && ! is_front_page() ) {
+			printf( '<link rel="canonical" href="%s">' . "\n", esc_url( get_pagenum_link( max( 1, (int) get_query_var( 'paged' ) ) ) ) );
+		}
 		if ( ( is_category() || is_tag() ) && ! is_wp_error( $url ) ) {
 			printf( '<link rel="canonical" href="%s">' . "\n", esc_url( get_pagenum_link( max( 1, (int) get_query_var( 'paged' ) ) ) ) );
 		}

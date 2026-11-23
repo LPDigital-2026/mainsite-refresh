@@ -24,5 +24,13 @@ function lpd_seo_defaults() {
 		'website-security'    => array( 'Website Security Monitoring | Lily Paw Digital', 'Website security monitoring for small businesses: configuration reviews, malware scan monitoring, SSL checks, login protection and clear advice.' ),
 		'microsoft-365'       => array( 'Microsoft 365 for Business from £7.49 | Lily Paw Digital', 'Microsoft 365 Business Basic, Standard and Premium with set-up and local support. From £7.49 per user per month on a 1-year commitment.' ),
 		'hosted-pbx'          => array( 'Hosted PBX Business Phones | Lily Paw Digital', 'Cloud business phone systems on FreePBX, FusionPBX and more, from £16.99 a month. Security, DDoS protection, daily backups and numbers on request.' ),
+		// Starter articles: shorter titles than their headlines, so Google shows them in full.
+		'spf-dkim-dmarc-explained'                    => array( 'SPF, DKIM and DMARC Explained | Lily Paw Digital', 'Three DNS records decide whether your business emails reach the inbox or the spam folder. Here is what SPF, DKIM and DMARC do and how to set them up.' ),
+		'microsoft-365-business-plans-compared'       => array( 'Microsoft 365 Basic vs Standard vs Premium', 'The three Microsoft 365 business plans compared in plain English, so you can pick the right one for your team without paying for features you will not use.' ),
+		'does-my-small-business-need-a-website'       => array( 'Does Your Small Business Need a Website in 2026?', 'A social media page is not enough on its own. What a simple website does for a local business, what it needs to include and how to get one built.' ),
+		'what-is-colocation'                          => array( 'What Is Colocation? A Plain-English Guide', 'Colocation moves your own servers into a professional data centre. How it works, how it compares with the cloud and the office, and who it suits.' ),
+		'signs-your-wordpress-site-needs-maintenance' => array( '5 Signs Your WordPress Site Needs Maintenance', 'Waiting updates, missing backups and slow pages all add up. Five warning signs your WordPress site needs attention, and what good maintenance looks like.' ),
+		'hosted-pbx-explained'                        => array( 'Hosted PBX Explained: Business Phones in the Cloud', 'The UK copper phone network is being switched off. What a hosted PBX is, how FreePBX and FusionPBX compare, and whether you can keep your number.' ),
+		'domain-and-ssl-expiry'                       => array( 'Domain and SSL Expiry: Keep Your Site Online', 'A missed domain or SSL renewal can take your website and email offline overnight. How to make sure it never happens to your business.' ),
 	);
 }
