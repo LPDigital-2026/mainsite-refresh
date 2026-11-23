@@ -88,6 +88,10 @@ function lpd_seo_description_for( $post ) {
 		if ( strlen( $text ) > 50 ) {
 			return $text;
 		}
+		// Nothing to go on (a page that is all shortcodes or images): describe
+		// it by its title rather than repeat the home page's description.
+		/* translators: %s: page title */
+		return lpd_seo_trim( sprintf( __( '%s from Lily Paw Digital: websites, hosting, email, security and colocation for businesses in the North East of England.', 'lilypaw-seo' ), wp_strip_all_tags( get_the_title( $post ) ) ) );
 	}
 	if ( is_category() || is_tag() ) {
 		$desc = term_description();

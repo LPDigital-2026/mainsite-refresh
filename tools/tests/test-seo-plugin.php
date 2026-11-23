@@ -28,6 +28,7 @@ $descs=array_map(fn($v)=>$v[1], lpd_seo_defaults()); ok(count($descs)===count(ar
 ok(lpd_seo_title_for($PAGES[0])===lpd_seo_defaults()['home'][0], 'the front page uses the home title');
 $M[2]['_lpd_seo_title']='My own title'; ok(lpd_seo_title_for($PAGES[1])==='My own title', 'a title typed into the SEO box wins'); unset($M[2]['_lpd_seo_title']);
 ok(lpd_seo_description_for($POSTS[0])==='Three DNS records decide whether your business emails reach the inbox.', 'an article uses its excerpt');
+$empty=P(30,'some-shortcode-page','page',['post_content'=>'[lpd_form id="x"]']); $ed=lpd_seo_description_for($empty); ok(strpos($ed,'Some Shortcode Page from Lily Paw Digital')===0 && $ed!==lpd_seo_defaults()['home'][1], 'a page with no words of its own gets a description from its title, not the home one');
 $long=str_repeat('word ',80); $t=lpd_seo_trim($long); ok(mb_strlen($t)<=158 && substr($t,-3)==='…', 'long text is trimmed to fit, on a whole word');
 // sitemaps
 $idx=lpd_seo_sitemap_xml('index'); $x=simplexml_load_string($idx); ok($x && count($x->sitemap)===3, 'sitemap index lists pages, articles and categories');
