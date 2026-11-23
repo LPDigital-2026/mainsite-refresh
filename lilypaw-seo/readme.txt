@@ -1,5 +1,5 @@
 === Lily Paw SEO ===
-Version: 1.0.2
+Version: 1.0.3
 
 Sitemaps, page titles and descriptions, link previews and indexing rules for lilypaw.digital.
 

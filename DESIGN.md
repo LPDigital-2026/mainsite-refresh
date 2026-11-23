@@ -436,6 +436,9 @@ Rules:
   Use facts about the building, in our own words. Do not name the operator,
   and do not carry over its commercial terms: its network SLA, customer
   count, AS number, memberships, other sites, phone number or hours.
+- **No carrier-neutral claims and no named providers** anywhere about
+  colocation (owner's request): no fibre operators, network partners,
+  transit or peering. Say "diverse fibre" and "flexible bandwidth" instead.
 - The owner removed "Free for 30 days" from the hero facts. The trial is
   still described in How It Works, the offer panel and the FAQ; don't
   put it back in the hero.

@@ -12,7 +12,7 @@ function lpd_seo_defaults() {
 	return array(
 		'home'                => array( 'Lily Paw Digital | Web Design, Hosting & IT, North East', 'Websites, hosting, business email, Microsoft 365, security and colocation for North East businesses. Clear pricing, real people, no jargon.' ),
 		'web-design'          => array( 'Small Business Web Design, North East | Lily Paw Digital', 'Websites designed and built for North East businesses and hosted on UK hardware, from £99. See yours live on a demo address before you pay.' ),
-		'colocation'          => array( 'Colocation in Newcastle | Lily Paw Digital', 'Rack space at Reliance House, Newcastle, from £65.99 a month. N+1 power and cooling, 24/7 access, remote hands and carrier-neutral connectivity.' ),
+		'colocation'          => array( 'Colocation in Newcastle | Lily Paw Digital', 'Rack space at Reliance House, Newcastle, from £65.99 a month. N+1 power and cooling, 24/7 access, remote hands and diverse fibre connectivity.' ),
 		'blog'                => array( 'Blog: Plain-English Tech Guides | Lily Paw Digital', 'Plain-English guides to websites, hosting, email, Microsoft 365 and security for small businesses, from our team in the North East of England.' ),
 		'our-work'            => array( 'Our Work: Websites We Have Built | Lily Paw Digital', 'Websites we have designed and built for North East organisations, including Ryton Singers and Ryton Cricket Club, and what their owners said.' ),
 		'about-us'            => array( 'About Us | Lily Paw Digital, North East England', 'Lily Paw Digital is a North East technology business founded in 2026 and named after Lily the cat. Websites, hosting, email, security and more.' ),
