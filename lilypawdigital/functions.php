@@ -5,7 +5,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-define( 'LPD_VERSION', '4.38' );
+define( 'LPD_VERSION', '4.39' );
 
 function lpd_setup() {
 	load_theme_textdomain( 'lilypawdigital', get_template_directory() . '/languages' );
@@ -129,7 +129,7 @@ add_filter( 'excerpt_more', 'lpd_excerpt_more' );
  * an SEO plugin is active, since those print their own.
  */
 function lpd_share_meta() {
-	if ( defined( 'WPSEO_VERSION' ) || defined( 'RANK_MATH_VERSION' ) || defined( 'AIOSEO_VERSION' ) || defined( 'SEOPRESS_VERSION' ) || defined( 'THE_SEO_FRAMEWORK_VERSION' ) || defined( 'SLIM_SEO_VER' ) ) {
+	if ( defined( 'LPD_SEO_VERSION' ) || defined( 'WPSEO_VERSION' ) || defined( 'RANK_MATH_VERSION' ) || defined( 'AIOSEO_VERSION' ) || defined( 'SEOPRESS_VERSION' ) || defined( 'THE_SEO_FRAMEWORK_VERSION' ) || defined( 'SLIM_SEO_VER' ) ) {
 		return;
 	}
 

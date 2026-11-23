@@ -478,6 +478,14 @@ Rules:
   copy in `page-content/blog-articles.html`. Each article ends by linking
   to its service page; `tools/tests/test-drafts.php` checks those links
   point at pages the theme creates.
+- **SEO plugin.** `lilypaw-seo/` (a plugin, so it survives a theme change)
+  owns titles, meta descriptions, link-preview tags, the sitemap at
+  /sitemap.xml and the indexing rules. Suggested titles and descriptions
+  for each page are in `includes/defaults.php` (titles 60 characters or
+  fewer, descriptions 120-160, all different; `tools/tests/test-seo-plugin.php`
+  enforces it). The theme's own description and preview tags step aside
+  when `LPD_SEO_VERSION` is defined; its structured data stays. Add a
+  suggested title and description there for every new page.
 - **Comments are off** site-wide (`inc/no-comments.php`, owner's request):
   closed on every post and page, existing comments hidden (not deleted),
   pingbacks refused, and the Comments screen, menu, toolbar item and

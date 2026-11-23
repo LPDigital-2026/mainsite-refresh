@@ -24,3 +24,5 @@ done
 php tools/tests/test-blog.php "$T" | tail -1
 php tools/tests/test-drafts.php "$T" | tail -1
 php tools/tests/test-comments.php "$T" | tail -1
+for f in lilypaw-seo/*.php lilypaw-seo/includes/*.php; do php -l "$f" >/dev/null; done
+php tools/tests/test-seo-plugin.php "$PWD/lilypaw-seo" | tail -1

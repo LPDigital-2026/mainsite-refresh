@@ -231,7 +231,7 @@ add_action( 'wp_head', 'lpd_structured_data', 6 );
  * Articles say they are articles to link previews, with their dates.
  */
 function lpd_article_meta() {
-	if ( lpd_seo_plugin_active() || ! is_singular( 'post' ) ) {
+	if ( defined( 'LPD_SEO_VERSION' ) || lpd_seo_plugin_active() || ! is_singular( 'post' ) ) {
 		return;
 	}
 	printf( '<meta property="article:published_time" content="%s">' . "\n", esc_attr( get_the_date( DATE_W3C ) ) );
