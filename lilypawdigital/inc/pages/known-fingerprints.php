@@ -42,6 +42,8 @@ return array(
 		'ccfd362276ed24731f96bc3f2a6ccf35',
 		'70547f4517d10031b47f3b46d6a8dc52',
 		'9efa37814f0186edcdff24a7094348a6',
+		'24fdc37e5289da701e58a53dd06f5c7b',
+		'82a5024fd59552543ff333d87a481d3a',
 	),
 	'web-design' => array(
 		'fff208ce0e9c40ec9af10c173781afc8',
@@ -56,6 +58,8 @@ return array(
 		'0308f53f8d74c4637d769fef19287f82',
 		'5eaa7d46c2a018d301c878e1d9bb232f',
 		'0887176c43b1d08aee0cbb38791a01cd',
+		'd0eabc751a8305938b50c3d600189d5f',
+		'375ff88ebfe3f153e7ce26cb4cf4bb55',
 	),
 	'about-us' => array(
 		'81429345e1a3fe48bb8f7ac3404837a2',
@@ -80,6 +84,7 @@ return array(
 		'2747d4627f8f192274418b4ba2816b0f',
 		'5b631e1ea2ede5fd12263418e8063afa',
 		'6c02dbc1837258d7ce8be5d533ab45e0',
+		'601b43abe4cc169aa9b2bc922068e628',
 	),
 	'website-maintenance' => array(
 		'0b18d4a78c29b2e970c2c88c0bdb0670',

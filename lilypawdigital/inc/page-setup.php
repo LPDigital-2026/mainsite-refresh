@@ -14,7 +14,7 @@
  * "Not edited by hand" is decided by fingerprint: the page's content
  * matches what this theme last wrote to it, or any version of the
  * content the theme has ever shipped. A page that has been edited
- * (a price calculator added to Get Started, say) is left alone and
+ * (a form or extra section added to a page, say) is left alone and
  * listed on Appearance -> Page Setup, where "Replace" overwrites it on
  * request. WordPress keeps the old content as a revision either way.
  */
@@ -58,7 +58,7 @@ function lpd_setup_pages() {
 		'get-started' => array(
 			'title'   => __( 'Get Started', 'lilypawdigital' ),
 			'file'    => 'get-started.html',
-			'warning' => __( 'Replacing this page removes anything added to it since, such as a price calculator.', 'lilypawdigital' ),
+			'warning' => __( 'Replacing this page removes anything you have added to it since, such as a different form.', 'lilypawdigital' ),
 		),
 		'website-maintenance' => array(
 			'title' => __( 'Website Maintenance', 'lilypawdigital' ),

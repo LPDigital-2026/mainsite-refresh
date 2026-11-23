@@ -53,6 +53,6 @@ set_error_handler(function($no,$str,$f,$l){ global $fail; echo "PHP WARNING: $st
 $_GET=['lpd_done'=>'replace']; ob_start(); lpd_setup_render_admin_page(); $html=ob_get_clean();
 ok(substr_count($html,'Up to date')>=1 && strpos($html,'Edited by you')!==false, 'statuses shown');
 ok(strpos($html,'Replaced')===false && strpos($html,'Page replaced with the theme version')!==false, 'success message shown');
-ok(strpos($html,'price calculator')!==false, 'Get Started warning shown');
+ok(strpos($html,'such as a different form')!==false, 'Get Started warning shown');
 file_put_contents(__DIR__.'/admin.html','<link rel="stylesheet" href="https://example.invalid/none.css"><body style="font:13px sans-serif;padding:20px;background:#f0f0f1">'.$html);
 echo $fail? "\n$fail FAILED\n" : "\nALL PASSED\n"; exit($fail?1:0);

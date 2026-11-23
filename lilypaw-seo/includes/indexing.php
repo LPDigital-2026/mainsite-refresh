@@ -39,6 +39,16 @@ add_action(
 			wp_safe_redirect( $about ? get_permalink( $about ) : home_url( '/' ), 301 );
 			exit;
 		}
+		// Pages that have been removed: send their old addresses (which Google
+		// may still have) to the page that replaced them.
+		if ( is_404() ) {
+			$moved = array( 'price-calculator' => 'get-started' );
+			$path  = trim( (string) wp_parse_url( isset( $_SERVER['REQUEST_URI'] ) ? wp_unslash( $_SERVER['REQUEST_URI'] ) : '', PHP_URL_PATH ), '/' );
+			if ( isset( $moved[ $path ] ) ) {
+				wp_safe_redirect( home_url( '/' . $moved[ $path ] . '/' ), 301 );
+				exit;
+			}
+		}
 		if ( is_attachment() ) {
 			$post   = get_queried_object();
 			$target = ( $post && $post->post_parent ) ? get_permalink( $post->post_parent ) : wp_get_attachment_url( $post ? $post->ID : 0 );
