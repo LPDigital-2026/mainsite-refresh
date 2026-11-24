@@ -59,6 +59,41 @@ function lpd_draft_articles() {
 			'tags'     => array( 'Domains', 'SSL', 'Security' ),
 			'excerpt'  => 'A missed domain or SSL renewal can take your website and email offline overnight. How to make sure it never happens to your business.',
 		),
+		'how-to-spot-a-phishing-email'      => array(
+			'title'    => 'How to Spot a Phishing Email: A Guide for Small Business Teams',
+			'file'     => 'phishing.html',
+			'category' => 'Email',
+			'tags'     => array( 'Email', 'Phishing', 'Security' ),
+			'excerpt'  => 'Phishing is the most common cyber attack on UK businesses. Eight warning signs to share with your team, and what to do if someone has already clicked.',
+		),
+		'protect-your-small-business-website' => array(
+			'title'    => 'How to Protect Your Small Business Website from Hackers',
+			'file'     => 'website-security.html',
+			'category' => 'Website Security',
+			'tags'     => array( 'WordPress', 'Security', 'Backups' ),
+			'excerpt'  => 'Most hacked websites are found by automated tools, not chosen. Six practical steps to keep your WordPress site safe, and the signs it may already be hacked.',
+		),
+		'why-is-my-website-slow'            => array(
+			'title'    => 'Why Is My Website Slow? Seven Common Causes and How to Fix Them',
+			'file'     => 'slow-website.html',
+			'category' => 'Website Maintenance',
+			'tags'     => array( 'WordPress', 'Speed', 'Hosting' ),
+			'excerpt'  => 'A slow website loses customers and search rankings. The seven most common reasons small business sites are slow, how to measure it, and the fixes that work.',
+		),
+		'local-seo-guide'                   => array(
+			'title'    => 'Local SEO: How to Get Your Business Found on Google Nearby',
+			'file'     => 'local-seo.html',
+			'category' => 'Web Design',
+			'tags'     => array( 'Local SEO', 'Small Business', 'Google' ),
+			'excerpt'  => 'How Google decides which local businesses to show, and six practical steps to appear in the map results, from your Business Profile to reviews.',
+		),
+		'cyber-essentials-explained'        => array(
+			'title'    => 'Cyber Essentials Explained: What It Is and How to Get Ready',
+			'file'     => 'cyber-essentials.html',
+			'category' => 'Website Security',
+			'tags'     => array( 'Cyber Essentials', 'Security', 'Microsoft 365' ),
+			'excerpt'  => 'Cyber Essentials is the UK government-backed scheme for basic cyber security. The five controls in plain English, the two levels, and why it is worth doing.',
+		),
 	);
 }
 

@@ -113,5 +113,7 @@ function the_content(){
 $GLOBALS['THEME']=$THEME; $GLOBALS['THEME_URL']=$THEME_URL; $GLOBALS['PAGES']=$PAGES; $GLOBALS['TITLES']=$TITLES;
 require $THEME.'/inc/template-tags.php'; require $THEME.'/inc/customizer-defaults.php'; require $THEME.'/inc/blog.php';
 if ($PAGE==='blogindex') lpd_preview_loop($GLOBALS['POSTS']);
-if ($PAGE==='post') { lpd_preview_loop([$GLOBALS['POSTS'][0]]); $GLOBALS['POSTS'][0]->post_content = file_get_contents(__DIR__.'/sample-article.html'); }
+if ($PAGE==='post') { lpd_preview_loop([$GLOBALS['POSTS'][0]]); $GLOBALS['POSTS'][0]->post_content = file_get_contents(__DIR__.'/sample-article.html');
+  // LPD_ARTICLE=<slug> renders one of the starter articles from inc/drafts/ instead of the sample.
+  if (($slug = getenv('LPD_ARTICLE')) && ($a = (require_once $THEME.'/inc/drafts.php') ? (lpd_draft_articles()[$slug] ?? null) : null)) { $q = $GLOBALS['POSTS'][0]; $q->post_name = $slug; $q->post_title = $a['title']; $q->post_excerpt = $q->excerpt = $a['excerpt']; $q->cat = $a['category']; $q->post_content = file_get_contents($THEME.'/inc/drafts/'.$a['file']); } }
 include $THEME . ($PAGE==='home' ? '/front-page.php' : ($PAGE==='404' ? '/404.php' : ($PAGE==='blogindex' ? '/home.php' : ($PAGE==='post' ? '/single.php' : '/page.php'))));
