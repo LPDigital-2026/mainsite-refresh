@@ -23,6 +23,7 @@ function lpd_seo_defaults() {
 		'business-email'      => array( 'Business Email on Your Own Domain | Lily Paw Digital', 'Professional email on your own domain, set up properly. Mailbox migration, email authentication and delivery troubleshooting from a local team.' ),
 		'website-security'    => array( 'Website Security Monitoring | Lily Paw Digital', 'Website security monitoring for small businesses: configuration reviews, malware scan monitoring, SSL checks, login protection and clear advice.' ),
 		'microsoft-365'       => array( 'Microsoft 365 for Business from £7.49 | Lily Paw Digital', 'Microsoft 365 Business Basic, Standard and Premium with set-up and local support. From £7.49 per user per month on a 1-year commitment.' ),
+		'web-hosting'         => array( 'UK Web Hosting from £5.99 a Month | Lily Paw Digital', 'Web hosting on UK hardware from £5.99 a month, with SSD storage, MySQL databases and up to 40 email addresses on your own domain. Local support.' ),
 		'hosted-pbx'          => array( 'Hosted PBX Business Phones | Lily Paw Digital', 'Cloud business phone systems on FreePBX, FusionPBX and more, from £16.99 a month. Security, DDoS protection, daily backups and numbers on request.' ),
 		// Starter articles: shorter titles than their headlines, so Google shows them in full.
 		'spf-dkim-dmarc-explained'                    => array( 'SPF, DKIM and DMARC Explained | Lily Paw Digital', 'Three DNS records decide whether your business emails reach the inbox or the spam folder. Here is what SPF, DKIM and DMARC do and how to set them up.' ),
@@ -32,5 +33,10 @@ function lpd_seo_defaults() {
 		'signs-your-wordpress-site-needs-maintenance' => array( '5 Signs Your WordPress Site Needs Maintenance', 'Waiting updates, missing backups and slow pages all add up. Five warning signs your WordPress site needs attention, and what good maintenance looks like.' ),
 		'hosted-pbx-explained'                        => array( 'Hosted PBX Explained: Business Phones in the Cloud', 'The UK copper phone network is being switched off. What a hosted PBX is, how FreePBX and FusionPBX compare, and whether you can keep your number.' ),
 		'domain-and-ssl-expiry'                       => array( 'Domain and SSL Expiry: Keep Your Site Online', 'A missed domain or SSL renewal can take your website and email offline overnight. How to make sure it never happens to your business.' ),
+		'how-to-spot-a-phishing-email'                => array( 'How to Spot a Phishing Email | Lily Paw Digital', 'Phishing is the most common cyber attack on UK businesses. Eight warning signs to share with your team, and what to do if someone has already clicked.' ),
+		'protect-your-small-business-website'         => array( 'Protect Your Small Business Website from Hackers', 'Most hacked websites are found by automated tools, not chosen. Six practical steps to keep your WordPress site safe, and the signs it may already be hacked.' ),
+		'why-is-my-website-slow'                      => array( 'Why Is My Website Slow? 7 Causes and Fixes', 'A slow website loses customers and search rankings. The seven most common reasons small business sites are slow, how to measure it, and the fixes that work.' ),
+		'local-seo-guide'                             => array( 'Local SEO: Get Your Business Found on Google', 'How Google decides which local businesses to show, and six practical steps to appear in the map results, from your Business Profile to your reviews.' ),
+		'cyber-essentials-explained'                  => array( 'Cyber Essentials Explained | Lily Paw Digital', 'Cyber Essentials is the UK government-backed scheme for basic cyber security. The five controls in plain English, the two levels, and why it is worth doing.' ),
 	);
 }

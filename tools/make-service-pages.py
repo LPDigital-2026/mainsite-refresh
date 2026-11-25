@@ -7,6 +7,23 @@ beside a "What's Included" tile, three reasons to choose Lily Paw Digital,
 and a call to action.
 """
 SERVICES = [
+    dict(slug='web-hosting', cls='lpd-service-hosting', short='Web Hosting',
+         lead='Monthly hosting on UK hardware, for websites you already have or want to build yourself.',
+         body='Every plan includes business email addresses on your own domain, with a local team to call when you need a hand. Would you rather we built the site for you? Our <a href="/web-design/">web design</a> packages include hosting.',
+         items=['Hosting on UK hardware', 'SSD storage', 'MySQL databases', 'Email addresses on your own domain', 'Support from our local team'],
+         plans_title='Web Hosting Plans',
+         plans_intro='Simple monthly prices. Pick the plan that fits, and move up whenever you need more room.',
+         plans_subprice='Per month',
+         plan_button=('Order Now', '/get-started/'),
+         plans=[
+             dict(name='Singapura', desc='A great start for a handful of small sites.', price='£5.99',
+                  features=['6 hosted websites', '10GB SSD storage', '10 MySQL databases', '40GB bandwidth', '10 email addresses']),
+             dict(name='Siamese', desc='More room for growing sites and databases.', price='£7.99',
+                  features=['9 hosted websites', '15GB SSD storage', '20 MySQL databases', '60GB bandwidth', '25 email addresses']),
+             dict(name='Maine Coon', desc='Unlimited websites, databases and bandwidth.', price='£9.99',
+                  features=['Unlimited hosted websites', '20GB SSD storage', 'Unlimited MySQL databases', 'Unlimited bandwidth', '40 email addresses']),
+         ],
+         plans_note='Not sure which plan you need, or moving a site from another host? <a href="/contact-us/">Get in touch</a> and we will help.'),
     dict(slug='website-maintenance', cls='lpd-service-maintenance', short='Website Maintenance',
          lead='We keep your WordPress website updated, backed up and running smoothly, so you can get on with running your business.',
          body='Updates, checks and fixes are handled for you by the same local team, and you can ask us whenever something does not look right.',
@@ -117,7 +134,7 @@ def page(s):
             inner += p(plan['name'], 'lpd-pricing-name') + '\n' + p(plan['desc'], 'lpd-pricing-desc') + '\n'
             inner += p(plan['price'], 'lpd-pricing-price') + '\n' + p(s.get('plans_subprice', 'Per user, per month'), 'lpd-pricing-subprice') + '\n'
             inner += '\n'.join(p(f, 'lpd-pricing-feature') for f in plan['features'])
-            inner += '\n<!-- wp:buttons -->\n<div class="wp-block-buttons">\n' + button('lpd-btn-primary' if plan.get('featured') else 'lpd-btn-secondary', '/contact-us/', 'Get Started') + '\n</div>\n<!-- /wp:buttons -->'
+            inner += '\n<!-- wp:buttons -->\n<div class="wp-block-buttons">\n' + button('lpd-btn-primary' if plan.get('featured') else 'lpd-btn-secondary', s.get('plan_button', ('Get Started', '/contact-us/'))[1], s.get('plan_button', ('Get Started', '/contact-us/'))[0]) + '\n</div>\n<!-- /wp:buttons -->'
             cls = 'lpd-pricing-card lpd-featured' if plan.get('featured') else 'lpd-pricing-card'
             cards.append(column(group(cls, inner)))
         heading = group('lpd-section-heading lpd-left', h(2, s['plans_title']) + '\n' + p(s['plans_intro']))

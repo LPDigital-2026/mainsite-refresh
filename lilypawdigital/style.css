@@ -4,7 +4,7 @@ Theme URI: https://lilypawdigital.xyz
 Author: Lily Paw Digital
 Author URI: https://lilypawdigital.xyz
 Description: Theme for Lily Paw Digital - North East web design, hosting and colocation. Navy and paper, set large, with the paw pink used sparingly.
-Version: 4.43
+Version: 4.44
 Requires at least: 6.0
 Tested up to: 6.6
 Requires PHP: 7.4
@@ -559,6 +559,7 @@ button[type="submit"], input[type="submit"] { background: var(--pink); border-co
 .lpd-service-maintenance { --icon: url('assets/icons/we-build-it.svg'); }
 .lpd-service-m365 { --icon: url('assets/icons/usecase-cloud.svg'); }
 .lpd-service-pbx { --icon: url('assets/icons/phone.svg'); }
+.lpd-service-hosting { --icon: url('assets/icons/capacity.svg'); }
 .lpd-service-security { --icon: url('assets/icons/security.svg'); }
 .lpd-service-email { --icon: url('assets/icons/email.svg'); }
 .lpd-service-dns { --icon: url('assets/icons/usecase-web.svg'); }

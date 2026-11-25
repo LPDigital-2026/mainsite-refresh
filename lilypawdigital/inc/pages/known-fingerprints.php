@@ -46,6 +46,8 @@ return array(
 		'82a5024fd59552543ff333d87a481d3a',
 		'b3e232d9fcfe60a5935d539a9b3044c8',
 		'589a129b8ebea7f9cd4054e07b351e63',
+		'f13ad75558171342a80be640e626d4ea',
+		'ffa848e39aa5eece89e1fbc2264ca97e',
 	),
 	'web-design' => array(
 		'fff208ce0e9c40ec9af10c173781afc8',
@@ -114,5 +116,8 @@ return array(
 		'e55b80051832b0124931975f2579f16e',
 		'f580dcb337309cc6e8b056a5b79884b1',
 		'7084ea448b183059bf1871c72e6a4555',
+	),
+	'web-hosting' => array(
+		'4148021d66097f112a3961a4526cc73a',
 	),
 );

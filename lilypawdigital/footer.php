@@ -39,6 +39,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 				<h2><?php esc_html_e( 'Services', 'lilypawdigital' ); ?></h2>
 				<ul>
 					<li><a href="<?php echo esc_url( home_url( '/web-design/' ) ); ?>"><?php esc_html_e( 'Web Design', 'lilypawdigital' ); ?></a></li>
+					<li><a href="<?php echo esc_url( home_url( '/web-hosting/' ) ); ?>"><?php esc_html_e( 'Web Hosting', 'lilypawdigital' ); ?></a></li>
 					<li><a href="<?php echo esc_url( home_url( '/colocation/' ) ); ?>"><?php esc_html_e( 'Colocation', 'lilypawdigital' ); ?></a></li>
 					<li><a href="<?php echo esc_url( home_url( '/website-maintenance/' ) ); ?>"><?php esc_html_e( 'Website Maintenance', 'lilypawdigital' ); ?></a></li>
 					<li><a href="<?php echo esc_url( home_url( '/domains-and-dns/' ) ); ?>"><?php esc_html_e( 'Domains and DNS', 'lilypawdigital' ); ?></a></li>

@@ -16,12 +16,12 @@ fi
 rm -rf "$OUT/site" && mkdir -p "$OUT/site" && cp -r "$THEME" "$OUT/site/theme"
 python3 - "$THEME" > "$OUT/content.html" <<'PY'
 import sys, html
-names = {'home': 'home', 'webdesign': 'web-design', 'blog': 'blog', 'colocation': 'colocation', 'about': 'about-us', 'work': 'our-work', 'contact': 'contact-us', 'getstarted': 'get-started', 'websitemaintenance': 'website-maintenance', 'domainsanddns': 'domains-and-dns', 'businessemail': 'business-email', 'websitesecurity': 'website-security', 'microsoft365': 'microsoft-365', 'hostedpbx': 'hosted-pbx'}
+names = {'home': 'home', 'webdesign': 'web-design', 'blog': 'blog', 'colocation': 'colocation', 'about': 'about-us', 'work': 'our-work', 'contact': 'contact-us', 'getstarted': 'get-started', 'websitemaintenance': 'website-maintenance', 'domainsanddns': 'domains-and-dns', 'businessemail': 'business-email', 'websitesecurity': 'website-security', 'microsoft365': 'microsoft-365', 'hostedpbx': 'hosted-pbx', 'webhosting': 'web-hosting'}
 for key, slug in names.items():
     content = open(f'{sys.argv[1]}/inc/pages/{slug}.html').read().replace('{{theme_uri}}', '/wp-content/themes/lilypawdigital')
     print(f'<textarea id="ta-{key}">' + html.escape(content, quote=False) + '</textarea>')
 PY
-for page in home webdesign colocation about work contact getstarted websitemaintenance domainsanddns businessemail websitesecurity microsoft365 hostedpbx 404 blogindex post; do
+for page in home webdesign colocation about work contact getstarted websitemaintenance domainsanddns businessemail websitesecurity microsoft365 hostedpbx webhosting 404 blogindex post; do
   php "$ROOT/tools/preview/render.php" "$OUT/site/theme" "$OUT/content.html" $page theme > "$OUT/site/$page.html"
 done
 echo "built $OUT/site"

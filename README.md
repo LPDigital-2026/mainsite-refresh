@@ -6,7 +6,7 @@ WordPress theme for lilypawdigital.xyz, plus the page content it ships with.
 |------|------------|
 | `lilypawdigital/` | The theme. Zip this folder to upload it. |
 | `lilypaw-seo/` | The Lily Paw SEO plugin: sitemaps, titles and descriptions, link previews, indexing rules. Zip this folder and upload it under Plugins. |
-| `lilypawdigital/inc/pages/` | Block content for Home, Web Design, Colocation, Our Work, About Us, Contact Us, Get Started and the six service pages (Website Maintenance, Domains and DNS, Business Email, Website Security, Microsoft 365, Hosted PBX). |
+| `lilypawdigital/inc/pages/` | Block content for Home, Web Design, Colocation, Our Work, About Us, Contact Us, Get Started and the seven service pages (Web Hosting, Website Maintenance, Domains and DNS, Business Email, Website Security, Microsoft 365, Hosted PBX). |
 | `lilypawdigital/inc/page-setup.php` | Creates those pages, sets the homepage and builds the menu. |
 | `page-content/blog-articles.html` | The starter blog articles, readable, with copy buttons. The theme can also add them as drafts (Appearance → Page Setup). |
 | `page-content/copy-all-page-content.html` | The same content as copy buttons, for pasting by hand. |

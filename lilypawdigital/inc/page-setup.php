@@ -60,6 +60,11 @@ function lpd_setup_pages() {
 			'file'    => 'get-started.html',
 			'warning' => __( 'Replacing this page removes anything you have added to it since, such as a different form.', 'lilypawdigital' ),
 		),
+		'web-hosting' => array(
+			'title' => __( 'Web Hosting', 'lilypawdigital' ),
+			'file'  => 'web-hosting.html',
+			'menu'  => false, // linked from the home page and footer instead
+		),
 		'website-maintenance' => array(
 			'title' => __( 'Website Maintenance', 'lilypawdigital' ),
 			'file'  => 'website-maintenance.html',
