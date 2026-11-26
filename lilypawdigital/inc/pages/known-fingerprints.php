@@ -123,5 +123,6 @@ return array(
 	),
 	'areas-we-cover' => array(
 		'9af4c96a5022e6f9e659d9f80e86a68e',
+		'e44113ae3e6b485b432188d3ec046336',
 	),
 );

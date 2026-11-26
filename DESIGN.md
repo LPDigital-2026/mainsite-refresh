@@ -423,7 +423,8 @@ Rules:
   and towns of the North East, from `lpd_service_areas()` in
   `inc/areas.php`. `tools/make-areas-page.py` writes the page from that
   list, and the same list is the business's `areaServed` in the structured
-  data, so edit the list and re-run the script; never edit the town names
+  data (plus the United Kingdom: the owner covers everywhere, with the
+  North East as home), so edit the list and re-run the script; never edit the town names
   in the page HTML. Do not add one page per town with the same text
   swapped (Google treats those as doorway pages); a town page is only worth
   it with genuinely local content. The footer carries one plain sentence

@@ -33,6 +33,7 @@ ob_start(); lpd_structured_data(); preg_match_all('#<script type="application/ld
 $c=json_decode($m[1][0]??'',true);
 ok($c && $c['@type']==='ProfessionalService' && $c['telephone']==='+443331127191', 'home page describes the business');
 ok(count($c['areaServed'])>40 && in_array('Gateshead',array_column($c['areaServed'],'name')) && in_array('Northumberland',array_column($c['areaServed'],'name')), 'the business covers every North East county and its towns');
+ok(in_array('United Kingdom',array_column($c['areaServed'],'name')), 'the business also covers the rest of the UK');
 ok(($c['sameAs'][0]??'')!=='' , 'the business links to its review profile');
 $page=file_get_contents($argv[1].'/inc/pages/areas-we-cover.html'); $missing=[];
 foreach(lpd_service_areas() as $county=>$towns) foreach(array_merge([$county],$towns) as $t) if(strpos($page,$t)===false) $missing[]=$t;

@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 					height="64"
 				>
 				<p><?php esc_html_e( 'Websites, hosting, email, security and colocation from the North East of England. Clear pricing, real people, and no jargon.', 'lilypawdigital' ); ?></p>
-				<p class="lpd-footer-areas"><?php esc_html_e( 'Serving the whole North East: Newcastle, Gateshead, Sunderland, Durham, Northumberland and Teesside.', 'lilypawdigital' ); ?></p>
+				<p class="lpd-footer-areas"><?php esc_html_e( 'We cover everywhere: the whole North East, from Newcastle, Gateshead and Sunderland to Durham, Northumberland and Teesside, and businesses anywhere else too.', 'lilypawdigital' ); ?></p>
 				<p class="lpd-footer-phone"><a href="tel:+443331127191">0333 112 7191</a></p>
 			</div>
 

@@ -19,10 +19,11 @@ function lpd_service_areas() {
 }
 
 /**
- * areaServed for the structured data: the region, each county, and each town.
+ * areaServed for the structured data: the UK (the owner covers everywhere),
+ * then the home region, each county, and each town.
  */
 function lpd_service_areas_schema() {
-	$out = array( array( '@type' => 'AdministrativeArea', 'name' => 'North East England' ) );
+	$out = array( array( '@type' => 'Country', 'name' => 'United Kingdom' ), array( '@type' => 'AdministrativeArea', 'name' => 'North East England' ) );
 	foreach ( lpd_service_areas() as $county => $towns ) {
 		$out[] = array( '@type' => 'AdministrativeArea', 'name' => $county );
 		foreach ( $towns as $town ) {

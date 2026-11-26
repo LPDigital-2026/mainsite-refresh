@@ -20,19 +20,19 @@ services = [('/web-design/', 'Web design'), ('/web-hosting/', 'Web hosting'), ('
             ('/website-maintenance/', 'Website maintenance'), ('/website-security/', 'Website security'), ('/domains-and-dns/', 'Domains and DNS'),
             ('/hosted-pbx/', 'Hosted PBX phone systems'), ('/colocation/', 'Colocation in Newcastle')]
 lis = '\n'.join(f'<!-- wp:list-item --><li><a href="{u}">{t}</a></li><!-- /wp:list-item -->' for u, t in services)
-tile = group('lpd-service-tile lpd-service-areas', h(2, 'Across the Region') + '\n<!-- wp:list {"className":"lpd-service-list"} -->\n<ul class="wp-block-list lpd-service-list">\n' + lis + '\n</ul>\n<!-- /wp:list -->')
+tile = group('lpd-service-tile lpd-service-areas', h(2, 'What We Offer') + '\n<!-- wp:list {"className":"lpd-service-list"} -->\n<ul class="wp-block-list lpd-service-list">\n' + lis + '\n</ul>\n<!-- /wp:list -->')
 prose = group('lpd-prose',
-    p('We work with businesses and organisations right across the North East of England, from the Scottish border to the Tees.', 'lpd-lead') + '\n'
-    + p('Most of what we do, from building websites to looking after hosting, email and Microsoft 365, happens online. So wherever you are in the region, you get the same service and the same local team on the end of the phone. Our colocation space is at Reliance House in Newcastle, within easy reach of the whole North East.') + '\n'
+    p('We cover everywhere. We are based in the North East and work right across it, from the Scottish border to the Tees, and with businesses anywhere else in the UK and beyond.', 'lpd-lead') + '\n'
+    + p('Most of what we do, from building websites to looking after hosting, email and Microsoft 365, happens online. So wherever you are, you get the same service and the same local team on the end of the phone. Our colocation space is at Reliance House in Newcastle, within easy reach of the whole North East.') + '\n'
     + p('Our clients so far include <a href="/our-work/">Ryton Singers and Ryton Cricket Club</a> in Gateshead.') + '\n'
     + buttons(('lpd-btn-primary', '/contact-us/', 'Talk to Us'), ('lpd-btn-secondary', '/#services', 'All Services')))
 intro = band('lpd-band', '\n' + columns('lpd-split lpd-split-top', [column(prose), column(tile)]) + '\n')
 
 cards = [column(group('lpd-card', h(3, county) + '\n' + p(town_list(towns)))) for county, towns in areas.items()]
 where = band('lpd-band lpd-band-alt', '\n' + group('lpd-section-heading lpd-left', h(2, 'Towns and Cities We Cover') + '\n' + p('Across Tyne and Wear, Northumberland, County Durham and the Tees Valley.')) + '\n\n'
-             + columns('lpd-grid-2', cards) + '\n\n' + p('Do not see your town? If you are in the North East, we cover it. <a href="/contact-us/">Get in touch</a>.', 'lpd-pricing-note') + '\n')
+             + columns('lpd-grid-2', cards) + '\n\n' + p('Do not see your town? We cover it, in the North East or anywhere else. <a href="/contact-us/">Get in touch</a>.', 'lpd-pricing-note') + '\n')
 
-cta = band('lpd-band lpd-cta-section', group('lpd-cta-banner', h(2, 'Wherever You Are in the North East') + '\n'
+cta = band('lpd-band lpd-cta-section', group('lpd-cta-banner', h(2, 'Wherever You Are, We Cover It') + '\n'
            + p('Tell us what you need and we will get back to you with clear advice and a clear price. No pressure, no jargon.') + '\n'
            + buttons(('lpd-btn-primary', '/contact-us/', 'Talk to Us'))))
 
