@@ -20,6 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 					height="64"
 				>
 				<p><?php esc_html_e( 'Websites, hosting, email, security and colocation from the North East of England. Clear pricing, real people, and no jargon.', 'lilypawdigital' ); ?></p>
+				<p class="lpd-footer-areas"><?php esc_html_e( 'Serving the whole North East: Newcastle, Gateshead, Sunderland, Durham, Northumberland and Teesside.', 'lilypawdigital' ); ?></p>
 				<p class="lpd-footer-phone"><a href="tel:+443331127191">0333 112 7191</a></p>
 			</div>
 
@@ -31,6 +32,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 					<li><a href="<?php echo esc_url( home_url( '/blog/' ) ); ?>"><?php esc_html_e( 'Blog', 'lilypawdigital' ); ?></a></li>
 					<li><a href="<?php echo esc_url( home_url( '/get-started/' ) ); ?>"><?php esc_html_e( 'Get Started', 'lilypawdigital' ); ?></a></li>
 					<li><a href="<?php echo esc_url( home_url( '/web-design/#pricing' ) ); ?>"><?php esc_html_e( 'Pricing', 'lilypawdigital' ); ?></a></li>
+					<li><a href="<?php echo esc_url( home_url( '/areas-we-cover/' ) ); ?>"><?php esc_html_e( 'Areas We Cover', 'lilypawdigital' ); ?></a></li>
 					<li><a href="<?php echo esc_url( home_url( '/contact-us/' ) ); ?>"><?php esc_html_e( 'Contact Us', 'lilypawdigital' ); ?></a></li>
 				</ul>
 			</div>

@@ -177,7 +177,7 @@ function lpd_structured_data() {
 	);
 	$data = array();
 
-	if ( is_front_page() ) {
+	if ( is_front_page() || is_page( 'areas-we-cover' ) ) {
 		$data[] = array(
 			'@context'   => 'https://schema.org',
 			'@type'      => 'ProfessionalService',
@@ -187,8 +187,9 @@ function lpd_structured_data() {
 			'image'      => get_template_directory_uri() . '/assets/images/share.jpg',
 			'telephone'  => '+443331127191',
 			'priceRange' => '££',
-			'areaServed' => 'North East England',
-			'address'    => array( '@type' => 'PostalAddress', 'addressLocality' => 'Newcastle upon Tyne', 'addressCountry' => 'GB' ),
+			'areaServed' => function_exists( 'lpd_service_areas_schema' ) ? lpd_service_areas_schema() : 'North East England',
+			'address'    => array( '@type' => 'PostalAddress', 'addressLocality' => 'Newcastle upon Tyne', 'addressRegion' => 'Tyne and Wear', 'addressCountry' => 'GB' ),
+			'sameAs'     => array( 'https://uk.trustpilot.com/review/lilypawdigital.xyz' ),
 		);
 	}
 
@@ -221,11 +222,48 @@ function lpd_structured_data() {
 		$data[] = array( '@context' => 'https://schema.org', '@type' => 'BreadcrumbList', 'itemListElement' => $items );
 	}
 
+	if ( is_page() ) {
+		$faq = lpd_faq_schema( get_post_field( 'post_content', get_queried_object_id() ) );
+		if ( $faq ) {
+			$data[] = $faq;
+		}
+	}
+
 	foreach ( $data as $item ) {
 		echo "\n" . '<script type="application/ld+json">' . wp_json_encode( $item, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE ) . '</script>' . "\n";
 	}
 }
 add_action( 'wp_head', 'lpd_structured_data', 6 );
+
+/**
+ * FAQPage data from a page's question-and-answer blocks (.lpd-faq-item:
+ * an h3 question followed by its answer paragraphs), so the markup always
+ * matches what visitors see. Returns null when the page has none.
+ */
+function lpd_faq_schema( $content ) {
+	if ( ! is_string( $content ) || false === strpos( $content, 'lpd-faq-item' ) ) {
+		return null;
+	}
+	$items = array();
+	foreach ( preg_split( '/<div class="wp-block-group lpd-faq-item">/', $content ) as $i => $chunk ) {
+		if ( 0 === $i || ! preg_match( '#<h3[^>]*>(.*?)</h3>#s', $chunk, $q ) ) {
+			continue;
+		}
+		$chunk = substr( $chunk, strpos( $chunk, '</h3>' ) );
+		$chunk = preg_split( '#</div>#', $chunk )[0];
+		preg_match_all( '#<p[^>]*>(.*?)</p>#s', $chunk, $a );
+		$question = trim( wp_strip_all_tags( $q[1] ) );
+		$answer   = trim( wp_strip_all_tags( implode( ' ', $a[1] ) ) );
+		if ( '' !== $question && '' !== $answer ) {
+			$items[] = array(
+				'@type'          => 'Question',
+				'name'           => html_entity_decode( $question, ENT_QUOTES, 'UTF-8' ),
+				'acceptedAnswer' => array( '@type' => 'Answer', 'text' => html_entity_decode( $answer, ENT_QUOTES, 'UTF-8' ) ),
+			);
+		}
+	}
+	return $items ? array( '@context' => 'https://schema.org', '@type' => 'FAQPage', 'mainEntity' => $items ) : null;
+}
 
 /**
  * Articles say they are articles to link previews, with their dates.

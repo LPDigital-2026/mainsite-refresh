@@ -419,6 +419,20 @@ Rules:
   label and link. Service pages are not
   in the header menu (`'menu' => false` in `lpd_setup_pages()`); they are
   linked from the home page tiles and the footer's Services column.
+- **Areas We Cover** (/areas-we-cover/) is the one local page: the counties
+  and towns of the North East, from `lpd_service_areas()` in
+  `inc/areas.php`. `tools/make-areas-page.py` writes the page from that
+  list, and the same list is the business's `areaServed` in the structured
+  data, so edit the list and re-run the script; never edit the town names
+  in the page HTML. Do not add one page per town with the same text
+  swapped (Google treats those as doorway pages); a town page is only worth
+  it with genuinely local content. The footer carries one plain sentence
+  naming the main areas.
+- **Structured data** (`inc/blog.php`): ProfessionalService on Home and
+  Areas We Cover (phone, area served, Trustpilot in `sameAs`), FAQPage on
+  any page with `.lpd-faq-item` blocks (built from the visible questions,
+  so it always matches), BlogPosting and breadcrumbs on articles.
+  `tools/tests/test-blog.php` checks all of it.
 - The home page is about the company, not one service (owner's request).
   Order: hero, statement, About, What We Do, How We're Different, stats,
   testimonials, colocation scene, contact. No web design prices, plans,

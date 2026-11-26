@@ -4,7 +4,7 @@ Theme URI: https://lilypawdigital.xyz
 Author: Lily Paw Digital
 Author URI: https://lilypawdigital.xyz
 Description: Theme for Lily Paw Digital - North East web design, hosting and colocation. Navy and paper, set large, with the paw pink used sparingly.
-Version: 4.44
+Version: 4.45
 Requires at least: 6.0
 Tested up to: 6.6
 Requires PHP: 7.4
@@ -560,6 +560,7 @@ button[type="submit"], input[type="submit"] { background: var(--pink); border-co
 .lpd-service-m365 { --icon: url('assets/icons/usecase-cloud.svg'); }
 .lpd-service-pbx { --icon: url('assets/icons/phone.svg'); }
 .lpd-service-hosting { --icon: url('assets/icons/capacity.svg'); }
+.lpd-service-areas { --icon: url('assets/icons/location.svg'); }
 .lpd-service-security { --icon: url('assets/icons/security.svg'); }
 .lpd-service-email { --icon: url('assets/icons/email.svg'); }
 .lpd-service-dns { --icon: url('assets/icons/usecase-web.svg'); }
@@ -1539,6 +1540,7 @@ body:has(.lpd-bands > .lpd-process:first-child) .page-hero .container::after { d
 .footer-brand .lpd-logo-img { height: 46px; margin-bottom: 18px; }
 .footer-brand p { color: var(--fg-dim); font-size: 0.95rem; line-height: 1.6; max-width: 34ch; margin: 0; }
 .lpd-footer-phone { margin: 18px 0 0 !important; }
+.lpd-footer-areas { margin: 18px 0 0 !important; }
 .lpd-footer-phone a { font-size: clamp(1.4rem, 2.4vw, 1.9rem); font-weight: 600; letter-spacing: -0.04em; color: var(--cream); }
 @media (hover: hover) and (pointer: fine) {
   .footer-grid li a:hover { color: var(--cream); }

@@ -2,7 +2,7 @@ const { chromium } = require('playwright');
 const [site, w, h] = process.argv.slice(2);
 (async () => {
   const b = await chromium.launch(); const pg = await (await b.newContext({ viewport: { width: +w, height: +h }, reducedMotion: 'reduce' })).newPage();
-  for (const p of ['home','webdesign','colocation','about','work','contact','getstarted','websitemaintenance','domainsanddns','businessemail','websitesecurity','microsoft365','hostedpbx','webhosting']) {
+  for (const p of ['home','webdesign','colocation','about','work','contact','getstarted','websitemaintenance','domainsanddns','businessemail','websitesecurity','microsoft365','hostedpbx','webhosting','areas']) {
     await pg.goto(`http://127.0.0.1:8765/${site}/${p}.html`); await pg.waitForTimeout(700);
     const rows = await pg.evaluate(() => {
       const out = []; const vis = e => e.getBoundingClientRect().height > 0;
