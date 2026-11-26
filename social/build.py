@@ -21,6 +21,24 @@ ADS = {
     bullets=['You talk to someone who knows your project', 'Honest pricing, no hidden fees', "We don't disappear after launch"],
     price='Websites from <strong>£99</strong>. Colocation from <strong>£65.99 a month</strong>.',
     terms='Terms and conditions apply.'),
+  'hosting-uk': dict(
+    big='UK', unit='based<br>hardware.', small='Every site we build',
+    h1='Fast hosting on<br><em>real UK hardware.</em>',
+    bullets=['Managed for you, start to finish', 'SSL certificate included', 'Custom email accounts on your domain'],
+    price='Hosting from <strong>£5.75 a month</strong>, with every website.',
+    terms='Terms and conditions apply. Hosting comes with a website plan. Price is for Essentials.'),
+  'hosting-uptime': dict(
+    big='99.9%', unit='uptime.', small='UK hardware', scale=.7,
+    h1='Your website,<br><em>always on.</em>',
+    bullets=["Managed hosting, so you don't have to", 'Free .uk, .co.uk or .org.uk domain', 'Need a change? Just get in touch'],
+    price='Hosting from <strong>£5.75 a month</strong>, with every website.',
+    terms='Terms and conditions apply. Hosting comes with a website plan. Price is for Essentials.'),
+  'hosting-one-team': dict(
+    big='1', unit='team for<br>everything.', small='Design, build and hosting',
+    h1='No separate<br><em>hosting company.</em>',
+    bullets=['We design it, build it and host it', 'Domain, email and SSL all sorted', 'One team to call if you need anything'],
+    price='Website from <strong>£99</strong>, then hosting from <strong>£5.75 a month</strong>.',
+    terms='Terms and conditions apply. Prices shown are for the Essentials plan.'),
 }
 # Format sizes. Story keeps clear of the top ~250px and bottom ~340px that the apps cover.
 FORMATS = {
@@ -62,7 +80,8 @@ li svg{{width:{icon}px;height:{icon}px;flex:none;color:#f0529c}}
 for name, ad in ADS.items():
     for fmt, f in FORMATS.items():
         lis = ''.join(f'<li><svg viewBox="0 0 512 512"><path fill="currentColor" d="{PAW}"/></svg>{b}</li>' for b in ad['bullets'])
-        html = TPL.format(A=A, **f, small=round(f['unit'] * .38), li_gap=round(f['li'] * .55), icon=round(f['li'] * 1.15),
+        g = dict(f, big=round(f['big'] * ad.get('scale', 1)))
+        html = TPL.format(A=A, **g, small=round(f['unit'] * .38), li_gap=round(f['li'] * .55), icon=round(f['li'] * 1.15),
                           price_pad=round(f['gap_list'] * .8), big_text=ad['big'], unit_text=ad['unit'], small_text=ad['small'],
                           h1_text=ad['h1'], lis=lis, price_text=ad['price'], terms_text=ad['terms'])
         pathlib.Path(f'{name}-{fmt}.html').write_text(html)
