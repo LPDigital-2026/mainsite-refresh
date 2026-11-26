@@ -164,6 +164,13 @@ function lpd_seo_plugin_active() {
 	return defined( 'WPSEO_VERSION' ) || defined( 'RANK_MATH_VERSION' ) || defined( 'AIOSEO_VERSION' ) || defined( 'SEOPRESS_VERSION' ) || defined( 'THE_SEO_FRAMEWORK_VERSION' ) || defined( 'SLIM_SEO_VER' );
 }
 
+/**
+ * Other names people search for the business by.
+ */
+function lpd_alternate_names() {
+	return array( 'Lily Paw', 'LilyPaw Digital', 'Lilypaw' );
+}
+
 function lpd_structured_data() {
 	if ( lpd_seo_plugin_active() ) {
 		return;
@@ -177,11 +184,24 @@ function lpd_structured_data() {
 	);
 	$data = array();
 
+	if ( is_front_page() ) {
+		// The site name Google shows above results, with the ways people
+		// actually search for it (Search Console: "lily paw", "lilypaw").
+		$data[] = array(
+			'@context'      => 'https://schema.org',
+			'@type'         => 'WebSite',
+			'name'          => get_bloginfo( 'name' ),
+			'alternateName' => lpd_alternate_names(),
+			'url'           => home_url( '/' ),
+		);
+	}
+
 	if ( is_front_page() || is_page( 'areas-we-cover' ) ) {
 		$data[] = array(
 			'@context'   => 'https://schema.org',
 			'@type'      => 'ProfessionalService',
 			'name'       => get_bloginfo( 'name' ),
+			'alternateName' => lpd_alternate_names(),
 			'url'        => home_url( '/' ),
 			'logo'       => $logo,
 			'image'      => get_template_directory_uri() . '/assets/images/share.jpg',

@@ -50,6 +50,7 @@ return array(
 		'ffa848e39aa5eece89e1fbc2264ca97e',
 		'0c2869db6b6dd7e4b99fffa82ebcf73c',
 		'57ae310dc424cddfba76b0b30098a9b4',
+		'd775323b9f4b823968789c3bf22fbcea',
 	),
 	'web-design' => array(
 		'fff208ce0e9c40ec9af10c173781afc8',
@@ -67,6 +68,7 @@ return array(
 		'd0eabc751a8305938b50c3d600189d5f',
 		'375ff88ebfe3f153e7ce26cb4cf4bb55',
 		'43f03872f7d5ad67e510a644c5f3da7f',
+		'4fd6fd00c61541391a22bb88185e6597',
 	),
 	'about-us' => array(
 		'81429345e1a3fe48bb8f7ac3404837a2',

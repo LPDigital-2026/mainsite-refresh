@@ -30,7 +30,8 @@ ok($a && $a['@type']==='BlogPosting' && $a['headline']==='How to Set Up SPF' && 
 ok($b && $b['@type']==='BreadcrumbList' && count($b['itemListElement'])===3 && $b['itemListElement'][1]['name']==='Blog', 'breadcrumbs: Home > Blog > article');
 $GLOBALS['ctx']=['front'=>true,'single'=>false,'thumb'=>false,'blog'=>7];
 ob_start(); lpd_structured_data(); preg_match_all('#<script type="application/ld\+json">(.*?)</script>#s',ob_get_clean(),$m);
-$c=json_decode($m[1][0]??'',true);
+$w=json_decode($m[1][0]??'',true); $c=json_decode($m[1][1]??'',true);
+ok($w && $w['@type']==='WebSite' && $w['name']==='Lily Paw Digital' && in_array('Lily Paw',$w['alternateName']), 'home page names the site, with the names people search for');
 ok($c && $c['@type']==='ProfessionalService' && $c['telephone']==='+443331127191', 'home page describes the business');
 ok(count($c['areaServed'])>40 && in_array('Gateshead',array_column($c['areaServed'],'name')) && in_array('Northumberland',array_column($c['areaServed'],'name')), 'the business covers every North East county and its towns');
 ok(in_array('United Kingdom',array_column($c['areaServed'],'name')), 'the business also covers the rest of the UK');
