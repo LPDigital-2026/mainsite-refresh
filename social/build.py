@@ -21,24 +21,24 @@ ADS = {
     bullets=['You talk to someone who knows your project', 'Honest pricing, no hidden fees', "We don't disappear after launch"],
     price='Websites from <strong>£99</strong>. Colocation from <strong>£65.99 a month</strong>.',
     terms='Terms and conditions apply.'),
-  'hosting-uk': dict(
-    big='UK', unit='based<br>hardware.', small='Every site we build',
-    h1='Fast hosting on<br><em>real UK hardware.</em>',
-    bullets=['Managed for you, start to finish', 'SSL certificate included', 'Custom email accounts on your domain'],
-    price='Hosting from <strong>£5.75 a month</strong>, with every website.',
-    terms='Terms and conditions apply. Hosting comes with a website plan. Price is for Essentials.'),
-  'hosting-uptime': dict(
-    big='99.9%', unit='uptime.', small='UK hardware', scale=.7,
-    h1='Your website,<br><em>always on.</em>',
-    bullets=["Managed hosting, so you don't have to", 'Free .uk, .co.uk or .org.uk domain', 'Need a change? Just get in touch'],
-    price='Hosting from <strong>£5.75 a month</strong>, with every website.',
-    terms='Terms and conditions apply. Hosting comes with a website plan. Price is for Essentials.'),
-  'hosting-one-team': dict(
-    big='1', unit='team for<br>everything.', small='Design, build and hosting',
-    h1='No separate<br><em>hosting company.</em>',
-    bullets=['We design it, build it and host it', 'Domain, email and SSL all sorted', 'One team to call if you need anything'],
-    price='Website from <strong>£99</strong>, then hosting from <strong>£5.75 a month</strong>.',
-    terms='Terms and conditions apply. Prices shown are for the Essentials plan.'),
+  'hosting-from': dict(
+    big='£5.99', unit='per<br>month.', small='Web hosting', scale=.66,
+    h1='Hosting for the site<br><em>you already have.</em>',
+    bullets=['UK hardware and SSD storage', 'Email addresses on your own domain', 'A local team to call when you need a hand'],
+    price='Web hosting plans from <strong>£5.99 a month</strong>.',
+    terms='Terms and conditions apply. Price shown is for the Singapura plan.'),
+  'hosting-plans': dict(
+    big='3', unit='simple<br>plans.', small='All named after cats',
+    h1='Pick a plan,<br><em>move up any time.</em>',
+    bullets=['<b>Singapura</b> · 6 websites · <b>£5.99</b> a month', '<b>Siamese</b> · 9 websites · <b>£7.99</b> a month', '<b>Maine Coon</b> · unlimited · <b>£9.99</b> a month'],
+    price='Every plan includes <strong>email on your own domain</strong>.',
+    terms='Terms and conditions apply. Prices are per month.'),
+  'hosting-unlimited': dict(
+    big='£9.99', unit='per<br>month.', small='Maine Coon plan', scale=.66,
+    h1='Unlimited websites.<br><em>Unlimited bandwidth.</em>',
+    bullets=['Unlimited MySQL databases', '20GB SSD storage on UK hardware', '40 email addresses on your domain'],
+    price='Our biggest web hosting plan, <strong>£9.99 a month</strong>.',
+    terms='Terms and conditions apply.'),
 }
 # Format sizes. Story keeps clear of the top ~250px and bottom ~340px that the apps cover.
 FORMATS = {
@@ -64,6 +64,7 @@ ul{{list-style:none;padding:0;margin-top:{gap_list}px;display:flex;flex-directio
 li{{font-size:{li}px;color:rgba(251,247,242,.85);display:flex;align-items:center;gap:20px}}
 li svg{{width:{icon}px;height:{icon}px;flex:none;color:#f0529c}}
 .price{{margin-top:{gap_list}px;padding-top:{price_pad}px;border-top:2px solid rgba(251,247,242,.16);font-size:{price}px;color:rgba(251,247,242,.74)}}
+li b{{color:#fbf7f2;font-weight:700}}
 .price strong{{color:#fbf7f2;font-weight:700;white-space:nowrap}}
 .terms{{margin-top:14px;font-size:{terms}px;color:rgba(251,247,242,.5)}}
 </style></head><body>
@@ -79,7 +80,7 @@ li svg{{width:{icon}px;height:{icon}px;flex:none;color:#f0529c}}
 </div></div></body></html>'''
 for name, ad in ADS.items():
     for fmt, f in FORMATS.items():
-        lis = ''.join(f'<li><svg viewBox="0 0 512 512"><path fill="currentColor" d="{PAW}"/></svg>{b}</li>' for b in ad['bullets'])
+        lis = ''.join(f'<li><svg viewBox="0 0 512 512"><path fill="currentColor" d="{PAW}"/></svg><span>{b}</span></li>' for b in ad['bullets'])
         g = dict(f, big=round(f['big'] * ad.get('scale', 1)))
         html = TPL.format(A=A, **g, small=round(f['unit'] * .38), li_gap=round(f['li'] * .55), icon=round(f['li'] * 1.15),
                           price_pad=round(f['gap_list'] * .8), big_text=ad['big'], unit_text=ad['unit'], small_text=ad['small'],
