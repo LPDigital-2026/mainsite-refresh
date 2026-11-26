@@ -36,7 +36,7 @@ get_header();
 
 							<p style="margin-top:14px;">
 								<a href="<?php the_permalink(); ?>" class="btn btn-secondary">
-									<?php esc_html_e( 'Read more', 'lilypawdigital' ); ?>
+									<?php esc_html_e( 'Read', 'lilypawdigital' ); ?> <?php the_title(); ?>
 								</a>
 							</p>
 						</article>
