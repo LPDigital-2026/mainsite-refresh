@@ -69,6 +69,7 @@ return array(
 		'375ff88ebfe3f153e7ce26cb4cf4bb55',
 		'43f03872f7d5ad67e510a644c5f3da7f',
 		'4fd6fd00c61541391a22bb88185e6597',
+		'bc448c0a0d2028500aeaff85b731a4cf',
 	),
 	'about-us' => array(
 		'81429345e1a3fe48bb8f7ac3404837a2',

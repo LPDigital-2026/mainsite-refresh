@@ -39,5 +39,10 @@ function lpd_seo_defaults() {
 		'why-is-my-website-slow'                      => array( 'Why Is My Website Slow? 7 Causes and Fixes', 'A slow website loses customers and search rankings. The seven most common reasons small business sites are slow, how to measure it, and the fixes that work.' ),
 		'local-seo-guide'                             => array( 'Local SEO: Get Your Business Found on Google', 'How Google decides which local businesses to show, and six practical steps to appear in the map results, from your Business Profile to your reviews.' ),
 		'cyber-essentials-explained'                  => array( 'Cyber Essentials Explained | Lily Paw Digital', 'Cyber Essentials is the UK government-backed scheme for basic cyber security. The five controls in plain English, the two levels, and why it is worth doing.' ),
+		'how-to-choose-a-colocation-provider'         => array( 'Choosing a Colocation Provider in Newcastle', 'Ten questions to ask before choosing colocation in Newcastle upon Tyne, from power and cooling to access and security, and what good answers sound like.' ),
+		'how-much-does-a-website-cost'                => array( 'How Much Does a Website Cost in the UK? | Lily Paw', 'What drives the cost of a small business website in the UK, the running costs after launch, the questions to ask any web designer, and what we charge.' ),
+		'what-is-web-hosting'                         => array( 'What Is Web Hosting? A Plain-English Guide', 'What web hosting is, how it differs from your domain, what storage, bandwidth and databases mean on a hosting plan, and how to choose the right one.' ),
+		'move-website-to-a-new-host'                  => array( 'Move Your Website to a New Host Without Downtime', 'A step-by-step guide to moving your website and email to a new host without breaking anything, from backups and testing to DNS and switching over.' ),
+		'microsoft-365-vs-google-workspace'           => array( 'Microsoft 365 vs Google Workspace for Business', 'Microsoft 365 and Google Workspace compared in plain English: what they share, where each stands out, and simple questions to help your business choose.' ),
 	);
 }

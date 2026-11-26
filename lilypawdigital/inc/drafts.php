@@ -94,6 +94,41 @@ function lpd_draft_articles() {
 			'tags'     => array( 'Cyber Essentials', 'Security', 'Microsoft 365' ),
 			'excerpt'  => 'Cyber Essentials is the UK government-backed scheme for basic cyber security. The five controls in plain English, the two levels, and why it is worth doing.',
 		),
+		'how-to-choose-a-colocation-provider' => array(
+			'title'    => 'How to Choose a Colocation Provider in Newcastle: 10 Questions to Ask',
+			'file'     => 'colocation-provider.html',
+			'category' => 'Colocation',
+			'tags'     => array( 'Colocation', 'Data Centre', 'Newcastle' ),
+			'excerpt'  => 'Ten questions to ask before choosing colocation in Newcastle upon Tyne, from power and cooling to access and security, and what good answers sound like.',
+		),
+		'how-much-does-a-website-cost'      => array(
+			'title'    => 'How Much Does a Small Business Website Cost in the UK?',
+			'file'     => 'website-cost.html',
+			'category' => 'Web Design',
+			'tags'     => array( 'Web Design', 'Small Business', 'Pricing' ),
+			'excerpt'  => 'What drives the cost of a small business website in the UK, the running costs after launch, the questions to ask any web designer, and what we charge.',
+		),
+		'what-is-web-hosting'               => array(
+			'title'    => 'What Is Web Hosting? A Plain-English Guide for Small Businesses',
+			'file'     => 'what-is-web-hosting.html',
+			'category' => 'Web Hosting',
+			'tags'     => array( 'Web Hosting', 'Domains', 'Small Business' ),
+			'excerpt'  => 'What web hosting is, how it differs from your domain, what storage, bandwidth and databases mean on a hosting plan, and how to choose the right one.',
+		),
+		'move-website-to-a-new-host'        => array(
+			'title'    => 'How to Move Your Website to a New Host Without Downtime',
+			'file'     => 'move-host.html',
+			'category' => 'Web Hosting',
+			'tags'     => array( 'Web Hosting', 'DNS', 'Email' ),
+			'excerpt'  => 'A step-by-step guide to moving your website and email to a new host without breaking anything, from backups and testing to DNS and switching over.',
+		),
+		'microsoft-365-vs-google-workspace' => array(
+			'title'    => 'Microsoft 365 vs Google Workspace: Which Is Right for Your Business?',
+			'file'     => 'm365-vs-workspace.html',
+			'category' => 'Microsoft 365',
+			'tags'     => array( 'Microsoft 365', 'Google Workspace', 'Email' ),
+			'excerpt'  => 'Microsoft 365 and Google Workspace compared in plain English: what they share, where each stands out, and simple questions to help your business choose.',
+		),
 	);
 }
 
