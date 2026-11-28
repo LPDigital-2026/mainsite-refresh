@@ -4,7 +4,7 @@ Theme URI: https://lilypawdigital.xyz
 Author: Lily Paw Digital
 Author URI: https://lilypawdigital.xyz
 Description: Theme for Lily Paw Digital - North East web design, hosting and colocation. Navy and paper, set large, with the paw pink used sparingly.
-Version: 4.50
+Version: 4.51
 Requires at least: 6.0
 Tested up to: 6.6
 Requires PHP: 7.4
@@ -1242,6 +1242,10 @@ body:has(.lpd-bands > .lpd-process:first-child) .page-hero .container::after { d
 .lpd-bands .wp-block-columns.lpd-figures { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--gap); }
 .lpd-figure { height: 100%; padding: var(--pad); background: var(--panel); border-radius: var(--radius); }
 .lpd-figure p.lpd-figure-number { margin: 0 0 clamp(20px, 3vw, 44px); font-size: clamp(2.4rem, 4.6vw, 4rem); font-weight: 600; letter-spacing: -0.06em; line-height: 0.95; font-variant-numeric: tabular-nums; color: var(--fg); }
+/* Narrow phones: two figure cards side by side leave as little as 90px
+   each, so the figure scales with the screen to keep a five-character
+   figure ("128GB") on one line. */
+@media (max-width: 399px) { .lpd-figure p.lpd-figure-number { font-size: 8.5vw; } }
 .lpd-figure p.lpd-figure-label { margin: 0; color: var(--fg-dim); font-size: 1rem; }
 .lpd-spec { margin-top: var(--head); border-bottom: 1px solid var(--rule); }
 .lpd-spec-row { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); column-gap: clamp(28px, 5vw, 80px); padding: var(--pad) 0; border-top: 1px solid var(--rule); }

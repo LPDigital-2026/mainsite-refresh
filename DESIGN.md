@@ -478,6 +478,9 @@ Rules:
   (JetBackup), Softaculous, PHP/Node.js/Python, free SSH, free migration (from the upstream
   provider's page the owner pointed to; facts only, written in our own words). Email limits are the
   owner's 10/25/40, not the upstream's unlimited.
+  Every plan also gets 2 CPU cores and 2GB RAM; servers are dual-CPU, 48+ cores, 128GB+ RAM. The page's
+  "The Specification" band (`spec_figures`, `spec_rows`) reuses Colocation's figures and spec rows.
+  Below 400px wide, figure numbers scale with the screen (8.5vw) so "128GB" stays on one line.
 - Hosted PBX: choice of PBX (FreePBX, FusionPBX and more); from £16.99 a month; powerful security and DDoS protection;
   2 vCores at 4.0GHz, 4GB ECC RAM, 48GB SSD storage, daily backups; phone numbers available on request (owner).
 - **Button labels are optically centred.** Sora's capitals sit about 1.5px

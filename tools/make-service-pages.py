@@ -17,11 +17,11 @@ SERVICES = [
          plan_button=('Order Now', '/get-started/'),
          plans=[
              dict(name='Singapura', desc='A great start for a handful of small sites.', price='£5.99',
-                  features=['6 hosted websites', '10GB SSD storage', '10 MySQL databases', '40GB bandwidth', '10 email addresses', 'cPanel with Imunify360', 'Free SSL and daily backups']),
+                  features=['6 hosted websites', '2 CPU cores and 2GB RAM', '10GB SSD storage', '10 MySQL databases', '40GB bandwidth', '10 email addresses', 'cPanel with Imunify360', 'Free SSL and daily backups']),
              dict(name='Siamese', desc='More room for growing sites and databases.', price='£7.99',
-                  features=['9 hosted websites', '15GB SSD storage', '20 MySQL databases', '60GB bandwidth', '25 email addresses', 'cPanel with Imunify360', 'Free SSL and daily backups']),
+                  features=['9 hosted websites', '2 CPU cores and 2GB RAM', '15GB SSD storage', '20 MySQL databases', '60GB bandwidth', '25 email addresses', 'cPanel with Imunify360', 'Free SSL and daily backups']),
              dict(name='Maine Coon', desc='Unlimited websites, databases and bandwidth.', price='£9.99',
-                  features=['Unlimited hosted websites', '20GB SSD storage', 'Unlimited MySQL databases', 'Unlimited bandwidth', '40 email addresses', 'cPanel with Imunify360', 'Free SSL and daily backups']),
+                  features=['Unlimited hosted websites', '2 CPU cores and 2GB RAM', '20GB SSD storage', 'Unlimited MySQL databases', 'Unlimited bandwidth', '40 email addresses', 'cPanel with Imunify360', 'Free SSL and daily backups']),
          ],
          plans_note='Not sure which plan you need? <a href="/contact-us/">Get in touch</a> and we will tell you honestly.',
          features_title='Everything Included',
@@ -34,14 +34,23 @@ SERVICES = [
              ('Free SSL Certificates', 'Automatic SSL on every domain you host, for the padlock, secure forms and better search rankings.'),
              ('Daily Offsite Backups', 'Daily backups stored away from the server, with one-click restores from cPanel when you need them.'),
              ('One-Click Installs', 'Softaculous installs WordPress, Joomla and hundreds of other apps in a few clicks.'),
-             ('PHP, Node.js and Python', 'Choose your PHP version from cPanel, and run Node.js and Python apps too. Free SSH access is included for developers.'),
+             ('PHP, Node.js, Python and More', 'Choose your PHP version from cPanel, and run Node.js, Python, Ruby and Perl too. Cron jobs and free SSH access are included for developers.'),
              ('Free Migration', 'Moving from another host? We move your websites, email and databases for you, free of charge.'),
+         ],
+         spec_title='The Specification',
+         spec_intro='The detail behind every plan, for anyone who wants to check it before they commit.',
+         spec_figures=[('2', 'CPU cores on every plan'), ('2GB', 'RAM on every plan'), ('48+', 'CPU cores per server'), ('128GB', 'Minimum RAM per server')],
+         spec_rows=[
+             ('Performance', ['2 CPU cores and 2GB RAM on every plan', 'LiteSpeed web server', 'LSCache website caching', 'Latest enterprise-grade servers', 'Dual CPUs, 48+ cores per server', 'Minimum 128GB RAM per server']),
+             ('Security', ['Imunify360 protection', 'CloudLinux LVE isolation', 'CageFS secure file system', 'Comprehensive firewall', 'Apache mod_security', 'Hotlink and leech protection', 'Restrict access by IP', 'Free SSL certificates']),
+             ('Tools and Extras', ['Daily remote backups', 'Softaculous 1-click installer', 'Free website builder', 'AwStats visitor analytics', 'Webmail access', 'Custom error pages', 'Cron jobs', 'Ruby, Perl and Python']),
          ],
          faq=[
              ('What is cPanel?', 'cPanel is the most widely used web hosting control panel in the world. It gives you a simple dashboard to manage your websites, email, databases, files and one-click app installs.'),
              ('What does Imunify360 do?', 'Imunify360 is a security suite that protects every account on the server. It combines a firewall, malware scanning and protection against common attacks, so problems are caught and blocked automatically.'),
              ('Can you move my website from my current host?', 'Yes, and it is free. We move your websites, email and databases for you, with as little downtime as possible.'),
              ('Is WordPress supported?', 'Absolutely. Install WordPress in one click with Softaculous, and enjoy LiteSpeed caching tuned for WordPress, with the PHP version you choose.'),
+             ('How much power does each plan get?', 'Every plan gets 2 CPU cores and 2GB of RAM, on the latest enterprise-grade servers with dual CPUs, 48 or more cores and at least 128GB of RAM, so there is plenty of headroom.'),
              ('Are there any setup fees?', 'No. There are no setup fees and no hidden extras. You pay the monthly price shown for your plan.'),
          ]),
     dict(slug='website-maintenance', cls='lpd-service-maintenance', short='Website Maintenance',
@@ -162,6 +171,13 @@ def page(s):
     if s.get('features'):
         fcards = [column(group('lpd-card', h(3, t) + '\n' + p(x))) for t, x in s['features']]
         sections.append(band('lpd-band lpd-band-alt', '\n' + group('lpd-section-heading lpd-left', h(2, s['features_title']) + '\n' + p(s['features_intro'])) + '\n\n' + columns('lpd-grid-3', fcards) + '\n'))
+    if s.get('spec_rows'):
+        figs = [column(group('lpd-figure', p(n, 'lpd-figure-number') + '\n' + p(l, 'lpd-figure-label'))) for n, l in s['spec_figures']]
+        def row(title, items):
+            lis = '\n'.join(f'<!-- wp:list-item --><li>{i}</li><!-- /wp:list-item -->' for i in items)
+            return group('lpd-spec-row', h(3, title) + '\n<!-- wp:list -->\n<ul class="wp-block-list">\n' + lis + '\n</ul>\n<!-- /wp:list -->')
+        sections.append(band('lpd-band', '\n' + group('lpd-section-heading lpd-left', h(2, s['spec_title']) + '\n' + p(s['spec_intro'])) + '\n\n'
+                             + columns('lpd-figures', figs) + '\n\n' + group('lpd-spec', '\n'.join(row(t, i) for t, i in s['spec_rows'])) + '\n'))
     sections.append(why)
     if s.get('faq'):
         items = '\n\n'.join(group('lpd-faq-item', h(3, q) + '\n' + p(a)) for q, a in s['faq'])
