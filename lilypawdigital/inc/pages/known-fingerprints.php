@@ -51,6 +51,7 @@ return array(
 		'0c2869db6b6dd7e4b99fffa82ebcf73c',
 		'57ae310dc424cddfba76b0b30098a9b4',
 		'd775323b9f4b823968789c3bf22fbcea',
+		'1060d4ab6537e58379936a69ae16bb33',
 	),
 	'web-design' => array(
 		'fff208ce0e9c40ec9af10c173781afc8',
@@ -124,6 +125,7 @@ return array(
 	),
 	'web-hosting' => array(
 		'4148021d66097f112a3961a4526cc73a',
+		'fa08069ae6862f0868eebddc079558f7',
 	),
 	'areas-we-cover' => array(
 		'9af4c96a5022e6f9e659d9f80e86a68e',

@@ -416,7 +416,9 @@ Rules:
   and a call to action. Edit the definition there and re-run it rather
   than editing the HTML. A definition with `plans` also gets a pricing
   band (Microsoft 365, Web Hosting); `plan_button` sets the card button's
-  label and link. Service pages are not
+  label and link. Optional `features` (an "Everything Included" card grid)
+  and `faq` (questions in the Colocation FAQ layout, so the FAQPage data is
+  built automatically) are used by Web Hosting. Service pages are not
   in the header menu (`'menu' => false` in `lpd_setup_pages()`); they are
   linked from the home page tiles and the footer's Services column.
 - **Areas We Cover** (/areas-we-cover/) is the one local page: the counties
@@ -472,6 +474,10 @@ Rules:
   40GB bandwidth, 10 email addresses); Siamese £7.99 (9 sites, 15GB, 20 databases, 60GB, 25 email addresses);
   Maine Coon £9.99 (unlimited sites, 20GB, unlimited databases and bandwidth, 40 email addresses); per month.
   "Order Now" goes to Get Started until the owner supplies order links.
+  Every plan: cPanel, Imunify360 (owner), LiteSpeed, CloudLinux, free SSL, daily offsite backups
+  (JetBackup), Softaculous, PHP/Node.js/Python, free SSH, free migration (from the upstream
+  provider's page the owner pointed to; facts only, written in our own words). Email limits are the
+  owner's 10/25/40, not the upstream's unlimited.
 - Hosted PBX: choice of PBX (FreePBX, FusionPBX and more); from £16.99 a month; powerful security and DDoS protection;
   2 vCores at 4.0GHz, 4GB ECC RAM, 48GB SSD storage, daily backups; phone numbers available on request (owner).
 - **Button labels are optically centred.** Sora's capitals sit about 1.5px

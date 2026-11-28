@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Lily Paw SEO
  * Description: Sitemaps for Google and Bing, page titles and descriptions, link previews and sensible indexing rules for lilypaw.digital.
- * Version: 1.0.9
+ * Version: 1.0.10
  * Author: Lily Paw Digital
  * Author URI: https://lilypaw.digital
  * Requires at least: 6.0
@@ -13,7 +13,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-define( 'LPD_SEO_VERSION', '1.0.9' );
+define( 'LPD_SEO_VERSION', '1.0.10' );
 define( 'LPD_SEO_DIR', __DIR__ );
 
 require LPD_SEO_DIR . '/includes/defaults.php';

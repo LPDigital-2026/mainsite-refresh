@@ -8,22 +8,42 @@ and a call to action.
 """
 SERVICES = [
     dict(slug='web-hosting', cls='lpd-service-hosting', short='Web Hosting',
-         lead='Monthly hosting on UK hardware, for websites you already have or want to build yourself.',
-         body='Every plan includes business email addresses on your own domain, with a local team to call when you need a hand. Would you rather we built the site for you? Our <a href="/web-design/">web design</a> packages include hosting.',
-         items=['Hosting on UK hardware', 'SSD storage', 'MySQL databases', 'Email addresses on your own domain', 'Support from our local team'],
+         lead='Fast, secure cPanel hosting on UK hardware, for websites you already have or want to build yourself.',
+         body='Every plan runs on cPanel, the most widely used hosting control panel, on LiteSpeed servers with Imunify360 security, free SSL and daily backups. You also get business email addresses on your own domain, free migration from your current host, and a local team to call when you need a hand. Would you rather we built the site for you? Our <a href="/web-design/">web design</a> packages include hosting.',
+         items=['Hosting on UK hardware', 'cPanel control panel', 'Imunify360 security', 'LiteSpeed and CloudLinux', 'Free SSL certificates', 'Daily offsite backups', 'Free migration from your current host', 'Support from our local team'],
          plans_title='Web Hosting Plans',
-         plans_intro='Simple monthly prices. Pick the plan that fits, and move up whenever you need more room.',
+         plans_intro='Simple monthly prices. Every plan includes cPanel and Imunify360 security. Pick the plan that fits, and move up whenever you need more room.',
          plans_subprice='Per month',
          plan_button=('Order Now', '/get-started/'),
          plans=[
              dict(name='Singapura', desc='A great start for a handful of small sites.', price='£5.99',
-                  features=['6 hosted websites', '10GB SSD storage', '10 MySQL databases', '40GB bandwidth', '10 email addresses']),
+                  features=['6 hosted websites', '10GB SSD storage', '10 MySQL databases', '40GB bandwidth', '10 email addresses', 'cPanel with Imunify360', 'Free SSL and daily backups']),
              dict(name='Siamese', desc='More room for growing sites and databases.', price='£7.99',
-                  features=['9 hosted websites', '15GB SSD storage', '20 MySQL databases', '60GB bandwidth', '25 email addresses']),
+                  features=['9 hosted websites', '15GB SSD storage', '20 MySQL databases', '60GB bandwidth', '25 email addresses', 'cPanel with Imunify360', 'Free SSL and daily backups']),
              dict(name='Maine Coon', desc='Unlimited websites, databases and bandwidth.', price='£9.99',
-                  features=['Unlimited hosted websites', '20GB SSD storage', 'Unlimited MySQL databases', 'Unlimited bandwidth', '40 email addresses']),
+                  features=['Unlimited hosted websites', '20GB SSD storage', 'Unlimited MySQL databases', 'Unlimited bandwidth', '40 email addresses', 'cPanel with Imunify360', 'Free SSL and daily backups']),
          ],
-         plans_note='Not sure which plan you need, or moving a site from another host? <a href="/contact-us/">Get in touch</a> and we will help.'),
+         plans_note='Not sure which plan you need? <a href="/contact-us/">Get in touch</a> and we will tell you honestly.',
+         features_title='Everything Included',
+         features_intro='No upsells for the basics. Every plan comes with all of this as standard.',
+         features=[
+             ('cPanel Control Panel', 'The most widely used hosting control panel in the world. Manage domains, DNS, email, databases and files from one friendly dashboard.'),
+             ('Imunify360 Security', 'Firewall, malware scanning and attack protection watching over every account, so threats are stopped before they reach your site.'),
+             ('LiteSpeed Web Server', 'A fast web server with LSCache built in, so WordPress and WooCommerce sites load quickly.'),
+             ('CloudLinux Isolation', 'Each account gets its own resources, so a busy neighbour on the server never slows your site down.'),
+             ('Free SSL Certificates', 'Automatic SSL on every domain you host, for the padlock, secure forms and better search rankings.'),
+             ('Daily Offsite Backups', 'Daily backups stored away from the server, with one-click restores from cPanel when you need them.'),
+             ('One-Click Installs', 'Softaculous installs WordPress, Joomla and hundreds of other apps in a few clicks.'),
+             ('PHP, Node.js and Python', 'Choose your PHP version from cPanel, and run Node.js and Python apps too. Free SSH access is included for developers.'),
+             ('Free Migration', 'Moving from another host? We move your websites, email and databases for you, free of charge.'),
+         ],
+         faq=[
+             ('What is cPanel?', 'cPanel is the most widely used web hosting control panel in the world. It gives you a simple dashboard to manage your websites, email, databases, files and one-click app installs.'),
+             ('What does Imunify360 do?', 'Imunify360 is a security suite that protects every account on the server. It combines a firewall, malware scanning and protection against common attacks, so problems are caught and blocked automatically.'),
+             ('Can you move my website from my current host?', 'Yes, and it is free. We move your websites, email and databases for you, with as little downtime as possible.'),
+             ('Is WordPress supported?', 'Absolutely. Install WordPress in one click with Softaculous, and enjoy LiteSpeed caching tuned for WordPress, with the PHP version you choose.'),
+             ('Are there any setup fees?', 'No. There are no setup fees and no hidden extras. You pay the monthly price shown for your plan.'),
+         ]),
     dict(slug='website-maintenance', cls='lpd-service-maintenance', short='Website Maintenance',
          lead='We keep your WordPress website updated, backed up and running smoothly, so you can get on with running your business.',
          body='Updates, checks and fixes are handled for you by the same local team, and you can ask us whenever something does not look right.',
@@ -139,7 +159,16 @@ def page(s):
             cards.append(column(group(cls, inner)))
         heading = group('lpd-section-heading lpd-left', h(2, s['plans_title']) + '\n' + p(s['plans_intro']))
         sections.append(band('lpd-band lpd-pricing', '\n' + heading + '\n\n' + columns('lpd-colocation-pricing', cards) + '\n\n' + p(s['plans_note'], 'lpd-pricing-note') + '\n'))
-    sections += [why, cta]
+    if s.get('features'):
+        fcards = [column(group('lpd-card', h(3, t) + '\n' + p(x))) for t, x in s['features']]
+        sections.append(band('lpd-band lpd-band-alt', '\n' + group('lpd-section-heading lpd-left', h(2, s['features_title']) + '\n' + p(s['features_intro'])) + '\n\n' + columns('lpd-grid-3', fcards) + '\n'))
+    sections.append(why)
+    if s.get('faq'):
+        items = '\n\n'.join(group('lpd-faq-item', h(3, q) + '\n' + p(a)) for q, a in s['faq'])
+        left = column(group('lpd-prose', h(2, 'Frequently Asked Questions') + '\n' + p('Something else you need to know? <a href="/contact-us/">Get in touch</a> and we will answer it.')))
+        right = column(group('lpd-faq', group('lpd-faq-list', '\n' + items + '\n')))
+        sections.append(band('lpd-band', '\n' + columns('lpd-split lpd-split-top lpd-split-narrow', [left, right]) + '\n'))
+    sections.append(cta)
     return '\n\n'.join(sections) + '\n'
 
 
