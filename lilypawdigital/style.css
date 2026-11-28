@@ -4,7 +4,7 @@ Theme URI: https://lilypawdigital.xyz
 Author: Lily Paw Digital
 Author URI: https://lilypawdigital.xyz
 Description: Theme for Lily Paw Digital - North East web design, hosting and colocation. Navy and paper, set large, with the paw pink used sparingly.
-Version: 4.51
+Version: 4.52
 Requires at least: 6.0
 Tested up to: 6.6
 Requires PHP: 7.4
@@ -201,6 +201,7 @@ p:last-child { margin-bottom: 0; }
 .lpd-prose a:not(.wp-block-button__link),
 .lpd-faq-item p a,
 .lpd-pricing-note a,
+.lpd-spec-row li a,
 .lpd-portfolio-cta a,
 .lpd-alt-contact a,
 .lpd-testimonial-link a,
@@ -1267,6 +1268,7 @@ body:has(.lpd-bands > .lpd-process:first-child) .page-hero .container::after { d
 .lpd-bands .lpd-photo-cutout { background: var(--navy); }
 .lpd-bands .lpd-photo-cutout img { display: block; aspect-ratio: 4 / 3; object-fit: contain; transform: translateX(-7.8%) scale(1.12); transform-origin: 50% 100%; }
 .lpd-bands ul.lpd-checklist { list-style: none; padding: 0; margin: 12px 0 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 32px; }
+.lpd-bands ul.lpd-checklist.lpd-checklist-single { grid-template-columns: minmax(0, 1fr); }
 .lpd-bands ul.lpd-checklist li { padding: 12px 0; border-top: 1px solid var(--rule); color: var(--fg); font-size: 1rem; }
 .lpd-bands .lpd-card.lpd-pad h3, .lpd-bands .lpd-pointer h3 { font-size: clamp(1.35rem, 2.1vw, 1.7rem); margin: 0 0 12px; }
 .lpd-bands .lpd-pointer { background: transparent; border: 0; box-shadow: inset 0 0 0 1px var(--rule-strong); }

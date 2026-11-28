@@ -54,6 +54,7 @@ return array(
 		'1060d4ab6537e58379936a69ae16bb33',
 		'de712330a985a4861de24d0f0219b39b',
 		'347055fac0e43fa926266ee190660c57',
+		'01e9df939e377749d07699028f5cd03a',
 	),
 	'web-design' => array(
 		'fff208ce0e9c40ec9af10c173781afc8',
@@ -129,9 +130,40 @@ return array(
 		'4148021d66097f112a3961a4526cc73a',
 		'fa08069ae6862f0868eebddc079558f7',
 		'cf649d17b0c05cde6dd87a054c1832fa',
+		'7ecaf506e848996d0f6705da758229f8',
 	),
 	'areas-we-cover' => array(
 		'9af4c96a5022e6f9e659d9f80e86a68e',
 		'e44113ae3e6b485b432188d3ec046336',
+	),
+	'wordpress-hosting' => array(
+		'562e64720d54b060ca6dca2dedb0ae45',
+	),
+	'woocommerce-hosting' => array(
+		'597c8c585a2633a0954d49c13a2238b8',
+	),
+	'joomla-hosting' => array(
+		'9c47f4c14d66e462de411adca4377b77',
+	),
+	'drupal-hosting' => array(
+		'41520685242e9a4b71eb5a4188a1cf38',
+	),
+	'prestashop-hosting' => array(
+		'50e0747bd79c0c26b9c20ab2190f5464',
+	),
+	'opencart-hosting' => array(
+		'd65ae4832a381f291d17a27c3deeb604',
+	),
+	'moodle-hosting' => array(
+		'159084f3a40250ed73ea5d14079e2c0f',
+	),
+	'phpbb-hosting' => array(
+		'1ad286735bcbbbeb7b9c2bcaa369691f',
+	),
+	'mediawiki-hosting' => array(
+		'd8852f12d7830b418398b635f2bc0841',
+	),
+	'matomo-hosting' => array(
+		'137c8adecd52b5070d73c54e15cb0ec8',
 	),
 );

@@ -43,6 +43,7 @@ SERVICES = [
          spec_rows=[
              ('Performance', ['2 CPU cores and 2GB RAM on every plan', 'LiteSpeed web server', 'LSCache website caching', 'Latest enterprise-grade servers', 'Dual CPUs, 48+ cores per server', 'Minimum 128GB RAM per server']),
              ('Security', ['Imunify360 protection', 'CloudLinux LVE isolation', 'CageFS secure file system', 'Comprehensive firewall', 'Apache mod_security', 'Hotlink and leech protection', 'Restrict access by IP', 'Free SSL certificates']),
+             ('One-Click Apps', ['<a href="/wordpress-hosting/">WordPress</a>', '<a href="/woocommerce-hosting/">WooCommerce</a>', '<a href="/joomla-hosting/">Joomla</a>', '<a href="/drupal-hosting/">Drupal</a>', '<a href="/prestashop-hosting/">PrestaShop</a>', '<a href="/opencart-hosting/">OpenCart</a>', '<a href="/moodle-hosting/">Moodle</a>', '<a href="/phpbb-hosting/">phpBB</a>', '<a href="/mediawiki-hosting/">MediaWiki</a>', '<a href="/matomo-hosting/">Matomo</a>']),
              ('Tools and Extras', ['Daily remote backups', 'Softaculous 1-click installer', 'Free website builder', 'AwStats visitor analytics', 'Webmail access', 'Custom error pages', 'Cron jobs', 'Ruby, Perl and Python']),
          ],
          faq=[

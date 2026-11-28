@@ -421,6 +421,16 @@ Rules:
   built automatically) are used by Web Hosting. Service pages are not
   in the header menu (`'menu' => false` in `lpd_setup_pages()`); they are
   linked from the home page tiles and the footer's Services column.
+- **App hosting pages** (/wordpress-hosting/, /woocommerce-hosting/, /joomla-hosting/,
+  /drupal-hosting/, /prestashop-hosting/, /opencart-hosting/, /moodle-hosting/,
+  /phpbb-hosting/, /mediawiki-hosting/, /matomo-hosting/) are written by
+  `tools/make-app-pages.py`, one definition per app with its own lead, reasons,
+  plan advice and questions. Plan names and prices come from the Web Hosting
+  definition, so a price change there reaches them all. They are linked from the
+  Web Hosting page's "One-Click Apps" spec row, not the menu. Keep each page
+  genuinely different: `test-blog.php` fails if two share 60% or more of their
+  vocabulary (Google treats near-identical pages as doorway pages). Only add apps
+  that suit 2 cores / 2GB shared hosting (not Magento).
 - **Areas We Cover** (/areas-we-cover/) is the one local page: the counties
   and towns of the North East, from `lpd_service_areas()` in
   `inc/areas.php`. `tools/make-areas-page.py` writes the page from that

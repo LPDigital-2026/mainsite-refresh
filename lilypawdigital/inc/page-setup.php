@@ -70,6 +70,56 @@ function lpd_setup_pages() {
 			'file'  => 'web-hosting.html',
 			'menu'  => false, // linked from the home page and footer instead
 		),
+		'wordpress-hosting' => array(
+			'title' => __( 'WordPress Hosting', 'lilypawdigital' ),
+			'file'  => 'wordpress-hosting.html',
+			'menu'  => false, // linked from the Web Hosting page
+		),
+		'woocommerce-hosting' => array(
+			'title' => __( 'WooCommerce Hosting', 'lilypawdigital' ),
+			'file'  => 'woocommerce-hosting.html',
+			'menu'  => false, // linked from the Web Hosting page
+		),
+		'joomla-hosting' => array(
+			'title' => __( 'Joomla Hosting', 'lilypawdigital' ),
+			'file'  => 'joomla-hosting.html',
+			'menu'  => false, // linked from the Web Hosting page
+		),
+		'drupal-hosting' => array(
+			'title' => __( 'Drupal Hosting', 'lilypawdigital' ),
+			'file'  => 'drupal-hosting.html',
+			'menu'  => false, // linked from the Web Hosting page
+		),
+		'prestashop-hosting' => array(
+			'title' => __( 'PrestaShop Hosting', 'lilypawdigital' ),
+			'file'  => 'prestashop-hosting.html',
+			'menu'  => false, // linked from the Web Hosting page
+		),
+		'opencart-hosting' => array(
+			'title' => __( 'OpenCart Hosting', 'lilypawdigital' ),
+			'file'  => 'opencart-hosting.html',
+			'menu'  => false, // linked from the Web Hosting page
+		),
+		'moodle-hosting' => array(
+			'title' => __( 'Moodle Hosting', 'lilypawdigital' ),
+			'file'  => 'moodle-hosting.html',
+			'menu'  => false, // linked from the Web Hosting page
+		),
+		'phpbb-hosting' => array(
+			'title' => __( 'phpBB Forum Hosting', 'lilypawdigital' ),
+			'file'  => 'phpbb-hosting.html',
+			'menu'  => false, // linked from the Web Hosting page
+		),
+		'mediawiki-hosting' => array(
+			'title' => __( 'MediaWiki Hosting', 'lilypawdigital' ),
+			'file'  => 'mediawiki-hosting.html',
+			'menu'  => false, // linked from the Web Hosting page
+		),
+		'matomo-hosting' => array(
+			'title' => __( 'Matomo Analytics Hosting', 'lilypawdigital' ),
+			'file'  => 'matomo-hosting.html',
+			'menu'  => false, // linked from the Web Hosting page
+		),
 		'website-maintenance' => array(
 			'title' => __( 'Website Maintenance', 'lilypawdigital' ),
 			'file'  => 'website-maintenance.html',

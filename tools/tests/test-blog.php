@@ -48,5 +48,16 @@ ok(lpd_faq_schema(file_get_contents($argv[1].'/inc/pages/about-us.html'))===null
 $GLOBALS['ctx']['page']='colocation'; $GLOBALS['post']->post_content=file_get_contents($argv[1].'/inc/pages/colocation.html');
 ob_start(); lpd_structured_data(); preg_match_all('#<script type="application/ld\+json">(.*?)</script>#s',ob_get_clean(),$m);
 ok(count($m[1])===1 && json_decode($m[1][0],true)['@type']==='FAQPage', 'the Colocation page prints its FAQ markup');
+$apps=glob($argv[1].'/inc/pages/*-hosting.html'); $apps=array_values(array_filter($apps,fn($f)=>basename($f)!=='web-hosting.html'));
+$hosting=file_get_contents($argv[1].'/inc/pages/web-hosting.html'); $words=[]; $nofaq=[]; $unlinked=[];
+foreach($apps as $f){ $html=file_get_contents($f); $slug=basename($f,'.html');
+  $faq=lpd_faq_schema($html); if(!$faq || count($faq['mainEntity'])<3) $nofaq[]=$slug;
+  if(strpos($hosting,'href="/'.$slug.'/"')===false) $unlinked[]=$slug;
+  $words[$slug]=array_unique(str_word_count(strtolower(strip_tags($html)),1)); }
+ok(count($apps)>=10 && !$nofaq, count($apps).' app hosting pages, each with its own FAQ markup'.($nofaq?': missing on '.implode(', ',$nofaq):''));
+ok(!$unlinked, 'the Web Hosting page links to every app page'.($unlinked?': not '.implode(', ',$unlinked):''));
+$max=0; $pair=''; $keys=array_keys($words);
+for($i=0;$i<count($keys);$i++) for($j=$i+1;$j<count($keys);$j++){ $a=$words[$keys[$i]]; $b=$words[$keys[$j]]; $sim=count(array_intersect($a,$b))/count(array_unique(array_merge($a,$b))); if($sim>$max){$max=$sim;$pair=$keys[$i].' / '.$keys[$j];} }
+ok($max<0.6, sprintf('app pages are genuinely different (most alike: %s, %d%% shared vocabulary)', $pair, $max*100));
 define('WPSEO_VERSION','1'); ob_start(); lpd_structured_data(); ok(ob_get_clean()==='', 'nothing printed when an SEO plugin is active');
 echo $fail ? "\n$fail FAILED\n" : "\nALL PASSED\n"; exit($fail?1:0);

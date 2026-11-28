@@ -11,7 +11,7 @@ lpd_setup_fingerprint() in lilypawdigital/inc/page-setup.php.
 import collections, glob, hashlib, html, re, subprocess
 
 SLUGS = {'home': 'home', 'webdesign': 'web-design', 'blog': 'blog', 'colocation': 'colocation', 'about': 'about-us',
-         'work': 'our-work', 'contact': 'contact-us', 'getstarted': 'get-started', 'websitemaintenance': 'website-maintenance', 'domainsanddns': 'domains-and-dns', 'businessemail': 'business-email', 'websitesecurity': 'website-security', 'microsoft365': 'microsoft-365', 'hostedpbx': 'hosted-pbx', 'webhosting': 'web-hosting', 'areas': 'areas-we-cover'}
+         'work': 'our-work', 'contact': 'contact-us', 'getstarted': 'get-started', 'websitemaintenance': 'website-maintenance', 'domainsanddns': 'domains-and-dns', 'businessemail': 'business-email', 'websitesecurity': 'website-security', 'microsoft365': 'microsoft-365', 'hostedpbx': 'hosted-pbx', 'webhosting': 'web-hosting', 'areas': 'areas-we-cover', 'wordpresshosting': 'wordpress-hosting', 'woocommercehosting': 'woocommerce-hosting', 'joomlahosting': 'joomla-hosting', 'drupalhosting': 'drupal-hosting', 'prestashophosting': 'prestashop-hosting', 'opencarthosting': 'opencart-hosting', 'moodlehosting': 'moodle-hosting', 'phpbbhosting': 'phpbb-hosting', 'mediawikihosting': 'mediawiki-hosting', 'matomohosting': 'matomo-hosting'}
 
 
 def fingerprint(content):
